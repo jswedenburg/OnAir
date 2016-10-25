@@ -1,5 +1,5 @@
 //
-//  SegmentedControlViewController.swift
+//  SongQueueViewController.swift
 //  OnAir
 //
 //  Created by Chandi Abey  on 10/25/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SegmentedControlViewController: UIViewController {
+class SongQueueViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,31 +31,5 @@ class SegmentedControlViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
-    
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
-    @IBOutlet weak var searchView: UIView!
-    @IBOutlet weak var songQueueView: UIView!
-    
-    
-    
-    @IBAction func showComponent(sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.searchView.alpha = 1
-                self.songQueueView.alpha = 0
-            })
-        } else {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.searchView.alpha = 0
-                self.songQueueView.alpha = 1
-            })
-        }
-    }
-
-    
-    segmentedControl.
-    
-    
 
 }
