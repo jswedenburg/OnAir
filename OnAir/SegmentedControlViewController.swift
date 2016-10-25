@@ -39,6 +39,8 @@ class SegmentedControlViewController: UIViewController {
     
     
     
+    
+    
     @IBAction func showComponent(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             UIView.animate(withDuration: 0.5, animations: {
@@ -53,8 +55,7 @@ class SegmentedControlViewController: UIViewController {
         }
     }
 
-    
-    segmentedControl.
+
     
     
 
