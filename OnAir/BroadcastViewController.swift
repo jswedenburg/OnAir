@@ -9,7 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class BroadCastViewController: UIViewController {
+class BroadcastViewController: UIViewController {
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -36,7 +36,7 @@ class BroadCastViewController: UIViewController {
 
 
 // MARK: - TableView Delegate and Datasource
-extension ReceiverMusicPlayerViewController: UITableViewDelegate, UITableViewDataSource{
+extension BroadcastViewController: UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -61,8 +61,12 @@ extension ReceiverMusicPlayerViewController: UITableViewDelegate, UITableViewDat
     
 }
 
-extension ReceiverMusicPlayerViewController: MPCManagerDelegate{
+extension BroadcastViewController: MPCManagerDelegate{
     func foundPeer(){
         tableView.reloadData()
+    }
+    
+    func invitationWasReceived(fromPeer: String) {
+        print("do something")
     }
 }

@@ -24,7 +24,7 @@
 		8118698B1DBFBD0200FD2D7C /* OnAirTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118698A1DBFBD0200FD2D7C /* OnAirTests.swift */; };
 		811869961DBFBD0200FD2D7C /* OnAirUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869951DBFBD0200FD2D7C /* OnAirUITests.swift */; };
 		815742D21DBFE72800FF1619 /* BroadcastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D01DBFE72800FF1619 /* BroadcastTableViewCell.swift */; };
-		815742D31DBFE72800FF1619 /* BroadCastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D11DBFE72800FF1619 /* BroadCastViewController.swift */; };
+		815742D31DBFE72800FF1619 /* BroadcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D11DBFE72800FF1619 /* BroadcastViewController.swift */; };
 		815742D51DBFEE5100FF1619 /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D41DBFEE5100FF1619 /* MPCManager.swift */; };
 		815742D81DC00B7F00FF1619 /* Broadcast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742D61DC00B7F00FF1619 /* Broadcast.storyboard */; };
 		815742DA1DC00B8800FF1619 /* ReceiverMusicPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742D91DC00B8800FF1619 /* ReceiverMusicPlayer.storyboard */; };
@@ -72,7 +72,7 @@
 		811869951DBFBD0200FD2D7C /* OnAirUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnAirUITests.swift; sourceTree = "<group>"; };
 		811869971DBFBD0200FD2D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		815742D01DBFE72800FF1619 /* BroadcastTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastTableViewCell.swift; sourceTree = "<group>"; };
-		815742D11DBFE72800FF1619 /* BroadCastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadCastViewController.swift; sourceTree = "<group>"; };
+		815742D11DBFE72800FF1619 /* BroadcastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastViewController.swift; sourceTree = "<group>"; };
 		815742D41DBFEE5100FF1619 /* MPCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
 		815742D71DC00B7F00FF1619 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Broadcast.storyboard; sourceTree = "<group>"; };
 		815742D91DC00B8800FF1619 /* ReceiverMusicPlayer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReceiverMusicPlayer.storyboard; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 				811869811DBFBD0200FD2D7C /* Info.plist */,
 				815742D01DBFE72800FF1619 /* BroadcastTableViewCell.swift */,
 				815742D41DBFEE5100FF1619 /* MPCManager.swift */,
-				815742D11DBFE72800FF1619 /* BroadCastViewController.swift */,
+				815742D11DBFE72800FF1619 /* BroadcastViewController.swift */,
 			);
 			path = OnAir;
 			sourceTree = "<group>";
@@ -336,7 +336,7 @@
 				4B0A94651DBFEFB400DF39EE /* SongQueueTableViewCell.swift in Sources */,
 				655BAB491DBFEF080073F487 /* Song.swift in Sources */,
 				655BAB6F1DBFFC740073F487 /* SongQueueController.swift in Sources */,
-				815742D31DBFE72800FF1619 /* BroadCastViewController.swift in Sources */,
+				815742D31DBFE72800FF1619 /* BroadcastViewController.swift in Sources */,
 				811869781DBFBD0200FD2D7C /* ViewController.swift in Sources */,
 				815742D51DBFEE5100FF1619 /* MPCManager.swift in Sources */,
 				815742D21DBFE72800FF1619 /* BroadcastTableViewCell.swift in Sources */,
