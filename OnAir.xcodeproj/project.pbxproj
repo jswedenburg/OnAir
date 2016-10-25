@@ -11,6 +11,9 @@
 		4B0A94611DBFE46900DF39EE /* SongQueueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */; };
 		4B0A94631DBFE7A900DF39EE /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */; };
 		4B0A94651DBFEFB400DF39EE /* SongQueueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94641DBFEFB400DF39EE /* SongQueueTableViewCell.swift */; };
+		4BB765C81DC004AA00C620F7 /* Broadcast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BB765C71DC004AA00C620F7 /* Broadcast.storyboard */; };
+		4BB765CA1DC004C000C620F7 /* ReceiverMusicPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BB765C91DC004C000C620F7 /* ReceiverMusicPlayer.storyboard */; };
+		4BB765CC1DC0055900C620F7 /* ReceiverMusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB765CB1DC0055900C620F7 /* ReceiverMusicPlayerViewController.swift */; };
 		811869761DBFBD0200FD2D7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869751DBFBD0200FD2D7C /* AppDelegate.swift */; };
 		811869781DBFBD0200FD2D7C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869771DBFBD0200FD2D7C /* ViewController.swift */; };
 		8118697B1DBFBD0200FD2D7C /* SegmentedControl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 811869791DBFBD0200FD2D7C /* SegmentedControl.storyboard */; };
@@ -19,7 +22,6 @@
 		8118698B1DBFBD0200FD2D7C /* OnAirTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118698A1DBFBD0200FD2D7C /* OnAirTests.swift */; };
 		811869961DBFBD0200FD2D7C /* OnAirUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869951DBFBD0200FD2D7C /* OnAirUITests.swift */; };
 		815742D21DBFE72800FF1619 /* BroadcastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D01DBFE72800FF1619 /* BroadcastTableViewCell.swift */; };
-		815742D31DBFE72800FF1619 /* BroadCastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D11DBFE72800FF1619 /* BroadCastViewController.swift */; };
 		815742D51DBFEE5100FF1619 /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D41DBFEE5100FF1619 /* MPCManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,9 @@
 		4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueViewController.swift; sourceTree = "<group>"; };
 		4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		4B0A94641DBFEFB400DF39EE /* SongQueueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueTableViewCell.swift; sourceTree = "<group>"; };
+		4BB765C71DC004AA00C620F7 /* Broadcast.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Broadcast.storyboard; sourceTree = "<group>"; };
+		4BB765C91DC004C000C620F7 /* ReceiverMusicPlayer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReceiverMusicPlayer.storyboard; sourceTree = "<group>"; };
+		4BB765CB1DC0055900C620F7 /* ReceiverMusicPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiverMusicPlayerViewController.swift; sourceTree = "<group>"; };
 		811869721DBFBD0200FD2D7C /* OnAir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnAir.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		811869751DBFBD0200FD2D7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		811869771DBFBD0200FD2D7C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -91,9 +96,6 @@
 		655BAB471DBFEEF40073F487 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				655BAB481DBFEF080073F487 /* Song.swift */,
-				655BAB4A1DBFEF180073F487 /* Album.swift */,
-				655BAB4D1DBFEF330073F487 /* SongQueue.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -125,6 +127,9 @@
 				811869751DBFBD0200FD2D7C /* AppDelegate.swift */,
 				811869771DBFBD0200FD2D7C /* ViewController.swift */,
 				811869791DBFBD0200FD2D7C /* SegmentedControl.storyboard */,
+				4BB765C71DC004AA00C620F7 /* Broadcast.storyboard */,
+				4BB765C91DC004C000C620F7 /* ReceiverMusicPlayer.storyboard */,
+				4BB765CB1DC0055900C620F7 /* ReceiverMusicPlayerViewController.swift */,
 				4B0A94641DBFEFB400DF39EE /* SongQueueTableViewCell.swift */,
 				4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */,
 				4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */,
@@ -267,9 +272,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FC780691DBFC67E009515A9 /* ReceiverMusicPlayer.storyboard in Resources */,
 				811869801DBFBD0200FD2D7C /* LaunchScreen.storyboard in Resources */,
 				8118697D1DBFBD0200FD2D7C /* Assets.xcassets in Resources */,
+				4BB765CA1DC004C000C620F7 /* ReceiverMusicPlayer.storyboard in Resources */,
+				4BB765C81DC004AA00C620F7 /* Broadcast.storyboard in Resources */,
 				8118697B1DBFBD0200FD2D7C /* SegmentedControl.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,12 +302,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B0A94651DBFEFB400DF39EE /* SongQueueTableViewCell.swift in Sources */,
+				4BB765CC1DC0055900C620F7 /* ReceiverMusicPlayerViewController.swift in Sources */,
 				811869781DBFBD0200FD2D7C /* ViewController.swift in Sources */,
 				815742D51DBFEE5100FF1619 /* MPCManager.swift in Sources */,
 				815742D21DBFE72800FF1619 /* BroadcastTableViewCell.swift in Sources */,
-				0FC7806B1DBFC93F009515A9 /* ReceiverMusicPlayerViewController.swift in Sources */,
-				655BAB4B1DBFEF180073F487 /* Album.swift in Sources */,
-				655BAB4E1DBFEF330073F487 /* SongQueue.swift in Sources */,
 				811869761DBFBD0200FD2D7C /* AppDelegate.swift in Sources */,
 				4B0A945F1DBFCA6700DF39EE /* SegmentedControlViewController.swift in Sources */,
 				4B0A94631DBFE7A900DF39EE /* SegmentedControl.swift in Sources */,
