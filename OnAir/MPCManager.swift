@@ -21,15 +21,15 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate {
     
     static let sharedController = MPCManager()
     
-    var delegate: MPCManagerDelegate
+    var delegate: MPCManagerDelegate?
     
     var session: MCSession!
     
-    var peer: MCPeerID
+    var peer: MCPeerID!
     
-    var browser: MCNearbyServiceBrowser
+    var browser: MCNearbyServiceBrowser!
     
-    var advertiser: MCNearbyServiceAdvertiser
+    var advertiser: MCNearbyServiceAdvertiser!
     
     var foundPeers: [MCPeerID] = []
     
@@ -60,7 +60,7 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate {
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         foundPeers.append(peerID)
         
-        delegate.foundPeer()
+        delegate?.foundPeer()
     }
     
     
@@ -78,7 +78,7 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate {
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         self.invitationHandler = invitationHandler
         
-        delegate.invitationWasReceived(fromPeer: peerID.displayName)
+        delegate?.invitationWasReceived(fromPeer: peerID.displayName)
     }
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
