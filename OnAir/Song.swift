@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Song {
+class Song: Equatable {
     
     let name: String
     let artist: String
@@ -23,4 +23,8 @@ class Song {
         self.trackDuration = trackDuration
         self.songID = songID
     }
+}
+
+func ==(lhs: Song, rhs: Song) -> Bool {
+    return lhs.songID == rhs.songID
 }
