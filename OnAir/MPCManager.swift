@@ -12,6 +12,8 @@ import MultipeerConnectivity
 protocol MPCManagerDelegate {
 
     func foundPeer()
+    
+    func invitationWasReceived(fromPeer: String)
 
 }
 
@@ -69,4 +71,18 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate {
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         print("lost peer")
     }
+    
+    // Advertiser Delegate
+    
+    
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        self.invitationHandler = invitationHandler
+        
+        delegate.invitationWasReceived(fromPeer: peerID.displayName)
+    }
+    
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
+        print(error.localizedDescription)
+    }
+
 }

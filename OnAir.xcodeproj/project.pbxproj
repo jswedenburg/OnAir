@@ -7,18 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
+		0FC780691DBFC67E009515A9 /* ReceiverMusicPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FC780681DBFC67E009515A9 /* ReceiverMusicPlayer.storyboard */; };
+		0FC7806B1DBFC93F009515A9 /* ReceiverMusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC7806A1DBFC93F009515A9 /* ReceiverMusicPlayerViewController.swift */; };
 		4B0A945F1DBFCA6700DF39EE /* SegmentedControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A945E1DBFCA6700DF39EE /* SegmentedControlViewController.swift */; };
 		4B0A94611DBFE46900DF39EE /* SongQueueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */; };
 		4B0A94631DBFE7A900DF39EE /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */; };
 		4B0A94651DBFEFB400DF39EE /* SongQueueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94641DBFEFB400DF39EE /* SongQueueTableViewCell.swift */; };
-
-		0FC780691DBFC67E009515A9 /* ReceiverMusicPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FC780681DBFC67E009515A9 /* ReceiverMusicPlayer.storyboard */; };
-		0FC7806B1DBFC93F009515A9 /* ReceiverMusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC7806A1DBFC93F009515A9 /* ReceiverMusicPlayerViewController.swift */; };
 		655BAB491DBFEF080073F487 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BAB481DBFEF080073F487 /* Song.swift */; };
 		655BAB4B1DBFEF180073F487 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BAB4A1DBFEF180073F487 /* Album.swift */; };
 		655BAB6F1DBFFC740073F487 /* SongQueueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BAB6E1DBFFC740073F487 /* SongQueueController.swift */; };
-
 		811869761DBFBD0200FD2D7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869751DBFBD0200FD2D7C /* AppDelegate.swift */; };
 		811869781DBFBD0200FD2D7C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869771DBFBD0200FD2D7C /* ViewController.swift */; };
 		8118697B1DBFBD0200FD2D7C /* SegmentedControl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 811869791DBFBD0200FD2D7C /* SegmentedControl.storyboard */; };
@@ -29,6 +26,9 @@
 		815742D21DBFE72800FF1619 /* BroadcastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D01DBFE72800FF1619 /* BroadcastTableViewCell.swift */; };
 		815742D31DBFE72800FF1619 /* BroadCastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D11DBFE72800FF1619 /* BroadCastViewController.swift */; };
 		815742D51DBFEE5100FF1619 /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D41DBFEE5100FF1619 /* MPCManager.swift */; };
+		815742D81DC00B7F00FF1619 /* Broadcast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742D61DC00B7F00FF1619 /* Broadcast.storyboard */; };
+		815742DA1DC00B8800FF1619 /* ReceiverMusicPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742D91DC00B8800FF1619 /* ReceiverMusicPlayer.storyboard */; };
+		815742DC1DC00BA100FF1619 /* BroadcasterMusicControl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742DB1DC00BA100FF1619 /* BroadcasterMusicControl.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,18 +49,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-
+		0FC780681DBFC67E009515A9 /* ReceiverMusicPlayer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ReceiverMusicPlayer.storyboard; path = ../ReceiverMusicPlayer.storyboard; sourceTree = "<group>"; };
+		0FC7806A1DBFC93F009515A9 /* ReceiverMusicPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiverMusicPlayerViewController.swift; sourceTree = "<group>"; };
 		4B0A945E1DBFCA6700DF39EE /* SegmentedControlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlViewController.swift; sourceTree = "<group>"; };
 		4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueViewController.swift; sourceTree = "<group>"; };
 		4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		4B0A94641DBFEFB400DF39EE /* SongQueueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueTableViewCell.swift; sourceTree = "<group>"; };
-
-		0FC780681DBFC67E009515A9 /* ReceiverMusicPlayer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ReceiverMusicPlayer.storyboard; path = ../ReceiverMusicPlayer.storyboard; sourceTree = "<group>"; };
-		0FC7806A1DBFC93F009515A9 /* ReceiverMusicPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiverMusicPlayerViewController.swift; sourceTree = "<group>"; };
 		655BAB481DBFEF080073F487 /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		655BAB4A1DBFEF180073F487 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		655BAB6E1DBFFC740073F487 /* SongQueueController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueController.swift; sourceTree = "<group>"; };
-
 		811869721DBFBD0200FD2D7C /* OnAir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnAir.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		811869751DBFBD0200FD2D7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		811869771DBFBD0200FD2D7C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +74,9 @@
 		815742D01DBFE72800FF1619 /* BroadcastTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastTableViewCell.swift; sourceTree = "<group>"; };
 		815742D11DBFE72800FF1619 /* BroadCastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadCastViewController.swift; sourceTree = "<group>"; };
 		815742D41DBFEE5100FF1619 /* MPCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
+		815742D71DC00B7F00FF1619 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Broadcast.storyboard; sourceTree = "<group>"; };
+		815742D91DC00B8800FF1619 /* ReceiverMusicPlayer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReceiverMusicPlayer.storyboard; sourceTree = "<group>"; };
+		815742DB1DC00BA100FF1619 /* BroadcasterMusicControl.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BroadcasterMusicControl.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,13 +148,12 @@
 				655BAB471DBFEEF40073F487 /* Model */,
 				811869751DBFBD0200FD2D7C /* AppDelegate.swift */,
 				811869771DBFBD0200FD2D7C /* ViewController.swift */,
-				811869791DBFBD0200FD2D7C /* SegmentedControl.storyboard */,
 				4B0A94641DBFEFB400DF39EE /* SongQueueTableViewCell.swift */,
 				4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */,
 				4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */,
 				4B0A945E1DBFCA6700DF39EE /* SegmentedControlViewController.swift */,
 				8118697C1DBFBD0200FD2D7C /* Assets.xcassets */,
-				8118697E1DBFBD0200FD2D7C /* LaunchScreen.storyboard */,
+				815742DD1DC00BA600FF1619 /* Views */,
 				811869811DBFBD0200FD2D7C /* Info.plist */,
 				815742D01DBFE72800FF1619 /* BroadcastTableViewCell.swift */,
 				815742D41DBFEE5100FF1619 /* MPCManager.swift */,
@@ -179,6 +178,18 @@
 				811869971DBFBD0200FD2D7C /* Info.plist */,
 			);
 			path = OnAirUITests;
+			sourceTree = "<group>";
+		};
+		815742DD1DC00BA600FF1619 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				811869791DBFBD0200FD2D7C /* SegmentedControl.storyboard */,
+				815742D91DC00B8800FF1619 /* ReceiverMusicPlayer.storyboard */,
+				815742DB1DC00BA100FF1619 /* BroadcasterMusicControl.storyboard */,
+				815742D61DC00B7F00FF1619 /* Broadcast.storyboard */,
+				8118697E1DBFBD0200FD2D7C /* LaunchScreen.storyboard */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,7 +305,10 @@
 				0FC780691DBFC67E009515A9 /* ReceiverMusicPlayer.storyboard in Resources */,
 				811869801DBFBD0200FD2D7C /* LaunchScreen.storyboard in Resources */,
 				8118697D1DBFBD0200FD2D7C /* Assets.xcassets in Resources */,
+				815742DC1DC00BA100FF1619 /* BroadcasterMusicControl.storyboard in Resources */,
 				8118697B1DBFBD0200FD2D7C /* SegmentedControl.storyboard in Resources */,
+				815742DA1DC00B8800FF1619 /* ReceiverMusicPlayer.storyboard in Resources */,
+				815742D81DC00B7F00FF1619 /* Broadcast.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,13 +333,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
 				4B0A94651DBFEFB400DF39EE /* SongQueueTableViewCell.swift in Sources */,
-
 				655BAB491DBFEF080073F487 /* Song.swift in Sources */,
 				655BAB6F1DBFFC740073F487 /* SongQueueController.swift in Sources */,
 				815742D31DBFE72800FF1619 /* BroadCastViewController.swift in Sources */,
-
 				811869781DBFBD0200FD2D7C /* ViewController.swift in Sources */,
 				815742D51DBFEE5100FF1619 /* MPCManager.swift in Sources */,
 				815742D21DBFE72800FF1619 /* BroadcastTableViewCell.swift in Sources */,
@@ -384,6 +395,14 @@
 				8118697F1DBFBD0200FD2D7C /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		815742D61DC00B7F00FF1619 /* Broadcast.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				815742D71DC00B7F00FF1619 /* Base */,
+			);
+			name = Broadcast.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
