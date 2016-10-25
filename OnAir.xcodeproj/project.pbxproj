@@ -14,6 +14,8 @@
 		811869801DBFBD0200FD2D7C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8118697E1DBFBD0200FD2D7C /* LaunchScreen.storyboard */; };
 		8118698B1DBFBD0200FD2D7C /* OnAirTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118698A1DBFBD0200FD2D7C /* OnAirTests.swift */; };
 		811869961DBFBD0200FD2D7C /* OnAirUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869951DBFBD0200FD2D7C /* OnAirUITests.swift */; };
+		815742CD1DBFC95000FF1619 /* BroadCastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742CC1DBFC95000FF1619 /* BroadCastViewController.swift */; };
+		815742CF1DBFCA1100FF1619 /* BroadcastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742CE1DBFCA1100FF1619 /* BroadcastTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		811869911DBFBD0200FD2D7C /* OnAirUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnAirUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		811869951DBFBD0200FD2D7C /* OnAirUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnAirUITests.swift; sourceTree = "<group>"; };
 		811869971DBFBD0200FD2D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		815742CC1DBFC95000FF1619 /* BroadCastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadCastViewController.swift; sourceTree = "<group>"; };
+		815742CE1DBFCA1100FF1619 /* BroadcastTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 				811869751DBFBD0200FD2D7C /* AppDelegate.swift */,
 				811869771DBFBD0200FD2D7C /* ViewController.swift */,
 				811869791DBFBD0200FD2D7C /* Broadcast.storyboard */,
+				815742CC1DBFC95000FF1619 /* BroadCastViewController.swift */,
+				815742CE1DBFCA1100FF1619 /* BroadcastTableViewCell.swift */,
 				8118697C1DBFBD0200FD2D7C /* Assets.xcassets */,
 				8118697E1DBFBD0200FD2D7C /* LaunchScreen.storyboard */,
 				811869811DBFBD0200FD2D7C /* Info.plist */,
@@ -263,7 +269,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				811869781DBFBD0200FD2D7C /* ViewController.swift in Sources */,
+				815742CF1DBFCA1100FF1619 /* BroadcastTableViewCell.swift in Sources */,
 				811869761DBFBD0200FD2D7C /* AppDelegate.swift in Sources */,
+				815742CD1DBFC95000FF1619 /* BroadCastViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
