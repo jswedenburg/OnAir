@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0FC780691DBFC67E009515A9 /* ReceiverMusicPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FC780681DBFC67E009515A9 /* ReceiverMusicPlayer.storyboard */; };
 		0FC7806B1DBFC93F009515A9 /* ReceiverMusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC7806A1DBFC93F009515A9 /* ReceiverMusicPlayerViewController.swift */; };
+		655BAB491DBFEF080073F487 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BAB481DBFEF080073F487 /* Song.swift */; };
+		655BAB4B1DBFEF180073F487 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BAB4A1DBFEF180073F487 /* Album.swift */; };
+		655BAB4E1DBFEF330073F487 /* SongQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BAB4D1DBFEF330073F487 /* SongQueue.swift */; };
 		811869761DBFBD0200FD2D7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869751DBFBD0200FD2D7C /* AppDelegate.swift */; };
 		811869781DBFBD0200FD2D7C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869771DBFBD0200FD2D7C /* ViewController.swift */; };
 		8118697B1DBFBD0200FD2D7C /* Broadcast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 811869791DBFBD0200FD2D7C /* Broadcast.storyboard */; };
@@ -40,6 +43,9 @@
 /* Begin PBXFileReference section */
 		0FC780681DBFC67E009515A9 /* ReceiverMusicPlayer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ReceiverMusicPlayer.storyboard; path = ../ReceiverMusicPlayer.storyboard; sourceTree = "<group>"; };
 		0FC7806A1DBFC93F009515A9 /* ReceiverMusicPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiverMusicPlayerViewController.swift; sourceTree = "<group>"; };
+		655BAB481DBFEF080073F487 /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		655BAB4A1DBFEF180073F487 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		655BAB4D1DBFEF330073F487 /* SongQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueue.swift; sourceTree = "<group>"; };
 		811869721DBFBD0200FD2D7C /* OnAir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnAir.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		811869751DBFBD0200FD2D7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		811869771DBFBD0200FD2D7C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +88,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		655BAB471DBFEEF40073F487 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				655BAB481DBFEF080073F487 /* Song.swift */,
+				655BAB4A1DBFEF180073F487 /* Album.swift */,
+				655BAB4D1DBFEF330073F487 /* SongQueue.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		811869691DBFBD0100FD2D7C = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +121,7 @@
 		811869741DBFBD0200FD2D7C /* OnAir */ = {
 			isa = PBXGroup;
 			children = (
+				655BAB471DBFEEF40073F487 /* Model */,
 				811869751DBFBD0200FD2D7C /* AppDelegate.swift */,
 				811869771DBFBD0200FD2D7C /* ViewController.swift */,
 				811869791DBFBD0200FD2D7C /* Broadcast.storyboard */,
@@ -275,10 +292,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				655BAB491DBFEF080073F487 /* Song.swift in Sources */,
 				815742D31DBFE72800FF1619 /* BroadCastViewController.swift in Sources */,
 				811869781DBFBD0200FD2D7C /* ViewController.swift in Sources */,
 				815742D21DBFE72800FF1619 /* BroadcastTableViewCell.swift in Sources */,
 				0FC7806B1DBFC93F009515A9 /* ReceiverMusicPlayerViewController.swift in Sources */,
+				655BAB4B1DBFEF180073F487 /* Album.swift in Sources */,
+				655BAB4E1DBFEF330073F487 /* SongQueue.swift in Sources */,
 				811869761DBFBD0200FD2D7C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
