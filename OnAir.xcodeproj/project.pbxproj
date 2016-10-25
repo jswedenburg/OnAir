@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		811869761DBFBD0200FD2D7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869751DBFBD0200FD2D7C /* AppDelegate.swift */; };
 		811869781DBFBD0200FD2D7C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869771DBFBD0200FD2D7C /* ViewController.swift */; };
-		8118697B1DBFBD0200FD2D7C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 811869791DBFBD0200FD2D7C /* Main.storyboard */; };
+		8118697B1DBFBD0200FD2D7C /* Broadcast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 811869791DBFBD0200FD2D7C /* Broadcast.storyboard */; };
 		8118697D1DBFBD0200FD2D7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8118697C1DBFBD0200FD2D7C /* Assets.xcassets */; };
 		811869801DBFBD0200FD2D7C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8118697E1DBFBD0200FD2D7C /* LaunchScreen.storyboard */; };
 		8118698B1DBFBD0200FD2D7C /* OnAirTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118698A1DBFBD0200FD2D7C /* OnAirTests.swift */; };
@@ -37,7 +37,7 @@
 		811869721DBFBD0200FD2D7C /* OnAir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnAir.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		811869751DBFBD0200FD2D7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		811869771DBFBD0200FD2D7C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8118697A1DBFBD0200FD2D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8118697A1DBFBD0200FD2D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Broadcast.storyboard; sourceTree = "<group>"; };
 		8118697C1DBFBD0200FD2D7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8118697F1DBFBD0200FD2D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		811869811DBFBD0200FD2D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 			children = (
 				811869751DBFBD0200FD2D7C /* AppDelegate.swift */,
 				811869771DBFBD0200FD2D7C /* ViewController.swift */,
-				811869791DBFBD0200FD2D7C /* Main.storyboard */,
+				811869791DBFBD0200FD2D7C /* Broadcast.storyboard */,
 				8118697C1DBFBD0200FD2D7C /* Assets.xcassets */,
 				8118697E1DBFBD0200FD2D7C /* LaunchScreen.storyboard */,
 				811869811DBFBD0200FD2D7C /* Info.plist */,
@@ -237,7 +237,7 @@
 			files = (
 				811869801DBFBD0200FD2D7C /* LaunchScreen.storyboard in Resources */,
 				8118697D1DBFBD0200FD2D7C /* Assets.xcassets in Resources */,
-				8118697B1DBFBD0200FD2D7C /* Main.storyboard in Resources */,
+				8118697B1DBFBD0200FD2D7C /* Broadcast.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,12 +299,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		811869791DBFBD0200FD2D7C /* Main.storyboard */ = {
+		811869791DBFBD0200FD2D7C /* Broadcast.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				8118697A1DBFBD0200FD2D7C /* Base */,
 			);
-			name = Main.storyboard;
+			name = Broadcast.storyboard;
 			sourceTree = "<group>";
 		};
 		8118697E1DBFBD0200FD2D7C /* LaunchScreen.storyboard */ = {
@@ -514,6 +514,7 @@
 				8118699C1DBFBD0200FD2D7C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8118699D1DBFBD0200FD2D7C /* Build configuration list for PBXNativeTarget "OnAirTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +523,7 @@
 				8118699F1DBFBD0200FD2D7C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		811869A01DBFBD0200FD2D7C /* Build configuration list for PBXNativeTarget "OnAirUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +532,7 @@
 				811869A21DBFBD0200FD2D7C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
