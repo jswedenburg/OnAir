@@ -1,5 +1,9 @@
 OnAir.xcodeproj/project.xcworkspace/xcuserdata/JakeSwedenburg.xcuserdatad/UserInterfaceState.xcuserstate
+<<<<<<< HEAD
 .DS_Store
 /OnAir.xcodeproj/project.xcworkspace/xcuserdata
 /OnAir.xcodeproj/xcuserdata/austinvanalfen.xcuserdatad
 /OnAir.xcodeproj/project.pbxproj
+=======
+/.DS_Store
+>>>>>>> feature/ca_segmentedControl_searchAndsongQueue
