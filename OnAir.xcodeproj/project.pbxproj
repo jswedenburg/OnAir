@@ -21,6 +21,7 @@
 		811869961DBFBD0200FD2D7C /* OnAirUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869951DBFBD0200FD2D7C /* OnAirUITests.swift */; };
 		815742D21DBFE72800FF1619 /* BroadcastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D01DBFE72800FF1619 /* BroadcastTableViewCell.swift */; };
 		815742D31DBFE72800FF1619 /* BroadCastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D11DBFE72800FF1619 /* BroadCastViewController.swift */; };
+		815742D51DBFEE5100FF1619 /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D41DBFEE5100FF1619 /* MPCManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		811869971DBFBD0200FD2D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		815742D01DBFE72800FF1619 /* BroadcastTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastTableViewCell.swift; sourceTree = "<group>"; };
 		815742D11DBFE72800FF1619 /* BroadCastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadCastViewController.swift; sourceTree = "<group>"; };
+		815742D41DBFEE5100FF1619 /* MPCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				8118697E1DBFBD0200FD2D7C /* LaunchScreen.storyboard */,
 				811869811DBFBD0200FD2D7C /* Info.plist */,
 				815742D01DBFE72800FF1619 /* BroadcastTableViewCell.swift */,
+				815742D41DBFEE5100FF1619 /* MPCManager.swift */,
 				815742D11DBFE72800FF1619 /* BroadCastViewController.swift */,
 			);
 			path = OnAir;
@@ -295,6 +298,7 @@
 				655BAB491DBFEF080073F487 /* Song.swift in Sources */,
 				815742D31DBFE72800FF1619 /* BroadCastViewController.swift in Sources */,
 				811869781DBFBD0200FD2D7C /* ViewController.swift in Sources */,
+				815742D51DBFEE5100FF1619 /* MPCManager.swift in Sources */,
 				815742D21DBFE72800FF1619 /* BroadcastTableViewCell.swift in Sources */,
 				0FC7806B1DBFC93F009515A9 /* ReceiverMusicPlayerViewController.swift in Sources */,
 				655BAB4B1DBFEF180073F487 /* Album.swift in Sources */,
