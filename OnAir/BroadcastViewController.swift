@@ -20,6 +20,8 @@ class BroadcastViewController: UIViewController {
         self.tableView.dataSource = self
         MPCManager.sharedController.advertiser.startAdvertisingPeer()
         MPCManager.sharedController.browser.startBrowsingForPeers()
+        
+        MPCManager.sharedController.delegate = self
     }
     
     /*
@@ -62,6 +64,7 @@ extension BroadcastViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension BroadcastViewController: MPCManagerDelegate{
+    
     func foundPeer(){
         tableView.reloadData()
     }
