@@ -11,6 +11,7 @@ import MultipeerConnectivity
 
 class BroadcastViewController: UIViewController {
     
+    
     @IBOutlet weak var startStopAdvertisingButton: UIButton!
     var isAdvertising = false
     
@@ -38,6 +39,8 @@ class BroadcastViewController: UIViewController {
             self.isAdvertising = true
         }
     }
+    
+    
 }
 
 
@@ -65,7 +68,7 @@ extension BroadcastViewController: UITableViewDelegate, UITableViewDataSource{
         let peer = MPCManager.sharedController.foundPeers[indexPath.row] as MCPeerID
         guard let session = MPCManager.sharedController.session else { return }
         MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
-        // TODO: Present ReceiverMusicPlayer
+        
     }
     
 }
@@ -76,12 +79,11 @@ extension BroadcastViewController: MPCManagerDelegate{
         tableView.reloadData()
     }
     
-    func invitationWasReceived(fromPeer: String) {
-        print("do something")
-    }
+    
     
     func connectedWithPeer(peerID: MCPeerID) {
         print("Connected")
-        //perform segue to mediaPlayer
+        
+        //preform segue to receiverMP
     }
 }

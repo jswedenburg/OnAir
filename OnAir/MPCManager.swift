@@ -15,8 +15,6 @@ protocol MPCManagerDelegate {
 
     func foundPeer()
     
-    func invitationWasReceived(fromPeer: String)
-    
     func connectedWithPeer(peerID: MCPeerID)
 
 }
@@ -36,6 +34,9 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
     var advertiser: MCNearbyServiceAdvertiser!
     
     var foundPeers: [MCPeerID] = []
+    
+    var connectedPeers: [MCPeerID] = []
+    
     
     
     
@@ -83,9 +84,9 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
         
         invitationHandler(true, self.session)
         
-        delegate?.invitationWasReceived(fromPeer: peerID.displayName)
         
-        //MARK Add an array to the Broadcast Mediaplayer VC that has number of listeners
+        
+        
     }
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
@@ -98,6 +99,7 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
         switch state {
         case MCSessionState.connected:
             delegate?.connectedWithPeer(peerID: peerID)
+            connectedPeers.append(peerID)
         case MCSessionState.connecting:
             print("Connecting")
         default:
@@ -125,10 +127,10 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
     
     // MARK: Custom Helper Functions
     
-    func sendData(dictionary: Dictionary<String, String>, peerArray: [MCPeerID]) {
+    func sendData(dictionary: Dictionary<String, String>) {
         let dataToSend = NSKeyedArchiver.archivedData(withRootObject: dictionary)
         do {
-            try session.send(dataToSend, toPeers: peerArray, with: .unreliable)
+            try session.send(dataToSend, toPeers: self.connectedPeers, with: .unreliable)
         } catch  {
             print("Sending Failed")
         }

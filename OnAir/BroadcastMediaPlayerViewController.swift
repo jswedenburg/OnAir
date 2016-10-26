@@ -13,7 +13,7 @@ class BroadcastMediaPlayerViewController: UIViewController {
     
     var playMode = true
     
-    var followersArray: [MCPeerID] = []
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,17 +42,17 @@ class BroadcastMediaPlayerViewController: UIViewController {
     
     func sendPlayData() {
         let messageDict: [String: String] = ["instruction": "play"]
-        MPCManager.sharedController.sendData(dictionary: messageDict, peerArray: followersArray)
+        MPCManager.sharedController.sendData(dictionary: messageDict)
     }
     
     func sendPauseData() {
         let messageDict: [String: String] = ["instruction": "pause"]
-        MPCManager.sharedController.sendData(dictionary: messageDict, peerArray: followersArray)
+        MPCManager.sharedController.sendData(dictionary: messageDict)
     }
     
     func sendNextSongData() {
         let messageDict: [String: String] = ["instruction": "next"]
-        MPCManager.sharedController.sendData(dictionary: messageDict, peerArray: followersArray)
+        MPCManager.sharedController.sendData(dictionary: messageDict)
     }
     
     
