@@ -10,6 +10,12 @@ import Foundation
 
 class SongQueueController {
     
+    init() {
+        SongQueueController.fetchSong(searchTerm: "John+Mayor") { (songs) in
+            print(songs)
+        }
+    }
+    
     var upNextQueue: [Song] = []
     var historyQueue: [Song] = []
     
@@ -35,7 +41,7 @@ class SongQueueController {
     
     static func fetchSong(searchTerm: String, completion: @escaping (_ songs: [Song]?)-> Void) {
         
-        let urlParameters = ["term": "\(searchTerm)"]
+        let urlParameters = ["term": "\(searchTerm)", "entity":"musicTrack"]
         
         guard let url = baseURL else { completion(nil) ; return }
         
@@ -49,6 +55,7 @@ class SongQueueController {
                 completion(nil)
                 return
             }
+            print(data)
             
             //check if error occurred
             if error != nil {

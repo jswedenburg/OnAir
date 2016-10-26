@@ -24,12 +24,12 @@ class Song: Equatable {
     
     let name: String
     let artist: String
-    let collectionID: String
+    let collectionID: Int
     let trackDuration: Int
-    let songID: String
+    let songID: Int
     let image: String
     
-    init(name: String, artist: String, collectionID: String, trackDuration: Int, songID: String, image: String) {
+    init(name: String, artist: String, collectionID: Int, trackDuration: Int, songID: Int, image: String) {
         self.name = name
         self.artist = artist
         self.collectionID = collectionID
@@ -47,9 +47,9 @@ class Song: Equatable {
         //first level dictionary- on the first level we have the bookName and array of song dictionaries
         guard let name = dictionary[kSongName] as? String,
             let artist = dictionary[kArtist] as? String,
-            let collectionID = dictionary[kAlbumID] as? String,
+            let collectionID = dictionary[kAlbumID] as? Int,
             let trackDuration = dictionary[kTrackDuration] as? Int,
-            let songID = dictionary[kSongID] as? String,
+            let songID = dictionary[kSongID] as? Int,
             let image = dictionary[kImage] as? String
             else { return nil }
         

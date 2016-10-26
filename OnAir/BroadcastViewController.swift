@@ -20,6 +20,9 @@ class BroadcastViewController: UIViewController {
         self.tableView.dataSource = self
         MPCManager.sharedController.advertiser.startAdvertisingPeer()
         MPCManager.sharedController.browser.startBrowsingForPeers()
+        SongQueueController.fetchSong(searchTerm: "John Mayor") { (songs) in
+            print(songs)
+        }
     }
     
     /*

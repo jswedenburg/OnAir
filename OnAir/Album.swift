@@ -28,8 +28,8 @@ class Album {
         self.albumCover = albumCover
     }
     
-    init?(dictionary: [String:Any]) {
-        guard
-        let name = dictionary[]
-    }
+//    init?(dictionary: [String:Any]) {
+//        guard
+//        let name = dictionary[]
+//    }
 }
