@@ -15,13 +15,9 @@ class AlbumController {
     var albumArray: [Album] = []
     
     func displayAlbumFrom(songsArray: [Song]) {
-        
         var newAlbumArray: [Album] = []
-        
         for song in songsArray {
-            
             let album = Album(albumName: song.albumName, artist: song.artist, collectionID: song.collectionID, albumCover: song.image)
-            
             if newAlbumArray.contains(album) {
                 print("heeloo")
             } else {
