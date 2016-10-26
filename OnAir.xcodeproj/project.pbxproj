@@ -27,6 +27,7 @@
 		815742D81DC00B7F00FF1619 /* Broadcast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742D61DC00B7F00FF1619 /* Broadcast.storyboard */; };
 		815742DA1DC00B8800FF1619 /* ReceiverMusicPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742D91DC00B8800FF1619 /* ReceiverMusicPlayer.storyboard */; };
 		815742DC1DC00BA100FF1619 /* BroadcasterMusicControl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742DB1DC00BA100FF1619 /* BroadcasterMusicControl.storyboard */; };
+		815743021DC1277E00FF1619 /* BroadcastMediaPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815743011DC1277E00FF1619 /* BroadcastMediaPlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		815742D71DC00B7F00FF1619 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Broadcast.storyboard; sourceTree = "<group>"; };
 		815742D91DC00B8800FF1619 /* ReceiverMusicPlayer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReceiverMusicPlayer.storyboard; sourceTree = "<group>"; };
 		815742DB1DC00BA100FF1619 /* BroadcasterMusicControl.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BroadcasterMusicControl.storyboard; sourceTree = "<group>"; };
+		815743011DC1277E00FF1619 /* BroadcastMediaPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastMediaPlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				815742D11DBFE72800FF1619 /* BroadcastViewController.swift */,
+				815743011DC1277E00FF1619 /* BroadcastMediaPlayerViewController.swift */,
 				4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */,
 				4B0A945E1DBFCA6700DF39EE /* SegmentedControlViewController.swift */,
 				811869771DBFBD0200FD2D7C /* ViewController.swift */,
@@ -357,6 +360,7 @@
 				655BAB6F1DBFFC740073F487 /* SongQueueController.swift in Sources */,
 				815742D31DBFE72800FF1619 /* BroadcastViewController.swift in Sources */,
 				811869781DBFBD0200FD2D7C /* ViewController.swift in Sources */,
+				815743021DC1277E00FF1619 /* BroadcastMediaPlayerViewController.swift in Sources */,
 				815742D51DBFEE5100FF1619 /* MPCManager.swift in Sources */,
 				815742D21DBFE72800FF1619 /* BroadcastTableViewCell.swift in Sources */,
 				655BAB4B1DBFEF180073F487 /* Album.swift in Sources */,
