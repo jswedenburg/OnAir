@@ -56,7 +56,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSH-mo-yEG">
                                 <frame key="frameInset" minX="75" minY="580" width="240" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Start/Stop Broadcasting"/>
+                                <state key="normal" title="Start Advertising"/>
                                 <connections>
                                     <action selector="broadcastButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XR4-Cz-jOB"/>
                                 </connections>
@@ -66,6 +66,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="9G4-bN-5gI"/>
                     <connections>
+                        <outlet property="startStopAdvertisingButton" destination="zSH-mo-yEG" id="5JL-yo-YEp"/>
                         <outlet property="tableView" destination="aXI-Xp-jiT" id="gud-yW-PFU"/>
                     </connections>
                 </viewController>

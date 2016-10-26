@@ -85,7 +85,7 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
         
         delegate?.invitationWasReceived(fromPeer: peerID.displayName)
         
-        //MARK Add an array to the Broadcast VC that has number of listeners
+        //MARK Add an array to the Broadcast Mediaplayer VC that has number of listeners
     }
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
