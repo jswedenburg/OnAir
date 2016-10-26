@@ -11,6 +11,7 @@
 		4B0A94611DBFE46900DF39EE /* SongQueueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */; };
 		4B0A94631DBFE7A900DF39EE /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */; };
 		4B0A94651DBFEFB400DF39EE /* SongQueueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94641DBFEFB400DF39EE /* SongQueueTableViewCell.swift */; };
+		652EF0491DC111B60020009B /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652EF0481DC111B60020009B /* NetworkController.swift */; };
 		655BAB491DBFEF080073F487 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BAB481DBFEF080073F487 /* Song.swift */; };
 		655BAB4B1DBFEF180073F487 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BAB4A1DBFEF180073F487 /* Album.swift */; };
 		655BAB6F1DBFFC740073F487 /* SongQueueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BAB6E1DBFFC740073F487 /* SongQueueController.swift */; };
@@ -51,6 +52,7 @@
 		4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueViewController.swift; sourceTree = "<group>"; };
 		4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		4B0A94641DBFEFB400DF39EE /* SongQueueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueTableViewCell.swift; sourceTree = "<group>"; };
+		652EF0481DC111B60020009B /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		655BAB481DBFEF080073F487 /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		655BAB4A1DBFEF180073F487 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		655BAB6E1DBFFC740073F487 /* SongQueueController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueController.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */,
 				655BAB6E1DBFFC740073F487 /* SongQueueController.swift */,
 				815742D41DBFEE5100FF1619 /* MPCManager.swift */,
+				652EF0481DC111B60020009B /* NetworkController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				4B0A945F1DBFCA6700DF39EE /* SegmentedControlViewController.swift in Sources */,
 				4B0A94631DBFE7A900DF39EE /* SegmentedControl.swift in Sources */,
 				4B0A94611DBFE46900DF39EE /* SongQueueViewController.swift in Sources */,
+				652EF0491DC111B60020009B /* NetworkController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
