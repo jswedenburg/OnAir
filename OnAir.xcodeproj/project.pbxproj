@@ -112,7 +112,9 @@
 		655BAB6D1DBFFC2D0073F487 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */,
 				655BAB6E1DBFFC740073F487 /* SongQueueController.swift */,
+				815742D41DBFEE5100FF1619 /* MPCManager.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -140,20 +142,13 @@
 		811869741DBFBD0200FD2D7C /* OnAir */ = {
 			isa = PBXGroup;
 			children = (
+				811869751DBFBD0200FD2D7C /* AppDelegate.swift */,
 				655BAB6D1DBFFC2D0073F487 /* Controllers */,
 				655BAB471DBFEEF40073F487 /* Model */,
-				811869751DBFBD0200FD2D7C /* AppDelegate.swift */,
-				811869771DBFBD0200FD2D7C /* ViewController.swift */,
-				4B0A94641DBFEFB400DF39EE /* SongQueueTableViewCell.swift */,
-				4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */,
-				4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */,
-				4B0A945E1DBFCA6700DF39EE /* SegmentedControlViewController.swift */,
-				8118697C1DBFBD0200FD2D7C /* Assets.xcassets */,
+				815742E01DC06FEB00FF1619 /* View Controllers */,
+				815742E11DC06FFA00FF1619 /* Custom Cells */,
 				815742DD1DC00BA600FF1619 /* Views */,
-				811869811DBFBD0200FD2D7C /* Info.plist */,
-				815742D01DBFE72800FF1619 /* BroadcastTableViewCell.swift */,
-				815742D41DBFEE5100FF1619 /* MPCManager.swift */,
-				815742D11DBFE72800FF1619 /* BroadcastViewController.swift */,
+				815742E21DC0704200FF1619 /* Resources */,
 			);
 			path = OnAir;
 			sourceTree = "<group>";
@@ -186,6 +181,35 @@
 				8118697E1DBFBD0200FD2D7C /* LaunchScreen.storyboard */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		815742E01DC06FEB00FF1619 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				815742D11DBFE72800FF1619 /* BroadcastViewController.swift */,
+				4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */,
+				4B0A945E1DBFCA6700DF39EE /* SegmentedControlViewController.swift */,
+				811869771DBFBD0200FD2D7C /* ViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		815742E11DC06FFA00FF1619 /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				815742D01DBFE72800FF1619 /* BroadcastTableViewCell.swift */,
+				4B0A94641DBFEFB400DF39EE /* SongQueueTableViewCell.swift */,
+			);
+			name = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		815742E21DC0704200FF1619 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				811869811DBFBD0200FD2D7C /* Info.plist */,
+				8118697C1DBFBD0200FD2D7C /* Assets.xcassets */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
