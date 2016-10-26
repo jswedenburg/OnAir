@@ -21,7 +21,8 @@ class BroadcastViewController: UIViewController {
         MPCManager.sharedController.advertiser.startAdvertisingPeer()
         MPCManager.sharedController.browser.startBrowsingForPeers()
         SongQueueController.fetchSong(searchTerm: "John Mayor") { (songs) in
-            print(songs)
+            guard let songs = songs else { return }
+            AlbumController.sharedController.displayAlbumFrom(songsArray: songs)
         }
     }
     

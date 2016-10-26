@@ -19,8 +19,7 @@ class Song: Equatable {
     private let kTrackDuration = "trackTimeMillis"
     private let kSongID = "trackId"
     private let kImage = "artworkUrl100"
-    
-    
+    private let kAlbumName = "collectionName"
     
     let name: String
     let artist: String
@@ -28,14 +27,16 @@ class Song: Equatable {
     let trackDuration: Int
     let songID: Int
     let image: String
+    let albumName: String
     
-    init(name: String, artist: String, collectionID: Int, trackDuration: Int, songID: Int, image: String) {
+    init(name: String, artist: String, collectionID: Int, trackDuration: Int, songID: Int, image: String, albumName: String) {
         self.name = name
         self.artist = artist
         self.collectionID = collectionID
         self.trackDuration = trackDuration
         self.songID = songID
         self.image = image
+        self.albumName = albumName
     }
     
     
@@ -50,7 +51,8 @@ class Song: Equatable {
             let collectionID = dictionary[kAlbumID] as? Int,
             let trackDuration = dictionary[kTrackDuration] as? Int,
             let songID = dictionary[kSongID] as? Int,
-            let image = dictionary[kImage] as? String
+            let image = dictionary[kImage] as? String,
+            let albumName = dictionary[kAlbumName] as? String
             else { return nil }
         
         
@@ -60,6 +62,7 @@ class Song: Equatable {
         self.trackDuration = trackDuration
         self.songID = songID
         self.image = image
+        self.albumName = albumName
     }
     
     

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Album {
+class Album: Equatable {
     
     private let kAlbumName = "collectionName"
     private let kArtist = "artistName"
@@ -16,20 +16,17 @@ class Album {
     
     let albumName: String
     let artist: String
-    let collectionID: String
-    let songs: [Song]
+    let collectionID: Int
     let albumCover: String
     
-    init(albumName: String, artist: String, collectionID: String, songs: [Song], albumCover: String) {
+    init(albumName: String, artist: String, collectionID: Int, albumCover: String) {
         self.albumName = albumName
         self.artist = artist
         self.collectionID = collectionID
-        self.songs = songs
         self.albumCover = albumCover
     }
-    
-//    init?(dictionary: [String:Any]) {
-//        guard
-//        let name = dictionary[]
-//    }
+}
+
+func ==(lhs: Album, rhs: Album) -> Bool {
+    return lhs.collectionID == rhs.collectionID
 }
