@@ -32,6 +32,8 @@ class BroadcastViewController: UIViewController {
             self.isAdvertising = false
         } else {
             sender.titleLabel?.text = "Stop Advertising"
+            MPCManager.sharedController.advertiser.startAdvertisingPeer()
+            self.isAdvertising = true
         }
     }
 }
