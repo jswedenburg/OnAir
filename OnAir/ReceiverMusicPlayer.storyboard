@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,19 +20,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RcA-01-sVK">
-                                <items>
-                                    <barButtonItem title="Dismiss" id="nsR-fG-zHE"/>
-                                </items>
-                            </toolbar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sxA-dz-aRS">
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bG6-fK-1ma">
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eho-ZU-hpR">
-                                                <frame key="frameInset" minX="8" minY="8" width="100" height="100"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Eho-ZU-hpR">
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="mym-qo-5wu"/>
+                                                    <constraint firstAttribute="width" secondItem="Eho-ZU-hpR" secondAttribute="height" multiplier="1:1" id="r2r-mx-AG1"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0TX-F7-IHs">
@@ -55,8 +51,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oeG-Zu-VyB">
-                                                <frame key="frameInset" minX="298" minY="78" width="53" height="39"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oeG-Zu-VyB">
                                                 <state key="normal" title="Mute"/>
                                             </button>
                                         </subviews>
@@ -101,11 +96,8 @@
                         <constraints>
                             <constraint firstItem="sxA-dz-aRS" firstAttribute="top" secondItem="2kk-8u-cB5" secondAttribute="bottom" id="4bm-NY-MBh"/>
                             <constraint firstItem="sxA-dz-aRS" firstAttribute="leading" secondItem="VY0-io-XpP" secondAttribute="leading" id="5UX-ru-pTe"/>
-                            <constraint firstItem="RcA-01-sVK" firstAttribute="leading" secondItem="sxA-dz-aRS" secondAttribute="leading" id="97t-XG-LAg"/>
                             <constraint firstAttribute="trailing" secondItem="sxA-dz-aRS" secondAttribute="trailing" id="bBL-zL-OZ8"/>
-                            <constraint firstItem="RPY-Po-wwr" firstAttribute="top" secondItem="sxA-dz-aRS" secondAttribute="bottom" constant="43" id="brk-LG-L8d"/>
-                            <constraint firstItem="RcA-01-sVK" firstAttribute="bottom" secondItem="RPY-Po-wwr" secondAttribute="top" id="jUW-m1-eNE"/>
-                            <constraint firstItem="RcA-01-sVK" firstAttribute="trailing" secondItem="sxA-dz-aRS" secondAttribute="trailing" id="x8z-Fx-hlo"/>
+                            <constraint firstItem="RPY-Po-wwr" firstAttribute="top" secondItem="sxA-dz-aRS" secondAttribute="bottom" id="brk-LG-L8d"/>
                         </constraints>
                     </view>
                 </viewController>

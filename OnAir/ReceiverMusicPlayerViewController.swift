@@ -9,27 +9,39 @@
 import UIKit
 
 class ReceiverMusicPlayerViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(dataReceived(notification:)), name: NSNotification.Name(rawValue: "receivedData"), object: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func dataReceived(notification: Notification){
+        guard let data = notification.object as? Data else { print("Object failed to convert to Data"); return }
+        guard let dictionary = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: String] else { print("Data failed to convert to dictionary of [String: String]"); return }
+        guard let value = dictionary.first?.value else { return }
+        
+        switch value{
+        case "play":
+            print("play")
+        case "pause":
+            print("pause")
+        case "next":
+            print("next")
+        default: ()
+            
+        }
+        
     }
-    */
-
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
