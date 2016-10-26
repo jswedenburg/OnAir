@@ -25,7 +25,7 @@
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qqf-mp-zkY">
-                                <frame key="frameInset" height="479" maxY="121"/>
+                                <frame key="frameInset" height="600"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="UEV-3s-0xl" kind="embed" id="QvO-PX-bwv"/>
@@ -45,7 +45,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="MUT-Fb-OMO" secondAttribute="bottom" constant="121" id="0SA-6R-vnx"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="MUT-Fb-OMO" secondAttribute="bottom" id="0SA-6R-vnx"/>
                             <constraint firstAttribute="trailing" secondItem="MUT-Fb-OMO" secondAttribute="trailing" id="1zf-WF-dEv"/>
                             <constraint firstItem="MUT-Fb-OMO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="taI-YR-fmW"/>
                             <constraint firstItem="MUT-Fb-OMO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="47" id="uN7-m6-wZQ"/>
@@ -70,7 +70,7 @@
                         <viewControllerLayoutGuide type="bottom" id="cJs-fy-tXl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="PXB-A5-F6g">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="479"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ai5-D5-Oxu">
@@ -186,17 +186,17 @@
                         <viewControllerLayoutGuide type="bottom" id="Z2s-iY-xzP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Gu2-op-IF8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="479"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="81" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="skY-wl-xxb">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="yWW-e2-VAE" customClass="SongQueueTableViewCell" customModule="OnAir" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1000" height="81"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yWW-e2-VAE" id="qBI-yq-lCI">
-                                            <frame key="frameInset" width="1000" height="80"/>
+                                            <frame key="frameInset" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j0f-Wb-ZCZ">

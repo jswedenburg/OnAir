@@ -42,7 +42,7 @@ class SongQueueTableViewCell: UITableViewCell {
     func updateCellWith(album: Album) {
         self.titleLabel.text = album.albumName
         self.subtitleLabel.text = album.artist
-        self.albumTextLabel = nil
+        self.albumTextLabel?.text = ""
         
         ImageController.imageForURL(imageEndpoint: album.albumCover) { (image) in
             guard let image = image else { print("Error getting image"); return }

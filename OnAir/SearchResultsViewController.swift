@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchResultsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
-
+    
     //MARK: - IB Outlet
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -52,16 +52,44 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
     
     //MARK:- Table view data source function
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Songs"
+        } else {
+            return "Albums"
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.songs.count
+        if section == 0 {
+            return songs.count
+        } else {
+            return albums.count
+        }
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "songCell", for: indexPath) as? SongQueueTableViewCell
-        let song = songs[indexPath.row]
-        cell?.updateCellWith(song: song)
-        return cell ?? SongQueueTableViewCell()
+        if indexPath.section == 0 {
+            let song = songs[indexPath.row]
+            cell?.updateCellWith(song: song)
+            return cell ?? SongQueueTableViewCell()
+        } else if indexPath.section == 1 {
+            let album = self.albums[indexPath.row]
+            cell?.updateCellWith(album: album)
+            return cell ?? SongQueueTableViewCell()
+        } else {
+            return cell ?? SongQueueTableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO:- ANGEL COME AND FIX THIS WHEN YOU HAVE TIME!!!!!
     }
     
     
