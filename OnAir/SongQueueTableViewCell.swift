@@ -27,14 +27,14 @@ class SongQueueTableViewCell: UITableViewCell {
     }
     
     func updateCellWith(song: Song) {
-        self.titleLabel.text = song.name
-        self.subtitleLabel.text = song.artist
+        self.titleLabel?.text = song.name
+        self.subtitleLabel?.text = song.artist
         self.albumTextLabel?.text = song.albumName
         
         ImageController.imageForURL(imageEndpoint: song.image) { (image) in
             guard let image = image else { print("Error getting image"); return }
             DispatchQueue.main.async {
-                self.albumCoverImage.image = image
+                self.albumCoverImage?.image = image
             }
         }
     }
