@@ -22,11 +22,11 @@ class BroadcastMediaPlayerViewController: UIViewController {
     
     @IBAction func playButtonPressed(){
         if playMode{
-            //playercontroller.pause
+            MusicPlayerController.sharedController.broadcasterPause()
             sendPauseData()
             playMode = false
         } else {
-            //Playercontroller.play
+            MusicPlayerController.sharedController.broadcaterPlay()
             sendPlayData()
             playMode = true
         }
@@ -34,7 +34,7 @@ class BroadcastMediaPlayerViewController: UIViewController {
     }
     
     @IBAction func nextButtonPressed() {
-        //playercontroller.next
+        MusicPlayerController.sharedController.skip()
         sendNextSongData()
     }
     
@@ -47,13 +47,11 @@ class BroadcastMediaPlayerViewController: UIViewController {
     
     func sendPauseData() {
         let messageDict: [String: String] = ["instruction": "pause"]
-        //Playercontroller.play
         MPCManager.sharedController.sendData(dictionary: messageDict, peerArray: followersArray)
     }
     
     func sendNextSongData() {
         let messageDict: [String: String] = ["instruction": "next"]
-        //Playercontroller.play
         MPCManager.sharedController.sendData(dictionary: messageDict, peerArray: followersArray)
     }
     
