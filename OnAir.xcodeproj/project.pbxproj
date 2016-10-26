@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FC780AF1DC14131009515A9 /* MusicPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC780AE1DC14131009515A9 /* MusicPlayerController.swift */; };
 		4B0A945F1DBFCA6700DF39EE /* SegmentedControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A945E1DBFCA6700DF39EE /* SegmentedControlViewController.swift */; };
 		4B0A94611DBFE46900DF39EE /* SongQueueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */; };
 		4B0A94631DBFE7A900DF39EE /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0FC780AE1DC14131009515A9 /* MusicPlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerController.swift; sourceTree = "<group>"; };
 		4B0A945E1DBFCA6700DF39EE /* SegmentedControlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlViewController.swift; sourceTree = "<group>"; };
 		4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueViewController.swift; sourceTree = "<group>"; };
 		4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		655BAB6D1DBFFC2D0073F487 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0FC780AE1DC14131009515A9 /* MusicPlayerController.swift */,
 				4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */,
 				655BAB6E1DBFFC740073F487 /* SongQueueController.swift */,
 				815742D41DBFEE5100FF1619 /* MPCManager.swift */,
@@ -366,6 +369,7 @@
 				655BAB4B1DBFEF180073F487 /* Album.swift in Sources */,
 				811869761DBFBD0200FD2D7C /* AppDelegate.swift in Sources */,
 				4B0A945F1DBFCA6700DF39EE /* SegmentedControlViewController.swift in Sources */,
+				0FC780AF1DC14131009515A9 /* MusicPlayerController.swift in Sources */,
 				4B0A94631DBFE7A900DF39EE /* SegmentedControl.swift in Sources */,
 				4B0A94611DBFE46900DF39EE /* SongQueueViewController.swift in Sources */,
 			);
