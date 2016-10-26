@@ -11,6 +11,7 @@ import MultipeerConnectivity
 
 class BroadcastViewController: UIViewController {
     
+    var isAdvertising = false
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -18,22 +19,23 @@ class BroadcastViewController: UIViewController {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        MPCManager.sharedController.delegate = self
         MPCManager.sharedController.advertiser.startAdvertisingPeer()
         MPCManager.sharedController.browser.startBrowsingForPeers()
-        
-        MPCManager.sharedController.delegate = self
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    @IBAction func broadcastButtonPressed(sender: UIButton) {
     
+        if self.isAdvertising {
+            sender.titleLabel?.text = "Start Advertising"
+            MPCManager.sharedController.advertiser.stopAdvertisingPeer()
+            self.isAdvertising = false
+        } else {
+            sender.titleLabel?.text = "Stop Advertising"
+            MPCManager.sharedController.advertiser.startAdvertisingPeer()
+            self.isAdvertising = true
+        }
+    }
 }
 
 
@@ -71,5 +73,9 @@ extension BroadcastViewController: MPCManagerDelegate{
     
     func invitationWasReceived(fromPeer: String) {
         print("do something")
+    }
+    
+    func connectedWithPeer(peerID: MCPeerID) {
+        //perform segue to mediaPlayer
     }
 }
