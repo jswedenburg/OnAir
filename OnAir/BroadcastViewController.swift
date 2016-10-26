@@ -22,7 +22,8 @@ class BroadcastViewController: UIViewController {
         MPCManager.sharedController.browser.startBrowsingForPeers()
         SongQueueController.fetchSong(searchTerm: "John Mayor") { (songs) in
             guard let songs = songs else { return }
-            AlbumController.sharedController.displayAlbumFrom(songsArray: songs)
+            let album = Album(albumName: songs[0].albumName, artist: songs[0].artist, collectionID: songs[0].collectionID, albumCover: songs[0].image)
+            AlbumController.sharedController.addSongsToQueueWith(album: album)
         }
     }
     

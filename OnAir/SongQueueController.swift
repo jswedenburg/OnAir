@@ -10,11 +10,7 @@ import Foundation
 
 class SongQueueController {
     
-    init() {
-        SongQueueController.fetchSong(searchTerm: "John+Mayor") { (songs) in
-            print(songs)
-        }
-    }
+    static let sharedController = SongQueueController()
     
     var upNextQueue: [Song] = []
     var historyQueue: [Song] = []
