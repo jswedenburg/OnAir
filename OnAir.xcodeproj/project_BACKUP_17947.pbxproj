@@ -392,7 +392,11 @@
 				4B0A945F1DBFCA6700DF39EE /* SegmentedControlViewController.swift in Sources */,
 				0FC780AF1DC14131009515A9 /* MusicPlayerController.swift in Sources */,
 				4B0A94631DBFE7A900DF39EE /* SegmentedControl.swift in Sources */,
+<<<<<<< HEAD
+				0FC780D31DC15E72009515A9 /* ReceiverMusicPlayerViewController.swift in Sources */,
+=======
 				652EF04B1DC118280020009B /* AlbumController.swift in Sources */,
+>>>>>>> feature/SearchController
 				4B0A94611DBFE46900DF39EE /* SongQueueViewController.swift in Sources */,
 				652EF0491DC111B60020009B /* NetworkController.swift in Sources */,
 			);

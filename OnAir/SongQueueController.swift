@@ -10,11 +10,12 @@ import Foundation
 
 class SongQueueController {
     
+    static let sharedController = SongQueueController()
+    
     var upNextQueue: [Song] = []
     var historyQueue: [Song] = []
     
-    func addSongToUpNext(name: String, artist: String, collectionID: String, trackDuration: Int, songID: String) {
-        let newSong = Song(name: name, artist: artist, collectionID: collectionID, trackDuration: trackDuration, songID: songID)
+    func addSongToUpNext(newSong: Song) {
         upNextQueue.append(newSong)
     }
     
@@ -27,5 +28,5 @@ class SongQueueController {
         guard let song = upNextQueue.first else { return }
         upNextQueue.remove(at: 0)
         historyQueue.insert(song, at: 0)
-    }
+    }    
 }

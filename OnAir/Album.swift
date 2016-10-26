@@ -8,17 +8,25 @@
 
 import Foundation
 
-class Album {
+class Album: Equatable {
     
-    let name: String
+    private let kAlbumName = "collectionName"
+    private let kArtist = "artistName"
+    private let kCollectionID = "collectionId"
+    
+    let albumName: String
     let artist: String
-    let collectionID: String
-    let songs: [Song]
+    let collectionID: Int
+    let albumCover: String
     
-    init(name: String, artist: String, collectionID: String, songs: [Song]) {
-        self.name = name
+    init(albumName: String, artist: String, collectionID: Int, albumCover: String) {
+        self.albumName = albumName
         self.artist = artist
         self.collectionID = collectionID
-        self.songs = songs
+        self.albumCover = albumCover
     }
+}
+
+func ==(lhs: Album, rhs: Album) -> Bool {
+    return lhs.collectionID == rhs.collectionID
 }

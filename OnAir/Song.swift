@@ -8,21 +8,64 @@
 
 import Foundation
 
+import Foundation
+
 class Song: Equatable {
+    
+    //create keys to use in the failable initializer
+    private let kSongName = "trackName"
+    private let kArtist = "artistName"
+    private let kAlbumID = "collectionId"
+    private let kTrackDuration = "trackTimeMillis"
+    private let kSongID = "trackId"
+    private let kImage = "artworkUrl100"
+    private let kAlbumName = "collectionName"
     
     let name: String
     let artist: String
-    let collectionID: String
+    let collectionID: Int
     let trackDuration: Int
-    let songID: String
+    let songID: Int
+    let image: String
+    let albumName: String
     
-    init(name: String, artist: String, collectionID: String, trackDuration: Int, songID: String) {
+    init(name: String, artist: String, collectionID: Int, trackDuration: Int, songID: Int, image: String, albumName: String) {
         self.name = name
         self.artist = artist
         self.collectionID = collectionID
         self.trackDuration = trackDuration
         self.songID = songID
+        self.image = image
+        self.albumName = albumName
     }
+    
+    
+    
+    //Model Objects: failable initializer.
+    
+    init?(dictionary: [String: Any])
+    {
+        //first level dictionary- on the first level we have the bookName and array of song dictionaries
+        guard let name = dictionary[kSongName] as? String,
+            let artist = dictionary[kArtist] as? String,
+            let collectionID = dictionary[kAlbumID] as? Int,
+            let trackDuration = dictionary[kTrackDuration] as? Int,
+            let songID = dictionary[kSongID] as? Int,
+            let image = dictionary[kImage] as? String,
+            let albumName = dictionary[kAlbumName] as? String
+            else { return nil }
+        
+        
+        self.name = name
+        self.artist = artist
+        self.collectionID = collectionID
+        self.trackDuration = trackDuration
+        self.songID = songID
+        self.image = image
+        self.albumName = albumName
+    }
+    
+    
 }
 
 func ==(lhs: Song, rhs: Song) -> Bool {

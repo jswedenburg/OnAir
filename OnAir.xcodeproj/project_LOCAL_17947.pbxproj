@@ -13,11 +13,6 @@
 		4B0A94611DBFE46900DF39EE /* SongQueueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */; };
 		4B0A94631DBFE7A900DF39EE /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */; };
 		4B0A94651DBFEFB400DF39EE /* SongQueueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94641DBFEFB400DF39EE /* SongQueueTableViewCell.swift */; };
-		652EF0491DC111B60020009B /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652EF0481DC111B60020009B /* NetworkController.swift */; };
-		652EF04B1DC118280020009B /* AlbumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652EF04A1DC118280020009B /* AlbumController.swift */; };
-		652EF04F1DC129E60020009B /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652EF04E1DC129E60020009B /* SearchResultsViewController.swift */; };
-		652EF0511DC13FE10020009B /* ImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652EF0501DC13FE10020009B /* ImageController.swift */; };
-		652EF0531DC149B60020009B /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652EF0521DC149B60020009B /* SearchController.swift */; };
 		655BAB491DBFEF080073F487 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BAB481DBFEF080073F487 /* Song.swift */; };
 		655BAB4B1DBFEF180073F487 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BAB4A1DBFEF180073F487 /* Album.swift */; };
 		655BAB6F1DBFFC740073F487 /* SongQueueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BAB6E1DBFFC740073F487 /* SongQueueController.swift */; };
@@ -61,11 +56,6 @@
 		4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueViewController.swift; sourceTree = "<group>"; };
 		4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		4B0A94641DBFEFB400DF39EE /* SongQueueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueTableViewCell.swift; sourceTree = "<group>"; };
-		652EF0481DC111B60020009B /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
-		652EF04A1DC118280020009B /* AlbumController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumController.swift; sourceTree = "<group>"; };
-		652EF04E1DC129E60020009B /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
-		652EF0501DC13FE10020009B /* ImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
-		652EF0521DC149B60020009B /* SearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		655BAB481DBFEF080073F487 /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		655BAB4A1DBFEF180073F487 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		655BAB6E1DBFFC740073F487 /* SongQueueController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueController.swift; sourceTree = "<group>"; };
@@ -132,10 +122,6 @@
 				4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */,
 				655BAB6E1DBFFC740073F487 /* SongQueueController.swift */,
 				815742D41DBFEE5100FF1619 /* MPCManager.swift */,
-				652EF0481DC111B60020009B /* NetworkController.swift */,
-				652EF04A1DC118280020009B /* AlbumController.swift */,
-				652EF0501DC13FE10020009B /* ImageController.swift */,
-				652EF0521DC149B60020009B /* SearchController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -213,7 +199,6 @@
 				4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */,
 				4B0A945E1DBFCA6700DF39EE /* SegmentedControlViewController.swift */,
 				811869771DBFBD0200FD2D7C /* ViewController.swift */,
-				652EF04E1DC129E60020009B /* SearchResultsViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -380,21 +365,17 @@
 				655BAB491DBFEF080073F487 /* Song.swift in Sources */,
 				655BAB6F1DBFFC740073F487 /* SongQueueController.swift in Sources */,
 				815742D31DBFE72800FF1619 /* BroadcastViewController.swift in Sources */,
-				652EF04F1DC129E60020009B /* SearchResultsViewController.swift in Sources */,
 				811869781DBFBD0200FD2D7C /* ViewController.swift in Sources */,
 				815743021DC1277E00FF1619 /* BroadcastMediaPlayerViewController.swift in Sources */,
 				815742D51DBFEE5100FF1619 /* MPCManager.swift in Sources */,
-				652EF0511DC13FE10020009B /* ImageController.swift in Sources */,
 				815742D21DBFE72800FF1619 /* BroadcastTableViewCell.swift in Sources */,
 				655BAB4B1DBFEF180073F487 /* Album.swift in Sources */,
-				652EF0531DC149B60020009B /* SearchController.swift in Sources */,
 				811869761DBFBD0200FD2D7C /* AppDelegate.swift in Sources */,
 				4B0A945F1DBFCA6700DF39EE /* SegmentedControlViewController.swift in Sources */,
 				0FC780AF1DC14131009515A9 /* MusicPlayerController.swift in Sources */,
 				4B0A94631DBFE7A900DF39EE /* SegmentedControl.swift in Sources */,
-				652EF04B1DC118280020009B /* AlbumController.swift in Sources */,
+				0FC780D31DC15E72009515A9 /* ReceiverMusicPlayerViewController.swift in Sources */,
 				4B0A94611DBFE46900DF39EE /* SongQueueViewController.swift in Sources */,
-				652EF0491DC111B60020009B /* NetworkController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
