@@ -37,28 +37,20 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
     
     var connectedPeers: [MCPeerID] = []
     
-    
-    
-    
-    
+
     override init(){
         super.init()
         
         peer = MCPeerID(displayName: UIDevice.current.name)
         
-        session = MCSession(peer: peer)
+        session = MCSession(peer: peer, securityIdentity: nil, encryptionPreference: .none)
         session.delegate = self
         
-        browser = MCNearbyServiceBrowser(peer: peer, serviceType: "onAir")
+        browser = MCNearbyServiceBrowser(peer: peer, serviceType: "onair")
         browser.delegate = self
         
-        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: nil, serviceType: "onAir")
+        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: nil, serviceType: "onair")
         advertiser.delegate = self
-        
-    
-        
-    
-        
     }
     
     
@@ -85,9 +77,7 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         
         invitationHandler(true, self.session)
-        
-        
-        
+
         
     }
     

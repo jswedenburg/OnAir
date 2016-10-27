@@ -22,7 +22,6 @@ class DiscoveryViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         MPCManager.sharedController.delegate = self
-        MPCManager.sharedController.advertiser.startAdvertisingPeer()
         MPCManager.sharedController.browser.startBrowsingForPeers()
         
     }

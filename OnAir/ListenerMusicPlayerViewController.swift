@@ -24,6 +24,7 @@ class ListenerMusicPlayerViewController: UIViewController {
         switch value{
         case "play":
             print("play")
+            
         case "pause":
             print("pause")
         case "next":
