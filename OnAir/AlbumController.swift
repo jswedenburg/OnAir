@@ -29,8 +29,23 @@ class AlbumController {
         SearchController.fetchAlbumSongsWith(id: album.collectionID) { (songs) in
             guard let songs = songs else { return }
             for song in songs{
-                SongQueueController.sharedController.upNextQueue.append(song)
+                DispatchQueue.main.async {
+                    SongQueueController.sharedController.upNextQueue.append(song)
+                }
             }
         }
+    }
+    
+    func removeSongsFromQueueFrom(album: Album) {
+        let id = album.collectionID
+        
+        let songs = SongQueueController.sharedController.upNextQueue.filter( { $0.collectionID == id })
+        
+        for song in songs {
+            let index = SongQueueController.sharedController.upNextQueue.index(of: song)
+            guard let songIndex = index else { return }
+            SongQueueController.sharedController.upNextQueue.remove(at: songIndex)
+        }
+        
     }
 }

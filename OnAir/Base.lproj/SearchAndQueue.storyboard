@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -73,6 +73,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dAm-Qc-bB5">
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Vam-R8-hjf" id="YGA-fT-rUj"/>
+                                </connections>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ai5-D5-Oxu">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -134,6 +140,7 @@
                                         <connections>
                                             <outlet property="albumCoverImage" destination="zXd-Qv-00K" id="9vM-df-04A"/>
                                             <outlet property="albumTextLabel" destination="p3V-0p-eRT" id="VqJ-4F-Lp7"/>
+                                            <outlet property="isAddedButton" destination="i3Y-7h-mSJ" id="Zmp-tE-9na"/>
                                             <outlet property="subtitleLabel" destination="In1-lB-GSB" id="1qZ-sF-Do6"/>
                                             <outlet property="titleLabel" destination="fmo-Fj-fmT" id="QE4-PJ-eCZ"/>
                                         </connections>
@@ -144,12 +151,6 @@
                                     <outlet property="delegate" destination="Vam-R8-hjf" id="kEZ-VB-U2h"/>
                                 </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dAm-Qc-bB5">
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Vam-R8-hjf" id="YGA-fT-rUj"/>
-                                </connections>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -158,12 +159,9 @@
                             <constraint firstItem="dAm-Qc-bB5" firstAttribute="top" secondItem="zvl-C1-r6i" secondAttribute="bottom" id="ElS-wY-0H6"/>
                             <constraint firstItem="ai5-D5-Oxu" firstAttribute="top" secondItem="PXB-A5-F6g" secondAttribute="top" constant="44" id="MaO-iI-1Ek"/>
                             <constraint firstItem="ai5-D5-Oxu" firstAttribute="top" secondItem="dAm-Qc-bB5" secondAttribute="bottom" id="Ng2-Ga-dpc"/>
-                            <constraint firstAttribute="bottom" secondItem="ai5-D5-Oxu" secondAttribute="bottom" id="OeQ-qe-dTr"/>
                             <constraint firstAttribute="trailing" secondItem="ai5-D5-Oxu" secondAttribute="trailing" id="Tbb-ie-Z4z"/>
                             <constraint firstItem="ai5-D5-Oxu" firstAttribute="leading" secondItem="PXB-A5-F6g" secondAttribute="leading" id="Xyj-6g-vT8"/>
-                            <constraint firstAttribute="trailing" secondItem="ai5-D5-Oxu" secondAttribute="trailing" id="dN1-BM-z3u"/>
                             <constraint firstAttribute="trailing" secondItem="dAm-Qc-bB5" secondAttribute="trailing" id="f8v-AJ-Tno"/>
-                            <constraint firstItem="ai5-D5-Oxu" firstAttribute="leading" secondItem="PXB-A5-F6g" secondAttribute="leading" id="vNs-Fy-og2"/>
                         </constraints>
                     </view>
                     <connections>
@@ -174,7 +172,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VpB-kc-Nd2" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="thY-JT-seR"/>
             </objects>
-            <point key="canvasLocation" x="345" y="766"/>
+            <point key="canvasLocation" x="344.80000000000001" y="765.51724137931035"/>
         </scene>
         <!--Song Queue View Controller-->
         <scene sceneID="AkP-9h-fiU">

@@ -47,6 +47,15 @@ class SongQueueViewController: UIViewController, UITableViewDelegate, UITableVie
         return cell
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        SongQueueController.sharedController.upNextQueue.remove(at: indexPath.row)
+//        tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+    
     // MARK: Functions
     
     func updateTableView() {

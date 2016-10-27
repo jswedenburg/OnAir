@@ -28,6 +28,7 @@ class Song: Equatable {
     let songID: Int
     let image: String
     let albumName: String
+    var isAdded: Bool?
     
     init(name: String, artist: String, collectionID: Int, trackDuration: Int, songID: Int, image: String, albumName: String) {
         self.name = name
