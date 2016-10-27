@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReceiverMusicPlayerViewController: UIViewController {
+class ListenerMusicPlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -9,7 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class BroadcastViewController: UIViewController {
+class DiscoveryViewController: UIViewController {
     
     
     @IBOutlet weak var startStopAdvertisingButton: UIButton!

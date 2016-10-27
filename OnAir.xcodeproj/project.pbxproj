@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0FC780AF1DC14131009515A9 /* MusicPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC780AE1DC14131009515A9 /* MusicPlayerController.swift */; };
-		0FC780D31DC15E72009515A9 /* ReceiverMusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC780D21DC15E72009515A9 /* ReceiverMusicPlayerViewController.swift */; };
 		4B0A945F1DBFCA6700DF39EE /* SegmentedControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A945E1DBFCA6700DF39EE /* SegmentedControlViewController.swift */; };
 		4B0A94611DBFE46900DF39EE /* SongQueueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */; };
 		4B0A94631DBFE7A900DF39EE /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */; };
@@ -22,19 +21,17 @@
 		655BAB4B1DBFEF180073F487 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BAB4A1DBFEF180073F487 /* Album.swift */; };
 		655BAB6F1DBFFC740073F487 /* SongQueueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BAB6E1DBFFC740073F487 /* SongQueueController.swift */; };
 		811869761DBFBD0200FD2D7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869751DBFBD0200FD2D7C /* AppDelegate.swift */; };
-		811869781DBFBD0200FD2D7C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869771DBFBD0200FD2D7C /* ViewController.swift */; };
-		8118697B1DBFBD0200FD2D7C /* SegmentedControl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 811869791DBFBD0200FD2D7C /* SegmentedControl.storyboard */; };
+		8118697B1DBFBD0200FD2D7C /* SearchAndQueue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 811869791DBFBD0200FD2D7C /* SearchAndQueue.storyboard */; };
 		8118697D1DBFBD0200FD2D7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8118697C1DBFBD0200FD2D7C /* Assets.xcassets */; };
 		811869801DBFBD0200FD2D7C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8118697E1DBFBD0200FD2D7C /* LaunchScreen.storyboard */; };
 		8118698B1DBFBD0200FD2D7C /* OnAirTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118698A1DBFBD0200FD2D7C /* OnAirTests.swift */; };
 		811869961DBFBD0200FD2D7C /* OnAirUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869951DBFBD0200FD2D7C /* OnAirUITests.swift */; };
-		815742D21DBFE72800FF1619 /* BroadcastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D01DBFE72800FF1619 /* BroadcastTableViewCell.swift */; };
-		815742D31DBFE72800FF1619 /* BroadcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D11DBFE72800FF1619 /* BroadcastViewController.swift */; };
+		815742D31DBFE72800FF1619 /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D11DBFE72800FF1619 /* DiscoveryViewController.swift */; };
 		815742D51DBFEE5100FF1619 /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D41DBFEE5100FF1619 /* MPCManager.swift */; };
-		815742D81DC00B7F00FF1619 /* Broadcast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742D61DC00B7F00FF1619 /* Broadcast.storyboard */; };
-		815742DA1DC00B8800FF1619 /* ReceiverMusicPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742D91DC00B8800FF1619 /* ReceiverMusicPlayer.storyboard */; };
-		815742DC1DC00BA100FF1619 /* BroadcasterMusicControl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742DB1DC00BA100FF1619 /* BroadcasterMusicControl.storyboard */; };
-		815743021DC1277E00FF1619 /* BroadcastMediaPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815743011DC1277E00FF1619 /* BroadcastMediaPlayerViewController.swift */; };
+		815742D81DC00B7F00FF1619 /* Discovery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742D61DC00B7F00FF1619 /* Discovery.storyboard */; };
+		815742DA1DC00B8800FF1619 /* ListenerMusicPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742D91DC00B8800FF1619 /* ListenerMusicPlayer.storyboard */; };
+		815742DC1DC00BA100FF1619 /* BroadcastMusicPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742DB1DC00BA100FF1619 /* BroadcastMusicPlayer.storyboard */; };
+		815743021DC1277E00FF1619 /* BroadcastMusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815743011DC1277E00FF1619 /* BroadcastMusicPlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +53,7 @@
 
 /* Begin PBXFileReference section */
 		0FC780AE1DC14131009515A9 /* MusicPlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerController.swift; sourceTree = "<group>"; };
-		0FC780D21DC15E72009515A9 /* ReceiverMusicPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiverMusicPlayerViewController.swift; sourceTree = "<group>"; };
+		0FC780D21DC15E72009515A9 /* ListenerMusicPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListenerMusicPlayerViewController.swift; sourceTree = "<group>"; };
 		4B0A945E1DBFCA6700DF39EE /* SegmentedControlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlViewController.swift; sourceTree = "<group>"; };
 		4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueViewController.swift; sourceTree = "<group>"; };
 		4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
@@ -71,8 +68,7 @@
 		655BAB6E1DBFFC740073F487 /* SongQueueController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueController.swift; sourceTree = "<group>"; };
 		811869721DBFBD0200FD2D7C /* OnAir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnAir.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		811869751DBFBD0200FD2D7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		811869771DBFBD0200FD2D7C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8118697A1DBFBD0200FD2D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SegmentedControl.storyboard; sourceTree = "<group>"; };
+		8118697A1DBFBD0200FD2D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SearchAndQueue.storyboard; sourceTree = "<group>"; };
 		8118697C1DBFBD0200FD2D7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8118697F1DBFBD0200FD2D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		811869811DBFBD0200FD2D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -82,13 +78,12 @@
 		811869911DBFBD0200FD2D7C /* OnAirUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnAirUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		811869951DBFBD0200FD2D7C /* OnAirUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnAirUITests.swift; sourceTree = "<group>"; };
 		811869971DBFBD0200FD2D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		815742D01DBFE72800FF1619 /* BroadcastTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastTableViewCell.swift; sourceTree = "<group>"; };
-		815742D11DBFE72800FF1619 /* BroadcastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastViewController.swift; sourceTree = "<group>"; };
+		815742D11DBFE72800FF1619 /* DiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		815742D41DBFEE5100FF1619 /* MPCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
-		815742D71DC00B7F00FF1619 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Broadcast.storyboard; sourceTree = "<group>"; };
-		815742D91DC00B8800FF1619 /* ReceiverMusicPlayer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReceiverMusicPlayer.storyboard; sourceTree = "<group>"; };
-		815742DB1DC00BA100FF1619 /* BroadcasterMusicControl.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BroadcasterMusicControl.storyboard; sourceTree = "<group>"; };
-		815743011DC1277E00FF1619 /* BroadcastMediaPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastMediaPlayerViewController.swift; sourceTree = "<group>"; };
+		815742D71DC00B7F00FF1619 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Discovery.storyboard; sourceTree = "<group>"; };
+		815742D91DC00B8800FF1619 /* ListenerMusicPlayer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ListenerMusicPlayer.storyboard; sourceTree = "<group>"; };
+		815742DB1DC00BA100FF1619 /* BroadcastMusicPlayer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BroadcastMusicPlayer.storyboard; sourceTree = "<group>"; };
+		815743011DC1277E00FF1619 /* BroadcastMusicPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastMusicPlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,10 +190,10 @@
 		815742DD1DC00BA600FF1619 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				811869791DBFBD0200FD2D7C /* SegmentedControl.storyboard */,
-				815742D91DC00B8800FF1619 /* ReceiverMusicPlayer.storyboard */,
-				815742DB1DC00BA100FF1619 /* BroadcasterMusicControl.storyboard */,
-				815742D61DC00B7F00FF1619 /* Broadcast.storyboard */,
+				811869791DBFBD0200FD2D7C /* SearchAndQueue.storyboard */,
+				815742D91DC00B8800FF1619 /* ListenerMusicPlayer.storyboard */,
+				815742DB1DC00BA100FF1619 /* BroadcastMusicPlayer.storyboard */,
+				815742D61DC00B7F00FF1619 /* Discovery.storyboard */,
 				8118697E1DBFBD0200FD2D7C /* LaunchScreen.storyboard */,
 			);
 			name = Views;
@@ -207,12 +202,11 @@
 		815742E01DC06FEB00FF1619 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0FC780D21DC15E72009515A9 /* ReceiverMusicPlayerViewController.swift */,
-				815742D11DBFE72800FF1619 /* BroadcastViewController.swift */,
-				815743011DC1277E00FF1619 /* BroadcastMediaPlayerViewController.swift */,
+				0FC780D21DC15E72009515A9 /* ListenerMusicPlayerViewController.swift */,
+				815742D11DBFE72800FF1619 /* DiscoveryViewController.swift */,
+				815743011DC1277E00FF1619 /* BroadcastMusicPlayerViewController.swift */,
 				4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */,
 				4B0A945E1DBFCA6700DF39EE /* SegmentedControlViewController.swift */,
-				811869771DBFBD0200FD2D7C /* ViewController.swift */,
 				652EF04E1DC129E60020009B /* SearchResultsViewController.swift */,
 			);
 			name = "View Controllers";
@@ -221,7 +215,6 @@
 		815742E11DC06FFA00FF1619 /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
-				815742D01DBFE72800FF1619 /* BroadcastTableViewCell.swift */,
 				4B0A94641DBFEFB400DF39EE /* SongQueueTableViewCell.swift */,
 			);
 			name = "Custom Cells";
@@ -348,10 +341,10 @@
 			files = (
 				811869801DBFBD0200FD2D7C /* LaunchScreen.storyboard in Resources */,
 				8118697D1DBFBD0200FD2D7C /* Assets.xcassets in Resources */,
-				815742DC1DC00BA100FF1619 /* BroadcasterMusicControl.storyboard in Resources */,
-				8118697B1DBFBD0200FD2D7C /* SegmentedControl.storyboard in Resources */,
-				815742DA1DC00B8800FF1619 /* ReceiverMusicPlayer.storyboard in Resources */,
-				815742D81DC00B7F00FF1619 /* Broadcast.storyboard in Resources */,
+				815742DC1DC00BA100FF1619 /* BroadcastMusicPlayer.storyboard in Resources */,
+				8118697B1DBFBD0200FD2D7C /* SearchAndQueue.storyboard in Resources */,
+				815742DA1DC00B8800FF1619 /* ListenerMusicPlayer.storyboard in Resources */,
+				815742D81DC00B7F00FF1619 /* Discovery.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,13 +372,11 @@
 				4B0A94651DBFEFB400DF39EE /* SongQueueTableViewCell.swift in Sources */,
 				655BAB491DBFEF080073F487 /* Song.swift in Sources */,
 				655BAB6F1DBFFC740073F487 /* SongQueueController.swift in Sources */,
-				815742D31DBFE72800FF1619 /* BroadcastViewController.swift in Sources */,
+				815742D31DBFE72800FF1619 /* DiscoveryViewController.swift in Sources */,
 				652EF04F1DC129E60020009B /* SearchResultsViewController.swift in Sources */,
-				811869781DBFBD0200FD2D7C /* ViewController.swift in Sources */,
-				815743021DC1277E00FF1619 /* BroadcastMediaPlayerViewController.swift in Sources */,
+				815743021DC1277E00FF1619 /* BroadcastMusicPlayerViewController.swift in Sources */,
 				815742D51DBFEE5100FF1619 /* MPCManager.swift in Sources */,
 				652EF0511DC13FE10020009B /* ImageController.swift in Sources */,
-				815742D21DBFE72800FF1619 /* BroadcastTableViewCell.swift in Sources */,
 				655BAB4B1DBFEF180073F487 /* Album.swift in Sources */,
 				652EF0531DC149B60020009B /* SearchController.swift in Sources */,
 				811869761DBFBD0200FD2D7C /* AppDelegate.swift in Sources */,
@@ -430,12 +421,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		811869791DBFBD0200FD2D7C /* SegmentedControl.storyboard */ = {
+		811869791DBFBD0200FD2D7C /* SearchAndQueue.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				8118697A1DBFBD0200FD2D7C /* Base */,
 			);
-			name = SegmentedControl.storyboard;
+			name = SearchAndQueue.storyboard;
 			sourceTree = "<group>";
 		};
 		8118697E1DBFBD0200FD2D7C /* LaunchScreen.storyboard */ = {
@@ -446,12 +437,12 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		815742D61DC00B7F00FF1619 /* Broadcast.storyboard */ = {
+		815742D61DC00B7F00FF1619 /* Discovery.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				815742D71DC00B7F00FF1619 /* Base */,
 			);
-			name = Broadcast.storyboard;
+			name = Discovery.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
