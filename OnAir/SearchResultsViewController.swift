@@ -50,19 +50,19 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func cellButtonTapped(cell: SongQueueTableViewCell) {
-        
-        if cell.songIsAdded == true {
+    
+        if cell.song?.isAdded == true {
             // remove song
             // check mark is now a  plus sign
             // cell.songIsAdded = false
             if cell.song != nil {
+                cell.song?.isAdded = false
                 SongQueueController.sharedController.removeSongFromUpNext(song: cell.song!)
             } else {
                 guard let album = cell.album else { return }
                 AlbumController.sharedController.removeSongsFromQueueFrom(album: album)
             }
-            cell.songIsAdded = false
-            cell.isAddedButton.setTitle("+", for: .normal)
+            cell.isAddedButton?.setTitle("+", for: .normal)
         } else {
             // add song(s) to queue
             // plus sign is now a check
@@ -70,14 +70,15 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
             
             if cell.song != nil {
                 guard let song = cell.song else { return }
+                song.isAdded = true
                 SongQueueController.sharedController.addSongToUpNext(newSong: song)
             } else {
                 guard let album = cell.album else { return }
                 AlbumController.sharedController.addSongsToQueueWith(album: album)
             }
-            cell.songIsAdded = true
-            cell.isAddedButton.setTitle("✓", for: .normal)
-        
+            cell.isAddedButton?.setTitle("✓", for: .normal)
+            
+        }
     }
     
     

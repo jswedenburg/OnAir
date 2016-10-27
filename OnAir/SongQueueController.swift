@@ -33,5 +33,10 @@ class SongQueueController {
         guard let song = upNextQueue.first else { return }
         upNextQueue.remove(at: 0)
         historyQueue.insert(song, at: 0)
-    }    
+    }
+    
+    func isInQueue(song: Song) -> Bool {
+        return upNextQueue.index(of: song) != nil
+    }
+    
 }
