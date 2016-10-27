@@ -30,6 +30,7 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         self.searchBar.delegate = self
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: Notification.Name(rawValue: "QueueHasChanged") , object: nil)
     }
     
     //MARK: - Search Bar Delegate
@@ -79,6 +80,12 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
             cell.isAddedButton?.setTitle("✓", for: .normal)
             
         }
+    }
+    
+    // MARK: Functions
+    
+    func reloadTableView() {
+        self.tableView.reloadData()
     }
     
     
