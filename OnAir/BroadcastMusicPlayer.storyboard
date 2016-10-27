@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Broadcast Media Player View Controller-->
+        <!--Broadcast Music Player View Controller-->
         <scene sceneID="IbB-Cq-hWy">
             <objects>
-                <viewController id="irE-pj-7TK" customClass="BroadcastMediaPlayerViewController" customModule="OnAir" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="irE-pj-7TK" customClass="BroadcastMusicPlayerViewController" customModule="OnAir" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PgT-rP-Ksx"/>
                         <viewControllerLayoutGuide type="bottom" id="QNX-La-gIc"/>

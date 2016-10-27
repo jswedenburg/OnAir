@@ -57,6 +57,8 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
         
     
         
+    
+        
     }
     
     

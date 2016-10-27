@@ -9,7 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class BroadcastMediaPlayerViewController: UIViewController {
+class BroadcastMusicPlayerViewController: UIViewController {
     
     var playMode = true
     

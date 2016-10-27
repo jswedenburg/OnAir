@@ -45,7 +45,7 @@ class DiscoveryViewController: UIViewController {
 
 
 // MARK: - TableView Delegate and Datasource
-extension BroadcastViewController: UITableViewDelegate, UITableViewDataSource{
+extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -73,7 +73,7 @@ extension BroadcastViewController: UITableViewDelegate, UITableViewDataSource{
     
 }
 
-extension BroadcastViewController: MPCManagerDelegate{
+extension DiscoveryViewController: MPCManagerDelegate{
     
     func foundPeer(){
         tableView.reloadData()
