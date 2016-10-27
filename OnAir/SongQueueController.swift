@@ -12,7 +12,12 @@ class SongQueueController {
     
     static let sharedController = SongQueueController()
     
-    var upNextQueue: [Song] = []
+    var upNextQueue: [Song] = [] {
+        didSet {
+            let notification = Notification(name: Notification.Name(rawValue: "QueueHasChanged"))
+            NotificationCenter.default.post(notification)
+        }
+    }
     var historyQueue: [Song] = []
     
     func addSongToUpNext(newSong: Song) {

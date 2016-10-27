@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchResultsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class SearchResultsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SongAddedToQueueDelegate {
     
     //MARK: - IB Outlet
     @IBOutlet weak var searchBar: UISearchBar!
@@ -49,6 +49,21 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
     
+    func cellButtonTapped(cell: SongQueueTableViewCell) {
+        if cell.song != nil {
+            guard let song = cell.song else { return }
+            SongQueueController.sharedController.addSongToUpNext(newSong: song)
+        } else {
+            guard let album = cell.album else { return }
+            SearchController.fetchAlbumSongsWith(id: album.collectionID, completion: { (songs) in
+                guard let songs = songs else { return }
+                for song in songs {
+                    SongQueueController.sharedController.addSongToUpNext(newSong: song)
+                }
+            })
+        }
+    }
+    
     
     //MARK:- Table view data source function
     
@@ -75,6 +90,7 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "songCell", for: indexPath) as? SongQueueTableViewCell
+        cell?.delegate = self
         if indexPath.section == 0 {
             let song = songs[indexPath.row]
             cell?.updateCellWith(song: song)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SegmentedControlViewController: UIViewController {
+class SegmentedControlViewController: UIViewController  {
 
     override func viewDidLoad() {
         super.viewDidLoad()

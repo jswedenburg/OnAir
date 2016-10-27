@@ -80,7 +80,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zwF-gd-yzs" id="iOy-KL-318">
-                                            <frame key="frameInset" width="375" height="79"/>
+                                            <frame key="frameInset" width="375" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zXd-Qv-00K">
@@ -113,6 +113,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                     <state key="normal" title="+"/>
+                                                    <connections>
+                                                        <action selector="addSongToQueueButtonTappedWithSender:" destination="zwF-gd-yzs" eventType="touchUpInside" id="oXa-aT-vRV"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -169,13 +172,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VpB-kc-Nd2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="thY-JT-seR">
-                    <connections>
-                        <outlet property="searchBar" destination="dAm-Qc-bB5" id="9D9-E9-3o4"/>
-                    </connections>
-                </searchDisplayController>
+                <searchDisplayController id="thY-JT-seR"/>
             </objects>
-            <point key="canvasLocation" x="69.599999999999994" y="748.87556221889065"/>
+            <point key="canvasLocation" x="345" y="766"/>
         </scene>
         <!--Song Queue View Controller-->
         <scene sceneID="AkP-9h-fiU">
@@ -192,7 +191,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="81" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="skY-wl-xxb">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="yWW-e2-VAE" customClass="SongQueueTableViewCell" customModule="OnAir" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="songQueueCell" id="yWW-e2-VAE" customClass="SongQueueTableViewCell" customModule="OnAir" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yWW-e2-VAE" id="qBI-yq-lCI">
@@ -242,6 +241,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="UEV-3s-0xl" id="2Lw-z0-jnD"/>
+                                    <outlet property="delegate" destination="UEV-3s-0xl" id="XMh-5b-atb"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -252,10 +255,13 @@
                             <constraint firstItem="skY-wl-xxb" firstAttribute="top" secondItem="Gu2-op-IF8" secondAttribute="top" id="xhn-6U-TmX"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="skY-wl-xxb" id="KWE-so-ibg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pJM-kp-JPT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="856.79999999999995" y="193.85307346326837"/>
+            <point key="canvasLocation" x="974" y="201"/>
         </scene>
     </scenes>
 </document>
