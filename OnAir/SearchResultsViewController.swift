@@ -50,18 +50,34 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func cellButtonTapped(cell: SongQueueTableViewCell) {
-        if cell.song != nil {
-            guard let song = cell.song else { return }
-            SongQueueController.sharedController.addSongToUpNext(newSong: song)
+        
+        if cell.songIsAdded == true {
+            // remove song
+            // check mark is now a  plus sign
+            // cell.songIsAdded = false
+            if cell.song != nil {
+                SongQueueController.sharedController.removeSongFromUpNext(song: cell.song!)
+            } else {
+                guard let album = cell.album else { return }
+                AlbumController.sharedController.removeSongsFromQueueFrom(album: album)
+            }
+            cell.songIsAdded = false
+            cell.isAddedButton.setTitle("+", for: .normal)
         } else {
-            guard let album = cell.album else { return }
-            SearchController.fetchAlbumSongsWith(id: album.collectionID, completion: { (songs) in
-                guard let songs = songs else { return }
-                for song in songs {
-                    SongQueueController.sharedController.addSongToUpNext(newSong: song)
-                }
-            })
-        }
+            // add song(s) to queue
+            // plus sign is now a check
+            // cell.songIsAdded = true
+            
+            if cell.song != nil {
+                guard let song = cell.song else { return }
+                SongQueueController.sharedController.addSongToUpNext(newSong: song)
+            } else {
+                guard let album = cell.album else { return }
+                AlbumController.sharedController.addSongsToQueueWith(album: album)
+            }
+            cell.songIsAdded = true
+            cell.isAddedButton.setTitle("✓", for: .normal)
+        
     }
     
     
@@ -93,10 +109,12 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         cell?.delegate = self
         if indexPath.section == 0 {
             let song = songs[indexPath.row]
+            cell?.album = nil
             cell?.updateCellWith(song: song)
             return cell ?? SongQueueTableViewCell()
         } else if indexPath.section == 1 {
             let album = self.albums[indexPath.row]
+            cell?.song = nil
             cell?.updateCellWith(album: album)
             return cell ?? SongQueueTableViewCell()
         } else {

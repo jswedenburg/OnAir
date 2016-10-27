@@ -14,6 +14,7 @@ protocol SongAddedToQueueDelegate: class {
 
 class SongQueueTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var isAddedButton: UIButton!
     @IBOutlet weak var albumCoverImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
@@ -21,6 +22,7 @@ class SongQueueTableViewCell: UITableViewCell {
     
     var song: Song?
     var album: Album?
+    var songIsAdded: Bool?
     weak var delegate: SongAddedToQueueDelegate?
     
     override func awakeFromNib() {
