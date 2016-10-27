@@ -30,6 +30,8 @@ class MusicPlayerController{
         NotificationCenter.default.addObserver(self, selector: #selector(playbackChange), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: applicationPlayer)
     }
     
+    var arrayOfTrackID = [String]()
+    
     // MARK: - Delegate
     /// Delegate that is called when the user play, pauses, skips, or returns from the control center or when the respective functions are called.
     var delegate: MusicPlayerControllerDelegate?
@@ -37,9 +39,14 @@ class MusicPlayerController{
     // MARK: - Singleton
     static let sharedController = MusicPlayerController()
     
-    /// Function to get the state of the application player
+    /// Function to get the state of the system player
     func getSystemPlayerState() -> MPMusicPlaybackState{
         return systemPlayer.playbackState
+    }
+    
+    /// Function to get the state of the application player
+    func getApplicationPlayerState() -> MPMusicPlaybackState{
+        return applicationPlayer.playbackState
     }
     
     /// Called when the Notification observer finds the MPMusicPlayerControllerPlaybackStateDidChange notification
@@ -105,8 +112,4 @@ class MusicPlayerController{
         applicationPlayer.skipToNextItem()
     }
     
-    /// Starts playback of the previous song in the queue of the broadcaster's application player; or, if the music player is not playing, designates the previous song as the next to be played.
-    func previous(){
-        applicationPlayer.skipToPreviousItem()
-    }
 }

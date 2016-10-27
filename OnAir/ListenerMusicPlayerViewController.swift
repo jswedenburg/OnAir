@@ -10,6 +10,12 @@ import UIKit
 
 class ListenerMusicPlayerViewController: UIViewController {
     
+    @IBOutlet weak var albumCoverImageView: UIImageView!
+    @IBOutlet weak var songNameLabel: UILabel!
+    @IBOutlet weak var artistNameLabel: UILabel!
+    @IBOutlet weak var albumNameLabel: UILabel!
+    @IBOutlet weak var muteButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,15 +30,22 @@ class ListenerMusicPlayerViewController: UIViewController {
         switch value{
         case "play":
             print("play")
-            
+            MusicPlayerController.sharedController.broadcaterPlay()
         case "pause":
             print("pause")
+            MusicPlayerController.sharedController.broadcasterPause()
         case "next":
             print("next")
+            MusicPlayerController.sharedController.skip()
+            
         default: ()
             
         }
         
+    }
+    @IBAction func muteButtonPressed(_ sender: UIButton) {
+        
+        MusicPlayerController.sharedController.listenerPause()
     }
     
     /*
