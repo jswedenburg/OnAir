@@ -10,7 +10,7 @@
         <!--Broadcast Music Player View Controller-->
         <scene sceneID="IbB-Cq-hWy">
             <objects>
-                <viewController id="irE-pj-7TK" customClass="BroadcastMusicPlayerViewController" customModule="OnAir" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="broadcastMusicPlayer" id="irE-pj-7TK" customClass="BroadcastMusicPlayerViewController" customModule="OnAir" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PgT-rP-Ksx"/>
                         <viewControllerLayoutGuide type="bottom" id="QNX-La-gIc"/>
