@@ -18,7 +18,18 @@ class ListenerMusicPlayerViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // Will be needing for the broadcaster to send trackID, songName, and artistName.
-    var previouslyPlayedSongs: [Song] = []
+    var previouslyPlayedSongs: [Song] = [] {
+        didSet{
+            tableView.reloadData()
+        }
+    }
+    
+    var song: Song?{
+        didSet{
+            guard let song = oldValue else { return }
+            previouslyPlayedSongs.append(song)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
