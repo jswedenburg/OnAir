@@ -8,7 +8,6 @@
 
 import Foundation
 import MultipeerConnectivity
-import StoreKit
 import UIKit
 
 protocol MPCManagerDelegate {
@@ -21,7 +20,7 @@ protocol MPCManagerDelegate {
 
 class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
     
-    static let sharedController = MPCManager()
+   // static let sharedController = MPCManager()
     
     var delegate: MPCManagerDelegate?
     
@@ -36,7 +35,8 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
     var foundPeers: [MCPeerID] = []
     
     var connectedPeers: [MCPeerID] = []
-    
+
+    let serviceType = "LCOC-Chat"
 
     override init(){
         super.init()
@@ -46,10 +46,10 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
         session = MCSession(peer: peer, securityIdentity: nil, encryptionPreference: .none)
         session.delegate = self
         
-        browser = MCNearbyServiceBrowser(peer: peer, serviceType: "onair")
+        browser = MCNearbyServiceBrowser(peer: peer, serviceType: self.serviceType)
         browser.delegate = self
         
-        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: nil, serviceType: "onair")
+        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: nil, serviceType: self.serviceType)
         advertiser.delegate = self
     }
     

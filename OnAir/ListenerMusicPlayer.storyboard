@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A319" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -53,6 +53,9 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oeG-Zu-VyB">
                                                 <state key="normal" title="Mute"/>
+                                                <connections>
+                                                    <action selector="muteButtonPressed:" destination="xEb-eO-HL9" eventType="touchUpInside" id="g9O-qS-XHx"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -79,12 +82,32 @@
                                             <constraint firstAttribute="height" constant="480" id="uvw-UL-7LB"/>
                                         </constraints>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="recentSongCell" id="phj-eA-Aso">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="recentSongCell" id="phj-eA-Aso" customClass="PreviouslyPlayedSongTableViewCell" customModule="OnAir" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="phj-eA-Aso" id="3kg-he-RRq">
                                                     <frame key="frameInset" width="375" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q5n-eh-nK3">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70z-Tk-5vU">
+                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="Q5n-eh-nK3" secondAttribute="trailing" constant="5" id="0eu-ZR-zJ7"/>
+                                                        <constraint firstItem="70z-Tk-5vU" firstAttribute="top" secondItem="Q5n-eh-nK3" secondAttribute="bottom" constant="1" id="1Xm-QL-Utl"/>
+                                                        <constraint firstItem="Q5n-eh-nK3" firstAttribute="leading" secondItem="3kg-he-RRq" secondAttribute="leadingMargin" id="4Nu-dd-WBM"/>
+                                                        <constraint firstItem="Q5n-eh-nK3" firstAttribute="leading" secondItem="70z-Tk-5vU" secondAttribute="leading" id="59I-xm-dkG"/>
+                                                        <constraint firstItem="Q5n-eh-nK3" firstAttribute="trailing" secondItem="70z-Tk-5vU" secondAttribute="trailing" id="CLF-jy-QME"/>
+                                                        <constraint firstItem="Q5n-eh-nK3" firstAttribute="top" secondItem="3kg-he-RRq" secondAttribute="top" id="kep-dO-VK3"/>
+                                                    </constraints>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                         </prototypes>
@@ -100,6 +123,14 @@
                             <constraint firstItem="RPY-Po-wwr" firstAttribute="top" secondItem="sxA-dz-aRS" secondAttribute="bottom" id="brk-LG-L8d"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="albumCoverImageView" destination="Eho-ZU-hpR" id="KqK-Dd-9li"/>
+                        <outlet property="albumNameLabel" destination="lA3-KI-zV2" id="vpd-Sa-lRD"/>
+                        <outlet property="artistNameLabel" destination="Kkx-aN-EMN" id="VuA-Wv-2hS"/>
+                        <outlet property="muteButton" destination="oeG-Zu-VyB" id="TEu-hm-Qw3"/>
+                        <outlet property="songNameLabel" destination="0TX-F7-IHs" id="hmq-MX-q7o"/>
+                        <outlet property="tableView" destination="SYj-AS-FNE" id="z9W-MW-fn7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WLi-Nv-yey" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
