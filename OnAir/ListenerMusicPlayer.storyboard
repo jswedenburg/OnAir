@@ -54,7 +54,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oeG-Zu-VyB">
                                                 <state key="normal" title="Mute"/>
                                                 <connections>
-                                                    <action selector="muteButtonPressed:" destination="xEb-eO-HL9" eventType="touchUpInside" id="9o5-1w-Hm3"/>
+                                                    <action selector="muteButtonPressed:" destination="xEb-eO-HL9" eventType="touchUpInside" id="g9O-qS-XHx"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -109,6 +109,7 @@
                         <outlet property="artistNameLabel" destination="Kkx-aN-EMN" id="VuA-Wv-2hS"/>
                         <outlet property="muteButton" destination="oeG-Zu-VyB" id="TEu-hm-Qw3"/>
                         <outlet property="songNameLabel" destination="0TX-F7-IHs" id="hmq-MX-q7o"/>
+                        <outlet property="tableView" destination="SYj-AS-FNE" id="z9W-MW-fn7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WLi-Nv-yey" userLabel="First Responder" sceneMemberID="firstResponder"/>
