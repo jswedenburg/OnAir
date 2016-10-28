@@ -20,7 +20,7 @@ protocol MPCManagerDelegate {
 
 class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
     
-   // static let sharedController = MPCManager()
+    static let sharedController = MPCManager()
     
     var delegate: MPCManagerDelegate?
     
@@ -92,6 +92,7 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
         case MCSessionState.connected:
             delegate?.connectedWithPeer(peerID: peerID)
             connectedPeers.append(peerID)
+            print("connected")
         case MCSessionState.connecting:
             print("Connecting")
         default:
@@ -113,7 +114,6 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) { }
     
-    func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) { }
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) { }
     

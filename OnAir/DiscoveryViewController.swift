@@ -11,7 +11,7 @@ import MultipeerConnectivity
 
 class DiscoveryViewController: UIViewController {
     
-    let mpcManager = MPCManager()
+   
     
     @IBOutlet weak var startStopAdvertisingButton: UIButton!
     var isAdvertising = false
@@ -22,8 +22,8 @@ class DiscoveryViewController: UIViewController {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        mpcManager.delegate = self
-        mpcManager.browser.startBrowsingForPeers()
+        MPCManager.sharedController.delegate = self
+        MPCManager.sharedController.browser.startBrowsingForPeers()
         
     }
     
@@ -31,11 +31,11 @@ class DiscoveryViewController: UIViewController {
     
         if self.isAdvertising {
             startStopAdvertisingButton.setTitle("Start Advertising", for: .normal)
-            mpcManager.advertiser.stopAdvertisingPeer()
+            MPCManager.sharedController.advertiser.stopAdvertisingPeer()
             self.isAdvertising = false
         } else {
             startStopAdvertisingButton.setTitle("Stop Advertising", for: .normal)
-            mpcManager.advertiser.startAdvertisingPeer()
+            MPCManager.sharedController.advertiser.startAdvertisingPeer()
             self.isAdvertising = true
         }
     }
@@ -52,22 +52,22 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mpcManager.foundPeers.count
+        return MPCManager.sharedController.foundPeers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "broadcastCell", for: indexPath)
         
-        let peer = mpcManager.foundPeers[indexPath.row]
+        let peer = MPCManager.sharedController.foundPeers[indexPath.row]
         cell.textLabel?.text = peer.displayName
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let peer = mpcManager.foundPeers[indexPath.row] as MCPeerID
-        guard let session = mpcManager.session else { return }
-        mpcManager.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
+        let peer = MPCManager.sharedController.foundPeers[indexPath.row] as MCPeerID
+        guard let session = MPCManager.sharedController.session else { return }
+        MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
         
     }
     
