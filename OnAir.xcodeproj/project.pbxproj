@@ -28,6 +28,7 @@
 		811869801DBFBD0200FD2D7C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8118697E1DBFBD0200FD2D7C /* LaunchScreen.storyboard */; };
 		8118698B1DBFBD0200FD2D7C /* OnAirTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118698A1DBFBD0200FD2D7C /* OnAirTests.swift */; };
 		811869961DBFBD0200FD2D7C /* OnAirUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869951DBFBD0200FD2D7C /* OnAirUITests.swift */; };
+		811FD0FE1DC641DE0086AC3D /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 811FD0FD1DC641DE0086AC3D /* TabBar.storyboard */; };
 		815742D31DBFE72800FF1619 /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D11DBFE72800FF1619 /* DiscoveryViewController.swift */; };
 		815742D51DBFEE5100FF1619 /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D41DBFEE5100FF1619 /* MPCManager.swift */; };
 		815742D81DC00B7F00FF1619 /* Discovery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742D61DC00B7F00FF1619 /* Discovery.storyboard */; };
@@ -81,6 +82,7 @@
 		811869911DBFBD0200FD2D7C /* OnAirUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnAirUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		811869951DBFBD0200FD2D7C /* OnAirUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnAirUITests.swift; sourceTree = "<group>"; };
 		811869971DBFBD0200FD2D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		811FD0FD1DC641DE0086AC3D /* TabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
 		815742D11DBFE72800FF1619 /* DiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		815742D41DBFEE5100FF1619 /* MPCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
 		815742D71DC00B7F00FF1619 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Discovery.storyboard; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				815742D91DC00B8800FF1619 /* ListenerMusicPlayer.storyboard */,
 				815742DB1DC00BA100FF1619 /* BroadcastMusicPlayer.storyboard */,
 				815742D61DC00B7F00FF1619 /* Discovery.storyboard */,
+				811FD0FD1DC641DE0086AC3D /* TabBar.storyboard */,
 				8118697E1DBFBD0200FD2D7C /* LaunchScreen.storyboard */,
 			);
 			name = Views;
@@ -348,6 +351,7 @@
 				815742DC1DC00BA100FF1619 /* BroadcastMusicPlayer.storyboard in Resources */,
 				8118697B1DBFBD0200FD2D7C /* SearchAndQueue.storyboard in Resources */,
 				815742DA1DC00B8800FF1619 /* ListenerMusicPlayer.storyboard in Resources */,
+				811FD0FE1DC641DE0086AC3D /* TabBar.storyboard in Resources */,
 				815742D81DC00B7F00FF1619 /* Discovery.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
