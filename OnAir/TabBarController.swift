@@ -8,11 +8,13 @@
 
 import UIKit
 
-class TabBarController: UITabBarController {
+class TabBarController: UITabBarController, CustomTabBarViewDelegate {
     
+    var tabView: CustomTabBarView!
     
     //MARK: View Override Methods
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         let name = NSNotification.Name("isAdvertisingChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(showHideTabs(notification:)), name: name, object: nil)
@@ -24,6 +26,14 @@ class TabBarController: UITabBarController {
     
     
     //MARK: Helper Functions
+    func setUpCustomTabBar() {
+        let frame = CGRect(x: 0, y: view.frame.height - tabView.frame.height, width: view.frame.width, height: tabView.frame.height)
+        tabView = CustomTabBarView(frame: frame)
+        tabView.delegate = self
+        tabView.selectIndex(index: 0)
+        view.addSubview(tabView)
+    }
+    
     func showHideTabs(notification: Notification) {
         guard let tabBarController = self.tabBarController else { return }
         guard let isAdvertising = notification.object as? Bool else { return }
