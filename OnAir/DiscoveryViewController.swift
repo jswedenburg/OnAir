@@ -14,7 +14,12 @@ class DiscoveryViewController: UIViewController {
    
     
     @IBOutlet weak var startStopAdvertisingButton: UIButton!
-    var isAdvertising = false
+    var isAdvertising = false {
+        didSet {
+            let name = NSNotification.Name("isAdvertisingChanged")
+            NotificationCenter.default.post(name: name, object: isAdvertising)
+        }
+    }
     
     @IBOutlet weak var tableView: UITableView!
     
