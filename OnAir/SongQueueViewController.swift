@@ -48,19 +48,32 @@ class SongQueueViewController: UIViewController, UITableViewDelegate, UITableVie
         return cell
     }
     
+    
+    //Delete function in editing mode
+    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        SongQueueController.sharedController.upNextQueue.remove(at: indexPath.row)
-//        tableView.deleteRows(at: [indexPath], with: .fade)
-//    }
-
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle.delete 
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            SongQueueController.sharedController.upNextQueue.remove(at: indexPath.row)
+            //tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
+
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        if (self.tableView.isEditing) {
+            return UITableViewCellEditingStyle.delete
+        }
+        
+        return UITableViewCellEditingStyle.none
+    }
+    
+    
+    //rearrange tableview cells in edit mode 
+ 
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
