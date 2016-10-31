@@ -41,13 +41,13 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         guard let searchTerm = searchBar.text else { return }
         
         //make the API call the moment the user clicks the searchBarButton- CHECK WITH AUSTIN, THIS FUNCTION NEEDS TO JUST ACCEPT THE SEARCH TERM, NOT ALL OF THESE paraameters- song or albumn
-        
+        self.searchBar.resignFirstResponder()
         SearchController.fetchSong(searchTerm: searchTerm) { (songs) in
             guard let songs = songs else { return }
             DispatchQueue.main.async {
                 self.albums = AlbumController.sharedController.displayAlbumFrom(songsArray: songs)
                 self.songs = songs
-                self.resignFirstResponder()
+                
             }
         }
     }
@@ -133,7 +133,11 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO:- ANGEL COME AND FIX THIS WHEN YOU HAVE TIME!!!!!
+        if indexPath.section == 0 {
+            let song = songs[indexPath.row]
+            SongQueueController.sharedController.appendSongToTopOfQueue(song)
+            MusicPlayerController.sharedController.broadcaterPlay()
+        }
     }
     
     

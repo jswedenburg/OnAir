@@ -14,6 +14,10 @@ class SongQueueController {
     
     var upNextQueue: [Song] = [] {
         didSet {
+          
+            let arraySongIds = upNextQueue.map{"\($0.songID)"}
+            MusicPlayerController.sharedController.setBroadcaterQueueWith(ids: arraySongIds )
+ 
             let notification = Notification(name: Notification.Name(rawValue: "QueueHasChanged"))
             NotificationCenter.default.post(notification)
         }
@@ -39,4 +43,11 @@ class SongQueueController {
         return upNextQueue.index(of: song) != nil
     }
     
+    func appendSongToTopOfQueue(_ song: Song){
+        if MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime() > 0 {
+            print(MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime())
+            addSongToHistoryFromUpNext()
+        }
+        upNextQueue.insert(song, at: 0)
+    }
 }
