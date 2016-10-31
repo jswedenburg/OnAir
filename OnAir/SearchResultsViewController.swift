@@ -32,6 +32,8 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         self.tableView.dataSource = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: Notification.Name(rawValue: "QueueHasChanged") , object: nil)
     }
+
+    
     
     //MARK: - Search Bar Delegate
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -24,16 +24,12 @@
                                     <segue destination="Vam-R8-hjf" kind="embed" id="AXM-FV-lMk"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qqf-mp-zkY">
-                                <frame key="frameInset" height="600"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qqf-mp-zkY">
                                 <connections>
                                     <segue destination="UEV-3s-0xl" kind="embed" id="QvO-PX-bwv"/>
                                 </connections>
                             </containerView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="J7g-xd-CfJ">
-                                <frame key="frameInset" minY="28" width="375" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="J7g-xd-CfJ">
                                 <segments>
                                     <segment title="Search"/>
                                     <segment title="Song Queue"/>
@@ -45,10 +41,17 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="MUT-Fb-OMO" secondAttribute="bottom" id="0SA-6R-vnx"/>
-                            <constraint firstAttribute="trailing" secondItem="MUT-Fb-OMO" secondAttribute="trailing" id="1zf-WF-dEv"/>
-                            <constraint firstItem="MUT-Fb-OMO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="taI-YR-fmW"/>
-                            <constraint firstItem="MUT-Fb-OMO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="47" id="uN7-m6-wZQ"/>
+                            <constraint firstItem="J7g-xd-CfJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="1Xy-P4-eqJ"/>
+                            <constraint firstItem="J7g-xd-CfJ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="OmN-TD-Lw2"/>
+                            <constraint firstItem="MUT-Fb-OMO" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Sks-QZ-287"/>
+                            <constraint firstItem="qqf-mp-zkY" firstAttribute="top" secondItem="MUT-Fb-OMO" secondAttribute="top" id="X0s-eH-93N"/>
+                            <constraint firstItem="J7g-xd-CfJ" firstAttribute="leading" secondItem="qqf-mp-zkY" secondAttribute="leading" id="cYw-bd-Xfd"/>
+                            <constraint firstItem="J7g-xd-CfJ" firstAttribute="trailing" secondItem="MUT-Fb-OMO" secondAttribute="trailing" id="dMp-7i-N9m"/>
+                            <constraint firstItem="qqf-mp-zkY" firstAttribute="top" secondItem="J7g-xd-CfJ" secondAttribute="bottom" constant="16" id="f75-AA-n3l"/>
+                            <constraint firstItem="MUT-Fb-OMO" firstAttribute="trailing" secondItem="qqf-mp-zkY" secondAttribute="trailing" id="hKI-Wl-BJp"/>
+                            <constraint firstAttribute="trailing" secondItem="J7g-xd-CfJ" secondAttribute="trailing" id="nBR-7B-iPq"/>
+                            <constraint firstItem="qqf-mp-zkY" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="rZe-K7-WDK"/>
+                            <constraint firstItem="MUT-Fb-OMO" firstAttribute="leading" secondItem="qqf-mp-zkY" secondAttribute="leading" id="yzs-AS-85Q"/>
                         </constraints>
                     </view>
                     <connections>
@@ -70,7 +73,7 @@
                         <viewControllerLayoutGuide type="bottom" id="cJs-fy-tXl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="PXB-A5-F6g">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dAm-Qc-bB5">
@@ -183,7 +186,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Z2s-iY-xzP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Gu2-op-IF8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="81" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="skY-wl-xxb">
@@ -193,7 +196,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yWW-e2-VAE" id="qBI-yq-lCI">
-                                            <frame key="frameInset" width="375" height="80"/>
+                                            <frame key="frameInset" width="375" height="80.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j0f-Wb-ZCZ">
