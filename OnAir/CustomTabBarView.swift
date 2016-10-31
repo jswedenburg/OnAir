@@ -10,14 +10,14 @@ import UIKit
 
 class CustomTabBarView: UIView {
     
-    weak var delegate: CustomTabBarViewDelegate?
-
+    var delegate: CustomTabBarViewDelegate?
+    
     var imageView0 = UIImageView()
     var imageView1 = UIImageView()
     var imageView2 = UIImageView()
     var imageView3 = UIImageView()
     
-    var label0 = UILabel()
+    var label0 = UILabel(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
     var label1 = UILabel()
     var label2 = UILabel()
     var label3 = UILabel()
@@ -27,12 +27,36 @@ class CustomTabBarView: UIView {
     var button2 = UIButton()
     var button3 = UIButton()
     
+    //MARK: Initializers
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        //self.backgroundColor = UIColor.green
+        label0.frame.origin.x = 0
+        label0.frame.origin.y = 0
+        
+        
+        label0.text = "test"
+        self.addSubview(imageView0)
+        self.addSubview(label0)
+        
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("Init Coder has not been implemented")
+        
+        
+    }
+    
     func selectIndex(index: Int) {
         
-        imageView0.tintColor = UIColor.white
-        imageView1.tintColor = UIColor.white
-        imageView2.tintColor = UIColor.white
-        imageView3.tintColor = UIColor.white
+        imageView0.tintColor = UIColor.blue
+        imageView1.tintColor = UIColor.blue
+        imageView2.tintColor = UIColor.blue
+        imageView3.tintColor = UIColor.blue
+        
+        
         
         label0.textColor = UIColor.red
         label1.textColor = UIColor.red
@@ -59,7 +83,7 @@ class CustomTabBarView: UIView {
     }
     
     func didTapButton(sender: UIButton) {
-        selectIndex(sender.tag)
+        selectIndex(index: sender.tag)
         delegate?.tabBarButtonPressed(index: sender.tag)
         
     }
@@ -70,3 +94,5 @@ class CustomTabBarView: UIView {
 protocol CustomTabBarViewDelegate: class {
     func tabBarButtonPressed(index: Int)
 }
+
+
