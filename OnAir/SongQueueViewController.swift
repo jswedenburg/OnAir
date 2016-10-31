@@ -30,9 +30,9 @@ class SongQueueViewController: UIViewController, UITableViewDelegate, UITableVie
         NotificationCenter.default.addObserver(self, selector: #selector(updateTableView), name: Notification.Name(rawValue: "QueueHasChanged"), object: nil)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
-        self.parent?.navigationItem.rightBarButtonItem = editButtonItem
+        self.parent?.parent?.navigationItem.rightBarButtonItem = editButtonItem
     }
     
     // MARK: TableView

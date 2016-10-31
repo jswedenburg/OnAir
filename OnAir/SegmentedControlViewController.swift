@@ -13,10 +13,10 @@ class SegmentedControlViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+    
     }
     
     override func viewDidAppear(_ animated: Bool) {
-         self.navigationItem.rightBarButtonItem = nil
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,19 +44,40 @@ class SegmentedControlViewController: UIViewController  {
     
     
     
-    @IBAction func showComponent(sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
+    @IBAction func segmentValueChanged(sender: UISegmentedControl) {
+        switch (sender.selectedSegmentIndex) {
+            case 0:
                 self.parent?.navigationItem.rightBarButtonItem = nil
-                UIView.animate(withDuration: 0.5, animations: {
-                self.searchView.alpha = 1
+                self.searchView.alpha = 1 
                 self.songQueueView.alpha = 0
-            })
-        } else {
-            //self.parent?.navigationItem.rightBarButtonItem = editButtonItem
-            UIView.animate(withDuration: 0.5, animations: {
+            case 1:
                 self.searchView.alpha = 0
                 self.songQueueView.alpha = 1
-            })
+            default:
+                break
         }
     }
+    
+    
+        
+        
+        
+        
+        
+        
+        
+//        showComponent(sender: UISegmentedControl) {
+//        if sender.selectedSegmentIndex == 0 {
+//                UIView.animate(withDuration: 0.5, animations: {
+//                self.searchView.alpha = 1
+//                self.songQueueView.alpha = 0
+//            })
+//        } else {
+//            self.parent?.navigationItem.rightBarButtonItem = editButtonItem
+//            UIView.animate(withDuration: 0.5, animations: {
+//                self.searchView.alpha = 0
+//                self.songQueueView.alpha = 1
+//            })
+//        }
+//    }
 }
