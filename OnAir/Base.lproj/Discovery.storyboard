@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dOm-1e-qZd">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -76,114 +76,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1134" y="95"/>
-        </scene>
-        <!--SearchAndQueue-->
-        <scene sceneID="dRs-jp-HBI">
-            <objects>
-                <viewControllerPlaceholder storyboardName="SearchAndQueue" id="48m-9Y-HuZ" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="lqF-2P-g4i"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oki-5V-Bzs" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-224" y="1445"/>
-        </scene>
-        <!--BroadcastMusicPlayer-->
-        <scene sceneID="VMd-Iw-LGW">
-            <objects>
-                <viewControllerPlaceholder storyboardName="BroadcastMusicPlayer" id="z2F-QF-LLm" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="RA0-kA-eW4"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CGp-2q-oE3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="581" y="1465"/>
-        </scene>
-        <!--ListenerMusicPlayer-->
-        <scene sceneID="l3R-uN-hYL">
-            <objects>
-                <viewControllerPlaceholder storyboardName="ListenerMusicPlayer" id="eO9-dq-jz1" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Ziv-Bw-YUy"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EOg-yq-Mm2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1320" y="1445"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="vij-cr-f5c">
-            <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="dOm-1e-qZd" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="RrI-u6-BMc">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="YP3-x3-CR8"/>
-                        <segue destination="xj4-aq-4rb" kind="relationship" relationship="viewControllers" id="ZXO-Vw-sgP"/>
-                        <segue destination="se4-07-Ka0" kind="relationship" relationship="viewControllers" id="LDU-WY-277"/>
-                        <segue destination="Ii2-Ey-XRn" kind="relationship" relationship="viewControllers" id="Rua-a9-gKM"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7j5-9F-Jyz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="117.59999999999999" y="123.68815592203899"/>
-        </scene>
-        <!--Search-->
-        <scene sceneID="mOK-iI-IhU">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="se4-07-Ka0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" id="jCR-Si-F7T"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="X7b-KM-pLg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="48m-9Y-HuZ" kind="relationship" relationship="rootViewController" id="mgo-tb-Day"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sMP-7o-K1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-223" y="989"/>
-        </scene>
-        <!--BroadcastMusicPlayer-->
-        <scene sceneID="WWN-25-lzD">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xj4-aq-4rb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="BroadcastMusicPlayer" id="Rh7-MY-XWn"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="35Z-7f-U8K">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="z2F-QF-LLm" kind="relationship" relationship="rootViewController" id="dDe-Xf-XAL"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ke0-Hz-38Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="583" y="988"/>
-        </scene>
-        <!--ListenerMusicPlayer-->
-        <scene sceneID="yWy-am-Qbt">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ii2-Ey-XRn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="ListenerMusicPlayer" id="NoS-Jm-iOH"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vOY-Y2-mtU">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="eO9-dq-jz1" kind="relationship" relationship="rootViewController" id="pR1-yB-P9E"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1nP-h4-phd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1322" y="988"/>
         </scene>
     </scenes>
 </document>

@@ -28,12 +28,16 @@
 		811869801DBFBD0200FD2D7C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8118697E1DBFBD0200FD2D7C /* LaunchScreen.storyboard */; };
 		8118698B1DBFBD0200FD2D7C /* OnAirTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118698A1DBFBD0200FD2D7C /* OnAirTests.swift */; };
 		811869961DBFBD0200FD2D7C /* OnAirUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869951DBFBD0200FD2D7C /* OnAirUITests.swift */; };
+		811FD0FE1DC641DE0086AC3D /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 811FD0FD1DC641DE0086AC3D /* TabBar.storyboard */; };
+		811FD1001DC6494E0086AC3D /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811FD0FF1DC6494E0086AC3D /* CustomTabBarController.swift */; };
+		811FD1021DC67EDD0086AC3D /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811FD1011DC67EDD0086AC3D /* CustomTabBar.swift */; };
 		815742D31DBFE72800FF1619 /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D11DBFE72800FF1619 /* DiscoveryViewController.swift */; };
 		815742D51DBFEE5100FF1619 /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D41DBFEE5100FF1619 /* MPCManager.swift */; };
 		815742D81DC00B7F00FF1619 /* Discovery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742D61DC00B7F00FF1619 /* Discovery.storyboard */; };
 		815742DA1DC00B8800FF1619 /* ListenerMusicPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742D91DC00B8800FF1619 /* ListenerMusicPlayer.storyboard */; };
 		815742DC1DC00BA100FF1619 /* BroadcastMusicPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742DB1DC00BA100FF1619 /* BroadcastMusicPlayer.storyboard */; };
 		815743021DC1277E00FF1619 /* BroadcastMusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815743011DC1277E00FF1619 /* BroadcastMusicPlayerViewController.swift */; };
+		81CA0FA41DC7A34700062511 /* CustomTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CA0FA31DC7A34700062511 /* CustomTabBarItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,12 +85,16 @@
 		811869911DBFBD0200FD2D7C /* OnAirUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnAirUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		811869951DBFBD0200FD2D7C /* OnAirUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnAirUITests.swift; sourceTree = "<group>"; };
 		811869971DBFBD0200FD2D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		811FD0FD1DC641DE0086AC3D /* TabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
+		811FD0FF1DC6494E0086AC3D /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		811FD1011DC67EDD0086AC3D /* CustomTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		815742D11DBFE72800FF1619 /* DiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		815742D41DBFEE5100FF1619 /* MPCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
 		815742D71DC00B7F00FF1619 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Discovery.storyboard; sourceTree = "<group>"; };
 		815742D91DC00B8800FF1619 /* ListenerMusicPlayer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ListenerMusicPlayer.storyboard; sourceTree = "<group>"; };
 		815742DB1DC00BA100FF1619 /* BroadcastMusicPlayer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BroadcastMusicPlayer.storyboard; sourceTree = "<group>"; };
 		815743011DC1277E00FF1619 /* BroadcastMusicPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastMusicPlayerViewController.swift; sourceTree = "<group>"; };
+		81CA0FA31DC7A34700062511 /* CustomTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +142,9 @@
 				652EF04A1DC118280020009B /* AlbumController.swift */,
 				652EF0501DC13FE10020009B /* ImageController.swift */,
 				652EF0521DC149B60020009B /* SearchController.swift */,
+				811FD0FF1DC6494E0086AC3D /* CustomTabBarController.swift */,
+				811FD1011DC67EDD0086AC3D /* CustomTabBar.swift */,
+				81CA0FA31DC7A34700062511 /* CustomTabBarItem.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -197,6 +208,7 @@
 				815742D91DC00B8800FF1619 /* ListenerMusicPlayer.storyboard */,
 				815742DB1DC00BA100FF1619 /* BroadcastMusicPlayer.storyboard */,
 				815742D61DC00B7F00FF1619 /* Discovery.storyboard */,
+				811FD0FD1DC641DE0086AC3D /* TabBar.storyboard */,
 				8118697E1DBFBD0200FD2D7C /* LaunchScreen.storyboard */,
 			);
 			name = Views;
@@ -348,6 +360,7 @@
 				815742DC1DC00BA100FF1619 /* BroadcastMusicPlayer.storyboard in Resources */,
 				8118697B1DBFBD0200FD2D7C /* SearchAndQueue.storyboard in Resources */,
 				815742DA1DC00B8800FF1619 /* ListenerMusicPlayer.storyboard in Resources */,
+				811FD0FE1DC641DE0086AC3D /* TabBar.storyboard in Resources */,
 				815742D81DC00B7F00FF1619 /* Discovery.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,6 +386,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				811FD1021DC67EDD0086AC3D /* CustomTabBar.swift in Sources */,
 				4B0A94651DBFEFB400DF39EE /* SongQueueTableViewCell.swift in Sources */,
 				655BAB491DBFEF080073F487 /* Song.swift in Sources */,
 				655BAB6F1DBFFC740073F487 /* SongQueueController.swift in Sources */,
@@ -386,12 +400,14 @@
 				811869761DBFBD0200FD2D7C /* AppDelegate.swift in Sources */,
 				0FDD3FBB1DC25F5900AA3CCD /* ListenerMusicPlayerViewController.swift in Sources */,
 				0FDD40221DC31C5400AA3CCD /* PreviouslyPlayedSongTableViewCell.swift in Sources */,
+				811FD1001DC6494E0086AC3D /* CustomTabBarController.swift in Sources */,
 				4B0A945F1DBFCA6700DF39EE /* SegmentedControlViewController.swift in Sources */,
 				0FC780AF1DC14131009515A9 /* MusicPlayerController.swift in Sources */,
 				4B0A94631DBFE7A900DF39EE /* SegmentedControl.swift in Sources */,
 				652EF04B1DC118280020009B /* AlbumController.swift in Sources */,
 				4B0A94611DBFE46900DF39EE /* SongQueueViewController.swift in Sources */,
 				652EF0491DC111B60020009B /* NetworkController.swift in Sources */,
+				81CA0FA41DC7A34700062511 /* CustomTabBarItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
