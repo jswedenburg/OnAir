@@ -9,15 +9,19 @@
 import UIKit
 import MultipeerConnectivity
 
+protocol AdvertisingDelegate {
+    var isAdvertising: Bool { get set }
+}
+
 class DiscoveryViewController: UIViewController {
     
    
-    
+    var delegate: AdvertisingDelegate?
     @IBOutlet weak var startStopAdvertisingButton: UIButton!
     var isAdvertising = false {
         didSet {
-            let name = NSNotification.Name("isAdvertisingChanged")
-            NotificationCenter.default.post(name: name, object: isAdvertising)
+            delegate?.isAdvertising = isAdvertising
+            self.tabBarController?.reloadInputViews()
         }
     }
     
