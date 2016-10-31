@@ -28,6 +28,7 @@ class MusicPlayerController{
     /// Initialized with a notificatin observer used to call the delegate function when playbackstate has changed.
     init(){
         NotificationCenter.default.addObserver(self, selector: #selector(playbackChange), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: applicationPlayer)
+        applicationPlayer.stop()
     }
     
     var arrayOfTrackID = [String]()
@@ -47,6 +48,10 @@ class MusicPlayerController{
     /// Function to get the state of the application player
     func getApplicationPlayerState() -> MPMusicPlaybackState{
         return applicationPlayer.playbackState
+    }
+    
+    func getApplicationPlayerPlaybackTime() -> TimeInterval{
+        return self.applicationPlayer.currentPlaybackTime
     }
     
     /// Called when the Notification observer finds the MPMusicPlayerControllerPlaybackStateDidChange notification
