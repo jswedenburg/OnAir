@@ -17,20 +17,24 @@ protocol CustomTabBarDelegate {
 }
 
 
-class CustomTabBar: UIView {
+class CustomTabBar: UIView, AdvertisingDelegate {
+    
+    
     
     //MARK: Properties
     var dataSource: CustomTabBarDataSource!
     var delegate: CustomTabBarDelegate!
-    
+    var isAdvertising: Bool = false     
     var tabBarItems: [UITabBarItem]!
     var customTabBarItems: [CustomTabBarItem]!
     var tabBarButtons: [UIButton]!
     
     
+    
     //MARK: Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
+        DiscoveryViewController.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,15 +43,32 @@ class CustomTabBar: UIView {
     
     //MARK: Target Actions
     func barItemTapped(sender: UIButton) {
-        guard let index = tabBarButtons.index(of: sender) else { return }
-        delegate.didSelectViewController(tabBarView: self, atIndex: index)
+        if tabBarButtons.index(of: sender) == 2 {
+            if isAdvertising{
+                delegate.didSelectViewController(tabBarView: self, atIndex: 2)
+            } else {
+                delegate.didSelectViewController(tabBarView: self, atIndex: 3)
+            }
+        } else {
+            guard let index = tabBarButtons.index(of: sender) else { return }
+            delegate.didSelectViewController(tabBarView: self, atIndex: index)
+        }
+        
     }
     
     //MARK: Helper Methods
     
     func setup() {
         // get tab bar items from default tab bar
-        tabBarItems = dataSource.tabBarItemsInCustomTabBar(tabBarView: self)
+        let defaultBarItems = dataSource.tabBarItemsInCustomTabBar(tabBarView: self)
+        
+        if isAdvertising {
+            tabBarItems = [defaultBarItems[0], defaultBarItems[1], defaultBarItems[2]]
+//            indexToShow = [0, 1, 2]
+        } else {
+            tabBarItems = [defaultBarItems[0], defaultBarItems[1], defaultBarItems[3]]
+//            indexToShow = [0, 1, 3]
+        }
         
         customTabBarItems = []
         tabBarButtons = []
@@ -82,6 +103,8 @@ class CustomTabBar: UIView {
     func createTabBarItems(containers: [CGRect]) {
         var index = 0
         for item in tabBarItems {
+            
+            
             let container = containers[index]
             let customTabBarItem = CustomTabBarItem(frame: container)
             customTabBarItem.setup(item: item)

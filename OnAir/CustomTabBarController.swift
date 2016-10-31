@@ -10,11 +10,7 @@ import UIKit
 
 class CustomTabBarController: UITabBarController, CustomTabBarDataSource, CustomTabBarDelegate {
     
-       
-    
-    
-    
-    
+  
     //MARK: Custom TabBar Delegate and Datasource
     func tabBarItemsInCustomTabBar(tabBarView: CustomTabBar) -> [UITabBarItem] {
         return tabBar.items!
@@ -29,19 +25,9 @@ class CustomTabBarController: UITabBarController, CustomTabBarDataSource, Custom
     //MARK: View Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpCustomTabBar()
-        
-        
-        
-        
-        
-        
-        
-//        let name = NSNotification.Name("isAdvertisingChanged")
-//        NotificationCenter.default.addObserver(self, selector: #selector(showHideTabs(notification:)), name: name, object: nil)
-//        guard let broadcastMPTab = self.tabBarController?.tabBar.items?[2] else { return }
-//        broadcastMPTab.isEnabled = false
+        let name = NSNotification.Name("isAdvertisingChanged")
+        NotificationCenter.default.addObserver(self, selector: #selector(setUpCustomTabBar), name: name, object: nil)
     }
     
     
