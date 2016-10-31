@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CustomTabBarController: UITabBarController, CustomTabBarDataSource {
+class CustomTabBarController: UITabBarController, CustomTabBarDataSource, CustomTabBarDelegate {
     
        
     
@@ -20,6 +20,10 @@ class CustomTabBarController: UITabBarController, CustomTabBarDataSource {
         return tabBar.items!
     }
     
+    func didSelectViewController(tabBarView: CustomTabBar, atIndex index: Int) {
+        self.selectedIndex = index
+    }
+    
     
     
     //MARK: View Override Methods
@@ -27,6 +31,7 @@ class CustomTabBarController: UITabBarController, CustomTabBarDataSource {
         super.viewDidLoad()
         
         setUpCustomTabBar()
+        
         
         
         
@@ -48,6 +53,9 @@ class CustomTabBarController: UITabBarController, CustomTabBarDataSource {
         let customTabBar = CustomTabBar(frame: self.tabBar.frame)
         customTabBar.dataSource = self
         customTabBar.delegate = self
+        customTabBar.setup()
+        
+        
         self.view.addSubview(customTabBar)
             }
     

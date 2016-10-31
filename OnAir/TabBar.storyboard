@@ -73,7 +73,7 @@
         <scene sceneID="5A0-pV-xsf">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9E2-cO-cCn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Discovery" id="vfi-Fi-kzv"/>
+                    <tabBarItem key="tabBarItem" title="Discovery" image="one" id="vfi-Fi-kzv"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UgN-F9-ex8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -92,7 +92,7 @@
         <scene sceneID="3Of-Bk-hs9">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ARp-83-3Jr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" id="LAG-5U-9dZ"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="two" id="LAG-5U-9dZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BIG-xp-JqI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -111,7 +111,7 @@
         <scene sceneID="d4B-Ge-3Hl">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vxU-iM-vA3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="BroadcastMP" id="Y5r-k2-Pms"/>
+                    <tabBarItem key="tabBarItem" title="BroadcastMP" image="three" id="Y5r-k2-Pms"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Rsr-ns-vhc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -130,7 +130,7 @@
         <scene sceneID="Olh-je-BYI">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Www-O8-KGH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="ListenerMP" id="ZLF-nu-oKo"/>
+                    <tabBarItem key="tabBarItem" title="ListenerMP" image="four" id="ZLF-nu-oKo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kmW-y1-PDp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -146,4 +146,10 @@
             <point key="canvasLocation" x="666" y="265"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="four" width="50" height="50"/>
+        <image name="one" width="50" height="50"/>
+        <image name="three" width="50" height="50"/>
+        <image name="two" width="50" height="50"/>
+    </resources>
 </document>

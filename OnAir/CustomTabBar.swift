@@ -24,6 +24,8 @@ class CustomTabBar: UIView {
     var delegate: CustomTabBarDelegate!
     
     var tabBarItems: [UITabBarItem]!
+    var customTabBarItems: [CustomTabBarItem]!
+    var tabBarButtons: [UIButton]!
     
     
     //MARK: Initializers
@@ -35,11 +37,24 @@ class CustomTabBar: UIView {
         fatalError("Init Coder has not been implemented")
     }
     
+    //MARK: Target Actions
+    func barItemTapped(sender: UIButton) {
+        guard let index = tabBarButtons.index(of: sender) else { return }
+        delegate.didSelectViewController(tabBarView: self, atIndex: index)
+    }
+    
     //MARK: Helper Methods
     
     func setup() {
         // get tab bar items from default tab bar
         tabBarItems = dataSource.tabBarItemsInCustomTabBar(tabBarView: self)
+        
+        customTabBarItems = []
+        tabBarButtons = []
+        
+        let containers = createTabBarItemContainers()
+        createTabBarItems(containers: containers)
+       
         
     }
     
@@ -63,6 +78,30 @@ class CustomTabBar: UIView {
         
         return tabBarContainerRect
     }
+    
+    func createTabBarItems(containers: [CGRect]) {
+        var index = 0
+        for item in tabBarItems {
+            let container = containers[index]
+            let customTabBarItem = CustomTabBarItem(frame: container)
+            customTabBarItem.setup(item: item)
+            
+            self.addSubview(customTabBarItem)
+            customTabBarItems.append(customTabBarItem)
+            
+            let button = UIButton(frame: CGRect(x: container.origin.x, y: container.origin.y, width: container.width, height: container.height))
+            
+            button.addTarget(self, action: #selector(self.barItemTapped(sender:)), for: UIControlEvents.touchUpInside)
+            
+            tabBarButtons.append(button)
+            self.addSubview(button)
+            
+            index += 1
+        }
+        
+    }
+    
+    
     
     
     
