@@ -26,6 +26,8 @@ class CustomTabBarController: UITabBarController, CustomTabBarDataSource, Custom
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCustomTabBar()
+        let name = NSNotification.Name("isAdvertisingChanged")
+        NotificationCenter.default.addObserver(self, selector: #selector(setUpCustomTabBar), name: name, object: nil)
     }
     
     

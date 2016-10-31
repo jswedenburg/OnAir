@@ -16,15 +16,18 @@ protocol AdvertisingDelegate {
 class DiscoveryViewController: UIViewController {
     
    
-    var delegate: AdvertisingDelegate?
+    static var delegate: AdvertisingDelegate?
     @IBOutlet weak var startStopAdvertisingButton: UIButton!
     var isAdvertising = false {
         didSet {
-            delegate?.isAdvertising = isAdvertising
-            self.tabBarController?.reloadInputViews()
+            
+            let name = Notification.Name(rawValue: "isAdvertisingChanged")
+            NotificationCenter.default.post(name: name, object: nil)
         }
     }
     
+    
+
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -42,12 +45,17 @@ class DiscoveryViewController: UIViewController {
             startStopAdvertisingButton.setTitle("Start Advertising", for: .normal)
             MPCManager.sharedController.advertiser.stopAdvertisingPeer()
             self.isAdvertising = false
+            
         } else {
             startStopAdvertisingButton.setTitle("Stop Advertising", for: .normal)
             MPCManager.sharedController.advertiser.startAdvertisingPeer()
             self.isAdvertising = true
         }
+        
+        DiscoveryViewController.delegate?.isAdvertising = isAdvertising
+
     }
+    
     
     
 }

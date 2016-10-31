@@ -24,12 +24,7 @@ class CustomTabBar: UIView, AdvertisingDelegate {
     //MARK: Properties
     var dataSource: CustomTabBarDataSource!
     var delegate: CustomTabBarDelegate!
-    var isAdvertising: Bool = false {
-        didSet {
-            
-        }
-    }
-    
+    var isAdvertising: Bool = false     
     var tabBarItems: [UITabBarItem]!
     var customTabBarItems: [CustomTabBarItem]!
     var tabBarButtons: [UIButton]!
@@ -39,6 +34,7 @@ class CustomTabBar: UIView, AdvertisingDelegate {
     //MARK: Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
+        DiscoveryViewController.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
