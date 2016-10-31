@@ -22,7 +22,7 @@ class DiscoveryViewController: UIViewController {
         didSet {
             
             let name = Notification.Name(rawValue: "isAdvertisingChanged")
-            NotificationCenter.default.post(name: name, object: nil)
+            NotificationCenter.default.post(name: name, object: isAdvertising)
         }
     }
     
@@ -36,6 +36,10 @@ class DiscoveryViewController: UIViewController {
         self.tableView.dataSource = self
         MPCManager.sharedController.delegate = self
         MPCManager.sharedController.browser.startBrowsingForPeers()
+        let vc = SearchResultsViewController()
+        let name = Notification.Name(rawValue: "isAdvertisingChanged")
+        NotificationCenter.default.addObserver(self, selector: #selector(vc.changeIsAdvertising(notification:)), name: name, object: nil)
+        
         
     }
     

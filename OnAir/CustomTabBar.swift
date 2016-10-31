@@ -64,10 +64,10 @@ class CustomTabBar: UIView, AdvertisingDelegate {
         
         if isAdvertising {
             tabBarItems = [defaultBarItems[0], defaultBarItems[1], defaultBarItems[2]]
-//            indexToShow = [0, 1, 2]
+
         } else {
             tabBarItems = [defaultBarItems[0], defaultBarItems[1], defaultBarItems[3]]
-//            indexToShow = [0, 1, 3]
+
         }
         
         customTabBarItems = []
