@@ -8,33 +8,26 @@
 
 import UIKit
 
-class CustomTabBarController: UITabBarController, CustomTabBarViewDelegate {
+class CustomTabBarController: UITabBarController, CustomTabBarDataSource {
     
        
-    var tabView: CustomTabBarView!
     
-    override var selectedIndex: Int {
-        didSet {
-            tabView.selectIndex(index: selectedIndex)
-        }
-    }
     
-    //MARK: Custom TabBar Delegate
-    func tabBarButtonPressed(index: Int) {
-        selectedIndex = index
-    }
     
-    //MARK: Custom TabbBar Datasource
     
-    func tabBarItemsInCustomTabBar(tabBarView: CustomTabBarView) -> [UITabBarItem] {
+    //MARK: Custom TabBar Delegate and Datasource
+    func tabBarItemsInCustomTabBar(tabBarView: CustomTabBar) -> [UITabBarItem] {
         return tabBar.items!
     }
+    
+    
     
     //MARK: View Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setUpCustomTabBar()
-        tabView.delegate = self
+        
         
         
         
@@ -52,15 +45,13 @@ class CustomTabBarController: UITabBarController, CustomTabBarViewDelegate {
     //MARK: Helper Functions
     func setUpCustomTabBar() {
         tabBar.isHidden = true
-//        let frame = CGRect(x: 0, y: view.frame.height - tabBar.frame.height, width: view.frame.width, height: tabBar.frame.height)
-        tabView = CustomTabBarView(frame: tabBar.frame)
-        tabView.delegate = self
-        tabView.selectIndex(index: 0)
-        view.addSubview(tabView)
-    }
+        let customTabBar = CustomTabBar(frame: self.tabBar.frame)
+        customTabBar.dataSource = self
+        customTabBar.delegate = self
+        self.view.addSubview(customTabBar)
+            }
     
     func showHideTabs(notification: Notification) {
-        guard let tabBarController = self.tabBarController else { return }
         guard let isAdvertising = notification.object as? Bool else { return }
         guard let listenerMPTab = self.tabBarController?.tabBar.items?[3] else { return }
         guard let broadcastMPTab = self.tabBarController?.tabBar.items?[2] else { return }
