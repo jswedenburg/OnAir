@@ -57,6 +57,8 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     //MARK: Helper Functions
     func sendPlayData() {
+        guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
+        MPCManager.sharedController.sendData(dictionary: ["song":song.dictionaryRepresentation])
         let messageDict: [String: String] = ["instruction": "play"]
         MPCManager.sharedController.sendData(dictionary: messageDict)
     }
