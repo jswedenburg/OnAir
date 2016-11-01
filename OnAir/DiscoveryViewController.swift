@@ -42,6 +42,12 @@ class DiscoveryViewController: UIViewController {
     }
     
     func advertisingBrowsingIdentify() {
+        
+        if MPCManager.sharedController.isAdvertising == false {
+            MusicPlayerController.sharedController.listenerPause()
+            SongQueueController.sharedController.upNextQueue = []
+        }
+        
         if MPCManager.sharedController.isAdvertising {
             self.tabBarController?.tabBar.backgroundColor = UIColor.red
         } else if MPCManager.isBrowsing {
