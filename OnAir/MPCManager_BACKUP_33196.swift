@@ -36,6 +36,10 @@
     
     var connectedPeers: [MCPeerID] = []
     
+<<<<<<< HEAD
+    let serviceType = "on-air"
+    
+=======
     var isAdvertising: Bool = false {
         didSet {
             let name = Notification.Name(rawValue: "isAdvertisingChanged")
@@ -43,8 +47,9 @@
         }
     }
 
-  	let serviceType = "on-air"
-    
+    let serviceType = "LCOC-Chat"
+
+>>>>>>> feature/isAdvertisingAlertController
     override init(){
         super.init()
         

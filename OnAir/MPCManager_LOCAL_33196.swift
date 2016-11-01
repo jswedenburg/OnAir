@@ -36,14 +36,7 @@
     
     var connectedPeers: [MCPeerID] = []
     
-    var isAdvertising: Bool = false {
-        didSet {
-            let name = Notification.Name(rawValue: "isAdvertisingChanged")
-            NotificationCenter.default.post(name: name, object: isAdvertising)
-        }
-    }
-
-  	let serviceType = "on-air"
+    let serviceType = "on-air"
     
     override init(){
         super.init()

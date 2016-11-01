@@ -9,22 +9,12 @@
 import UIKit
 import MultipeerConnectivity
 
-protocol AdvertisingDelegate {
-    var isAdvertising: Bool { get set }
-}
 
 class DiscoveryViewController: UIViewController {
     
    
-    static var delegate: AdvertisingDelegate?
     @IBOutlet weak var startStopAdvertisingButton: UIButton!
-    var isAdvertising = false {
-        didSet {
-            
-            let name = Notification.Name(rawValue: "isAdvertisingChanged")
-            NotificationCenter.default.post(name: name, object: nil)
-        }
-    }
+     
     
     
 
@@ -36,23 +26,24 @@ class DiscoveryViewController: UIViewController {
         self.tableView.dataSource = self
         MPCManager.sharedController.delegate = self
         MPCManager.sharedController.browser.startBrowsingForPeers()
+        let vc = SearchResultsViewController()
+        
+        
         
     }
     
     @IBAction func broadcastButtonPressed(sender: UIButton) {
     
-        if self.isAdvertising {
+        if MPCManager.sharedController.isAdvertising {
             startStopAdvertisingButton.setTitle("Start Advertising", for: .normal)
             MPCManager.sharedController.advertiser.stopAdvertisingPeer()
-            self.isAdvertising = false
+            MPCManager.sharedController.isAdvertising = false
             
         } else {
             startStopAdvertisingButton.setTitle("Stop Advertising", for: .normal)
             MPCManager.sharedController.advertiser.startAdvertisingPeer()
-            self.isAdvertising = true
+            MPCManager.sharedController.isAdvertising = true
         }
-        
-        DiscoveryViewController.delegate?.isAdvertising = isAdvertising
 
     }
     

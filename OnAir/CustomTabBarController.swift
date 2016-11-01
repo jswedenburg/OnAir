@@ -43,19 +43,6 @@ class CustomTabBarController: UITabBarController, CustomTabBarDataSource, Custom
         
         
         self.view.addSubview(customTabBar)
-            }
-    
-    func showHideTabs(notification: Notification) {
-        guard let isAdvertising = notification.object as? Bool else { return }
-        guard let listenerMPTab = self.tabBarController?.tabBar.items?[3] else { return }
-        guard let broadcastMPTab = self.tabBarController?.tabBar.items?[2] else { return }
-        if isAdvertising {
-            listenerMPTab.isEnabled = false
-            broadcastMPTab.isEnabled = true
-        } else {
-            listenerMPTab.isEnabled = true
-            broadcastMPTab.isEnabled = false
-        }
     }
     
 }
