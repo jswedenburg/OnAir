@@ -45,7 +45,7 @@ class SongQueueController {
     }
     
     func appendSongToTopOfQueue(_ song: Song){
-        if MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime() == 0 { return }
+        if MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime() <= 1 { return }
         
         if MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime() > 0 {
             print(MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime())
