@@ -8,13 +8,13 @@
 
 import UIKit
 
-class SearchResultsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SongAddedToQueueDelegate, AdvertisingDelegate {
+class SearchResultsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate,   SongAddedToQueueDelegate {
     
     //MARK: - IB Outlet
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    var isAdvertising: Bool = false
+    
     
     var songs: [Song] = [] {
         didSet {
@@ -57,7 +57,7 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
     
     func cellButtonTapped(cell: SongQueueTableViewCell) {
         
-        if isAdvertising {
+        if MPCManager.sharedController.isAdvertising {
             if cell.song?.isAdded == true {
                 // remove song
                 // check mark is now a  plus sign
@@ -109,11 +109,6 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         
     }
     
-    func changeIsAdvertising(notification: Notification) {
-        guard let isAdvertising = notification.object as? Bool else { return }
-        
-        self.isAdvertising = isAdvertising
-    }
     
     
     //MARK:- Table view data source function
@@ -158,7 +153,7 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if isAdvertising {
+        if MPCManager.sharedController.isAdvertising {
             if indexPath.section == 0 {
                 let song = songs[indexPath.row]
                 SongQueueController.sharedController.appendSongToTopOfQueue(song)

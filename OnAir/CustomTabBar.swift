@@ -17,14 +17,14 @@ protocol CustomTabBarDelegate {
 }
 
 
-class CustomTabBar: UIView, AdvertisingDelegate {
+class CustomTabBar: UIView {
     
     
     
     //MARK: Properties
     var dataSource: CustomTabBarDataSource!
     var delegate: CustomTabBarDelegate!
-    var isAdvertising: Bool = false     
+    
     var tabBarItems: [UITabBarItem]!
     var customTabBarItems: [CustomTabBarItem]!
     var tabBarButtons: [UIButton]!
@@ -34,7 +34,6 @@ class CustomTabBar: UIView, AdvertisingDelegate {
     //MARK: Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
-        DiscoveryViewController.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,7 +43,7 @@ class CustomTabBar: UIView, AdvertisingDelegate {
     //MARK: Target Actions
     func barItemTapped(sender: UIButton) {
         if tabBarButtons.index(of: sender) == 2 {
-            if isAdvertising{
+            if MPCManager.sharedController.isAdvertising{
                 delegate.didSelectViewController(tabBarView: self, atIndex: 2)
             } else {
                 delegate.didSelectViewController(tabBarView: self, atIndex: 3)
@@ -62,7 +61,7 @@ class CustomTabBar: UIView, AdvertisingDelegate {
         // get tab bar items from default tab bar
         let defaultBarItems = dataSource.tabBarItemsInCustomTabBar(tabBarView: self)
         
-        if isAdvertising {
+        if MPCManager.sharedController.isAdvertising {
             tabBarItems = [defaultBarItems[0], defaultBarItems[1], defaultBarItems[2]]
 
         } else {

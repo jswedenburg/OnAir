@@ -35,6 +35,13 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
     var foundPeers: [MCPeerID] = []
     
     var connectedPeers: [MCPeerID] = []
+    
+    var isAdvertising: Bool = false {
+        didSet {
+            let name = Notification.Name(rawValue: "isAdvertisingChanged")
+            NotificationCenter.default.post(name: name, object: isAdvertising)
+        }
+    }
 
     let serviceType = "LCOC-Chat"
 
