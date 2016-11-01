@@ -26,7 +26,7 @@ class DiscoveryViewController: UIViewController {
         self.tableView.dataSource = self
         MPCManager.sharedController.delegate = self
         MPCManager.sharedController.browser.startBrowsingForPeers()
-        let vc = SearchResultsViewController()
+        
         
         
         
@@ -87,11 +87,13 @@ extension DiscoveryViewController: MPCManagerDelegate{
         tableView.reloadData()
     }
     
-    
+    func lostPeer() {
+        tableView.reloadData()
+    }
     
     func connectedWithPeer(peerID: MCPeerID) {
-        print("Connected")
-        
-        //preform segue to receiverMP
+        if MPCManager.sharedController.isAdvertising == false {
+            self.tabBarController?.selectedIndex = 2
+        }
     }
 }

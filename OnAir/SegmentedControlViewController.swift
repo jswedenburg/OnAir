@@ -12,11 +12,17 @@ class SegmentedControlViewController: UIViewController  {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
-         self.navigationItem.rightBarButtonItem = nil
+        if MPCManager.sharedController.isAdvertising {
+            self.segmentedControl.setEnabled(true, forSegmentAt: 1)
+        } else {
+            self.segmentedControl.setEnabled(false, forSegmentAt: 1)
+        }
+        self.navigationItem.rightBarButtonItem = nil
     }
 
     override func didReceiveMemoryWarning() {
