@@ -46,13 +46,15 @@ class SegmentedControlViewController: UIViewController  {
     
     @IBAction func showComponent(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-                self.parent?.navigationItem.rightBarButtonItem = nil
+                self.parent?.navigationItem.rightBarButtonItem?.isEnabled = false
+                self.parent?.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear
                 UIView.animate(withDuration: 0.5, animations: {
                 self.searchView.alpha = 1
                 self.songQueueView.alpha = 0
             })
         } else {
-            //self.parent?.navigationItem.rightBarButtonItem = editButtonItem
+            self.parent?.navigationItem.rightBarButtonItem?.isEnabled = true
+            self.parent?.navigationItem.rightBarButtonItem?.tintColor = nil
             UIView.animate(withDuration: 0.5, animations: {
                 self.searchView.alpha = 0
                 self.songQueueView.alpha = 1
