@@ -8,11 +8,13 @@
 
 import UIKit
 
-class SearchResultsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SongAddedToQueueDelegate {
+class SearchResultsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate,   SongAddedToQueueDelegate {
     
     //MARK: - IB Outlet
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    
+    
     
     var songs: [Song] = [] {
         didSet {
@@ -31,6 +33,7 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         self.tableView.delegate = self
         self.tableView.dataSource = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: Notification.Name(rawValue: "QueueHasChanged") , object: nil)
+        
     }
 
     
@@ -42,6 +45,7 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         
         //make the API call the moment the user clicks the searchBarButton- CHECK WITH AUSTIN, THIS FUNCTION NEEDS TO JUST ACCEPT THE SEARCH TERM, NOT ALL OF THESE paraameters- song or albumn
         self.searchBar.resignFirstResponder()
+        self.tableView.setContentOffset(CGPoint.zero, animated: true)
         SearchController.fetchSong(searchTerm: searchTerm) { (songs) in
             guard let songs = songs else { return }
             DispatchQueue.main.async {
@@ -53,42 +57,59 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func cellButtonTapped(cell: SongQueueTableViewCell) {
-    
-        if cell.song?.isAdded == true {
-            // remove song
-            // check mark is now a  plus sign
-            // cell.songIsAdded = false
-            if cell.song != nil {
-                cell.song?.isAdded = false
-                SongQueueController.sharedController.removeSongFromUpNext(song: cell.song!)
+        
+        if MPCManager.sharedController.isAdvertising {
+            if cell.song?.isAdded == true {
+                // remove song
+                // check mark is now a  plus sign
+                // cell.songIsAdded = false
+                if cell.song != nil {
+                    cell.song?.isAdded = false
+                    SongQueueController.sharedController.removeSongFromUpNext(song: cell.song!)
+                } else {
+                    guard let album = cell.album else { return }
+                    AlbumController.sharedController.removeSongsFromQueueFrom(album: album)
+                }
+                cell.isAddedButton?.setTitle("+", for: .normal)
             } else {
-                guard let album = cell.album else { return }
-                AlbumController.sharedController.removeSongsFromQueueFrom(album: album)
+                // add song(s) to queue
+                // plus sign is now a check
+                // cell.songIsAdded = true
+                
+                if cell.song != nil {
+                    guard let song = cell.song else { return }
+                    song.isAdded = true
+                    SongQueueController.sharedController.addSongToUpNext(newSong: song)
+                } else {
+                    guard let album = cell.album else { return }
+                    AlbumController.sharedController.addSongsToQueueWith(album: album)
+                }
+                cell.isAddedButton?.setTitle("✓", for: .normal)
+                
             }
-            cell.isAddedButton?.setTitle("+", for: .normal)
         } else {
-            // add song(s) to queue
-            // plus sign is now a check
-            // cell.songIsAdded = true
-            
-            if cell.song != nil {
-                guard let song = cell.song else { return }
-                song.isAdded = true
-                SongQueueController.sharedController.addSongToUpNext(newSong: song)
-            } else {
-                guard let album = cell.album else { return }
-                AlbumController.sharedController.addSongsToQueueWith(album: album)
-            }
-            cell.isAddedButton?.setTitle("✓", for: .normal)
-            
+            presentAlertController()
         }
+    
+       
     }
     
-    // MARK: Functions
+    // MARK: Helper Functions
     
     func reloadTableView() {
         self.tableView.reloadData()
     }
+    
+    func presentAlertController() {
+        
+        let alertController = UIAlertController(title: "Attention", message: "You must be broadcasting to play a song or add a song to queue", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        alertController.addAction(action)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
     
     
     //MARK:- Table view data source function
@@ -133,11 +154,16 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            let song = songs[indexPath.row]
-            SongQueueController.sharedController.appendSongToTopOfQueue(song)
-            MusicPlayerController.sharedController.broadcaterPlay()
+        if MPCManager.sharedController.isAdvertising {
+            if indexPath.section == 0 {
+                let song = songs[indexPath.row]
+                SongQueueController.sharedController.appendSongToTopOfQueue(song)
+                MusicPlayerController.sharedController.broadcaterPlay()
+            }
+        } else {
+            presentAlertController()
         }
+        
     }
     
     

@@ -1,32 +1,26 @@
-  //
-  //  MPCManager.swift
-  //  OnAir
-  //
-  //  Created by Jake SWEDENBURG on 10/25/16.
-  //  Copyright © 2016 Jake Swedenbug. All rights reserved.
-  //
-  
-  import Foundation
-  import MultipeerConnectivity
-  import UIKit
-  
-  protocol MPCManagerDelegate {
-    
+//
+//  MPCManager.swift
+//  OnAir
+//
+//  Created by Jake SWEDENBURG on 10/25/16.
+//  Copyright © 2016 Jake Swedenbug. All rights reserved.
+//
+
+import Foundation
+import MultipeerConnectivity
+import UIKit
+
+protocol MPCManagerDelegate {
+
     func foundPeer()
     
     func connectedWithPeer(peerID: MCPeerID)
-    
-  }
-  
-  protocol GotDataFromBroadcaster {
-    func dataReceivedFromBroadcast(data: Data)
-  }
-  
-  class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
+
+}
+
+class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
     
     static let sharedController = MPCManager()
-    
-    var dataDelegate: GotDataFromBroadcaster?
     
     var delegate: MPCManagerDelegate?
     
@@ -41,16 +35,9 @@
     var foundPeers: [MCPeerID] = []
     
     var connectedPeers: [MCPeerID] = []
-    
-    var isAdvertising: Bool = false {
-        didSet {
-            let name = Notification.Name(rawValue: "isAdvertisingChanged")
-            NotificationCenter.default.post(name: name, object: isAdvertising)
-        }
-    }
 
-  	let serviceType = "on-air"
-    
+    let serviceType = "LCOC-Chat"
+
     override init(){
         super.init()
         
@@ -67,7 +54,7 @@
     }
     
     
-    //MARK: Broswer Delegate
+    //MARK: Broswer Delegate 
     
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         foundPeers.append(peerID)
@@ -90,7 +77,7 @@
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         
         invitationHandler(true, self.session)
-        
+
         
     }
     
@@ -105,7 +92,6 @@
         case MCSessionState.connected:
             delegate?.connectedWithPeer(peerID: peerID)
             connectedPeers.append(peerID)
-            browser.stopBrowsingForPeers()
             print("connected")
         case MCSessionState.connecting:
             print("Connecting")
@@ -114,18 +100,12 @@
         }
     }
     
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        
-        self.dataDelegate?.dataReceivedFromBroadcast(data: data)
-
-        let dataDictionary = NSKeyedUnarchiver.unarchiveObject(with: data) as! Dictionary<String, String>
+     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         let name: NSNotification.Name = NSNotification.Name.init(rawValue: "receivedData")
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: name, object: nil, userInfo: dataDictionary)
-        }
+        NotificationCenter.default.post(name: name, object: data)
     }
     
-    
+   
     
     
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) { }
@@ -142,9 +122,9 @@
     func sendData(dictionary: Dictionary<String, String>) {
         let dataToSend = NSKeyedArchiver.archivedData(withRootObject: dictionary)
         do {
-            try session.send(dataToSend, toPeers: self.connectedPeers, with: .reliable)
+            try session.send(dataToSend, toPeers: self.connectedPeers, with: .unreliable)
         } catch  {
             print("Sending Failed")
         }
     }
-  }
+}

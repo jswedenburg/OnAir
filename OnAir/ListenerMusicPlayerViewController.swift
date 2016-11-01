@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListenerMusicPlayerViewController: UIViewController {
+class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaster {
     
     @IBOutlet weak var albumCoverImageView: UIImageView!
     @IBOutlet weak var songNameLabel: UILabel!
@@ -33,16 +33,16 @@ class ListenerMusicPlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        MPCManager.sharedController.dataDelegate = self
         tableView.delegate = self
         tableView.dataSource = self
-        NotificationCenter.default.addObserver(self, selector: #selector(dataReceived(notification:)), name: NSNotification.Name(rawValue: "receivedData"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(dataReceived(notification:)), name: NSNotification.Name(rawValue: "receivedData"), object: nil)
     }
     
-    func dataReceived(notification: Notification){
-        guard let data = notification.object as? Data else { print("Object failed to convert to Data"); return }
-        guard let dictionary = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: String] else { print("Data failed to convert to dictionary of [String: String]"); return }
-        guard let value = dictionary.first?.value else { return }
-        
+    func dataReceivedFromBroadcast(data: Data) {
+        let dictionary: Dictionary? = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String:String]
+        guard let newDictionary = dictionary else { return }
+        guard let value = newDictionary["instruction"] else { return }
         switch value{
         case "play":
             print("play")
@@ -54,7 +54,14 @@ class ListenerMusicPlayerViewController: UIViewController {
             print("next")
             MusicPlayerController.sharedController.skip()
         default: ()
-            
+    }
+    
+    func dataReceived(notification: Notification){
+        // TODO: - unarchive data
+        let dictionary = notification.userInfo
+        guard let value = dictionary?["instruction"] as? String else { print("no value") ;return }
+        
+        
         }
         
     }

@@ -18,15 +18,9 @@
     
   }
   
-  protocol GotDataFromBroadcaster {
-    func dataReceivedFromBroadcast(data: Data)
-  }
-  
   class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
     
     static let sharedController = MPCManager()
-    
-    var dataDelegate: GotDataFromBroadcaster?
     
     var delegate: MPCManagerDelegate?
     
@@ -42,6 +36,10 @@
     
     var connectedPeers: [MCPeerID] = []
     
+<<<<<<< HEAD
+    let serviceType = "on-air"
+    
+=======
     var isAdvertising: Bool = false {
         didSet {
             let name = Notification.Name(rawValue: "isAdvertisingChanged")
@@ -49,8 +47,9 @@
         }
     }
 
-  	let serviceType = "on-air"
-    
+    let serviceType = "LCOC-Chat"
+
+>>>>>>> feature/isAdvertisingAlertController
     override init(){
         super.init()
         
@@ -115,8 +114,6 @@
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        
-        self.dataDelegate?.dataReceivedFromBroadcast(data: data)
 
         let dataDictionary = NSKeyedUnarchiver.unarchiveObject(with: data) as! Dictionary<String, String>
         let name: NSNotification.Name = NSNotification.Name.init(rawValue: "receivedData")
