@@ -13,7 +13,27 @@ class SegmentedControlViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SegmentedControlViewController.dismissKeyboard))
+        
+        //ensures tap does not interfere and cancel other interactions
+        tap.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(tap)
     }
+    
+    //called upon tap gesture recognition
+    func dismissKeyboard() {
+        //Causes view to resign the first responder status.
+        view.endEditing(true)
+    }
+        
+        
+        
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
          self.navigationItem.rightBarButtonItem = nil
