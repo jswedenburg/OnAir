@@ -34,10 +34,12 @@ class DiscoveryViewController: UIViewController {
             startStopAdvertisingButton.setTitle("Start Advertising", for: .normal)
             MPCManager.sharedController.advertiser.stopAdvertisingPeer()
             MPCManager.sharedController.isAdvertising = false
+            self.tableView.isUserInteractionEnabled = true
         } else {
             startStopAdvertisingButton.setTitle("Stop Advertising", for: .normal)
             MPCManager.sharedController.advertiser.startAdvertisingPeer()
             MPCManager.sharedController.isAdvertising = true
+            self.tableView.isUserInteractionEnabled = false
         }
     }
     
