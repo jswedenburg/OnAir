@@ -23,14 +23,12 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     //MARK: Actions
     @IBAction func playButtonPressed(){
-        if playMode{
+        if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
             MusicPlayerController.sharedController.broadcasterPause()
             sendPauseData()
-            playMode = false
         } else {
             MusicPlayerController.sharedController.broadcaterPlay()
             sendPlayData()
-            playMode = true
         }
     }
     
@@ -70,12 +68,15 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     func sendNextSongData() {
         let messageDict: [String: String] = ["instruction": "next"]
+        SongQueueController.sharedController.addSongToHistoryFromUpNext()
         MPCManager.sharedController.sendData(dictionary: messageDict)
     }
-    
-    
-    
-    
-    
 
+}
+
+extension BroadcastMusicPlayerViewController: MusicPlayerControllerNowPlayingDelegate{
+    func nowPlayingItemDidChange() {
+        guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
+        MPCManager.sharedController.sendData(dictionary: ["song":song.dictionaryRepresentation])
+    }
 }
