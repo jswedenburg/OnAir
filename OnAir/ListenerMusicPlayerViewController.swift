@@ -39,9 +39,9 @@ class ListenerMusicPlayerViewController: UIViewController {
     }
     
     func dataReceived(notification: Notification){
-        guard let data = notification.object as? Data else { print("Object failed to convert to Data"); return }
-        guard let dictionary = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: String] else { print("Data failed to convert to dictionary of [String: String]"); return }
-        guard let value = dictionary.first?.value else { return }
+        // TODO: - unarchive data
+        let dictionary = notification.userInfo
+        guard let value = dictionary?["instruction"] as? String else { print("no value") ;return }
         
         switch value{
         case "play":

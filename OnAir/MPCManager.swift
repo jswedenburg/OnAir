@@ -1,24 +1,24 @@
-//
-//  MPCManager.swift
-//  OnAir
-//
-//  Created by Jake SWEDENBURG on 10/25/16.
-//  Copyright © 2016 Jake Swedenbug. All rights reserved.
-//
-
-import Foundation
-import MultipeerConnectivity
-import UIKit
-
-protocol MPCManagerDelegate {
-
+  //
+  //  MPCManager.swift
+  //  OnAir
+  //
+  //  Created by Jake SWEDENBURG on 10/25/16.
+  //  Copyright © 2016 Jake Swedenbug. All rights reserved.
+  //
+  
+  import Foundation
+  import MultipeerConnectivity
+  import UIKit
+  
+  protocol MPCManagerDelegate {
+    
     func foundPeer()
     
     func connectedWithPeer(peerID: MCPeerID)
-
-}
-
-class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
+    
+  }
+  
+  class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
     
     static let sharedController = MPCManager()
     
@@ -35,9 +35,9 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
     var foundPeers: [MCPeerID] = []
     
     var connectedPeers: [MCPeerID] = []
-
-    let serviceType = "LCOC-Chat"
-
+    
+    let serviceType = "on-air"
+    
     override init(){
         super.init()
         
@@ -54,7 +54,7 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
     }
     
     
-    //MARK: Broswer Delegate 
+    //MARK: Broswer Delegate
     
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         foundPeers.append(peerID)
@@ -77,7 +77,7 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         
         invitationHandler(true, self.session)
-
+        
         
     }
     
@@ -92,6 +92,7 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
         case MCSessionState.connected:
             delegate?.connectedWithPeer(peerID: peerID)
             connectedPeers.append(peerID)
+            browser.stopBrowsingForPeers()
             print("connected")
         case MCSessionState.connecting:
             print("Connecting")
@@ -100,12 +101,16 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
         }
     }
     
-     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+
+        let dataDictionary = NSKeyedUnarchiver.unarchiveObject(with: data) as! Dictionary<String, String>
         let name: NSNotification.Name = NSNotification.Name.init(rawValue: "receivedData")
-        NotificationCenter.default.post(name: name, object: data)
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: name, object: nil, userInfo: dataDictionary)
+        }
     }
     
-   
+    
     
     
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) { }
@@ -122,9 +127,9 @@ class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdve
     func sendData(dictionary: Dictionary<String, String>) {
         let dataToSend = NSKeyedArchiver.archivedData(withRootObject: dictionary)
         do {
-            try session.send(dataToSend, toPeers: self.connectedPeers, with: .unreliable)
+            try session.send(dataToSend, toPeers: self.connectedPeers, with: .reliable)
         } catch  {
             print("Sending Failed")
         }
     }
-}
+  }
