@@ -39,6 +39,18 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
 //        NotificationCenter.default.addObserver(self, selector: #selector(dataReceived(notification:)), name: NSNotification.Name(rawValue: "receivedData"), object: nil)
     }
     
+    func updateViewWith(song: Song) {
+        ImageController.imageForURL(imageEndpoint: song.image) { (image) in
+            DispatchQueue.main.async {
+                self.albumCoverImageView.image = image
+            }
+        }
+        
+        self.albumNameLabel.text = song.albumName
+        self.songNameLabel.text = song.name
+        self.artistNameLabel.text = song.artist
+    }
+    
     func dataReceivedFromBroadcast(data: Data) {
         let dictionary: Dictionary? = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String:String]
         guard let newDictionary = dictionary else { return }
