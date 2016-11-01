@@ -313,7 +313,7 @@
 				TargetAttributes = {
 					811869711DBFBD0100FD2D7C = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = K723TX5AY3;
+						DevelopmentTeam = GU6XEEN2H9;
 						ProvisioningStyle = Automatic;
 					};
 					811869851DBFBD0200FD2D7C = {
@@ -567,7 +567,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = K723TX5AY3;
+				DEVELOPMENT_TEAM = GU6XEEN2H9;
 				INFOPLIST_FILE = OnAir/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jakeswedenburg.OnAir;
@@ -580,7 +580,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = K723TX5AY3;
+				DEVELOPMENT_TEAM = GU6XEEN2H9;
 				INFOPLIST_FILE = OnAir/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jakeswedenburg.OnAir;

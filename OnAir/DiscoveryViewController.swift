@@ -27,9 +27,6 @@ class DiscoveryViewController: UIViewController {
         MPCManager.sharedController.delegate = self
         MPCManager.sharedController.browser.startBrowsingForPeers()
         let vc = SearchResultsViewController()
-        
-        
-        
     }
     
     @IBAction func broadcastButtonPressed(sender: UIButton) {
@@ -38,11 +35,15 @@ class DiscoveryViewController: UIViewController {
             startStopAdvertisingButton.setTitle("Start Advertising", for: .normal)
             MPCManager.sharedController.advertiser.stopAdvertisingPeer()
             MPCManager.sharedController.isAdvertising = false
+            self.tableView.isUserInteractionEnabled = false 
+            
             
         } else {
             startStopAdvertisingButton.setTitle("Stop Advertising", for: .normal)
             MPCManager.sharedController.advertiser.startAdvertisingPeer()
             MPCManager.sharedController.isAdvertising = true
+             self.tableView.isUserInteractionEnabled = true 
+
         }
 
     }
