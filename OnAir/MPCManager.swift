@@ -72,7 +72,13 @@
     //MARK: Broswer Delegate
     
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        foundPeers.append(peerID)
+        
+        if foundPeers.contains(peerID){
+            //Do not append
+        } else {
+            foundPeers.append(peerID)
+        }
+        
         
         delegate?.foundPeer()
     }
