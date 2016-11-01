@@ -59,6 +59,8 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     //MARK: Helper Functions
     func sendPlayData() {
+        guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
+        MPCManager.sharedController.sendData(dictionary: ["song":song.dictionaryRepresentation])
         let messageDict: [String: String] = ["instruction": "play"]
         MPCManager.sharedController.sendData(dictionary: messageDict)
     }
@@ -70,12 +72,15 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     func sendNextSongData() {
         let messageDict: [String: String] = ["instruction": "next"]
+        SongQueueController.sharedController.addSongToHistoryFromUpNext()
         MPCManager.sharedController.sendData(dictionary: messageDict)
     }
-    
-    
-    
-    
-    
 
+}
+
+extension BroadcastMusicPlayerViewController: MusicPlayerControllerNowPlayingDelegate{
+    func nowPlayingItemDidChange() {
+        guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
+        MPCManager.sharedController.sendData(dictionary: ["song":song.dictionaryRepresentation])
+    }
 }

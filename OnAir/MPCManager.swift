@@ -135,14 +135,8 @@
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        
         self.dataDelegate?.dataReceivedFromBroadcast(data: data)
-
-        let dataDictionary = NSKeyedUnarchiver.unarchiveObject(with: data) as! Dictionary<String, String>
-        let name: NSNotification.Name = NSNotification.Name.init(rawValue: "receivedData")
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: name, object: nil, userInfo: dataDictionary)
-        }
+        
     }
     
     
@@ -159,7 +153,7 @@
     
     // MARK: Custom Helper Functions
     
-    func sendData(dictionary: Dictionary<String, String>) {
+    func sendData(dictionary: Dictionary<String, Any>) {
         let dataToSend = NSKeyedArchiver.archivedData(withRootObject: dictionary)
         do {
             try session.send(dataToSend, toPeers: self.connectedPeers, with: .reliable)

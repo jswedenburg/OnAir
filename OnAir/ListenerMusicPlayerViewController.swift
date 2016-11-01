@@ -36,7 +36,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         MPCManager.sharedController.dataDelegate = self
         tableView.delegate = self
         tableView.dataSource = self
-//        NotificationCenter.default.addObserver(self, selector: #selector(dataReceived(notification:)), name: NSNotification.Name(rawValue: "receivedData"), object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(dataReceived(notification:)), name: NSNotification.Name(rawValue: "receivedData"), object: nil)
     }
     
     func updateViewWith(song: Song) {
@@ -52,64 +52,66 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     }
     
     func dataReceivedFromBroadcast(data: Data) {
-        let dictionary: Dictionary? = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String:String]
-        guard let newDictionary = dictionary else { return }
-        guard let value = newDictionary["instruction"] else { return }
-        switch value{
-        case "play":
-            print("play")
-            MusicPlayerController.sharedController.broadcaterPlay()
-        case "pause":
-            print("pause")
-            MusicPlayerController.sharedController.broadcasterPause()
-        case "next":
-            print("next")
-            MusicPlayerController.sharedController.skip()
-        default: ()
-    }
-    
-    func dataReceived(notification: Notification){
-        // TODO: - unarchive data
-        let dictionary = notification.userInfo
-        guard let value = dictionary?["instruction"] as? String else { print("no value") ;return }
+        guard let dictionaryFromData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: Any] else { return }
         
-        
+        if dictionaryFromData.first?.key == "song"{
+            guard let songDictionary  = dictionaryFromData["song"] as? [String: Any],
+                let song = Song(dictionary: songDictionary) else { return }
+            
+            self.song = song
+            MusicPlayerController.sharedController.setListenerQueueWith(id: "\(song.songID)")
         }
         
-    }
-    @IBAction func muteButtonPressed(_ sender: UIButton) {
-        if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
-            MusicPlayerController.sharedController.listenerPause()
-        } else if MusicPlayerController.sharedController.getApplicationPlayerState() == .paused{
-            MusicPlayerController.sharedController.listenerPlay()
+        if dictionaryFromData.first?.key == "instruction"{
+            guard let value = dictionaryFromData["instruction"] as? String else { return }
+            switch value{
+            case "play":
+                print("play")
+                MusicPlayerController.sharedController.broadcaterPlay()
+            case "pause":
+                print("pause")
+                MusicPlayerController.sharedController.broadcasterPause()
+            case "next":
+                print("next")
+                MusicPlayerController.sharedController.skip()
+            default: ()
+            }
         }
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+        @IBAction func muteButtonPressed(_ sender: UIButton) {
+            if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
+                MusicPlayerController.sharedController.listenerPause()
+            } else if MusicPlayerController.sharedController.getApplicationPlayerState() == .paused{
+                MusicPlayerController.sharedController.listenerPlay()
+            }
+        }
+        
+        /*
+         // MARK: - Navigation
+         
+         // In a storyboard-based application, you will often want to do a little preparation before navigation
+         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         // Get the new view controller using segue.destinationViewController.
+         // Pass the selected object to the new view controller.
+         }
+         */
+        
+    }
     
-}
-
-extension ListenerMusicPlayerViewController: UITableViewDelegate, UITableViewDataSource{
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return previouslyPlayedSongs.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "previousSongCell", for: indexPath)
+    extension ListenerMusicPlayerViewController: UITableViewDelegate, UITableViewDataSource{
+        func numberOfSections(in tableView: UITableView) -> Int {
+            return 1
+        }
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return previouslyPlayedSongs.count
+        }
         
-        
-        
-        return cell
-    }
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "previousSongCell", for: indexPath)
+            
+            
+            
+            return cell
+        }
 }

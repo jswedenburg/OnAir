@@ -30,6 +30,11 @@ class Song: Equatable {
     let albumName: String
     var isAdded: Bool?
     
+    var dictionaryRepresentation:[String: Any]{
+        return [kSongName: self.name, kArtist: self.artist, kAlbumID: self.collectionID, kTrackDuration: self.trackDuration, kSongID: self.songID, kImage: self.image, kAlbumName: self.albumName]
+    }
+    
+    
     init(name: String, artist: String, collectionID: Int, trackDuration: Int, songID: Int, image: String, albumName: String) {
         self.name = name
         self.artist = artist
@@ -39,7 +44,7 @@ class Song: Equatable {
         self.image = image
         self.albumName = albumName
     }
-    
+
     
     
     //Model Objects: failable initializer.

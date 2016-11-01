@@ -11,9 +11,12 @@
 import Foundation
 import MediaPlayer
 
-protocol MusicPlayerControllerDelegate: class{
+protocol MusicPlayerControllerPlaybackDelegate: class{
     func playBackDidChange(value: Bool)
-    
+}
+
+protocol MusicPlayerControllerNowPlayingDelegate {
+    func nowPlayingItemDidChange()
 }
 
 
@@ -28,14 +31,18 @@ class MusicPlayerController{
     /// Initialized with a notificatin observer used to call the delegate function when playbackstate has changed.
     init(){
         NotificationCenter.default.addObserver(self, selector: #selector(playbackChange), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: applicationPlayer)
-        applicationPlayer.stop()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(nowPlayingChange), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: applicationPlayer)
     }
     
     var arrayOfTrackID = [String]()
     
     // MARK: - Delegate
     /// Delegate that is called when the user play, pauses, skips, or returns from the control center or when the respective functions are called.
-    var delegate: MusicPlayerControllerDelegate?
+    var delegate: MusicPlayerControllerPlaybackDelegate?
+    
+    /// Delegate that is called when the the nowPlayingItem changes.
+    var nowPlayingDelegate: MusicPlayerControllerNowPlayingDelegate?
     
     // MARK: - Singleton
     static let sharedController = MusicPlayerController()
@@ -62,6 +69,10 @@ class MusicPlayerController{
             delegate?.playBackDidChange(value: false)
         }
         
+    }
+    
+    @objc func nowPlayingChange(){
+        nowPlayingDelegate?.nowPlayingItemDidChange()
     }
     
     // MARK: - Listener's Music Player Functions
@@ -99,12 +110,14 @@ class MusicPlayerController{
     // MARK: - Broadcaster's Music Player Functions
     /// Sets an array of stings of trackIDs for the broadcaster's application player.
     func setBroadcaterQueueWith(ids:[String]){
+        print("Queue is set")
         applicationPlayer.setQueueWithStoreIDs(ids)
     }
     
     /// Starts the broadcaster's application player to play
     func broadcaterPlay(){
         applicationPlayer.play()
+        applicationPlayer.beginGeneratingPlaybackNotifications()
     }
     
     /// Pauses the broadcaster's application player
@@ -115,6 +128,10 @@ class MusicPlayerController{
     /// Starts playback of the next song in the queue of the broadcaster's application player; or, if the music player is not playing, designates the next song as the next to be played.
     func skip(){
         applicationPlayer.skipToNextItem()
+    }
+    
+    func stop(){
+        applicationPlayer.stop()
     }
     
 }
