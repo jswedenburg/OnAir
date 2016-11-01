@@ -42,6 +42,7 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         
         //make the API call the moment the user clicks the searchBarButton- CHECK WITH AUSTIN, THIS FUNCTION NEEDS TO JUST ACCEPT THE SEARCH TERM, NOT ALL OF THESE paraameters- song or albumn
         self.searchBar.resignFirstResponder()
+        self.tableView.setContentOffset(CGPoint.zero, animated: true)
         SearchController.fetchSong(searchTerm: searchTerm) { (songs) in
             guard let songs = songs else { return }
             DispatchQueue.main.async {
