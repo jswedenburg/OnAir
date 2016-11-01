@@ -11,13 +11,8 @@ import MultipeerConnectivity
 
 
 class DiscoveryViewController: UIViewController {
-    
    
     @IBOutlet weak var startStopAdvertisingButton: UIButton!
-     
-    
-    
-
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -26,10 +21,11 @@ class DiscoveryViewController: UIViewController {
         self.tableView.dataSource = self
         MPCManager.sharedController.delegate = self
         MPCManager.sharedController.browser.startBrowsingForPeers()
-        
-        
-        
-        
+        MPCManager.isBrowsing = true
+        let isBrowsingNotification = Notification.Name(rawValue: "isBrowsingChanged")
+        NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isBrowsingNotification, object: nil)
+        let isAdvertisingNotification = NSNotification.Name(rawValue: "isAdvertisingChanged")
+        NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isAdvertisingNotification, object: nil)
     }
     
     @IBAction func broadcastButtonPressed(sender: UIButton) {
@@ -38,21 +34,29 @@ class DiscoveryViewController: UIViewController {
             startStopAdvertisingButton.setTitle("Start Advertising", for: .normal)
             MPCManager.sharedController.advertiser.stopAdvertisingPeer()
             MPCManager.sharedController.isAdvertising = false
-            
         } else {
             startStopAdvertisingButton.setTitle("Stop Advertising", for: .normal)
             MPCManager.sharedController.advertiser.startAdvertisingPeer()
             MPCManager.sharedController.isAdvertising = true
         }
-
     }
     
-    
-    
+    func advertisingBrowsingIdentify() {
+        if MPCManager.sharedController.isAdvertising {
+            self.tabBarController?.tabBar.backgroundColor = UIColor.red
+        } else if MPCManager.isBrowsing {
+            self.tabBarController?.tabBar.backgroundColor = UIColor.green
+        } else {
+            self.tabBarController?.tabBar.backgroundColor = UIColor.white
+        }
+    }
 }
 
 
+
+
 // MARK: - TableView Delegate and Datasource
+
 extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -76,9 +80,7 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
         let peer = MPCManager.sharedController.foundPeers[indexPath.row] as MCPeerID
         guard let session = MPCManager.sharedController.session else { return }
         MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
-        
     }
-    
 }
 
 extension DiscoveryViewController: MPCManagerDelegate{

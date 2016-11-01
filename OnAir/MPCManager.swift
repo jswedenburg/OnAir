@@ -44,6 +44,13 @@
     
     var connectedPeers: [MCPeerID] = []
     
+    static var isBrowsing: Bool = false {
+        didSet {
+            let name = Notification.Name(rawValue: "isBrowsingChanged")
+            NotificationCenter.default.post(name: name, object: nil)
+        }
+    }
+    
     var isAdvertising: Bool = false {
         didSet {
             let name = Notification.Name(rawValue: "isAdvertisingChanged")
@@ -118,6 +125,7 @@
             delegate?.connectedWithPeer(peerID: peerID)
             connectedPeers.append(peerID)
             browser.stopBrowsingForPeers()
+            MPCManager.isBrowsing = false
             print("connected")
         case MCSessionState.connecting:
             print("Connecting")
