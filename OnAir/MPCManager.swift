@@ -14,6 +14,8 @@
     
     func foundPeer()
     
+    func lostPeer()
+    
     func connectedWithPeer(peerID: MCPeerID)
     
   }
@@ -81,7 +83,11 @@
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        print("lost peer")
+        if let index = foundPeers.index(of: peerID) {
+            foundPeers.remove(at: index)
+        }
+        
+        delegate?.lostPeer()
     }
     
     // Advertiser Delegate

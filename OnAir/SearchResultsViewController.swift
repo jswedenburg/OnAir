@@ -159,6 +159,7 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
                 let song = songs[indexPath.row]
                 SongQueueController.sharedController.appendSongToTopOfQueue(song)
                 MusicPlayerController.sharedController.broadcaterPlay()
+                SongQueueController.disableAddingSong = false
             }
         } else {
             presentAlertController()
