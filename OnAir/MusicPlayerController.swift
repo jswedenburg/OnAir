@@ -28,7 +28,7 @@ class MusicPlayerController{
     /// Variable to log when the listener has pressed paused from an in app button or in the control center.
     private var timeWhenPaused: Date?
     
-    /// Initialized with a notificatin observer used to call the delegate function when playbackstate has changed.
+    /// Initialized with a notification observer used to call the delegate function when playbackstate has changed.
     init(){
         NotificationCenter.default.addObserver(self, selector: #selector(playbackChange), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: applicationPlayer)
         

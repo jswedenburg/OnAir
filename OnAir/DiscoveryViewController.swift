@@ -12,10 +12,13 @@ import MultipeerConnectivity
 
 class DiscoveryViewController: UIViewController {
    
+    
+    //Outlets
     @IBOutlet weak var startStopAdvertisingButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var broadcastLabel: UILabel!
     
+    //View Overriding Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
@@ -30,12 +33,14 @@ class DiscoveryViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isAdvertisingNotification, object: nil)
     }
     
+    //IBActions
     @IBAction func broadcastButtonPressed(sender: UIButton) {
     
         if MPCManager.sharedController.isAdvertising {
             startStopAdvertisingButton.setTitle("Start Broadcasting", for: .normal)
             MPCManager.sharedController.advertiser.stopAdvertisingPeer()
             MPCManager.sharedController.isAdvertising = false
+            MPCManager.sharedController.disconnect()
             self.tableView.isUserInteractionEnabled = true
             broadcastLabel.text = ""
         } else {
@@ -101,6 +106,7 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
+//MPC Manager Delegate
 extension DiscoveryViewController: MPCManagerDelegate{
     
     func foundPeer(){
