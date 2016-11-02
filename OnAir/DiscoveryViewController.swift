@@ -42,6 +42,7 @@ class DiscoveryViewController: UIViewController {
             startStopAdvertisingButton.setTitle("Stop Broadcasting", for: .normal)
             MPCManager.sharedController.advertiser.startAdvertisingPeer()
             MPCManager.sharedController.isAdvertising = true
+            MPCManager.sharedController.disconnect()
             self.tableView.isUserInteractionEnabled = false
             broadcastLabel.text = "YOU ARE DJING BRO"
         }
