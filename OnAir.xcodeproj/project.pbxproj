@@ -313,7 +313,6 @@
 				TargetAttributes = {
 					811869711DBFBD0100FD2D7C = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 8V7ERX2APN;
 						ProvisioningStyle = Automatic;
 					};
 					811869851DBFBD0200FD2D7C = {
@@ -567,12 +566,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8V7ERX2APN;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = OnAir/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = comjakeswedenburgonair;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -580,12 +580,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8V7ERX2APN;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = OnAir/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = comjakeswedenburgonair;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
