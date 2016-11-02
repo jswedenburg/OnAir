@@ -96,7 +96,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     }
     
     func updateViewWithNewSong() {
-        let song = SongQueueController.sharedController.upNextQueue[0]
+        guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
         self.songNameLabel.text = song.name
         self.songArtistLabel.text = song.artist
         
@@ -104,13 +104,43 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
             self.songAlbumImageView.image = image
         }
     }
-
 }
+
+// MARK: - MusicPlayerController Delegate
 
 extension BroadcastMusicPlayerViewController: MusicPlayerControllerNowPlayingDelegate{
     func nowPlayingItemDidChange() {
 //        print("I am here you SoB")
 //        guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
 //        MPCManager.sharedController.sendData(dictionary: ["song":song.dictionaryRepresentation])
+    }
+}
+
+// MARK: - MPC Manager Delegate
+extension BroadcastMusicPlayerViewController: MPCManagerDelegate{
+    func foundPeer() {
+    }
+    
+    func lostPeer() {
+    }
+    
+    func connectedWithPeer(peerID: MCPeerID) {
+        var instruction = ""
+        
+        if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
+            instruction = "pause"
+        } else {
+            instruction = "play"
+        }
+        
+        guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
+        let messageDict: [String: Any] = ["instruction": instruction, "song": song.dictionaryRepresentation, "playbackTime": MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime(), "timeStamp": Date()]
+        let dataToSend = NSKeyedArchiver.archivedData(withRootObject: messageDict)
+        
+        do {
+            try MPCManager.sharedController.session.send(dataToSend, toPeers: [peerID], with: .reliable)
+        } catch {
+            print("Sending Failed")
+        }
     }
 }

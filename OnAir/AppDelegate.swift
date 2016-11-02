@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
         
+        MusicPlayerController.sharedController.stop()
+        
         return true
     }
     
