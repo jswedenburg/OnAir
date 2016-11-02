@@ -24,11 +24,17 @@
     func dataReceivedFromBroadcast(data: Data)
   }
   
+  protocol ConnectedPeerArrayChangedDelegate {
+    func connectedPeersChanged()
+  }
+  
   class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
     
     static let sharedController = MPCManager()
     
     var dataDelegate: GotDataFromBroadcaster?
+    
+    static var connectedDelegate: ConnectedPeerArrayChangedDelegate?
     
     var delegate: MPCManagerDelegate?
     
@@ -127,10 +133,12 @@
             browser.stopBrowsingForPeers()
             MPCManager.isBrowsing = false
             print("connected")
+            MPCManager.connectedDelegate?.connectedPeersChanged()
         case MCSessionState.connecting:
             print("Connecting")
         default:
-            print("Did not connect")
+            print("Disconnected")
+            MPCManager.connectedDelegate?.connectedPeersChanged()
         }
     }
     
