@@ -11,6 +11,13 @@ import MultipeerConnectivity
 
 class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ConnectedPeerArrayChangedDelegate {
     
+    // MARK: Outlets
+    
+    @IBOutlet weak var songAlbumImageView: UIImageView!
+    @IBOutlet weak var songNameLabel: UILabel!
+    @IBOutlet weak var songArtistLabel: UILabel!
+    
+    
     //MARK: Properties
     var playMode = true
     
@@ -23,6 +30,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.updateViewWithNewSong()
         self.tableView.reloadData()
     }
     
@@ -83,6 +91,16 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         let messageDict: [String: String] = ["instruction": "next"]
         SongQueueController.sharedController.addSongToHistoryFromUpNext()
         MPCManager.sharedController.sendData(dictionary: messageDict)
+    }
+    
+    func updateViewWithNewSong() {
+        let song = SongQueueController.sharedController.upNextQueue[0]
+        self.songNameLabel.text = song.name
+        self.songArtistLabel.text = song.artist
+        
+        ImageController.imageForURL(imageEndpoint: song.image) { (image) in
+            self.songAlbumImageView.image = image
+        }
     }
 
 }
