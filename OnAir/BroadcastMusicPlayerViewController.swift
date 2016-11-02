@@ -20,6 +20,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         MPCManager.connectedDelegate = self
+        MusicPlayerController.sharedController.nowPlayingDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,8 +70,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     //MARK: Helper Functions
     func sendPlayData() {
         guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
-        MPCManager.sharedController.sendData(dictionary: ["song":song.dictionaryRepresentation])
-        let messageDict: [String: String] = ["instruction": "play"]
+        let messageDict: [String: Any] = ["instruction": "play", "song": song.dictionaryRepresentation, "playbackTime": MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime(), "timeStamp": Date()]
         MPCManager.sharedController.sendData(dictionary: messageDict)
     }
     
@@ -89,6 +89,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
 
 extension BroadcastMusicPlayerViewController: MusicPlayerControllerNowPlayingDelegate{
     func nowPlayingItemDidChange() {
+        print("I am here you SoB")
         guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
         MPCManager.sharedController.sendData(dictionary: ["song":song.dictionaryRepresentation])
     }
