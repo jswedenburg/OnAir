@@ -22,8 +22,8 @@ protocol MusicPlayerControllerNowPlayingDelegate: class {
 
 class MusicPlayerController{
     
-    private let applicationPlayer = MPMusicPlayerController.applicationMusicPlayer()
-    private let systemPlayer = MPMusicPlayerController.systemMusicPlayer()
+    let applicationPlayer = MPMusicPlayerController.applicationMusicPlayer()
+    let systemPlayer = MPMusicPlayerController.systemMusicPlayer()
     
     /// Variable to log when the listener has pressed paused from an in app button or in the control center.
     private var timeWhenPaused: Date?

@@ -62,7 +62,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             guard let songDictionary  = dictionaryFromData["song"] as? [String: Any],
                 let song = Song(dictionary: songDictionary) else { return }
             self.song = song
-            MusicPlayerController.sharedController.setListenerQueueWith(id: "\(song.songID)")
+            MusicPlayerController.sharedController.setBroadcaterQueueWith(ids: ["\(song.songID)"])
             updateViewWith(song: song)
         }
         
@@ -73,6 +73,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                 print("play")
                 if timeStamp != nil && playbacktimeStamp != nil{
                     let playbackTime = Date().timeIntervalSince(timeStamp!) + playbacktimeStamp!
+                    MusicPlayerController.sharedController.applicationPlayer.prepareToPlay()
                     MusicPlayerController.sharedController.setCurrentPlaybackTime(playbackTime)
                 }
                 MusicPlayerController.sharedController.broadcaterPlay()

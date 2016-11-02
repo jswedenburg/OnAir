@@ -89,8 +89,8 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
 
 extension BroadcastMusicPlayerViewController: MusicPlayerControllerNowPlayingDelegate{
     func nowPlayingItemDidChange() {
-        print("I am here you SoB")
-        guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
-        MPCManager.sharedController.sendData(dictionary: ["song":song.dictionaryRepresentation])
+//        print("I am here you SoB")
+//        guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
+//        MPCManager.sharedController.sendData(dictionary: ["song":song.dictionaryRepresentation])
     }
 }
