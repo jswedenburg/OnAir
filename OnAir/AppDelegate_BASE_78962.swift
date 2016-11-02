@@ -17,13 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-<<<<<<< Updated upstream
         NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
         
-        MusicPlayerController.sharedController.stop()
-        
-=======
->>>>>>> Stashed changes
         return true
     }
     
