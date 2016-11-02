@@ -16,7 +16,7 @@ class DiscoveryViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var broadcastLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var connectingLabel: UIButton!
+    @IBOutlet weak var connectingLabel: UILabel!
     
     
     
@@ -99,6 +99,8 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let peer = MPCManager.sharedController.foundPeers[indexPath.row] as MCPeerID
         guard let session = MPCManager.sharedController.session else { return }
+        connectingLabel.text = "Connecting...You will be on air shortly"
+        activityIndicator.startAnimating()
         MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
         broadcastLabel.text = "YOU ARE VIBING WITH \(peer.displayName)"
     }
