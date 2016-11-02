@@ -47,7 +47,12 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         self.searchBar.resignFirstResponder()
         self.tableView.setContentOffset(CGPoint.zero, animated: true)
         SearchController.fetchSong(searchTerm: searchTerm) { (songs) in
-            guard let songs = songs else { return }
+            guard let songs = songs else {
+                DispatchQueue.main.async {
+                    self.alertControllerForFailedSearch()
+                }
+                 return
+            }
             DispatchQueue.main.async {
                 self.albums = AlbumController.sharedController.displayAlbumFrom(songsArray: songs)
                 self.songs = songs
@@ -165,6 +170,18 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
             presentAlertController()
         }
         
+    }
+    
+    
+    func alertControllerForFailedSearch() {
+        let alertController = UIAlertController(title: "Error", message: "Unable to search. Please try back later.", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {
+            alert -> Void in
+        })
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     
