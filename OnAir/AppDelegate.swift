@@ -8,14 +8,47 @@
 
 import UIKit
 
+protocol IGotDataDelegate: class {
+    func hereIsTheSong(song: Song)
+}
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GotDataFromBroadcaster {
 
     var window: UIWindow?
-
+    static weak var songDelegate: IGotDataDelegate?
+    var tabBarController: UITabBarController?
+    
+    func dataReceivedFromBroadcast(data: Data) {
+        guard let dictionaryFromData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: Any] else { return }
+        
+        if dictionaryFromData.first?.key == "song"{
+            guard let songDictionary  = dictionaryFromData["song"] as? [String: Any],
+                let song = Song(dictionary: songDictionary) else { return }
+            
+            AppDelegate.songDelegate?.hereIsTheSong(song: song)
+            MusicPlayerController.sharedController.setListenerQueueWith(id: "\(song.songID)")
+        }
+        
+        if dictionaryFromData.first?.key == "instruction"{
+            guard let value = dictionaryFromData["instruction"] as? String else { return }
+            switch value{
+            case "play":
+                print("play")
+                MusicPlayerController.sharedController.broadcaterPlay()
+            case "pause":
+                print("pause")
+                MusicPlayerController.sharedController.broadcasterPause()
+            case "next":
+                print("next")
+                MusicPlayerController.sharedController.skip()
+            default: ()
+            }
+        }
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+        MPCManager.sharedController.dataDelegate = self
         return true
     }
 
