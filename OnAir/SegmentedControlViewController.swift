@@ -14,8 +14,23 @@ class SegmentedControlViewController: UIViewController  {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+    
+        //look for taps
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SegmentedControlViewController.dismissKeyboard))
+        //tap will not interfere with or cancel other interactions
+        tap.cancelsTouchesInView = false
+    
+        view.addGestureRecognizer(tap)
     }
     
+    //function called when tap is recognized
+    func dismissKeyboard() {
+        //causes view to resign first responder status
+        view.endEditing(true)
+    }
+    
+    
+
     override func viewDidAppear(_ animated: Bool) {
         if MPCManager.sharedController.isAdvertising {
             self.segmentedControl.setEnabled(true, forSegmentAt: 1)
