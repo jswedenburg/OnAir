@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,10 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RWP-Fz-5c2"/>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Hua-FP-KyM" userLabel="SongTitle/Artist">
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Hua-FP-KyM" userLabel="SongTitle/Artist">
+                                <frame key="frameInset" minX="137" minY="184" width="101" height="58"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJG-Nh-vGo">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJG-Nh-vGo">
                                         <frame key="frameInset" width="101" height="37"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                         <nil key="textColor"/>
@@ -39,20 +38,12 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="7Lj-J6-5up" userLabel="MusicControl">
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmY-hS-GJJ">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="9c2-51-Kga"/>
-                                            <constraint firstAttribute="width" constant="46" id="dlt-cJ-cnP"/>
-                                        </constraints>
                                         <state key="normal" title="Play"/>
                                         <connections>
                                             <action selector="playButtonPressed" destination="irE-pj-7TK" eventType="touchUpInside" id="urf-em-mPl"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBN-hS-dGH">
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="46" id="66Y-B4-tMA"/>
-                                            <constraint firstAttribute="height" constant="40" id="94c-o7-Bbv"/>
-                                        </constraints>
                                         <state key="normal" title="next"/>
                                         <connections>
                                             <action selector="nextButtonPressed" destination="irE-pj-7TK" eventType="touchUpInside" id="JVx-DJ-ax0"/>
@@ -62,21 +53,24 @@
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="63" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PMN-HJ-TS7">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="286" id="3Vv-s7-sSP"/>
+                                </constraints>
                                 <tableView key="tableFooterView" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" id="Dmb-bs-wcp">
-                                    <rect key="frame" x="0.0" y="91" width="343" height="295"/>
+                                    <rect key="frame" x="0.0" y="91" width="375" height="295"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </tableView>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="peerCell" textLabel="4O0-ap-6iv" rowHeight="63" style="IBUITableViewCellStyleDefault" id="z69-k8-eoJ">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="63"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z69-k8-eoJ" id="XFg-jn-4Kx">
-                                            <frame key="frameInset" width="343" height="62.5"/>
+                                            <frame key="frameInset" width="375" height="62"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4O0-ap-6iv">
-                                                    <frame key="frameInset" minX="15" width="313" height="62.5"/>
+                                                    <frame key="frameInset" minX="15" width="345" height="62"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -91,25 +85,32 @@
                                     <outlet property="delegate" destination="irE-pj-7TK" id="ehX-Fs-Rmz"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RWP-Fz-5c2">
+                                <frame key="frameInset" minX="108" minY="28" width="158" height="144"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="158" id="29z-G8-uR4"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7Lj-J6-5up" firstAttribute="top" secondItem="Hua-FP-KyM" secondAttribute="bottom" constant="19" id="4kf-q7-S4m"/>
-                            <constraint firstItem="7Lj-J6-5up" firstAttribute="centerX" secondItem="5sV-eY-9Qy" secondAttribute="centerX" id="61K-68-3DO"/>
-                            <constraint firstItem="PMN-HJ-TS7" firstAttribute="top" secondItem="7Lj-J6-5up" secondAttribute="bottom" constant="68" id="GV3-nL-EgA"/>
-                            <constraint firstItem="RWP-Fz-5c2" firstAttribute="trailing" secondItem="5sV-eY-9Qy" secondAttribute="trailingMargin" id="Huo-2F-wBm"/>
-                            <constraint firstItem="Hua-FP-KyM" firstAttribute="centerX" secondItem="5sV-eY-9Qy" secondAttribute="centerX" id="Pg9-jJ-O76"/>
-                            <constraint firstItem="QNX-La-gIc" firstAttribute="top" secondItem="PMN-HJ-TS7" secondAttribute="bottom" id="TID-wz-Ox7"/>
-                            <constraint firstItem="Hua-FP-KyM" firstAttribute="top" secondItem="RWP-Fz-5c2" secondAttribute="bottom" constant="19" id="UYn-yw-Lus"/>
-                            <constraint firstItem="PMN-HJ-TS7" firstAttribute="trailing" secondItem="5sV-eY-9Qy" secondAttribute="trailingMargin" id="e5L-r6-zAu"/>
-                            <constraint firstItem="RWP-Fz-5c2" firstAttribute="top" secondItem="PgT-rP-Ksx" secondAttribute="bottom" constant="8" id="eVG-4g-9j4"/>
-                            <constraint firstItem="RWP-Fz-5c2" firstAttribute="leading" secondItem="5sV-eY-9Qy" secondAttribute="leadingMargin" id="jiw-kZ-f5D"/>
-                            <constraint firstItem="PMN-HJ-TS7" firstAttribute="leading" secondItem="5sV-eY-9Qy" secondAttribute="leadingMargin" id="rL9-Q3-t9g"/>
-                            <constraint firstItem="QNX-La-gIc" firstAttribute="top" secondItem="7Lj-J6-5up" secondAttribute="bottom" constant="314" id="xbq-ma-2Wd"/>
+                            <constraint firstItem="QNX-La-gIc" firstAttribute="top" secondItem="PMN-HJ-TS7" secondAttribute="bottom" id="1P0-En-uo6"/>
+                            <constraint firstItem="PMN-HJ-TS7" firstAttribute="leading" secondItem="5sV-eY-9Qy" secondAttribute="leading" id="2gU-sk-GTr"/>
+                            <constraint firstItem="PMN-HJ-TS7" firstAttribute="top" secondItem="7Lj-J6-5up" secondAttribute="bottom" constant="38" id="8XY-XB-mB1"/>
+                            <constraint firstItem="7Lj-J6-5up" firstAttribute="centerX" secondItem="5sV-eY-9Qy" secondAttribute="centerX" id="8w8-vi-mc1"/>
+                            <constraint firstItem="7Lj-J6-5up" firstAttribute="top" relation="lessThanOrEqual" secondItem="Hua-FP-KyM" secondAttribute="bottom" constant="22" id="BTD-bt-CjS"/>
+                            <constraint firstAttribute="trailing" secondItem="PMN-HJ-TS7" secondAttribute="trailing" id="JHH-h7-Mw5"/>
+                            <constraint firstItem="NJG-Nh-vGo" firstAttribute="top" secondItem="RWP-Fz-5c2" secondAttribute="bottom" constant="12" id="MPb-q0-vHe"/>
+                            <constraint firstItem="7Lj-J6-5up" firstAttribute="centerX" secondItem="5sV-eY-9Qy" secondAttribute="centerX" id="MoR-uQ-KqT"/>
+                            <constraint firstItem="RWP-Fz-5c2" firstAttribute="centerX" secondItem="5sV-eY-9Qy" secondAttribute="centerX" id="bFQ-fc-dk8"/>
+                            <constraint firstItem="Hua-FP-KyM" firstAttribute="centerX" secondItem="5sV-eY-9Qy" secondAttribute="centerX" id="uwv-lV-lTj"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" id="dti-vO-SKP"/>
                     <connections>
+                        <outlet property="songAlbumImageView" destination="RWP-Fz-5c2" id="GIP-gw-Xkj"/>
+                        <outlet property="songArtistLabel" destination="oQ4-Ju-f9X" id="n9a-Rf-4Wj"/>
+                        <outlet property="songNameLabel" destination="NJG-Nh-vGo" id="84C-rJ-0fd"/>
                         <outlet property="tableView" destination="PMN-HJ-TS7" id="C1y-Z4-LS0"/>
                     </connections>
                 </viewController>
