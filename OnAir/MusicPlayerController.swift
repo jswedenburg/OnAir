@@ -11,25 +11,27 @@
 import Foundation
 import MediaPlayer
 
-protocol MusicPlayerControllerPlaybackDelegate: class{
+protocol MusicPlayerControllerPlaybackDelegate: class {
     func playBackDidChange(value: Bool)
 }
 
-protocol MusicPlayerControllerNowPlayingDelegate {
+protocol MusicPlayerControllerNowPlayingDelegate: class {
     func nowPlayingItemDidChange()
 }
 
 
 class MusicPlayerController{
     
-    private let applicationPlayer = MPMusicPlayerController.applicationMusicPlayer()
-    private let systemPlayer = MPMusicPlayerController.systemMusicPlayer()
+    let applicationPlayer = MPMusicPlayerController.applicationMusicPlayer()
+    let systemPlayer = MPMusicPlayerController.systemMusicPlayer()
     
     /// Variable to log when the listener has pressed paused from an in app button or in the control center.
     private var timeWhenPaused: Date?
     
     /// Initialized with a notification observer used to call the delegate function when playbackstate has changed.
     init(){
+        applicationPlayer.beginGeneratingPlaybackNotifications()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(playbackChange), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: applicationPlayer)
         
         NotificationCenter.default.addObserver(self, selector: #selector(nowPlayingChange), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: applicationPlayer)
@@ -61,6 +63,10 @@ class MusicPlayerController{
         return self.applicationPlayer.currentPlaybackTime
     }
     
+    func setCurrentPlaybackTime(_ timeInterval: TimeInterval){
+        applicationPlayer.currentPlaybackTime = timeInterval
+    }
+    
     /// Called when the Notification observer finds the MPMusicPlayerControllerPlaybackStateDidChange notification
     @objc func playbackChange(){
         if !(applicationPlayer.playbackState == MPMusicPlaybackState.playing){
@@ -72,7 +78,7 @@ class MusicPlayerController{
     }
     
     @objc func nowPlayingChange(){
-        nowPlayingDelegate?.nowPlayingItemDidChange()
+        self.nowPlayingDelegate?.nowPlayingItemDidChange()
     }
     
     // MARK: - Listener's Music Player Functions
@@ -117,7 +123,6 @@ class MusicPlayerController{
     /// Starts the broadcaster's application player to play
     func broadcaterPlay(){
         applicationPlayer.play()
-        applicationPlayer.beginGeneratingPlaybackNotifications()
     }
     
     /// Pauses the broadcaster's application player

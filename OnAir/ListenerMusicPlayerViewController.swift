@@ -40,33 +40,42 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     }
     
     func updateViewWith(song: Song) {
+        self.albumNameLabel.text = song.albumName
+        self.songNameLabel.text = song.name
+        self.artistNameLabel.text = song.artist
         ImageController.imageForURL(imageEndpoint: song.image) { (image) in
             DispatchQueue.main.async {
                 self.albumCoverImageView.image = image
             }
         }
-        
-        self.albumNameLabel.text = song.albumName
-        self.songNameLabel.text = song.name
-        self.artistNameLabel.text = song.artist
     }
     
     func dataReceivedFromBroadcast(data: Data) {
         guard let dictionaryFromData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: Any] else { return }
         
-        if dictionaryFromData.first?.key == "song"{
+        guard let instruction = dictionaryFromData["instruction"] as? String?,
+            let songDictionary = dictionaryFromData["song"] as? [String: Any]?,
+        let playbacktimeStamp = dictionaryFromData["playbackTime"] as? TimeInterval?,
+        let timeStamp = dictionaryFromData["timeStamp"] as? Date? else { return }
+        
+        if songDictionary != nil {
             guard let songDictionary  = dictionaryFromData["song"] as? [String: Any],
                 let song = Song(dictionary: songDictionary) else { return }
-            
             self.song = song
-            MusicPlayerController.sharedController.setListenerQueueWith(id: "\(song.songID)")
+            MusicPlayerController.sharedController.setBroadcaterQueueWith(ids: ["\(song.songID)"])
+            updateViewWith(song: song)
         }
         
-        if dictionaryFromData.first?.key == "instruction"{
-            guard let value = dictionaryFromData["instruction"] as? String else { return }
-            switch value{
+        if instruction != nil{
+            guard let instruction = instruction else { return }
+            switch instruction{
             case "play":
                 print("play")
+                if timeStamp != nil && playbacktimeStamp != nil{
+                    let playbackTime = Date().timeIntervalSince(timeStamp!) + playbacktimeStamp!
+                    MusicPlayerController.sharedController.applicationPlayer.prepareToPlay()
+                    MusicPlayerController.sharedController.setCurrentPlaybackTime(playbackTime)
+                }
                 MusicPlayerController.sharedController.broadcaterPlay()
             case "pause":
                 print("pause")

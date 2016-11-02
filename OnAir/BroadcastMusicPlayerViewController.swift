@@ -27,6 +27,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         MPCManager.connectedDelegate = self
+        MusicPlayerController.sharedController.nowPlayingDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,20 +77,21 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     //MARK: Helper Functions
     func sendPlayData() {
-        guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
-        MPCManager.sharedController.sendData(dictionary: ["song":song.dictionaryRepresentation])
-        let messageDict: [String: String] = ["instruction": "play"]
-        MPCManager.sharedController.sendData(dictionary: messageDict)
+        sendDataWith(instruction: "play")
     }
     
     func sendPauseData() {
-        let messageDict: [String: String] = ["instruction": "pause"]
-        MPCManager.sharedController.sendData(dictionary: messageDict)
+        sendDataWith(instruction: "pause")
     }
     
     func sendNextSongData() {
-        let messageDict: [String: String] = ["instruction": "next"]
         SongQueueController.sharedController.addSongToHistoryFromUpNext()
+        sendDataWith(instruction: "next")
+    }
+    
+    func sendDataWith(instruction: String){
+        guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
+        let messageDict: [String: Any] = ["instruction": instruction, "song": song.dictionaryRepresentation, "playbackTime": MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime(), "timeStamp": Date()]
         MPCManager.sharedController.sendData(dictionary: messageDict)
     }
     
@@ -107,7 +109,8 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
 
 extension BroadcastMusicPlayerViewController: MusicPlayerControllerNowPlayingDelegate{
     func nowPlayingItemDidChange() {
-        guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
-        MPCManager.sharedController.sendData(dictionary: ["song":song.dictionaryRepresentation])
+//        print("I am here you SoB")
+//        guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
+//        MPCManager.sharedController.sendData(dictionary: ["song":song.dictionaryRepresentation])
     }
 }
