@@ -103,7 +103,9 @@ extension DiscoveryViewController: MPCManagerDelegate{
     
     func connectedWithPeer(peerID: MCPeerID) {
         if MPCManager.sharedController.isAdvertising == false {
-            self.tabBarController?.selectedIndex = 2
+            
+            self.parent?.parent?.tabBarController!.selectedIndex = 3
+            
         }
     }
 }
