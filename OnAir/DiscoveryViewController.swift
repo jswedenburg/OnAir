@@ -14,6 +14,7 @@ class DiscoveryViewController: UIViewController {
    
     @IBOutlet weak var startStopAdvertisingButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var broadcastLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,7 @@ class DiscoveryViewController: UIViewController {
         MPCManager.sharedController.delegate = self
         MPCManager.sharedController.browser.startBrowsingForPeers()
         MPCManager.isBrowsing = true
+        broadcastLabel.adjustsFontSizeToFitWidth = true
         let isBrowsingNotification = Notification.Name(rawValue: "isBrowsingChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isBrowsingNotification, object: nil)
         let isAdvertisingNotification = NSNotification.Name(rawValue: "isAdvertisingChanged")
@@ -31,15 +33,17 @@ class DiscoveryViewController: UIViewController {
     @IBAction func broadcastButtonPressed(sender: UIButton) {
     
         if MPCManager.sharedController.isAdvertising {
-            startStopAdvertisingButton.setTitle("Start Advertising", for: .normal)
+            startStopAdvertisingButton.setTitle("Start Broadcasting", for: .normal)
             MPCManager.sharedController.advertiser.stopAdvertisingPeer()
             MPCManager.sharedController.isAdvertising = false
             self.tableView.isUserInteractionEnabled = true
+            broadcastLabel.text = ""
         } else {
-            startStopAdvertisingButton.setTitle("Stop Advertising", for: .normal)
+            startStopAdvertisingButton.setTitle("Stop Broadcasting", for: .normal)
             MPCManager.sharedController.advertiser.startAdvertisingPeer()
             MPCManager.sharedController.isAdvertising = true
             self.tableView.isUserInteractionEnabled = false
+            broadcastLabel.text = "YOU ARE DJING BRO"
         }
     }
     
@@ -88,6 +92,11 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
         let peer = MPCManager.sharedController.foundPeers[indexPath.row] as MCPeerID
         guard let session = MPCManager.sharedController.session else { return }
         MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
+        broadcastLabel.text = "YOU ARE VIBING WITH \(peer.displayName)"
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Choose or Start a Broadcast"
     }
 }
 
