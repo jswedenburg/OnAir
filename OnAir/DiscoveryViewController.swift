@@ -33,6 +33,7 @@ class DiscoveryViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isBrowsingNotification, object: nil)
         let isAdvertisingNotification = NSNotification.Name(rawValue: "isAdvertisingChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isAdvertisingNotification, object: nil)
+        activityIndicator.hidesWhenStopped = true
     }
     
     @IBAction func broadcastButtonPressed(sender: UIButton) {
@@ -49,8 +50,6 @@ class DiscoveryViewController: UIViewController {
             MPCManager.sharedController.isAdvertising = true
             self.tableView.isUserInteractionEnabled = false
             broadcastLabel.text = "YOU ARE DJING BRO"
-            connectingLabel.text = "Connecting...You will be on air shortly"
-            activityIndicator.startAnimating()
             
         }
     }
@@ -122,10 +121,11 @@ extension DiscoveryViewController: MPCManagerDelegate{
     
     func connectedWithPeer(peerID: MCPeerID) {
         if MPCManager.sharedController.isAdvertising == false {
+            DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
             self.connectingLabel.text = "Connected"
             self.parent?.parent?.tabBarController!.selectedIndex = 3
-            
+            }
         }
     }
 }
