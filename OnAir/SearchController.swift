@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class SearchController {
     
@@ -65,6 +66,7 @@ class SearchController {
             //unwrap the data
             guard let data = data else {
                 print("Error: no data returned from network")
+                
                 completion(nil)
                 return
             }
@@ -89,4 +91,6 @@ class SearchController {
             completion(songsArray)
         }
     }
+
+    
 }
