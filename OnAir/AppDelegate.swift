@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func disconnect() {
-        if MPCManager.sharedController.isAdvertising == false || true {
+        if MPCManager.sharedController.isAdvertising == false {
             
             MPCManager.sharedController.disconnect()
             let alertController = UIAlertController(title: "You have been disconnected from current broadcast", message: "Rejoin or start a broadcast", preferredStyle: .actionSheet)
