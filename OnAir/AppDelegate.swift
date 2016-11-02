@@ -17,7 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
+        
         return true
+    }
+    
+    func disconnect() {
+        MPCManager.sharedController.disconnect()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
