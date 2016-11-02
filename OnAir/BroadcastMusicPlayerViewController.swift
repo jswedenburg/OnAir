@@ -9,15 +9,21 @@
 import UIKit
 import MultipeerConnectivity
 
-class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ConnectedPeerArrayChangedDelegate {
     
     //MARK: Properties
     var playMode = true
     
+    @IBOutlet weak var tableView: UITableView!
     
     //MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        MPCManager.connectedDelegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.reloadData()
     }
     
     
@@ -37,7 +43,12 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         sendNextSongData()
     }
     
+    func connectedPeersChanged() {
+        self.tableView.reloadData()
+    }
+    
     //MARK TableView Datasource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MPCManager.sharedController.connectedPeers.count
     }
