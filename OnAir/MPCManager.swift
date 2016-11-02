@@ -169,4 +169,10 @@
             print("Sending Failed")
         }
     }
+    
+    //Disconnect from current session
+    
+    func disconnect() {
+        self.session.disconnect()
+    }
   }
