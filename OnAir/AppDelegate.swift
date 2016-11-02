@@ -23,7 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func disconnect() {
-        MPCManager.sharedController.disconnect()
+        if MPCManager.sharedController.isAdvertising == false {
+            MPCManager.sharedController.disconnect()
+        }
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
