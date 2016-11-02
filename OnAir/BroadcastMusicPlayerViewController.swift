@@ -69,19 +69,21 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     //MARK: Helper Functions
     func sendPlayData() {
-        guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
-        let messageDict: [String: Any] = ["instruction": "play", "song": song.dictionaryRepresentation, "playbackTime": MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime(), "timeStamp": Date()]
-        MPCManager.sharedController.sendData(dictionary: messageDict)
+        sendDataWith(instruction: "play")
     }
     
     func sendPauseData() {
-        let messageDict: [String: String] = ["instruction": "pause"]
-        MPCManager.sharedController.sendData(dictionary: messageDict)
+        sendDataWith(instruction: "pause")
     }
     
     func sendNextSongData() {
-        let messageDict: [String: String] = ["instruction": "next"]
         SongQueueController.sharedController.addSongToHistoryFromUpNext()
+        sendDataWith(instruction: "next")
+    }
+    
+    func sendDataWith(instruction: String){
+        guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
+        let messageDict: [String: Any] = ["instruction": instruction, "song": song.dictionaryRepresentation, "playbackTime": MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime(), "timeStamp": Date()]
         MPCManager.sharedController.sendData(dictionary: messageDict)
     }
 
