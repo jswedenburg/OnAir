@@ -19,7 +19,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     
     //MARK: Properties
-    var playMode = true
+    var song: Song?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -39,21 +39,22 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     //MARK: Actions
     @IBAction func playButtonPressed(){
         if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
-            MusicPlayerController.sharedController.broadcasterPause()
             sendPauseData()
+            MusicPlayerController.sharedController.broadcasterPause()
         } else {
-            MusicPlayerController.sharedController.broadcaterPlay()
             sendPlayData()
+            MusicPlayerController.sharedController.broadcaterPlay()
         }
     }
     
     @IBAction func nextButtonPressed() {
-        MusicPlayerController.sharedController.skip()
         sendNextSongData()
+        MusicPlayerController.sharedController.skip()
     }
     
     func connectedPeersChanged() {
         self.tableView.reloadData()
+        sendDataToNew(peer: MPCManager.sharedController.connectedPeers.last)
     }
     
     //MARK TableView Datasource
@@ -79,14 +80,14 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     func sendPlayData() {
         makeDataDictionary(instruction: "play") { (messageData) in
             guard let messageData = messageData else { return }
-            MPCManager.sharedController.sendData(dictionary: messageData)
+            MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
         }
     }
     
     func sendPauseData() {
         makeDataDictionary(instruction: "pause") { (messageData) in
             guard let messageData = messageData else { return }
-            MPCManager.sharedController.sendData(dictionary: messageData)
+            MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
         }
     }
     
@@ -94,7 +95,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         SongQueueController.sharedController.addSongToHistoryFromUpNext()
         makeDataDictionary(instruction: "next") { (messageData) in
             guard let messageData = messageData else { return }
-            MPCManager.sharedController.sendData(dictionary: messageData)
+            MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
         }
     }
     
@@ -114,46 +115,33 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
             self.songAlbumImageView.image = image
         }
     }
+    
+    func sendDataToNew(peer: MCPeerID?){
+        guard let peerID = peer else { return }
+        print()
+        var instruction = ""
+        
+        if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
+            instruction = "play"
+        } else {
+            instruction = "pause"
+        }
+        makeDataDictionary(instruction: instruction) { (messageData) in
+            guard let messageData = messageData else { return }
+            MPCManager.sharedController.sendData(dictionary: messageData, to: [peerID])
+        }
+    }
 }
 
 // MARK: - MusicPlayerController Delegate
 
 extension BroadcastMusicPlayerViewController: MusicPlayerControllerNowPlayingDelegate{
     func nowPlayingItemDidChange() {
-//        print("I am here you SoB")
-//        guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
-//        MPCManager.sharedController.sendData(dictionary: ["song":song.dictionaryRepresentation])
-    }
-}
-
-// MARK: - MPC Manager Delegate
-extension BroadcastMusicPlayerViewController: MPCManagerDelegate{
-    func foundPeer() {
-    }
-    
-    func lostPeer() {
-    }
-    
-    func connectedWithPeer(peerID: MCPeerID) {
-        print("New Peer")
-        
-        var instruction = ""
-        
-        if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
-            instruction = "pause"
-        } else {
-            instruction = "play"
-        }
-        
+        let instruction = "play"
+        SongQueueController.sharedController.addSongToHistoryFromUpNext()
         makeDataDictionary(instruction: instruction) { (messageData) in
-            let dataToSend = NSKeyedArchiver.archivedData(withRootObject: messageData)
-            
-            do {
-                try MPCManager.sharedController.session.send(dataToSend, toPeers: [peerID], with: .reliable)
-            } catch {
-                print("Sending Failed")
-            }
+            guard let messageData = messageData else { return }
+            MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
         }
-        
     }
 }
