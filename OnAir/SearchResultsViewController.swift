@@ -65,9 +65,6 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         
         if MPCManager.sharedController.isAdvertising {
             if cell.song?.isAdded == true {
-                // remove song
-                // check mark is now a  plus sign
-                // cell.songIsAdded = false
                 if cell.song != nil {
                     cell.song?.isAdded = false
                     SongQueueController.sharedController.removeSongFromUpNext(song: cell.song!)
@@ -160,12 +157,26 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if MPCManager.sharedController.isAdvertising {
-            if indexPath.section == 0 {
+            switch indexPath.section {
+            case 0:
                 let song = songs[indexPath.row]
+                let instruction = "play"
+                let messageDict: [String: Any] = ["instruction": instruction, "song": song.dictionaryRepresentation, "playbackTime": MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime(), "timeStamp": Date()]
+                MPCManager.sharedController.sendData(dictionary: messageDict, to: nil)
                 SongQueueController.sharedController.appendSongToTopOfQueue(song)
-                
+                song.isAdded = true
                 MusicPlayerController.sharedController.broadcaterPlay()
-                SongQueueController.disableAddingSong = false
+            case 1:
+                let album = albums[indexPath.row]
+                AlbumController.sharedController.addSongsToQueueWith(album: album)
+                guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
+                let instruction = "play"
+                let messageDict: [String: Any] = ["instruction": instruction, "song": song.dictionaryRepresentation, "playbackTime": MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime(), "timeStamp": Date()]
+                MPCManager.sharedController.sendData(dictionary: messageDict, to: nil)
+                SongQueueController.sharedController.appendSongToTopOfQueue(song)
+                MusicPlayerController.sharedController.broadcaterPlay()
+            default:
+                ()
             }
         } else {
             presentAlertController()
