@@ -20,7 +20,7 @@ class DiscoveryViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var connectingLabel: UILabel!
     
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+   
     let listener = Notification.Name("listenerMP")
     
     
@@ -39,7 +39,7 @@ class DiscoveryViewController: UIViewController {
         let isAdvertisingNotification = NSNotification.Name(rawValue: "isAdvertisingChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isAdvertisingNotification, object: nil)
         activityIndicator.hidesWhenStopped = true
-        NotificationCenter.default.addObserver(appDelegate, selector: #selector(appDelegate.disconnect), name: listener, object: nil)
+        
     }
     
     //IBActions
@@ -53,14 +53,14 @@ class DiscoveryViewController: UIViewController {
             self.tableView.isUserInteractionEnabled = true
             broadcastLabel.text = ""
             
-            NotificationCenter.default.addObserver(appDelegate, selector: #selector(appDelegate.disconnect), name: listener, object: nil)
+            
         } else {
             startStopAdvertisingButton.setTitle("Stop Broadcasting", for: .normal)
             MPCManager.sharedController.advertiser.startAdvertisingPeer()
             MPCManager.sharedController.isAdvertising = true
             self.tableView.isUserInteractionEnabled = false
             broadcastLabel.text = "YOU ARE DJING BRO"
-            NotificationCenter.default.removeObserver(appDelegate, name: listener, object: nil)
+            
             
         }
     }
