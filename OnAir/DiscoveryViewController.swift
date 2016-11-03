@@ -18,7 +18,8 @@ class DiscoveryViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var broadcastLabel: UILabel!
     
-    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let listener = Notification.Name("listenerMP")
     
     
     //View Overriding Methods
@@ -26,6 +27,7 @@ class DiscoveryViewController: UIViewController {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        MPCManager.sharedController.dataDelegate = self
         MPCManager.sharedController.delegate = self
         MPCManager.sharedController.browser.startBrowsingForPeers()
         MPCManager.isBrowsing = true
@@ -46,13 +48,15 @@ class DiscoveryViewController: UIViewController {
             MPCManager.sharedController.disconnect()
             self.tableView.isUserInteractionEnabled = true
             broadcastLabel.text = ""
+            
+            NotificationCenter.default.addObserver(appDelegate, selector: #selector(appDelegate.disconnect), name: listener, object: nil)
         } else {
             startStopAdvertisingButton.setTitle("Stop Broadcasting", for: .normal)
             MPCManager.sharedController.advertiser.startAdvertisingPeer()
             MPCManager.sharedController.isAdvertising = true
-            MPCManager.sharedController.disconnect()
             self.tableView.isUserInteractionEnabled = false
             broadcastLabel.text = "YOU ARE DJING BRO"
+            NotificationCenter.default.removeObserver(appDelegate, name: listener, object: nil)
             
         }
     }
@@ -72,7 +76,6 @@ class DiscoveryViewController: UIViewController {
             self.tabBarController?.tabBar.backgroundColor = UIColor.white
         }
     }
-    var selectedIndex: IndexPath?
 }
 
 
@@ -158,3 +161,40 @@ extension DiscoveryViewController: MPCManagerDelegate{
     }
 }
 
+extension DiscoveryViewController: GotDataFromBroadcaster{
+    func dataReceivedFromBroadcast(data: Data) {
+        guard let dictionaryFromData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: Any] else { return }
+        
+        guard let instruction = dictionaryFromData["instruction"] as? String?,
+            let songDictionary = dictionaryFromData["song"] as? [String: Any]?,
+            let playbacktimeStamp = dictionaryFromData["playbackTime"] as? TimeInterval?,
+            let timeStamp = dictionaryFromData["timeStamp"] as? Date? else { return }
+        
+        if songDictionary != nil {
+            guard let songDictionary  = dictionaryFromData["song"] as? [String: Any],
+                let song = Song(dictionary: songDictionary) else { return }
+            MusicPlayerController.sharedController.setBroadcaterQueueWith(ids: ["\(song.songID)"])
+        }
+        
+        if instruction != nil{
+            guard let instruction = instruction else { return }
+            switch instruction{
+            case "play":
+                print("play")
+                if timeStamp != nil && playbacktimeStamp != nil{
+                    let playbackTime = Date().timeIntervalSince(timeStamp!) + playbacktimeStamp!
+                    MusicPlayerController.sharedController.applicationPlayer.prepareToPlay()
+                    MusicPlayerController.sharedController.setCurrentPlaybackTime(playbackTime)
+                }
+                MusicPlayerController.sharedController.broadcaterPlay()
+            case "pause":
+                print("pause")
+                MusicPlayerController.sharedController.broadcasterPause()
+            case "next":
+                print("next")
+                MusicPlayerController.sharedController.skip()
+            default: ()
+            }
+        }
+    }
+}

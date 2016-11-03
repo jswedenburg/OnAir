@@ -26,17 +26,19 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     
     var song: Song?{
         didSet{
-            guard let song = oldValue else { return }
-            previouslyPlayedSongs.append(song)
+            //guard let song = oldValue else { return }
+            //previouslyPlayedSongs.append(song)
         }
     }
+    
+    let historyQueueHasChanged = Notification.Name(rawValue: "historyQueueHasChanged")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         MPCManager.sharedController.dataDelegate = self
         tableView.delegate = self
         tableView.dataSource = self
-        //        NotificationCenter.default.addObserver(self, selector: #selector(dataReceived(notification:)), name: NSNotification.Name(rawValue: "receivedData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: historyQueueHasChanged, object: nil)
     }
     
     func updateViewWith(song: Song) {
@@ -48,6 +50,10 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                 self.albumCoverImageView.image = image
             }
         }
+    }
+    
+    func reloadTable() {
+        self.tableView.reloadData()
     }
     
     func dataReceivedFromBroadcast(data: Data) {
@@ -72,7 +78,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             case "play":
                 print("play")
                 if timeStamp != nil && playbacktimeStamp != nil{
-                    let playbackTime = Date().timeIntervalSince(timeStamp!) + playbacktimeStamp!
+                    let playbackTime = Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.2
                     MusicPlayerController.sharedController.applicationPlayer.prepareToPlay()
                     MusicPlayerController.sharedController.setCurrentPlaybackTime(playbackTime)
                 }
@@ -82,7 +88,11 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                 MusicPlayerController.sharedController.broadcasterPause()
             case "next":
                 print("next")
-                MusicPlayerController.sharedController.skip()
+                let playbackTime = Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.2
+                
+                MusicPlayerController.sharedController.applicationPlayer.prepareToPlay()
+                MusicPlayerController.sharedController.setCurrentPlaybackTime(playbackTime)
+                MusicPlayerController.sharedController.broadcaterPlay()
             default: ()
             }
         }
@@ -113,13 +123,15 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             return 1
         }
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return previouslyPlayedSongs.count
+            return SongQueueController.sharedController.historyQueue.count
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "previousSongCell", for: indexPath)
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "previousSongCell", for: indexPath) as? PreviouslyPlayedSongTableViewCell else { return PreviouslyPlayedSongTableViewCell() }
+            let song = SongQueueController.sharedController.historyQueue[indexPath.row]
             
-            
+            cell.artistNameLabel.text = song.artist
+            cell.songNameLabel.text = song.name
             
             return cell
         }

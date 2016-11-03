@@ -17,6 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+<<<<<<< Updated upstream
+        NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
+        
+        MusicPlayerController.sharedController.stop()
+        
+=======
+>>>>>>> Stashed changes
         return true
     }
     
@@ -27,10 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let alertController = UIAlertController(title: "You have been disconnected from current broadcast", message: "Rejoin or start a broadcast", preferredStyle: .actionSheet)
             self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
-            
+                
                 alertController.dismiss(animated: true, completion: nil)
             })
         }
+        
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
