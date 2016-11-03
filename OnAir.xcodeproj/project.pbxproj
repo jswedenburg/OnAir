@@ -32,6 +32,7 @@
 		811FD0FE1DC641DE0086AC3D /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 811FD0FD1DC641DE0086AC3D /* TabBar.storyboard */; };
 		811FD1001DC6494E0086AC3D /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811FD0FF1DC6494E0086AC3D /* CustomTabBarController.swift */; };
 		811FD1021DC67EDD0086AC3D /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811FD1011DC67EDD0086AC3D /* CustomTabBar.swift */; };
+		8133C7A81DCBA3EA00D03654 /* SubscriptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8133C7A71DCBA3EA00D03654 /* SubscriptionController.swift */; };
 		815742D31DBFE72800FF1619 /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D11DBFE72800FF1619 /* DiscoveryViewController.swift */; };
 		815742D51DBFEE5100FF1619 /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815742D41DBFEE5100FF1619 /* MPCManager.swift */; };
 		815742D81DC00B7F00FF1619 /* Discovery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815742D61DC00B7F00FF1619 /* Discovery.storyboard */; };
@@ -90,6 +91,7 @@
 		811FD0FD1DC641DE0086AC3D /* TabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
 		811FD0FF1DC6494E0086AC3D /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		811FD1011DC67EDD0086AC3D /* CustomTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		8133C7A71DCBA3EA00D03654 /* SubscriptionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionController.swift; sourceTree = "<group>"; };
 		815742D11DBFE72800FF1619 /* DiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		815742D41DBFEE5100FF1619 /* MPCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
 		815742D71DC00B7F00FF1619 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Discovery.storyboard; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				652EF0521DC149B60020009B /* SearchController.swift */,
 				811FD0FF1DC6494E0086AC3D /* CustomTabBarController.swift */,
 				811FD1011DC67EDD0086AC3D /* CustomTabBar.swift */,
+				8133C7A71DCBA3EA00D03654 /* SubscriptionController.swift */,
 				81CA0FA31DC7A34700062511 /* CustomTabBarItem.swift */,
 			);
 			name = Controllers;
@@ -316,7 +319,7 @@
 				TargetAttributes = {
 					811869711DBFBD0100FD2D7C = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = GQMN9RP4XE;
+						DevelopmentTeam = 8V7ERX2APN;
 						ProvisioningStyle = Automatic;
 					};
 					811869851DBFBD0200FD2D7C = {
@@ -404,6 +407,7 @@
 				811869761DBFBD0200FD2D7C /* AppDelegate.swift in Sources */,
 				0FDD3FBB1DC25F5900AA3CCD /* ListenerMusicPlayerViewController.swift in Sources */,
 				0FDD40221DC31C5400AA3CCD /* PreviouslyPlayedSongTableViewCell.swift in Sources */,
+				8133C7A81DCBA3EA00D03654 /* SubscriptionController.swift in Sources */,
 				811FD1001DC6494E0086AC3D /* CustomTabBarController.swift in Sources */,
 				4B0A945F1DBFCA6700DF39EE /* SegmentedControlViewController.swift in Sources */,
 				0FC780AF1DC14131009515A9 /* MusicPlayerController.swift in Sources */,
@@ -571,7 +575,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = GQMN9RP4XE;
+				DEVELOPMENT_TEAM = 8V7ERX2APN;
 				INFOPLIST_FILE = OnAir/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = comjakeswedenburgonair;
@@ -584,7 +588,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = GQMN9RP4XE;
+				DEVELOPMENT_TEAM = 8V7ERX2APN;
 				INFOPLIST_FILE = OnAir/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = comjakeswedenburgonair;
