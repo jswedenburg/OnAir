@@ -13,26 +13,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    var tabBarController: UITabBarController?
+    var delegate: SubscriptionDelegate?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        SubscriptionController.requestCapabilities { (aMusic, iCloud) in
+            self.delegate?.aMusic = aMusic
+            self.delegate?.iCloud = iCloud
+            
+            if aMusic == false {
+                let alertController = UIAlertController(title: "We have detected you are not an Apple Music subcriber", message: "Please subscribe or sign up for a free trial", preferredStyle: .alert)
+                let action = UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+                    //segue to a music sign up
+                })
+                
+                alertController.addAction(action)
+                self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+            }
+            
+            
+        }
+        
         return true
-    }
-    
-    func disconnect() {
-        if MPCManager.sharedController.isAdvertising == false {
-            
-            MPCManager.sharedController.disconnect()
-            let alertController = UIAlertController(title: "You have been disconnected from current broadcast", message: "Rejoin or start a broadcast", preferredStyle: .actionSheet)
-            self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
-            
-                alertController.dismiss(animated: true, completion: nil)
-            })
         }
     }
-    
+
+
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
