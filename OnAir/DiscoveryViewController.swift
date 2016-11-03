@@ -11,14 +11,12 @@ import MultipeerConnectivity
 
 
 class DiscoveryViewController: UIViewController {
-   
+    
     
     //Outlets
     @IBOutlet weak var startStopAdvertisingButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var broadcastLabel: UILabel!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var connectingLabel: UILabel!
     
     
     
@@ -36,12 +34,11 @@ class DiscoveryViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isBrowsingNotification, object: nil)
         let isAdvertisingNotification = NSNotification.Name(rawValue: "isAdvertisingChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isAdvertisingNotification, object: nil)
-        activityIndicator.hidesWhenStopped = true
     }
     
     //IBActions
     @IBAction func broadcastButtonPressed(sender: UIButton) {
-    
+        
         if MPCManager.sharedController.isAdvertising {
             startStopAdvertisingButton.setTitle("Start Broadcasting", for: .normal)
             MPCManager.sharedController.advertiser.stopAdvertisingPeer()
@@ -75,6 +72,7 @@ class DiscoveryViewController: UIViewController {
             self.tabBarController?.tabBar.backgroundColor = UIColor.white
         }
     }
+    var selectedIndex: IndexPath?
 }
 
 
@@ -93,22 +91,42 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "broadcastCell", for: indexPath)
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "broadcastCell", for: indexPath) as? DiscoveryTableViewCell
         let peer = MPCManager.sharedController.foundPeers[indexPath.row]
-        cell.textLabel?.text = peer.displayName
-        
-        return cell
+        DispatchQueue.main.async {
+            cell?.activityIndicator.hidesWhenStopped = true
+            cell?.peerLabel.text = peer.displayName
+        }
+        return cell ?? DiscoveryTableViewCell()
     }
     
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let peer = MPCManager.sharedController.foundPeers[indexPath.row] as MCPeerID
         guard let session = MPCManager.sharedController.session else { return }
-        connectingLabel.text = "Connecting...You will be on air shortly"
-        activityIndicator.startAnimating()
         MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
         broadcastLabel.text = "YOU ARE VIBING WITH \(peer.displayName)"
+        
+        let cell = tableView.cellForRow(at: indexPath) as! DiscoveryTableViewCell
+        cell.peerLabel.text = peer.displayName
+        cell.activityIndicator.startAnimating()
+        cell.connectingLabel.text = "Connecting..."
+        
+        connectedWithPeer(peerID: peer)
     }
+    
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        let cell = tableView.cellForRow(at: indexPath) as? DiscoveryTableViewCell
+        cell?.connectingLabel.text = ""
+        cell?.activityIndicator.stopAnimating()
+        cell?.activityIndicator.hidesWhenStopped = true
+    }
+    
+    
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Choose or Start a Broadcast"
@@ -129,10 +147,14 @@ extension DiscoveryViewController: MPCManagerDelegate{
     func connectedWithPeer(peerID: MCPeerID) {
         if MPCManager.sharedController.isAdvertising == false {
             DispatchQueue.main.async {
-            self.activityIndicator.stopAnimating()
-            self.connectingLabel.text = "Connected"
-            self.parent?.parent?.tabBarController!.selectedIndex = 3
+                let indexPath = self.tableView.indexPathForSelectedRow
+                let cell = self.tableView.cellForRow(at: indexPath!) as? DiscoveryTableViewCell
+                cell?.activityIndicator.stopAnimating()
+                cell?.activityIndicator.hidesWhenStopped = true
+                cell?.connectingLabel.text = "Connected"
+                self.parent?.parent?.tabBarController!.selectedIndex = 3
             }
         }
     }
 }
+

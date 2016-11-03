@@ -14,6 +14,7 @@
 		4B0A94611DBFE46900DF39EE /* SongQueueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */; };
 		4B0A94631DBFE7A900DF39EE /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */; };
 		4B0A94651DBFEFB400DF39EE /* SongQueueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A94641DBFEFB400DF39EE /* SongQueueTableViewCell.swift */; };
+		4B25C5111DCA93EE000533E0 /* DiscoveryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B25C5101DCA93EE000533E0 /* DiscoveryTableViewCell.swift */; };
 		652EF0491DC111B60020009B /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652EF0481DC111B60020009B /* NetworkController.swift */; };
 		652EF04B1DC118280020009B /* AlbumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652EF04A1DC118280020009B /* AlbumController.swift */; };
 		652EF04F1DC129E60020009B /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652EF04E1DC129E60020009B /* SearchResultsViewController.swift */; };
@@ -65,6 +66,7 @@
 		4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueViewController.swift; sourceTree = "<group>"; };
 		4B0A94621DBFE7A900DF39EE /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		4B0A94641DBFEFB400DF39EE /* SongQueueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueTableViewCell.swift; sourceTree = "<group>"; };
+		4B25C5101DCA93EE000533E0 /* DiscoveryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryTableViewCell.swift; sourceTree = "<group>"; };
 		652EF0481DC111B60020009B /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		652EF04A1DC118280020009B /* AlbumController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumController.swift; sourceTree = "<group>"; };
 		652EF04E1DC129E60020009B /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 		815742E11DC06FFA00FF1619 /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
+				4B25C5101DCA93EE000533E0 /* DiscoveryTableViewCell.swift */,
 				0FDD40211DC31C5400AA3CCD /* PreviouslyPlayedSongTableViewCell.swift */,
 				4B0A94641DBFEFB400DF39EE /* SongQueueTableViewCell.swift */,
 			);
@@ -313,7 +316,7 @@
 				TargetAttributes = {
 					811869711DBFBD0100FD2D7C = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 8V7ERX2APN;
+						DevelopmentTeam = GU6XEEN2H9;
 						ProvisioningStyle = Automatic;
 					};
 					811869851DBFBD0200FD2D7C = {
@@ -387,6 +390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				811FD1021DC67EDD0086AC3D /* CustomTabBar.swift in Sources */,
+				4B25C5111DCA93EE000533E0 /* DiscoveryTableViewCell.swift in Sources */,
 				4B0A94651DBFEFB400DF39EE /* SongQueueTableViewCell.swift in Sources */,
 				655BAB491DBFEF080073F487 /* Song.swift in Sources */,
 				655BAB6F1DBFFC740073F487 /* SongQueueController.swift in Sources */,
@@ -567,7 +571,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8V7ERX2APN;
+				DEVELOPMENT_TEAM = GU6XEEN2H9;
 				INFOPLIST_FILE = OnAir/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = comjakeswedenburgonair;
@@ -580,7 +584,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8V7ERX2APN;
+				DEVELOPMENT_TEAM = GU6XEEN2H9;
 				INFOPLIST_FILE = OnAir/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = comjakeswedenburgonair;
