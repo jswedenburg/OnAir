@@ -129,7 +129,9 @@
         switch state {
         case MCSessionState.connected:
             delegate?.connectedWithPeer(peerID: peerID)
-            connectedPeers.append(peerID)
+            if connectedPeers.contains(peerID) == false {
+                connectedPeers.append(peerID)
+            }
             browser.stopBrowsingForPeers()
             MPCManager.isBrowsing = false
             print("connected")
@@ -137,6 +139,10 @@
         case MCSessionState.connecting:
             print("Connecting")
         default:
+            if connectedPeers.contains(peerID) == true {
+                let index = connectedPeers.index(of: peerID)
+                connectedPeers.remove(at: index!)
+            }
             print("Disconnected")
             MPCManager.connectedDelegate?.connectedPeersChanged()
         }
