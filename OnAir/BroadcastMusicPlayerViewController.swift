@@ -27,7 +27,6 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         MPCManager.connectedDelegate = self
-        MusicPlayerController.sharedController.nowPlayingDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
