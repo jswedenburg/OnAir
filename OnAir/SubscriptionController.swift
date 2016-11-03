@@ -41,18 +41,29 @@ class SubscriptionController {
                 //handle error
             }
             
-            switch capabilites {
-            case SKCloudServiceCapability.musicCatalogPlayback:
-                completion(true, false)
-                print("Has amusic but no icloud")
-            case SKCloudServiceCapability.addToCloudMusicLibrary:
+            if capabilites.contains(SKCloudServiceCapability.addToCloudMusicLibrary) {
                 completion(true, true)
                 print("Has amusic and icloud")
-            default:
+            } else if capabilites.contains(SKCloudServiceCapability.musicCatalogPlayback){
+                completion(true, false)
+                print("Has amusic but no icloud")
+            } else {
                 completion(false, false)
                 print("no amusic :-(")
-            
             }
+            
+//            switch capabilites {
+//            case SKCloudServiceCapability.musicCatalogPlayback:
+//                completion(true, false)
+//                print("Has amusic but no icloud")
+//            case SKCloudServiceCapability.addToCloudMusicLibrary:
+//                completion(true, true)
+//                print("Has amusic and icloud")
+//            default:
+//                completion(false, false)
+//                print("no amusic :-(")
+//            
+//            }
             
             
         }

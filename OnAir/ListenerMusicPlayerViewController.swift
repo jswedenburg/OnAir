@@ -7,15 +7,29 @@
 //
 
 import UIKit
+import MediaPlayer
 
 class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaster {
     
+    //MARK: Outlets
     @IBOutlet weak var albumCoverImageView: UIImageView!
     @IBOutlet weak var songNameLabel: UILabel!
     @IBOutlet weak var artistNameLabel: UILabel!
     @IBOutlet weak var albumNameLabel: UILabel!
     @IBOutlet weak var muteButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    
+    
+    //MARK: IBActions
+    
+    @IBAction func addSongToLibrary(sender: UIButton) {
+        let mediaLibrary = MPMediaLibrary.default()
+        if let song = self.song {
+            mediaLibrary.addItem(withProductID: String(song.songID), completionHandler: nil)
+            print("song added to library")
+        }
+    }
+    
     
     // Will be needing for the broadcaster to send trackID, songName, and artistName.
     var previouslyPlayedSongs: [Song] = [] {
