@@ -27,11 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let alertController = UIAlertController(title: "You have been disconnected from current broadcast", message: "Rejoin or start a broadcast", preferredStyle: .actionSheet)
             self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
-                
+            
                 alertController.dismiss(animated: true, completion: nil)
             })
         }
-        
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

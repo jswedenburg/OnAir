@@ -26,8 +26,8 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     
     var song: Song?{
         didSet{
-            guard let song = oldValue else { return }
-            previouslyPlayedSongs.append(song)
+            //guard let song = oldValue else { return }
+            //previouslyPlayedSongs.append(song)
         }
     }
     
@@ -72,7 +72,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             case "play":
                 print("play")
                 if timeStamp != nil && playbacktimeStamp != nil{
-                    let playbackTime = Date().timeIntervalSince(timeStamp!) + playbacktimeStamp!
+                    let playbackTime = Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.2
                     MusicPlayerController.sharedController.applicationPlayer.prepareToPlay()
                     MusicPlayerController.sharedController.setCurrentPlaybackTime(playbackTime)
                 }

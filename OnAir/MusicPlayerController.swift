@@ -30,7 +30,7 @@ class MusicPlayerController{
     
     /// Initialized with a notification observer used to call the delegate function when playbackstate has changed.
     init(){
-        applicationPlayer.beginGeneratingPlaybackNotifications()
+        //applicationPlayer.beginGeneratingPlaybackNotifications()
         
         NotificationCenter.default.addObserver(self, selector: #selector(playbackChange), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: applicationPlayer)
         
