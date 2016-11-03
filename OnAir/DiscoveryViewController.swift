@@ -49,15 +49,13 @@ class DiscoveryViewController: UIViewController {
             self.tableView.isUserInteractionEnabled = true
             broadcastLabel.text = ""
             
-            NotificationCenter.default.addObserver(appDelegate, selector: #selector(appDelegate.disconnect), name: listener, object: nil)
+            
         } else {
             startStopAdvertisingButton.setTitle("Stop Broadcasting", for: .normal)
             MPCManager.sharedController.advertiser.startAdvertisingPeer()
             MPCManager.sharedController.isAdvertising = true
             self.tableView.isUserInteractionEnabled = false
             broadcastLabel.text = "YOU ARE DJING BRO"
-            NotificationCenter.default.removeObserver(appDelegate, name: listener, object: nil)
-            
         }
     }
     
