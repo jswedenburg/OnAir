@@ -12,11 +12,6 @@ class SongQueueController {
     
     static let sharedController = SongQueueController()
     
-    init(){
-        upNextQueue.append(Song(name: "Where We Are Today", artist: "Festive People", collectionID: 992480403, trackDuration: 243160, songID: 992480437, image: "http://is2.mzstatic.com/image/thumb/Music7/v4/36/cd/51/36cd519d-76fb-07c6-d341-78e8f2acc7b5/source/100x100bb.jpg", albumName: "Festive People - EP"))
-        MusicPlayerController.sharedController.setBroadcaterQueueWith(ids: ["992480437"])
-    }
-    
     var upNextQueue: [Song] = [] {
         didSet {
             

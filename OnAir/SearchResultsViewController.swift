@@ -163,6 +163,7 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
             if indexPath.section == 0 {
                 let song = songs[indexPath.row]
                 SongQueueController.sharedController.appendSongToTopOfQueue(song)
+                
                 MusicPlayerController.sharedController.broadcaterPlay()
                 SongQueueController.disableAddingSong = false
             }
