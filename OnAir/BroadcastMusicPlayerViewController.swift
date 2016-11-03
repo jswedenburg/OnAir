@@ -19,7 +19,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     
     //MARK: Properties
-    var playMode = true
+    var song: Song?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -137,13 +137,8 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
 
 extension BroadcastMusicPlayerViewController: MusicPlayerControllerNowPlayingDelegate{
     func nowPlayingItemDidChange() {
-        var instruction = ""
-        
-        if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
-            instruction = "play"
-        } else {
-            instruction = "pause"
-        }
+        let instruction = "play"
+        SongQueueController.sharedController.addSongToHistoryFromUpNext()
         makeDataDictionary(instruction: instruction) { (messageData) in
             guard let messageData = messageData else { return }
             MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
