@@ -167,10 +167,12 @@
     
     // MARK: Custom Helper Functions
     
-    func sendData(dictionary: Dictionary<String, Any>) {
+    func sendData(dictionary: Dictionary<String, Any>, to peers: [MCPeerID]?) {
+        let peers = peers ?? self.connectedPeers
+        
         let dataToSend = NSKeyedArchiver.archivedData(withRootObject: dictionary)
         do {
-            try session.send(dataToSend, toPeers: self.connectedPeers, with: .reliable)
+            try session.send(dataToSend, toPeers: peers, with: .reliable)
         } catch  {
             print("Sending Failed")
         }
