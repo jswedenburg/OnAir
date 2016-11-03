@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.delegate?.aMusic = aMusic
             self.delegate?.iCloud = iCloud
             
-            if aMusic == true {
+            if aMusic == false {
                 let alertController = UIAlertController(title: "We have detected you are not an Apple Music subcriber", message: "Please subscribe or sign up for a free trial", preferredStyle: .alert)
                 let action = UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
                     //segue to a music sign up
