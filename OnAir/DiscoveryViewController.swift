@@ -181,7 +181,7 @@ extension DiscoveryViewController: GotDataFromBroadcaster{
                 print("play")
                 if timeStamp != nil && playbacktimeStamp != nil{
                     let playbackTime = Date().timeIntervalSince(timeStamp!) + playbacktimeStamp!
-                    MusicPlayerController.sharedController.applicationPlayer.prepareToPlay()
+                    MusicPlayerController.sharedController.systemPlayer.prepareToPlay()
                     MusicPlayerController.sharedController.setCurrentPlaybackTime(playbackTime)
                 }
                 MusicPlayerController.sharedController.broadcaterPlay()

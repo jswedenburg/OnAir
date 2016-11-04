@@ -22,20 +22,13 @@ protocol MusicPlayerControllerNowPlayingDelegate: class {
 
 class MusicPlayerController{
     
-    let applicationPlayer = MPMusicPlayerController.applicationMusicPlayer()
     let systemPlayer = MPMusicPlayerController.systemMusicPlayer()
+//    let systemPlayer = MPMusicPlayerController.systemMusicPlayer()
     
     /// Variable to log when the listener has pressed paused from an in app button or in the control center.
     private var timeWhenPaused: Date?
     
     /// Initialized with a notification observer used to call the delegate function when playbackstate has changed.
-    init(){
-        applicationPlayer.beginGeneratingPlaybackNotifications()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(playbackChange), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: applicationPlayer)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(nowPlayingChange), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: applicationPlayer)
-    }
     
     var arrayOfTrackID = [String]()
     
@@ -50,26 +43,26 @@ class MusicPlayerController{
     static let sharedController = MusicPlayerController()
     
     /// Function to get the state of the system player
-    func getSystemPlayerState() -> MPMusicPlaybackState{
-        return systemPlayer.playbackState
-    }
+//    func getSystemPlayerState() -> MPMusicPlaybackState{
+//        return systemPlayer.playbackState
+//    }
     
     /// Function to get the state of the application player
     func getApplicationPlayerState() -> MPMusicPlaybackState{
-        return applicationPlayer.playbackState
+        return systemPlayer.playbackState
     }
     
     func getApplicationPlayerPlaybackTime() -> TimeInterval{
-        return self.applicationPlayer.currentPlaybackTime
+        return self.systemPlayer.currentPlaybackTime
     }
     
     func setCurrentPlaybackTime(_ timeInterval: TimeInterval){
-        applicationPlayer.currentPlaybackTime = timeInterval
+        systemPlayer.currentPlaybackTime = timeInterval
     }
     
     /// Called when the Notification observer finds the MPMusicPlayerControllerPlaybackStateDidChange notification
     @objc func playbackChange(){
-        if !(applicationPlayer.playbackState == MPMusicPlaybackState.playing){
+        if !(systemPlayer.playbackState == MPMusicPlaybackState.playing){
             delegate?.playBackDidChange(value: true)
         } else {
             delegate?.playBackDidChange(value: false)
@@ -86,8 +79,8 @@ class MusicPlayerController{
     /// Sets a song or an array of songs with their trackIDs in the queue via a variadic parameter "id". When a new song or songs are set, the pause timer gets reset. Also, if the listener is still in pause, the timer begins from when the song is set in the queue.
     func setListenerQueueWith(id: String...){
         self.timeWhenPaused = nil
-        applicationPlayer.setQueueWithStoreIDs(id)
-        if applicationPlayer.playbackState == MPMusicPlaybackState.paused{
+        systemPlayer.setQueueWithStoreIDs(id)
+        if systemPlayer.playbackState == MPMusicPlaybackState.paused{
             self.timeWhenPaused = Date()
         }
     }
@@ -98,45 +91,45 @@ class MusicPlayerController{
         if let timeWhenPaused = timeWhenPaused{
             let timeInterval = Date().timeIntervalSince(timeWhenPaused)
             print(timeInterval)
-            let currentPlayBacktime = applicationPlayer.currentPlaybackTime
-            applicationPlayer.currentPlaybackTime = timeInterval + currentPlayBacktime
-            applicationPlayer.play()
+            let currentPlayBacktime = systemPlayer.currentPlaybackTime
+            systemPlayer.currentPlaybackTime = timeInterval + currentPlayBacktime
+            systemPlayer.play()
             self.timeWhenPaused = nil
         } else {
-            applicationPlayer.play()
+            systemPlayer.play()
         }
     }
     
     /// Pauses the listener's application player and begins the pause timer to calculate where to start the song playbacktime when the listerner presses play.
     func listenerPause(){
         timeWhenPaused = Date()
-        applicationPlayer.pause()
+        systemPlayer.pause()
     }
     
     // MARK: - Broadcaster's Music Player Functions
     /// Sets an array of stings of trackIDs for the broadcaster's application player.
     func setBroadcaterQueueWith(ids:[String]){
         print("Queue is set")
-        applicationPlayer.setQueueWithStoreIDs(ids)
+        systemPlayer.setQueueWithStoreIDs(ids)
     }
     
     /// Starts the broadcaster's application player to play
     func broadcaterPlay(){
-        applicationPlayer.play()
+        systemPlayer.play()
     }
     
     /// Pauses the broadcaster's application player
     func broadcasterPause(){
-        applicationPlayer.pause()
+        systemPlayer.pause()
     }
     
     /// Starts playback of the next song in the queue of the broadcaster's application player; or, if the music player is not playing, designates the next song as the next to be played.
     func skip(){
-        applicationPlayer.skipToNextItem()
+        systemPlayer.skipToNextItem()
     }
     
     func stop(){
-        applicationPlayer.stop()
+        systemPlayer.stop()
     }
     
 }

@@ -93,8 +93,11 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                 print("play")
                 if timeStamp != nil && playbacktimeStamp != nil{
                     let playbackTime = Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.2
-                    MusicPlayerController.sharedController.applicationPlayer.prepareToPlay()
+                    
+                    MusicPlayerController.sharedController.systemPlayer.prepareToPlay()
+
                     MusicPlayerController.sharedController.setCurrentPlaybackTime(playbackTime)
+                    
                 }
                 MusicPlayerController.sharedController.broadcaterPlay()
             case "pause":
@@ -102,7 +105,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                 MusicPlayerController.sharedController.broadcasterPause()
             case "next":
                 print("next")
-                MusicPlayerController.sharedController.applicationPlayer.prepareToPlay()
+                MusicPlayerController.sharedController.systemPlayer.prepareToPlay()
                 MusicPlayerController.sharedController.setCurrentPlaybackTime(Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.2)
                 MusicPlayerController.sharedController.broadcaterPlay()
             default: ()
