@@ -45,6 +45,8 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         }
     }
     
+    let player = MusicPlayerController.sharedController.systemPlayer
+    
     let historyQueueHasChanged = Notification.Name(rawValue: "historyQueueHasChanged")
     
     override func viewDidLoad() {
@@ -54,6 +56,32 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         tableView.dataSource = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: historyQueueHasChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: Notification.Name(rawValue: "DisconnectedFromSession"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleListenerInteraction(notification:)), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: player)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if MPCManager.sharedController.isAdvertising {
+            NotificationCenter.default.removeObserver(self, name: .MPMusicPlayerControllerPlaybackStateDidChange , object: nil)
+        } else {
+            NotificationCenter.default.addObserver(self, selector: #selector(handleListenerInteraction(notification:)), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: player)
+            player.beginGeneratingPlaybackNotifications()
+        }
+    }
+    
+    func handleListenerInteraction(notification: Notification) {
+        
+        if MPCManager.sharedController.isAdvertising == false {
+            switch player.playbackState {
+            case .paused:
+                MusicPlayerController.sharedController.listenerPause()
+            case .playing:
+                MusicPlayerController.sharedController.listenerPlay()
+            default:
+                print("listener did something else")
+            }
+        }
+        
+        
     }
     
     func updateViewWith(song: Song) {
