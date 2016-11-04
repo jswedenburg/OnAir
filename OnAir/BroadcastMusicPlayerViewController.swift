@@ -48,7 +48,9 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     @IBAction func nextButtonPressed() {
         sendNextSongData()
+        updateViewWithNewSong()
         MusicPlayerController.sharedController.skip()
+        MusicPlayerController.sharedController.broadcaterPlay()
     }
     
     func connectedPeersChanged() {
