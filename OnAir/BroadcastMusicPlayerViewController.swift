@@ -133,4 +133,14 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
             MPCManager.sharedController.sendData(dictionary: messageData, to: [peerID])
         }
     }
+    
+    func sendSongQueue(){
+        
+    }
+}
+
+extension BroadcastMusicPlayerViewController: SongQueueControllerDelegate{
+    func songQueueHasChanged() {
+//        let playlist: [String: [Any]] =
+    }
 }
