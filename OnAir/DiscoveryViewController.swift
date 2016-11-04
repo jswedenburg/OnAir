@@ -20,6 +20,7 @@ class DiscoveryViewController: UIViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let listener = Notification.Name("listenerMP")
+    var isConnected = false
     
     
     //View Overriding Methods
@@ -74,6 +75,13 @@ class DiscoveryViewController: UIViewController {
             self.tabBarController?.tabBar.backgroundColor = UIColor.white
         }
     }
+    
+    public func alert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(ok)
+        self.present(alertController, animated: true, completion: nil)
+    }
 }
 
 
@@ -107,15 +115,23 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
         
         let peer = MPCManager.sharedController.foundPeers[indexPath.row] as MCPeerID
         guard let session = MPCManager.sharedController.session else { return }
-        MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
-        broadcastLabel.text = "YOU ARE VIBING WITH \(peer.displayName)"
-        
         let cell = tableView.cellForRow(at: indexPath) as! DiscoveryTableViewCell
         cell.peerLabel.text = peer.displayName
         cell.activityIndicator.startAnimating()
-        cell.connectingLabel.text = "Connecting..."
         
-        connectedWithPeer(peerID: peer)
+        if isConnected == false {
+            MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
+            connectedWithPeer(peerID: peer)
+            isConnected = true
+        } else {
+            MPCManager.sharedController.disconnect()
+            broadcastLabel.text = ""
+            cell.connectingLabel.text = ""
+            isConnected = false
+            cell.activityIndicator.stopAnimating()
+            MusicPlayerController.sharedController.stop()
+            alert(title: "Disconnected", message: "You've been disconnected from \(peer.displayName)")
+        }
     }
     
     
@@ -195,4 +211,6 @@ extension DiscoveryViewController: GotDataFromBroadcaster{
             }
         }
     }
+    
+    
 }
