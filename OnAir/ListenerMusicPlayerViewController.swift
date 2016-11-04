@@ -108,6 +108,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     }
     
     func dataReceivedFromBroadcast(data: Data) {
+        player.endGeneratingPlaybackNotifications()
         guard let dictionaryFromData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: Any] else { return }
         
         guard let instruction = dictionaryFromData["instruction"] as? String?,
@@ -151,6 +152,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             default: ()
             }
         }
+        player.beginGeneratingPlaybackNotifications()
     }
     
     @IBAction func muteButtonPressed(_ sender: UIButton) {
