@@ -40,8 +40,8 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     
     var song: Song?{
         didSet{
-            //guard let song = oldValue else { return }
-            //previouslyPlayedSongs.append(song)
+            guard let song = self.song else { return }
+                self.updateViewWith(song: song); print("here")
         }
     }
     
@@ -53,14 +53,15 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         tableView.delegate = self
         tableView.dataSource = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: historyQueueHasChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: Notification.Name(rawValue: "DisconnectedFromSession"), object: nil)
     }
     
     func updateViewWith(song: Song) {
-        self.albumNameLabel.text = song.albumName
-        self.songNameLabel.text = song.name
-        self.artistNameLabel.text = song.artist
-        ImageController.imageForURL(imageEndpoint: song.image) { (image) in
-            DispatchQueue.main.async {
+        DispatchQueue.main.async {
+            self.albumNameLabel.text = song.albumName
+            self.songNameLabel.text = song.name
+            self.artistNameLabel.text = song.artist
+            ImageController.imageForURL(imageEndpoint: song.image) { (image) in
                 self.albumCoverImageView.image = image
             }
         }
@@ -70,18 +71,27 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         self.tableView.reloadData()
     }
     
+    func clearSong() {
+        self.song = nil
+        self.albumNameLabel.text = ""
+        self.songNameLabel.text = ""
+        self.artistNameLabel.text = ""
+        self.albumCoverImageView.image = UIImage()
+    }
+    
     func dataReceivedFromBroadcast(data: Data) {
         guard let dictionaryFromData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: Any] else { return }
         
         guard let instruction = dictionaryFromData["instruction"] as? String?,
             let songDictionary = dictionaryFromData["song"] as? [String: Any]?,
-        let playbacktimeStamp = dictionaryFromData["playbackTime"] as? TimeInterval?,
-        let timeStamp = dictionaryFromData["timeStamp"] as? Date? else { return }
+            let playbacktimeStamp = dictionaryFromData["playbackTime"] as? TimeInterval?,
+            let timeStamp = dictionaryFromData["timeStamp"] as? Date? else { return }
         
         if songDictionary != nil {
             guard let songDictionary  = dictionaryFromData["song"] as? [String: Any],
                 let song = Song(dictionary: songDictionary) else { return }
             self.song = song
+            updateViewWith(song: song); print("here")
             MusicPlayerController.sharedController.setBroadcaterQueueWith(ids: ["\(song.songID)"])
             updateViewWith(song: song)
         }
@@ -95,7 +105,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                     let playbackTime = Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.2
                     
                     MusicPlayerController.sharedController.systemPlayer.prepareToPlay()
-
+                    
                     MusicPlayerController.sharedController.setCurrentPlaybackTime(playbackTime)
                     
                 }
@@ -113,41 +123,41 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         }
     }
     
-        @IBAction func muteButtonPressed(_ sender: UIButton) {
-            if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
-                MusicPlayerController.sharedController.listenerPause()
-            } else if MusicPlayerController.sharedController.getApplicationPlayerState() == .paused{
-                MusicPlayerController.sharedController.listenerPlay()
-            }
+    @IBAction func muteButtonPressed(_ sender: UIButton) {
+        if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
+            MusicPlayerController.sharedController.listenerPause()
+        } else if MusicPlayerController.sharedController.getApplicationPlayerState() == .paused{
+            MusicPlayerController.sharedController.listenerPlay()
         }
-        
-        /*
-         // MARK: - Navigation
-         
-         // In a storyboard-based application, you will often want to do a little preparation before navigation
-         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destinationViewController.
-         // Pass the selected object to the new view controller.
-         }
-         */
-        
     }
     
-    extension ListenerMusicPlayerViewController: UITableViewDelegate, UITableViewDataSource{
-        func numberOfSections(in tableView: UITableView) -> Int {
-            return 1
-        }
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return SongQueueController.sharedController.historyQueue.count
-        }
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
+}
+
+extension ListenerMusicPlayerViewController: UITableViewDelegate, UITableViewDataSource{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return SongQueueController.sharedController.historyQueue.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "previousSongCell", for: indexPath) as? PreviouslyPlayedSongTableViewCell else { return PreviouslyPlayedSongTableViewCell() }
+        let song = SongQueueController.sharedController.historyQueue[indexPath.row]
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "previousSongCell", for: indexPath) as? PreviouslyPlayedSongTableViewCell else { return PreviouslyPlayedSongTableViewCell() }
-            let song = SongQueueController.sharedController.historyQueue[indexPath.row]
-            
-            cell.artistNameLabel.text = song.artist
-            cell.songNameLabel.text = song.name
-            
-            return cell
-        }
+        cell.artistNameLabel.text = song.artist
+        cell.songNameLabel.text = song.name
+        
+        return cell
+    }
 }

@@ -20,6 +20,7 @@ class DiscoveryViewController: UIViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let listener = Notification.Name("listenerMP")
+    var previousCellIndexPath: IndexPath?
     var isConnected = false
     
     
@@ -119,19 +120,34 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
         cell.peerLabel.text = peer.displayName
         cell.activityIndicator.startAnimating()
         
-        if isConnected == false {
+        
+        switch isConnected {
+        case true:
+            if indexPath == previousCellIndexPath {
+                MPCManager.sharedController.disconnect()
+                broadcastLabel.text = ""
+                cell.connectingLabel.text = ""
+                isConnected = false
+                cell.activityIndicator.stopAnimating()
+                MusicPlayerController.sharedController.stop()
+                let notification = Notification.Name(rawValue: "DisconnectedFromSession")
+                NotificationCenter.default.post(name: notification, object: nil)
+                alert(title: "Disconnected", message: "You've been disconnected from \(peer.displayName)")
+            } else {
+                DispatchQueue.main.async {
+                    MPCManager.sharedController.disconnect()
+                }
+                MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
+                connectedWithPeer(peerID: peer)
+                isConnected = true
+            }
+        case false:
             MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
             connectedWithPeer(peerID: peer)
             isConnected = true
-        } else {
-            MPCManager.sharedController.disconnect()
-            broadcastLabel.text = ""
-            cell.connectingLabel.text = ""
-            isConnected = false
-            cell.activityIndicator.stopAnimating()
-            MusicPlayerController.sharedController.stop()
-            alert(title: "Disconnected", message: "You've been disconnected from \(peer.displayName)")
         }
+        
+        self.previousCellIndexPath = indexPath
     }
     
     
