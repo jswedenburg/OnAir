@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         checkForSubscription()
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
         return true
     }
     

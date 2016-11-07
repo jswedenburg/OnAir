@@ -41,7 +41,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     var song: Song?{
         didSet{
             guard let song = self.song else { return }
-                self.updateViewWith(song: song); print("here")
+                self.updateViewWith(song: song)
         }
     }
     
@@ -123,7 +123,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             guard let songDictionary  = dictionaryFromData["song"] as? [String: Any],
                 let song = Song(dictionary: songDictionary) else { return }
             self.song = song
-            updateViewWith(song: song); print("here")
+            updateViewWith(song: song)
             MusicPlayerController.sharedController.setBroadcaterQueueWith(ids: ["\(song.songID)"])
             updateViewWith(song: song)
         }
