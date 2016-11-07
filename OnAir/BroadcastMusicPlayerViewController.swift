@@ -20,6 +20,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     //MARK: Properties
     var song: Song?
+    let player = MusicPlayerController.sharedController.systemPlayer
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -27,11 +28,21 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         MPCManager.sharedController.connectedDelegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleBroadcastInteraction(notification:)), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: player)
+        player.beginGeneratingPlaybackNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.updateViewWithNewSong()
         self.tableView.reloadData()
+        
+        if MPCManager.sharedController.isAdvertising {
+            NotificationCenter.default.addObserver(self, selector: #selector(handleBroadcastInteraction(notification:)), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: player)
+            player.beginGeneratingPlaybackNotifications()
+        } else {
+            NotificationCenter.default.removeObserver(self, name: .MPMusicPlayerControllerPlaybackStateDidChange , object: nil)
+        }
     }
     
     
@@ -78,6 +89,22 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     
     //MARK: Helper Functions
+    func handleBroadcastInteraction(notification: Notification) {
+        
+        if MPCManager.sharedController.isAdvertising{
+            switch player.playbackState {
+            case .paused:
+                MusicPlayerController.sharedController.broadcasterPause()
+                sendPauseData()
+            case .playing:
+                MusicPlayerController.sharedController.broadcaterPlay()
+                sendPlayData()
+            default:
+                print("broadcaster did something else")
+            }
+        }
+    }
+    
     func sendPlayData() {
         makeDataDictionary(instruction: "play") { (messageData) in
             guard let messageData = messageData else { return }
