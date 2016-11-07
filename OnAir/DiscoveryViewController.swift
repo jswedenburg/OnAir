@@ -147,26 +147,29 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
                 MusicPlayerController.sharedController.stop()
                 NotificationCenter.default.post(name: disconnectNotification, object: nil)
                 alert(title: "Disconnected", message: "You've been disconnected from \(peer.displayName)")
+                cell.isHighlighted = false
+                self.tableView.reloadData()
             } else {
                 DispatchQueue.main.async {
                     MPCManager.sharedController.disconnect()
                 }
                 MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
-                connectedWithPeer(peerID: peer)
                 isConnected = true
                 broadcastLabel.text = "Connected to: \(peer.displayName)"
+                
                 connectedSessionIndexPath = indexPath
             }
         case false:
             MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
-            connectedWithPeer(peerID: peer)
             isConnected = true
             broadcastLabel.text = "Connected to: \(peer.displayName)"
+            
             connectedSessionIndexPath = indexPath
         }
         
         self.previousCellIndexPath = indexPath
         cell.isSelected = false
+        cell.isHighlighted = true
     }
     
     
