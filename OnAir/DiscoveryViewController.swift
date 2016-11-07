@@ -148,6 +148,7 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
         }
         
         self.previousCellIndexPath = indexPath
+        cell.isSelected = false
     }
     
     
@@ -187,6 +188,13 @@ extension DiscoveryViewController: MPCManagerDelegate{
                 cell?.connectingLabel.text = "Connected"
                 self.parent?.parent?.tabBarController!.selectedIndex = 3
             }
+        }
+    }
+    
+    func disconnectWithPeer(peerID: MCPeerID) {
+        if MPCManager.sharedController.isAdvertising == false {
+            self.isConnected = false
+            
         }
     }
 }

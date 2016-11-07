@@ -30,7 +30,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         }
     }
     
-    
+    //MARK: Properties
     // Will be needing for the broadcaster to send trackID, songName, and artistName.
     var previouslyPlayedSongs: [Song] = [] {
         didSet{
@@ -46,9 +46,10 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     }
     
     let player = MusicPlayerController.sharedController.systemPlayer
-    
     let historyQueueHasChanged = Notification.Name(rawValue: "historyQueueHasChanged")
     
+    
+    //MARK: View Lifecycle Overriding Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         MPCManager.sharedController.dataDelegate = self
@@ -67,6 +68,8 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             player.beginGeneratingPlaybackNotifications()
         }
     }
+    
+    //MARK: Helper Functions
     
     func handleListenerInteraction(notification: Notification) {
         
@@ -155,26 +158,10 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         player.beginGeneratingPlaybackNotifications()
     }
     
-    @IBAction func muteButtonPressed(_ sender: UIButton) {
-        if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
-            MusicPlayerController.sharedController.listenerPause()
-        } else if MusicPlayerController.sharedController.getApplicationPlayerState() == .paused{
-            MusicPlayerController.sharedController.listenerPlay()
-        }
-    }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
 
+
+//MARK: Tableview Datasource and Delegate
 extension ListenerMusicPlayerViewController: UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

@@ -18,6 +18,8 @@
     
     func connectedWithPeer(peerID: MCPeerID)
     
+    func disconnectWithPeer(peerID: MCPeerID)
+    
   }
   
   protocol GotDataFromBroadcaster {
@@ -34,7 +36,7 @@
     
     var dataDelegate: GotDataFromBroadcaster?
     
-    static var connectedDelegate: ConnectedPeerArrayChangedDelegate?
+    var connectedDelegate: ConnectedPeerArrayChangedDelegate?
     
     var delegate: MPCManagerDelegate?
     
@@ -135,7 +137,7 @@
             browser.stopBrowsingForPeers()
             MPCManager.isBrowsing = false
             print("connected")
-            MPCManager.connectedDelegate?.connectedPeersChanged()
+            connectedDelegate?.connectedPeersChanged()
         case MCSessionState.connecting:
             print("Connecting")
         default:
@@ -144,7 +146,7 @@
                 connectedPeers.remove(at: index!)
             }
             print("Disconnected")
-            MPCManager.connectedDelegate?.connectedPeersChanged()
+            connectedDelegate?.connectedPeersChanged()
         }
     }
     
