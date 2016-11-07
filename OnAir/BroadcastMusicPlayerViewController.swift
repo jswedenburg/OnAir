@@ -40,6 +40,9 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         if MPCManager.sharedController.isAdvertising {
             NotificationCenter.default.addObserver(self, selector: #selector(handleBroadcastInteraction(notification:)), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: player)
             player.beginGeneratingPlaybackNotifications()
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(nowPlayingItemChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: player)
+            
         } else {
             NotificationCenter.default.removeObserver(self, name: .MPMusicPlayerControllerPlaybackStateDidChange , object: nil)
             player.endGeneratingPlaybackNotifications()
@@ -60,10 +63,14 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     }
     
     @IBAction func nextButtonPressed() {
+        player.endGeneratingPlaybackNotifications()
+        
         sendNextSongData()
         updateViewWithNewSong()
         MusicPlayerController.sharedController.skip()
-        MusicPlayerController.sharedController.broadcaterPlay()
+//        MusicPlayerController.sharedController.broadcaterPlay()
+        
+        player.beginGeneratingPlaybackNotifications()
     }
     
     func connectedPeersChanged() {
@@ -125,7 +132,6 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     }
     
     func sendNextSongData() {
-        SongQueueController.sharedController.addSongToHistoryFromUpNext()
         makeDataDictionary(instruction: "next") { (messageData) in
             guard let messageData = messageData else { return }
             MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
@@ -134,7 +140,8 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     }
     
     func makeDataDictionary(instruction: String, completion: (_ messageDict: [String: Any]?)-> Void){
-        let messageDict: [String: Any] = ["instruction": instruction, "playbackTime": MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime(), "timeStamp": Date()]
+        guard let song = SongQueueController.sharedController.upNextQueue.first else { return }
+        let messageDict: [String: Any] = ["instruction": instruction, "playbackTime": MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime(), "timeStamp": Date(), "song": song.dictionaryRepresentation]
         
         completion(messageDict)
     }
@@ -160,20 +167,23 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
             instruction = "pause"
         }
         makeDataDictionary(instruction: instruction) { (messageData) in
-            guard var messageData = messageData else { return }
-            messageData["songs"] = makeSongDictionary()
+            guard let messageData = messageData else { return }
             MPCManager.sharedController.sendData(dictionary: messageData, to: [peerID])
         }
     }
     
-    func makeSongDictionary() -> [[String: Any]]{
-        var arrayOfSongDictionaryRepresentation: [[String: Any]] = []
-        if !SongQueueController.sharedController.upNextQueue.isEmpty{
-            SongQueueController.sharedController.upNextQueue.forEach({ (song) in
-                arrayOfSongDictionaryRepresentation.append(song.dictionaryRepresentation)
-            })
-            
+    var didChange: Bool = false
+    var index: Int =  0
+    func nowPlayingItemChanged(){
+        index += index
+        SongQueueController.sharedController.addSongToHistoryFromUpNext()
+        
+        var instruction = ""
+        (MusicPlayerController.sharedController.getApplicationPlayerState() == .playing) ? (instruction = "play") : (instruction = "pause")
+        
+        makeDataDictionary(instruction: instruction) { (messageData) in
+            guard let messageData = messageData else { return }
+            MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
         }
-        return arrayOfSongDictionaryRepresentation
     }
 }
