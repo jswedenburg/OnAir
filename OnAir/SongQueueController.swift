@@ -20,10 +20,11 @@ class SongQueueController {
     var upNextQueue: [Song] = [] {
         didSet {
             
+            self.delegate?.songQueueHasChanged()
+            
             let arraySongIds = upNextQueue.map{"\($0.songID)"}
             MusicPlayerController.sharedController.setBroadcaterQueueWith(ids: arraySongIds )
             
-            self.delegate?.songQueueHasChanged()
             let notification = Notification(name: Notification.Name(rawValue: "QueueHasChanged"))
             NotificationCenter.default.post(notification)
         }

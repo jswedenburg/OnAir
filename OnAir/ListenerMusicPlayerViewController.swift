@@ -112,17 +112,16 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         guard let dictionaryFromData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: Any] else { return }
         
         guard let instruction = dictionaryFromData["instruction"] as? String?,
-            let songDictionary = dictionaryFromData["song"] as? [String: Any]?,
+            let songsDictionary = dictionaryFromData["songs"] as? [String: Any]?,
             let playbacktimeStamp = dictionaryFromData["playbackTime"] as? TimeInterval?,
             let timeStamp = dictionaryFromData["timeStamp"] as? Date? else { return }
         
-        if songDictionary != nil {
-            guard let songDictionary  = dictionaryFromData["song"] as? [String: Any],
-                let song = Song(dictionary: songDictionary) else { return }
-            self.song = song
-            updateViewWith(song: song); print("here")
-            MusicPlayerController.sharedController.setBroadcaterQueueWith(ids: ["\(song.songID)"])
-            updateViewWith(song: song)
+        if songsDictionary != nil {
+            guard let songArrayOfDictionaries  = dictionaryFromData["songs"] as? [[String: Any]] else { return }
+            let songs = songArrayOfDictionaries.flatMap{Song(dictionary: $0)}
+            songs.forEach({ (song) in
+                SongQueueController.sharedController.addSongToUpNext(newSong: song)
+            })
         }
         
         if instruction != nil{
@@ -133,12 +132,10 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                 if timeStamp != nil && playbacktimeStamp != nil{
                     let playbackTime = Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.2
                     
-
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                         MusicPlayerController.sharedController.systemPlayer.prepareToPlay()
                         MusicPlayerController.sharedController.setCurrentPlaybackTime(playbackTime + 0.6)
                     })
-                    
                 }
                 MusicPlayerController.sharedController.broadcaterPlay()
             case "pause":
