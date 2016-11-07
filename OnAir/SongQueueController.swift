@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol SongQueueControllerDelegate: class {
-    func songQueueHasChanged()
-}
-
 class SongQueueController {
     
     static let sharedController = SongQueueController()
@@ -19,17 +15,16 @@ class SongQueueController {
     
     var upNextQueue: [Song] = [] {
         didSet {
+            //TODO: Send songqueue when it changes
             
             let arraySongIds = upNextQueue.map{"\($0.songID)"}
             MusicPlayerController.sharedController.setBroadcaterQueueWith(ids: arraySongIds )
             
-            self.delegate?.songQueueHasChanged()
             let notification = Notification(name: Notification.Name(rawValue: "QueueHasChanged"))
             NotificationCenter.default.post(notification)
         }
     }
     
-    weak var delegate: SongQueueControllerDelegate?
     
     var historyQueue: [Song] = []
     static var disableAddingSong = false
