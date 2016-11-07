@@ -42,7 +42,9 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
             player.beginGeneratingPlaybackNotifications()
         } else {
             NotificationCenter.default.removeObserver(self, name: .MPMusicPlayerControllerPlaybackStateDidChange , object: nil)
+            player.endGeneratingPlaybackNotifications()
         }
+        
     }
     
     
@@ -99,6 +101,9 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
             case .playing:
                 MusicPlayerController.sharedController.broadcaterPlay()
                 sendPlayData()
+            case .interrupted:
+                MusicPlayerController.sharedController.broadcasterPause()
+                sendPauseData()
             default:
                 print("broadcaster did something else")
             }
