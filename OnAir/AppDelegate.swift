@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         checkForSubscription()
+        MusicPlayerController.sharedController.stop()
         return true
     }
     

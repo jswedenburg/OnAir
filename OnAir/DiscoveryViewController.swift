@@ -9,6 +9,12 @@
 import UIKit
 import MultipeerConnectivity
 
+protocol ClearSongAfterDisconnectDelegate {
+    func getRidOfThatSong()
+}
+
+
+// MARK: Todo - clean up cell's "connected" label. not using it anymore.
 
 class DiscoveryViewController: UIViewController {
     
@@ -18,10 +24,14 @@ class DiscoveryViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var broadcastLabel: UILabel!
     
+    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let listener = Notification.Name("listenerMP")
     var previousCellIndexPath: IndexPath?
     var isConnected = false
+    var connectedSessionIndexPath: IndexPath?
+    let disconnectNotification = Notification.Name(rawValue: "DisconnectedFromSession")
+    static var clearSongDelegate: ClearSongAfterDisconnectDelegate?
     
     
     //View Overriding Methods
@@ -60,6 +70,18 @@ class DiscoveryViewController: UIViewController {
             broadcastLabel.text = "YOU ARE DJING BRO"
         }
     }
+    
+    @IBAction func disconnectButtonPressed(_ sender: AnyObject) {
+        MPCManager.sharedController.disconnect()
+        MusicPlayerController.sharedController.stop()
+        NotificationCenter.default.post(name: disconnectNotification, object: nil)
+        isConnected = false
+        broadcastLabel.text = "Not Connected"
+        MPCManager.sharedController.browser.startBrowsingForPeers()
+        DiscoveryViewController.clearSongDelegate?.getRidOfThatSong()
+        alert(title: "Disconnected", message: "You've been disconnected from your broadcast")
+    }
+    
     
     func advertisingBrowsingIdentify() {
         
@@ -125,30 +147,38 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
         case true:
             if indexPath == previousCellIndexPath {
                 MPCManager.sharedController.disconnect()
-                broadcastLabel.text = ""
+                broadcastLabel.text = "Not Connected"
                 cell.connectingLabel.text = ""
                 isConnected = false
                 cell.activityIndicator.stopAnimating()
                 MusicPlayerController.sharedController.stop()
-                let notification = Notification.Name(rawValue: "DisconnectedFromSession")
-                NotificationCenter.default.post(name: notification, object: nil)
+                NotificationCenter.default.post(name: disconnectNotification, object: nil)
+                MPCManager.sharedController.browser.startBrowsingForPeers()
+                DiscoveryViewController.clearSongDelegate?.getRidOfThatSong()
                 alert(title: "Disconnected", message: "You've been disconnected from \(peer.displayName)")
+                cell.isHighlighted = false
+                self.tableView.reloadData()
             } else {
                 DispatchQueue.main.async {
                     MPCManager.sharedController.disconnect()
                 }
                 MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
-                connectedWithPeer(peerID: peer)
                 isConnected = true
+                broadcastLabel.text = "Connected to: \(peer.displayName)"
+                
+                connectedSessionIndexPath = indexPath
             }
         case false:
             MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
-            connectedWithPeer(peerID: peer)
             isConnected = true
+            broadcastLabel.text = "Connected to: \(peer.displayName)"
+            
+            connectedSessionIndexPath = indexPath
         }
         
         self.previousCellIndexPath = indexPath
         cell.isSelected = false
+        cell.isHighlighted = true
     }
     
     
@@ -185,7 +215,7 @@ extension DiscoveryViewController: MPCManagerDelegate{
                 let cell = self.tableView.cellForRow(at: indexPath!) as? DiscoveryTableViewCell
                 cell?.activityIndicator.stopAnimating()
                 cell?.activityIndicator.hidesWhenStopped = true
-                cell?.connectingLabel.text = "Connected"
+                cell?.connectingLabel.text = ""
                 self.parent?.parent?.tabBarController!.selectedIndex = 3
             }
         }

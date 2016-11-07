@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="TxY-He-Zhx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="TxY-He-Zhx">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -110,6 +110,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ypD-wv-0Ot">
+                                <state key="normal" title="Disconnect"/>
+                                <connections>
+                                    <action selector="disconnectButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DiH-8b-EZc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -119,7 +125,9 @@
                             <constraint firstItem="aXI-Xp-jiT" firstAttribute="top" secondItem="LU8-nL-mu6" secondAttribute="bottom" constant="8" symbolic="YES" id="LEi-Dt-meN"/>
                             <constraint firstItem="LU8-nL-mu6" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Q1w-MX-4Oa"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zSH-mo-yEG" secondAttribute="bottom" constant="8" symbolic="YES" id="Tba-xc-Bwh"/>
-                            <constraint firstItem="zSH-mo-yEG" firstAttribute="top" secondItem="aXI-Xp-jiT" secondAttribute="bottom" constant="55" id="gJT-Lf-gUT"/>
+                            <constraint firstItem="zSH-mo-yEG" firstAttribute="top" secondItem="ypD-wv-0Ot" secondAttribute="bottom" constant="8" id="Wcp-Ls-51f"/>
+                            <constraint firstItem="ypD-wv-0Ot" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bnP-zv-b5u"/>
+                            <constraint firstItem="ypD-wv-0Ot" firstAttribute="top" secondItem="aXI-Xp-jiT" secondAttribute="bottom" constant="17" id="kIQ-Oj-wE8"/>
                             <constraint firstItem="aXI-Xp-jiT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="oHn-zk-P4O"/>
                             <constraint firstItem="LU8-nL-mu6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="tdC-eg-1nR"/>
                         </constraints>
