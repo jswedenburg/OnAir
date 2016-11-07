@@ -9,6 +9,10 @@
 import UIKit
 import MultipeerConnectivity
 
+protocol ClearSongAfterDisconnectDelegate {
+    func getRidOfThatSong()
+}
+
 
 // MARK: Todo - clean up cell's "connected" label. not using it anymore.
 
@@ -27,6 +31,7 @@ class DiscoveryViewController: UIViewController {
     var isConnected = false
     var connectedSessionIndexPath: IndexPath?
     let disconnectNotification = Notification.Name(rawValue: "DisconnectedFromSession")
+    static var clearSongDelegate: ClearSongAfterDisconnectDelegate?
     
     
     //View Overriding Methods
@@ -73,6 +78,7 @@ class DiscoveryViewController: UIViewController {
         isConnected = false
         broadcastLabel.text = "Not Connected"
         MPCManager.sharedController.browser.startBrowsingForPeers()
+        DiscoveryViewController.clearSongDelegate?.getRidOfThatSong()
         alert(title: "Disconnected", message: "You've been disconnected from your broadcast")
     }
     
@@ -148,6 +154,7 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
                 MusicPlayerController.sharedController.stop()
                 NotificationCenter.default.post(name: disconnectNotification, object: nil)
                 MPCManager.sharedController.browser.startBrowsingForPeers()
+                DiscoveryViewController.clearSongDelegate?.getRidOfThatSong()
                 alert(title: "Disconnected", message: "You've been disconnected from \(peer.displayName)")
                 cell.isHighlighted = false
                 self.tableView.reloadData()

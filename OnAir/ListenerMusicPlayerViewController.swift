@@ -9,7 +9,7 @@
 import UIKit
 import MediaPlayer
 
-class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaster {
+class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaster, ClearSongAfterDisconnectDelegate {
     
     //MARK: Outlets
     @IBOutlet weak var albumCoverImageView: UIImageView!
@@ -58,6 +58,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: historyQueueHasChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: Notification.Name(rawValue: "DisconnectedFromSession"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleListenerInteraction(notification:)), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: player)
+        DiscoveryViewController.clearSongDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +71,10 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     }
     
     //MARK: Helper Functions
+    
+    func getRidOfThatSong() {
+        self.song = nil
+    }
     
     func handleListenerInteraction(notification: Notification) {
         
