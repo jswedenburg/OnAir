@@ -154,15 +154,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         }
         player.beginGeneratingPlaybackNotifications()
     }
-    
-    @IBAction func muteButtonPressed(_ sender: UIButton) {
-        if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
-            MusicPlayerController.sharedController.listenerPause()
-        } else if MusicPlayerController.sharedController.getApplicationPlayerState() == .paused{
-            MusicPlayerController.sharedController.listenerPlay()
-        }
-    }
-    
+
     /*
      // MARK: - Navigation
      
