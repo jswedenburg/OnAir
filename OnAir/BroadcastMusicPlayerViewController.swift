@@ -29,8 +29,6 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         super.viewDidLoad()
         MPCManager.sharedController.connectedDelegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleBroadcastInteraction(notification:)), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: player)
-        player.beginGeneratingPlaybackNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,14 +36,12 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         self.tableView.reloadData()
         
         if MPCManager.sharedController.isAdvertising {
-            NotificationCenter.default.addObserver(self, selector: #selector(handleBroadcastInteraction(notification:)), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: player)
-            player.beginGeneratingPlaybackNotifications()
+            
             
             NotificationCenter.default.addObserver(self, selector: #selector(nowPlayingItemChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: player)
             
         } else {
-            NotificationCenter.default.removeObserver(self, name: .MPMusicPlayerControllerPlaybackStateDidChange , object: nil)
-            player.endGeneratingPlaybackNotifications()
+            
         }
         
     }
@@ -57,18 +53,23 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
             sendPauseData()
             MusicPlayerController.sharedController.broadcasterPause()
         } else {
+            
             sendPlayData()
             MusicPlayerController.sharedController.broadcaterPlay()
+            
+            
         }
+        
+        
     }
     
     @IBAction func nextButtonPressed() {
         player.endGeneratingPlaybackNotifications()
         
         sendNextSongData()
-        updateViewWithNewSong()
+        
         MusicPlayerController.sharedController.skip()
-//        MusicPlayerController.sharedController.broadcaterPlay()
+        //        MusicPlayerController.sharedController.broadcaterPlay()
         
         player.beginGeneratingPlaybackNotifications()
     }
@@ -98,24 +99,29 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     
     //MARK: Helper Functions
-    func handleBroadcastInteraction(notification: Notification) {
-        
-        if MPCManager.sharedController.isAdvertising{
-            switch player.playbackState {
-            case .paused:
-                MusicPlayerController.sharedController.broadcasterPause()
-                sendPauseData()
-            case .playing:
-                MusicPlayerController.sharedController.broadcaterPlay()
-                sendPlayData()
-            case .interrupted:
-                MusicPlayerController.sharedController.broadcasterPause()
-                sendPauseData()
-            default:
-                print("broadcaster did something else")
-            }
-        }
-    }
+    //    func handleBroadcastInteraction(notification: Notification) {
+    //
+    //        if MPCManager.sharedController.isAdvertising{
+    //            switch player.playbackState {
+    //            case .paused:
+    //
+    //                    MusicPlayerController.sharedController.broadcasterPause()
+    //                    sendPauseData()
+    //
+    //
+    //            case .playing:
+    //
+    //                    MusicPlayerController.sharedController.broadcaterPlay()
+    //                    sendPlayData()
+    //
+    //            case .interrupted:
+    //                MusicPlayerController.sharedController.broadcasterPause()
+    //                sendPauseData()
+    //            default:
+    //                print("broadcaster did something else")
+    //            }
+    //        }
+    //    }
     
     func sendPlayData() {
         makeDataDictionary(instruction: "play") { (messageData) in
@@ -173,10 +179,10 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     }
     
     var didChange: Bool = false
-    var index: Int =  0
+    
     func nowPlayingItemChanged(){
-        index += index
         SongQueueController.sharedController.addSongToHistoryFromUpNext()
+        updateViewWithNewSong()
         
         var instruction = ""
         (MusicPlayerController.sharedController.getApplicationPlayerState() == .playing) ? (instruction = "play") : (instruction = "pause")

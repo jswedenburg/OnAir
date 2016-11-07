@@ -115,6 +115,7 @@ class MusicPlayerController{
     
     /// Starts the broadcaster's application player to play
     func broadcaterPlay(){
+        print("broadcaster play")
         systemPlayer.play()
     }
     
