@@ -72,6 +72,7 @@ class DiscoveryViewController: UIViewController {
         NotificationCenter.default.post(name: disconnectNotification, object: nil)
         isConnected = false
         broadcastLabel.text = "Not Connected"
+        MPCManager.sharedController.browser.startBrowsingForPeers()
         alert(title: "Disconnected", message: "You've been disconnected from your broadcast")
     }
     
@@ -146,6 +147,7 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
                 cell.activityIndicator.stopAnimating()
                 MusicPlayerController.sharedController.stop()
                 NotificationCenter.default.post(name: disconnectNotification, object: nil)
+                MPCManager.sharedController.browser.startBrowsingForPeers()
                 alert(title: "Disconnected", message: "You've been disconnected from \(peer.displayName)")
                 cell.isHighlighted = false
                 self.tableView.reloadData()
