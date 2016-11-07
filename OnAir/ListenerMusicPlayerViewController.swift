@@ -45,7 +45,8 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         }
     }
     
-    let player = MusicPlayerController.sharedController.systemPlayer
+    var player = MusicPlayerController.sharedController.systemPlayer
+    
     
     let historyQueueHasChanged = Notification.Name(rawValue: "historyQueueHasChanged")
     
@@ -69,7 +70,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     }
     
     func handleListenerInteraction(notification: Notification) {
-        
+        // TODO: This code is ran everytime the broadcaster sends pause, play, or next.
         if MPCManager.sharedController.isAdvertising == false {
             switch player.playbackState {
             case .paused:
@@ -80,8 +81,6 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                 print("listener did something else")
             }
         }
-        
-        
     }
     
     func updateViewWith(song: Song) {
@@ -112,16 +111,14 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         guard let dictionaryFromData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: Any] else { return }
         
         guard let instruction = dictionaryFromData["instruction"] as? String?,
-            let songsDictionary = dictionaryFromData["songs"] as? [String: Any]?,
+            let songsDictionary = dictionaryFromData["songs"] as? [[String: Any]]?,
             let playbacktimeStamp = dictionaryFromData["playbackTime"] as? TimeInterval?,
             let timeStamp = dictionaryFromData["timeStamp"] as? Date? else { return }
         
         if songsDictionary != nil {
             guard let songArrayOfDictionaries  = dictionaryFromData["songs"] as? [[String: Any]] else { return }
             let songs = songArrayOfDictionaries.flatMap{Song(dictionary: $0)}
-            songs.forEach({ (song) in
-                SongQueueController.sharedController.addSongToUpNext(newSong: song)
-            })
+            SongQueueController.sharedController.upNextQueue = songs
         }
         
         if instruction != nil{
@@ -134,7 +131,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                         MusicPlayerController.sharedController.systemPlayer.prepareToPlay()
-                        MusicPlayerController.sharedController.setCurrentPlaybackTime(playbackTime + 0.6)
+                        MusicPlayerController.sharedController.setCurrentPlaybackTime(playbackTime + 1.0)
                     })
                 }
                 MusicPlayerController.sharedController.broadcaterPlay()
@@ -143,12 +140,14 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                 MusicPlayerController.sharedController.broadcasterPause()
             case "next":
                 print("next")
+                MusicPlayerController.sharedController.skip()
                 MusicPlayerController.sharedController.systemPlayer.prepareToPlay()
                 MusicPlayerController.sharedController.setCurrentPlaybackTime(Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.2)
                 MusicPlayerController.sharedController.broadcaterPlay()
             default: ()
             }
         }
+        
         player.beginGeneratingPlaybackNotifications()
     }
     

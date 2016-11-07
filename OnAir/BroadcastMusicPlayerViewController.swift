@@ -56,7 +56,6 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     func connectedPeersChanged() {
         self.tableView.reloadData()
         sendDataToNew(peer: MPCManager.sharedController.connectedPeers.last)
-        sendSongQueue(peer: MPCManager.sharedController.connectedPeers.last)
     }
     
     //MARK TableView Datasource
@@ -129,20 +128,20 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
             instruction = "pause"
         }
         makeDataDictionary(instruction: instruction) { (messageData) in
-            guard let messageData = messageData else { return }
+            guard var messageData = messageData else { return }
+            messageData["songs"] = makeSongDictionary()
             MPCManager.sharedController.sendData(dictionary: messageData, to: [peerID])
         }
     }
     
-    func sendSongQueue(peer: MCPeerID?){
-        guard let peer = peer else { return }
-        let arrayOfSongDictionaries: [String: Any] = Dictionary(dictionaryLiteral: ("songs", SongQueueController.sharedController.upNextQueue.flatMap{$0.dictionaryRepresentation}))
-        MPCManager.sharedController.sendData(dictionary: arrayOfSongDictionaries, to: [peer])
-    }
-}
-
-extension BroadcastMusicPlayerViewController: SongQueueControllerDelegate{
-    func songQueueHasChanged() {
-        sendSongQueue(peer: nil)
+    func makeSongDictionary() -> [[String: Any]]{
+        var arrayOfSongDictionaryRepresentation: [[String: Any]] = []
+        if !SongQueueController.sharedController.upNextQueue.isEmpty{
+            SongQueueController.sharedController.upNextQueue.forEach({ (song) in
+                arrayOfSongDictionaryRepresentation.append(song.dictionaryRepresentation)
+            })
+            
+        }
+        return arrayOfSongDictionaryRepresentation
     }
 }
