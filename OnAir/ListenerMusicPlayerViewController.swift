@@ -47,7 +47,8 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     
     let player = MusicPlayerController.sharedController.systemPlayer
     let historyQueueHasChanged = Notification.Name(rawValue: "historyQueueHasChanged")
-    
+    let mainImageURL = "http://is4.mzstatic.com/image/thumb/Music18/v4/57/91/a1/5791a19c-871d-d398-f160-1e832036449b/source/1400x1400bb.jpg"
+    var mainImage: UIImage?
     
     //MARK: View Lifecycle Overriding Methods
     override func viewDidLoad() {
@@ -59,6 +60,12 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: Notification.Name(rawValue: "DisconnectedFromSession"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleListenerInteraction(notification:)), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: player)
         DiscoveryViewController.clearSongDelegate = self
+        ImageController.imageForURL(imageEndpoint: mainImageURL) { (image) in
+            DispatchQueue.main.async {
+                guard let image = image else { return }
+                self.albumCoverImageView.image = image
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,6 +81,8 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     
     func getRidOfThatSong() {
         self.song = nil
+        guard let image = mainImage else { return }
+        self.albumCoverImageView.image = image
     }
     
     func handleListenerInteraction(notification: Notification) {
