@@ -36,14 +36,11 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         self.tableView.reloadData()
         
         if MPCManager.sharedController.isAdvertising {
-            
-            
             NotificationCenter.default.addObserver(self, selector: #selector(nowPlayingItemChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: player)
             
         } else {
             
         }
-        
     }
     
     
@@ -69,8 +66,9 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         sendNextSongData()
         
         MusicPlayerController.sharedController.skip()
-        //        MusicPlayerController.sharedController.broadcaterPlay()
-        
+        if MusicPlayerController.sharedController.getApplicationPlayerState() != .playing{
+            MusicPlayerController.sharedController.broadcaterPlay()
+        }
         player.beginGeneratingPlaybackNotifications()
     }
     
@@ -124,13 +122,16 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     //    }
     
     func sendPlayData() {
+        timeStamp = Date()
         makeDataDictionary(instruction: "play") { (messageData) in
             guard let messageData = messageData else { return }
             MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
         }
+        MusicPlayerController.sharedController.systemPlayer.beginGeneratingPlaybackNotifications()
     }
     
     func sendPauseData() {
+        timeStamp = Date()
         makeDataDictionary(instruction: "pause") { (messageData) in
             guard let messageData = messageData else { return }
             MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
@@ -179,17 +180,25 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     }
     
     var didChange: Bool = false
+    var index = 0
+    var timeStamp = Date()
     
     func nowPlayingItemChanged(){
-        SongQueueController.sharedController.addSongToHistoryFromUpNext()
-        updateViewWithNewSong()
-        
-        var instruction = ""
-        (MusicPlayerController.sharedController.getApplicationPlayerState() == .playing) ? (instruction = "play") : (instruction = "pause")
-        
-        makeDataDictionary(instruction: instruction) { (messageData) in
-            guard let messageData = messageData else { return }
-            MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
+        print(Date().timeIntervalSince(timeStamp))
+        if Date().timeIntervalSince(timeStamp) > 1 {
+            timeStamp = Date()
+            index = index + 1
+            print(index)
+            SongQueueController.sharedController.addSongToHistoryFromUpNext()
+            updateViewWithNewSong()
+            
+            var instruction = ""
+            (MusicPlayerController.sharedController.getApplicationPlayerState() == .playing) ? (instruction = "play") : (instruction = "pause")
+            
+            makeDataDictionary(instruction: instruction) { (messageData) in
+                guard let messageData = messageData else { return }
+                MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
+            }
         }
     }
 }

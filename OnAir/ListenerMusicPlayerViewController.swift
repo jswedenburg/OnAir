@@ -80,17 +80,17 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     }
     
     func handleListenerInteraction(notification: Notification) {
-        
-        if MPCManager.sharedController.isAdvertising == false {
-            switch player.playbackState {
-            case .paused:
-                MusicPlayerController.sharedController.listenerPause()
-            case .playing:
-                MusicPlayerController.sharedController.listenerPlay()
-            default:
-                print("listener did something else")
-            }
-        }
+//        
+//        if MPCManager.sharedController.isAdvertising == false {
+//            switch player.playbackState {
+//            case .paused:
+//                MusicPlayerController.sharedController.listenerPause()
+//            case .playing:
+//                MusicPlayerController.sharedController.listenerPlay()
+//            default:
+//                print("listener did something else")
+//            }
+//        }
         
         
     }
@@ -142,12 +142,9 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             case "play":
                 print("play")
                 if timeStamp != nil && playbacktimeStamp != nil{
-                    let playbackTime = Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.2
-                    
-
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                         MusicPlayerController.sharedController.systemPlayer.prepareToPlay()
-                        MusicPlayerController.sharedController.setCurrentPlaybackTime(playbackTime + 0.6)
+                        MusicPlayerController.sharedController.setCurrentPlaybackTime(Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.2)
                     })
                     
                 }
@@ -158,7 +155,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             case "next":
                 print("next")
                 MusicPlayerController.sharedController.systemPlayer.prepareToPlay()
-                MusicPlayerController.sharedController.setCurrentPlaybackTime(Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.2)
+                MusicPlayerController.sharedController.setCurrentPlaybackTime(Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.1)
                 MusicPlayerController.sharedController.broadcaterPlay()
             default: ()
             }
