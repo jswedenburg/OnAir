@@ -16,7 +16,6 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     @IBOutlet weak var songNameLabel: UILabel!
     @IBOutlet weak var artistNameLabel: UILabel!
     @IBOutlet weak var albumNameLabel: UILabel!
-    @IBOutlet weak var muteButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -47,7 +46,6 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     
     let player = MusicPlayerController.sharedController.systemPlayer
     let historyQueueHasChanged = Notification.Name(rawValue: "historyQueueHasChanged")
-    let mainImageURL = "http://is4.mzstatic.com/image/thumb/Music18/v4/57/91/a1/5791a19c-871d-d398-f160-1e832036449b/source/1400x1400bb.jpg"
     var mainImage: UIImage?
     
     //MARK: View Lifecycle Overriding Methods
@@ -60,12 +58,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: Notification.Name(rawValue: "DisconnectedFromSession"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleListenerInteraction(notification:)), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: player)
         DiscoveryViewController.clearSongDelegate = self
-        ImageController.imageForURL(imageEndpoint: mainImageURL) { (image) in
-            DispatchQueue.main.async {
-                guard let image = image else { return }
-                self.albumCoverImageView.image = image
-            }
-        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

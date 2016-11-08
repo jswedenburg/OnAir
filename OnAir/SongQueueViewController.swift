@@ -33,6 +33,8 @@ class SongQueueViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidAppear(_ animated: Bool) {
         self.tableView.reloadData()
         self.parent?.parent?.navigationItem.rightBarButtonItem = editButtonItem
+        self.parent?.parent?.navigationItem.rightBarButtonItem?.isEnabled = false
+        self.parent?.parent?.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear
     }
     
     // MARK: TableView

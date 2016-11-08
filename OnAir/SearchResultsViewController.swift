@@ -35,6 +35,8 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: Notification.Name(rawValue: "QueueHasChanged") , object: nil)
         
     }
+    
+    
 
     
     
