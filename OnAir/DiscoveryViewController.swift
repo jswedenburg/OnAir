@@ -58,6 +58,7 @@ class DiscoveryViewController: UIViewController {
         }
     }
     
+      
     //IBActions
     @IBAction func broadcastButtonPressed(sender: UIButton) {
         

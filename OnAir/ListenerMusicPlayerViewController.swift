@@ -75,6 +75,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             NotificationCenter.default.addObserver(self, selector: #selector(handleListenerInteraction(notification:)), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: player)
             player.beginGeneratingPlaybackNotifications()
         }
+        self.tabBarController?.tabBar.tintColor = TeamMusicColor.ourColor
     }
     
     //MARK: Helper Functions
