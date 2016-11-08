@@ -53,7 +53,7 @@ class SegmentedControlViewController: UIViewController  {
         } else {
             self.segmentedControl.setEnabled(false, forSegmentAt: 1)
         }
-        self.navigationItem.rightBarButtonItem = nil
+        
     }
     
     override func didReceiveMemoryWarning() {

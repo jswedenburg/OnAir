@@ -22,7 +22,6 @@ class DiscoveryViewController: UIViewController {
     //Outlets
     @IBOutlet weak var startStopAdvertisingButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var broadcastLabel: UILabel!
     @IBOutlet weak var mainImage: UIImageView!
     
     
@@ -33,7 +32,7 @@ class DiscoveryViewController: UIViewController {
     var connectedSessionIndexPath: IndexPath?
     let disconnectNotification = Notification.Name(rawValue: "DisconnectedFromSession")
     static var clearSongDelegate: ClearSongAfterDisconnectDelegate?
-    let mainImageURL = "http://is4.mzstatic.com/image/thumb/Music18/v4/57/91/a1/5791a19c-871d-d398-f160-1e832036449b/source/1400x1400bb.jpg"
+//    let mainImageURL = "http://is4.mzstatic.com/image/thumb/Music18/v4/57/91/a1/5791a19c-871d-d398-f160-1e832036449b/source/1400x1400bb.jpg"
     var mainImageImage: UIImage?
     
     //View Overriding Methods
@@ -45,17 +44,16 @@ class DiscoveryViewController: UIViewController {
         MPCManager.sharedController.delegate = self
         MPCManager.sharedController.browser.startBrowsingForPeers()
         MPCManager.isBrowsing = true
-        broadcastLabel.adjustsFontSizeToFitWidth = true
         let isBrowsingNotification = Notification.Name(rawValue: "isBrowsingChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isBrowsingNotification, object: nil)
         let isAdvertisingNotification = NSNotification.Name(rawValue: "isAdvertisingChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isAdvertisingNotification, object: nil)
-        ImageController.imageForURL(imageEndpoint: mainImageURL) { (image) in
-            DispatchQueue.main.async {
-                guard let image = image else { return }
-                self.mainImage.image = image
-            }
-        }
+//        ImageController.imageForURL(imageEndpoint: mainImageURL) { (image) in
+//            DispatchQueue.main.async {
+//                guard let image = image else { return }
+//                self.mainImage.image = image
+//            }
+//        }
     }
     
       
@@ -68,7 +66,7 @@ class DiscoveryViewController: UIViewController {
             MPCManager.sharedController.isAdvertising = false
             MPCManager.sharedController.disconnect()
             self.tableView.isUserInteractionEnabled = true
-            broadcastLabel.text = ""
+            
             
             
         } else {
@@ -76,7 +74,7 @@ class DiscoveryViewController: UIViewController {
             MPCManager.sharedController.advertiser.startAdvertisingPeer()
             MPCManager.sharedController.isAdvertising = true
             self.tableView.isUserInteractionEnabled = false
-            broadcastLabel.text = "YOU ARE DJING BRO"
+            
         }
     }
     
@@ -85,7 +83,7 @@ class DiscoveryViewController: UIViewController {
         MusicPlayerController.sharedController.stop()
         NotificationCenter.default.post(name: disconnectNotification, object: nil)
         isConnected = false
-        broadcastLabel.text = "Not Connected"
+        
         MPCManager.sharedController.browser.startBrowsingForPeers()
         DiscoveryViewController.clearSongDelegate?.getRidOfThatSong()
         alert(title: "Disconnected", message: "You've been disconnected from your broadcast")
@@ -149,17 +147,17 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
         guard let session = MPCManager.sharedController.session else { return }
         let cell = tableView.cellForRow(at: indexPath) as! DiscoveryTableViewCell
         cell.peerLabel.text = peer.displayName
-        cell.activityIndicator.startAnimating()
+        
         
         
         switch isConnected {
         case true:
             if indexPath == previousCellIndexPath {
                 MPCManager.sharedController.disconnect()
-                broadcastLabel.text = "Not Connected"
-                cell.connectingLabel.text = ""
+                
                 isConnected = false
                 cell.activityIndicator.stopAnimating()
+                cell.connectingLabel.text = ""
                 MusicPlayerController.sharedController.stop()
                 NotificationCenter.default.post(name: disconnectNotification, object: nil)
                 MPCManager.sharedController.browser.startBrowsingForPeers()
@@ -168,21 +166,27 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
                 cell.isHighlighted = false
                 self.tableView.reloadData()
             } else {
+                cell.activityIndicator.startAnimating()
                 DispatchQueue.main.async {
                     MPCManager.sharedController.disconnect()
                 }
+                cell.connectingLabel.text = "Connected"
                 MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
                 isConnected = true
-                broadcastLabel.text = "Connected to: \(peer.displayName)"
+                
                 DiscoveryViewController.clearSongDelegate?.getRidOfThatSong()
                 connectedSessionIndexPath = indexPath
+                cell.activityIndicator.stopAnimating()
             }
         case false:
+            cell.activityIndicator.startAnimating()
             MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
             isConnected = true
-            broadcastLabel.text = "Connected to: \(peer.displayName)"
+            
+            cell.connectingLabel.text = "Connected"
             
             connectedSessionIndexPath = indexPath
+            cell.activityIndicator.stopAnimating()
         }
         
         self.previousCellIndexPath = indexPath
@@ -201,7 +205,11 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Choose or Start a Broadcast"
+        return "join a nearby broadcast"
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 75
     }
 }
 
