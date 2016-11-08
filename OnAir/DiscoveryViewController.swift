@@ -32,7 +32,7 @@ class DiscoveryViewController: UIViewController {
     var connectedSessionIndexPath: IndexPath?
     let disconnectNotification = Notification.Name(rawValue: "DisconnectedFromSession")
     static var clearSongDelegate: ClearSongAfterDisconnectDelegate?
-//    let mainImageURL = "http://is4.mzstatic.com/image/thumb/Music18/v4/57/91/a1/5791a19c-871d-d398-f160-1e832036449b/source/1400x1400bb.jpg"
+    var selectedIndexPath: IndexPath?
     var mainImageImage: UIImage?
     
     //View Overriding Methods
@@ -147,6 +147,7 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
         guard let session = MPCManager.sharedController.session else { return }
         let cell = tableView.cellForRow(at: indexPath) as! DiscoveryTableViewCell
         cell.peerLabel.text = peer.displayName
+        self.selectedIndexPath = indexPath
         
         
         
@@ -170,23 +171,25 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
                 DispatchQueue.main.async {
                     MPCManager.sharedController.disconnect()
                 }
-                cell.connectingLabel.text = "Connected"
+                
                 MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
                 isConnected = true
                 
                 DiscoveryViewController.clearSongDelegate?.getRidOfThatSong()
                 connectedSessionIndexPath = indexPath
-                cell.activityIndicator.stopAnimating()
+//                cell.activityIndicator.stopAnimating()
+//                cell.connectingLabel.text = "Disconnect"
             }
         case false:
             cell.activityIndicator.startAnimating()
             MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
             isConnected = true
             
-            cell.connectingLabel.text = "Connected"
+            
             
             connectedSessionIndexPath = indexPath
-            cell.activityIndicator.stopAnimating()
+//            cell.activityIndicator.stopAnimating()
+//            cell.connectingLabel.text = "Disconnect"
         }
         
         self.previousCellIndexPath = indexPath
@@ -227,12 +230,12 @@ extension DiscoveryViewController: MPCManagerDelegate{
     func connectedWithPeer(peerID: MCPeerID) {
         if MPCManager.sharedController.isAdvertising == false {
             DispatchQueue.main.async {
-                let indexPath = self.tableView.indexPathForSelectedRow
-                let cell = self.tableView.cellForRow(at: indexPath!) as? DiscoveryTableViewCell
-                cell?.activityIndicator.stopAnimating()
-                cell?.activityIndicator.hidesWhenStopped = true
-                cell?.connectingLabel.text = ""
-                self.parent?.parent?.tabBarController!.selectedIndex = 3
+                
+                let cell = self.tableView.cellForRow(at: self.selectedIndexPath!) as? DiscoveryTableViewCell ?? DiscoveryTableViewCell()
+                cell.activityIndicator.stopAnimating()
+                cell.activityIndicator.hidesWhenStopped = true
+                cell.connectingLabel.text = "disconnect"
+                self.parent?.tabBarController!.selectedIndex = 3
             }
         }
     }
