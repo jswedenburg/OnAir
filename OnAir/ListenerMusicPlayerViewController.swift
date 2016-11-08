@@ -77,17 +77,17 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     }
     
     func handleListenerInteraction(notification: Notification) {
-        
-        if MPCManager.sharedController.isAdvertising == false {
-            switch player.playbackState {
-            case .paused:
-                MusicPlayerController.sharedController.listenerPause()
-            case .playing:
-                MusicPlayerController.sharedController.listenerPlay()
-            default:
-                print("listener did something else")
-            }
-        }
+//        
+//        if MPCManager.sharedController.isAdvertising == false {
+//            switch player.playbackState {
+//            case .paused:
+//                MusicPlayerController.sharedController.listenerPause()
+//            case .playing:
+//                MusicPlayerController.sharedController.listenerPlay()
+//            default:
+//                print("listener did something else")
+//            }
+//        }
         
         
     }
@@ -140,7 +140,6 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                 print("play")
                 if timeStamp != nil && playbacktimeStamp != nil{
                     let playbackTime = Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.2
-                    
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                         MusicPlayerController.sharedController.systemPlayer.prepareToPlay()

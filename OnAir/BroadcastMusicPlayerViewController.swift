@@ -28,7 +28,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         MPCManager.sharedController.connectedDelegate = self
-        
+        MusicPlayerController.sharedController.systemPlayer.beginGeneratingPlaybackNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,14 +36,11 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         self.tableView.reloadData()
         
         if MPCManager.sharedController.isAdvertising {
-            
-            
             NotificationCenter.default.addObserver(self, selector: #selector(nowPlayingItemChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: player)
             
         } else {
             
         }
-        
     }
     
     
@@ -69,8 +66,9 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         sendNextSongData()
         
         MusicPlayerController.sharedController.skip()
-        //        MusicPlayerController.sharedController.broadcaterPlay()
-        
+        if MusicPlayerController.sharedController.getApplicationPlayerState() != .playing{
+            MusicPlayerController.sharedController.broadcaterPlay()
+        }
         player.beginGeneratingPlaybackNotifications()
     }
     
