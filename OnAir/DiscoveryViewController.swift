@@ -23,6 +23,7 @@ class DiscoveryViewController: UIViewController {
     @IBOutlet weak var startStopAdvertisingButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var broadcastLabel: UILabel!
+    @IBOutlet weak var mainImage: UIImageView!
     
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -32,7 +33,8 @@ class DiscoveryViewController: UIViewController {
     var connectedSessionIndexPath: IndexPath?
     let disconnectNotification = Notification.Name(rawValue: "DisconnectedFromSession")
     static var clearSongDelegate: ClearSongAfterDisconnectDelegate?
-    
+    let mainImageURL = "http://is4.mzstatic.com/image/thumb/Music18/v4/57/91/a1/5791a19c-871d-d398-f160-1e832036449b/source/1400x1400bb.jpg"
+    var mainImageImage: UIImage?
     
     //View Overriding Methods
     override func viewDidLoad() {
@@ -48,6 +50,12 @@ class DiscoveryViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isBrowsingNotification, object: nil)
         let isAdvertisingNotification = NSNotification.Name(rawValue: "isAdvertisingChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isAdvertisingNotification, object: nil)
+        ImageController.imageForURL(imageEndpoint: mainImageURL) { (image) in
+            DispatchQueue.main.async {
+                guard let image = image else { return }
+                self.mainImage.image = image
+            }
+        }
     }
     
     //IBActions
@@ -165,7 +173,7 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
                 MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
                 isConnected = true
                 broadcastLabel.text = "Connected to: \(peer.displayName)"
-                
+                DiscoveryViewController.clearSongDelegate?.getRidOfThatSong()
                 connectedSessionIndexPath = indexPath
             }
         case false:
@@ -177,8 +185,7 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
         }
         
         self.previousCellIndexPath = indexPath
-        cell.isSelected = false
-        cell.isHighlighted = true
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     

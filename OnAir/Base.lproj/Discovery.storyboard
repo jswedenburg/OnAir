@@ -44,6 +44,9 @@
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aXI-Xp-jiT">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="187" id="fx7-zW-0uc"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="broadcastCell" id="QUz-WZ-tiW" customClass="DiscoveryTableViewCell" customModule="OnAir" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -116,25 +119,30 @@
                                     <action selector="disconnectButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DiH-8b-EZc"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f0X-pC-4kQ"/>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="aXI-Xp-jiT" firstAttribute="top" secondItem="f0X-pC-4kQ" secondAttribute="bottom" constant="8" id="1AD-VQ-s7H"/>
                             <constraint firstItem="aXI-Xp-jiT" firstAttribute="centerX" secondItem="zSH-mo-yEG" secondAttribute="centerX" id="2Mf-j8-9aC"/>
                             <constraint firstItem="LU8-nL-mu6" firstAttribute="centerX" secondItem="aXI-Xp-jiT" secondAttribute="centerX" id="FUO-Yt-YxE"/>
                             <constraint firstAttribute="trailing" secondItem="aXI-Xp-jiT" secondAttribute="trailing" id="JOu-nA-Fhz"/>
-                            <constraint firstItem="aXI-Xp-jiT" firstAttribute="top" secondItem="LU8-nL-mu6" secondAttribute="bottom" constant="8" symbolic="YES" id="LEi-Dt-meN"/>
                             <constraint firstItem="LU8-nL-mu6" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Q1w-MX-4Oa"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zSH-mo-yEG" secondAttribute="bottom" constant="8" symbolic="YES" id="Tba-xc-Bwh"/>
                             <constraint firstItem="zSH-mo-yEG" firstAttribute="top" secondItem="ypD-wv-0Ot" secondAttribute="bottom" constant="8" id="Wcp-Ls-51f"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="f0X-pC-4kQ" secondAttribute="trailing" id="Wwi-lU-AQ2"/>
                             <constraint firstItem="ypD-wv-0Ot" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bnP-zv-b5u"/>
+                            <constraint firstItem="f0X-pC-4kQ" firstAttribute="top" secondItem="LU8-nL-mu6" secondAttribute="bottom" constant="8" id="gZF-xW-QB9"/>
                             <constraint firstItem="ypD-wv-0Ot" firstAttribute="top" secondItem="aXI-Xp-jiT" secondAttribute="bottom" constant="17" id="kIQ-Oj-wE8"/>
                             <constraint firstItem="aXI-Xp-jiT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="oHn-zk-P4O"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="f0X-pC-4kQ" secondAttribute="leading" id="rhh-ZC-WUx"/>
                             <constraint firstItem="LU8-nL-mu6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="tdC-eg-1nR"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" id="9G4-bN-5gI"/>
                     <connections>
                         <outlet property="broadcastLabel" destination="jHX-RM-iSt" id="tej-8p-QaX"/>
+                        <outlet property="mainImage" destination="f0X-pC-4kQ" id="ahf-ea-gyC"/>
                         <outlet property="startStopAdvertisingButton" destination="zSH-mo-yEG" id="5JL-yo-YEp"/>
                         <outlet property="tableView" destination="aXI-Xp-jiT" id="gud-yW-PFU"/>
                     </connections>
