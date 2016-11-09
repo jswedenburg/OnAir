@@ -18,6 +18,7 @@ class DataController {
     
     var song: Song? {
         didSet {
+            MusicPlayerController.sharedController.broadcaterPlay()
             sendPlayData()
             let songHasChanged = Notification.Name(rawValue: "SongHasChanged")
             NotificationCenter.default.post(name: songHasChanged, object: nil)
@@ -64,17 +65,13 @@ class DataController {
     func sendDataToNew(peer: MCPeerID?){
         guard let peerID = peer else { return }
         print("new peer \(peerID.displayName)")
-        var instruction = ""
         
         if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
-            instruction = "play"
+            sendPlayData()
         } else {
-            instruction = "pause"
+            sendPauseData()
         }
-        makeDataDictionary(instruction: instruction) { (messageData) in
-            guard let messageData = messageData else { return }
-            MPCManager.sharedController.sendData(dictionary: messageData, to: [peerID])
-        }
+       
     }
     
     @objc func nowPlayingItemChanged(){

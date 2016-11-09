@@ -8,6 +8,7 @@
 
 import UIKit
 import MultipeerConnectivity
+import MediaPlayer
 
 class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ConnectedPeerArrayChangedDelegate {
     
@@ -20,6 +21,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     //MARK: Properties
     let player = MusicPlayerController.sharedController.systemPlayer
+    let commandCenter = MPRemoteCommandCenter.shared()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -29,12 +31,33 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         MPCManager.sharedController.connectedDelegate = self
         let songHasChanged = Notification.Name(rawValue: "SongHasChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(updateViewWithNewSong), name: songHasChanged, object: nil)
+        configureCommandCenter()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.updateViewWithNewSong()
         self.tableView.reloadData()
+    }
+    
+    func configureCommandCenter() {
+        self.commandCenter.playCommand.addTarget { (play) -> MPRemoteCommandHandlerStatus in
+            DataController.sharedController.sendPlayData()
+            MusicPlayerController.sharedController.broadcaterPlay()
+            return .success
+        }
+        
+        self.commandCenter.pauseCommand.addTarget { (pause) -> MPRemoteCommandHandlerStatus in
+            DataController.sharedController.sendPauseData()
+            MusicPlayerController.sharedController.broadcasterPause()
+            return .success
+        }
+        
+        self.commandCenter.nextTrackCommand.addTarget { (next) -> MPRemoteCommandHandlerStatus in
+            DataController.sharedController.sendNextSongData()
+            MusicPlayerController.sharedController.skip()
+            return .success
+        }
     }
     
     
