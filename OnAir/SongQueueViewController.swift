@@ -46,8 +46,9 @@ class SongQueueViewController: UIViewController, UITableViewDelegate, UITableVie
         // Add a background view to the table view
         let backgroundImage = UIImage(named: "Skylar")
         let imageView = UIImageView(image: backgroundImage)
+        // center and scale background image
+        imageView.contentMode = .scaleAspectFill
         self.tableView.backgroundView = imageView
-    
     }
     
     

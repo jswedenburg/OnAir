@@ -39,6 +39,8 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         
     }
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -50,6 +52,7 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         // center and scale background image
         imageView.contentMode = .scaleAspectFill
+        searchBarCustomizeAppearance()
     }
     
     
@@ -78,6 +81,43 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
             }
         }
     }
+    
+    
+    //changing physical appearance of Search Bar
+    func searchBarCustomizeAppearance()
+    {
+       
+        self.searchBar.layer.backgroundColor = UIColor.clear.cgColor
+        self.searchBar.layer.cornerRadius = 20.0
+        self.searchBar.clipsToBounds = false
+        self.searchBar.placeholder = "Search for an artist or a song"
+        self.searchBar.barTintColor = .white
+        self.searchBar.layer.borderColor = UIColor.white.cgColor
+        
+        //change the searchIcon
+        self.searchBar.setImage(#imageLiteral(resourceName: "Microphone"), for: UISearchBarIcon.search, state: UIControlState.normal)
+        
+//        let image = self.getImageWithColor(color: UIColor.clear, size: CGSize(width: 700, height: 30))
+//        searchBar.setSearchFieldBackgroundImage(image, for: .normal)
+    }
+    
+
+    
+   //function to create a rounded corner
+    func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: 20.0)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        path.fill()
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return image
+    }
+   
+
+    
+   
     
     func cellButtonTapped(cell: SongQueueTableViewCell) {
         

@@ -25,9 +25,16 @@ class SegmentedControlViewController: UIViewController  {
         //remove all borders and colors from the apple provided segmented control, see extension below
         segmentedControl.removeBorders()
         
-        //change text color of the segmented control titles
-        let titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
-        self.segmentedControl.setTitleTextAttributes(titleTextAttributes, for: .normal)
+        //change text font and color of the segmented control titles
+        segmentedControl.setFontSize(fontSize: 16)
+        
+        
+        
+        //let titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
+        //self.segmentedControl.setTitleTextAttributes(titleTextAttributes, for: .normal)
+        
+       
+        
         
         //default, add border color to search segment
         self.segmentedControl.selectedSegmentIndex = 0
@@ -37,6 +44,10 @@ class SegmentedControlViewController: UIViewController  {
                 self.setupBorder()
         }
     }
+    
+    
+  
+    
     
     
     //function called when tap is recognized
@@ -88,7 +99,7 @@ class SegmentedControlViewController: UIViewController  {
         
 //        bottomBorder.borderColor = UIColor.blue.cgColor
 //        bottomBorder.borderWidth = 3
-        bottomBorder.frame = CGRect(x: 0, y: self.segmentedControl.frame.size.height - bottomBorder.borderWidth, width: self.segmentedControl.frame.size.width, height: bottomBorder.borderWidth)
+  //      bottomBorder.frame = CGRect(x: 0, y: self.segmentedControl.frame.size.height - bottomBorder.borderWidth, width: self.segmentedControl.frame.size.width, height: bottomBorder.borderWidth)
 //        self.segmentedControl.layer.addSublayer(bottomBorder)
         
         
@@ -157,6 +168,27 @@ extension UISegmentedControl {
         UIGraphicsEndImageContext();
         return image!
     }
+    
+    
+ 
+        
+    func setFontSize(fontSize: CGFloat) {
+            
+            let normalTextAttributes: [String : AnyObject] = [
+                NSForegroundColorAttributeName: TeamMusicColor.ourColor,
+                NSFontAttributeName: UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightMedium)
+            ]
+            
+            let boldTextAttributes: [String : AnyObject] = [
+                NSForegroundColorAttributeName : TeamMusicColor.ourColor,
+                NSFontAttributeName : UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightBold),
+                ]
+            
+            self.setTitleTextAttributes(normalTextAttributes, for: .normal)
+            self.setTitleTextAttributes(normalTextAttributes, for: .highlighted)
+            self.setTitleTextAttributes(boldTextAttributes, for: .selected)
+    }
+    
     
 }
 

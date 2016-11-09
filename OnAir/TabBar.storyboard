@@ -30,7 +30,7 @@
         <scene sceneID="3hM-ly-Ozk">
             <objects>
                 <tabBarController id="W7a-Rd-3CY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="Music" id="FL9-8r-bvx"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="Musical Notes" id="FL9-8r-bvx"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="NnW-KP-ZGD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -48,7 +48,7 @@
         <scene sceneID="eRP-Cj-Pu7">
             <objects>
                 <viewControllerPlaceholder storyboardName="Discovery" id="vxD-1m-aOo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Bvi-Bp-7tq"/>
+                    <tabBarItem key="tabBarItem" title="Broadcast" image="Online" id="Bvi-Bp-7tq"/>
                     <navigationItem key="navigationItem" id="4Ar-mY-Qco"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u6s-ek-ZN5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -105,11 +105,11 @@
             </objects>
             <point key="canvasLocation" x="665" y="731"/>
         </scene>
-        <!--Item-->
+        <!--Broadcast-->
         <scene sceneID="H05-iL-6fc">
             <objects>
                 <tabBarController id="1JA-gt-pdI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="Binoculars" id="zBl-MO-MeH"/>
+                    <tabBarItem key="tabBarItem" title="Broadcast" image="Online" id="zBl-MO-MeH"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="dTc-g2-UbS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -127,7 +127,7 @@
         <scene sceneID="3Of-Bk-hs9">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ARp-83-3Jr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" image="FlashLight" id="LAG-5U-9dZ"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="Search" id="LAG-5U-9dZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BIG-xp-JqI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -144,8 +144,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Binoculars" width="25" height="25"/>
-        <image name="FlashLight" width="25" height="25"/>
         <image name="Music" width="25" height="25"/>
+        <image name="Musical Notes" width="25" height="25"/>
+        <image name="Online" width="25" height="25"/>
+        <image name="Search" width="25" height="25"/>
     </resources>
 </document>

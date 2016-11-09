@@ -24,11 +24,6 @@
                                     <segue destination="Vam-R8-hjf" kind="embed" id="AXM-FV-lMk"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qqf-mp-zkY">
-                                <connections>
-                                    <segue destination="UEV-3s-0xl" kind="embed" id="QvO-PX-bwv"/>
-                                </connections>
-                            </containerView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="J7g-xd-CfJ">
                                 <segments>
                                     <segment title="SEARCH"/>
@@ -38,6 +33,11 @@
                                     <action selector="showComponentWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="KNC-kZ-ike"/>
                                 </connections>
                             </segmentedControl>
+                            <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qqf-mp-zkY">
+                                <connections>
+                                    <segue destination="UEV-3s-0xl" kind="embed" id="QvO-PX-bwv"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -47,7 +47,7 @@
                             <constraint firstItem="qqf-mp-zkY" firstAttribute="top" secondItem="MUT-Fb-OMO" secondAttribute="top" id="X0s-eH-93N"/>
                             <constraint firstItem="J7g-xd-CfJ" firstAttribute="leading" secondItem="qqf-mp-zkY" secondAttribute="leading" id="cYw-bd-Xfd"/>
                             <constraint firstItem="J7g-xd-CfJ" firstAttribute="trailing" secondItem="MUT-Fb-OMO" secondAttribute="trailing" id="dMp-7i-N9m"/>
-                            <constraint firstItem="qqf-mp-zkY" firstAttribute="top" secondItem="J7g-xd-CfJ" secondAttribute="bottom" constant="16" id="f75-AA-n3l"/>
+                            <constraint firstItem="qqf-mp-zkY" firstAttribute="top" secondItem="J7g-xd-CfJ" secondAttribute="bottom" id="f75-AA-n3l"/>
                             <constraint firstItem="MUT-Fb-OMO" firstAttribute="trailing" secondItem="qqf-mp-zkY" secondAttribute="trailing" id="hKI-Wl-BJp"/>
                             <constraint firstAttribute="trailing" secondItem="J7g-xd-CfJ" secondAttribute="trailing" id="r4d-cd-Fgs"/>
                             <constraint firstItem="qqf-mp-zkY" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="rZe-K7-WDK"/>
@@ -74,7 +74,7 @@
                         <viewControllerLayoutGuide type="bottom" id="cJs-fy-tXl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="PXB-A5-F6g">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="570"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dAm-Qc-bB5">
@@ -190,7 +190,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Z2s-iY-xzP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Gu2-op-IF8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="570"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="96" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="skY-wl-xxb">
