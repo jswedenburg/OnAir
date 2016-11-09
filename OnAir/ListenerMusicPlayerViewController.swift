@@ -9,7 +9,7 @@
 import UIKit
 import MediaPlayer
 
-class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaster, ClearSongAfterDisconnectDelegate {
+class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaster {
     
     //MARK: Outlets
     @IBOutlet weak var albumCoverImageView: UIImageView!

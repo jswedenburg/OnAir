@@ -19,7 +19,6 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     
     //MARK: Properties
-    var song: Song?
     let player = MusicPlayerController.sharedController.systemPlayer
     
     @IBOutlet weak var tableView: UITableView!
@@ -36,10 +35,6 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     override func viewWillAppear(_ animated: Bool) {
         self.updateViewWithNewSong()
         self.tableView.reloadData()
-        
-        if MPCManager.sharedController.isAdvertising {
-            NotificationCenter.default.addObserver(self, selector: #selector(nowPlayingItemChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: player)
-        }
     }
     
     
