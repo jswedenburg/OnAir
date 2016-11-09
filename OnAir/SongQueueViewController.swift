@@ -28,6 +28,8 @@ class SongQueueViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.dataSource = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateTableView), name: Notification.Name(rawValue: "QueueHasChanged"), object: nil)
+        
+        self.tableView.separatorStyle = .none
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -37,6 +39,18 @@ class SongQueueViewController: UIViewController, UITableViewDelegate, UITableVie
         self.parent?.parent?.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Add a background view to the table view
+        let backgroundImage = UIImage(named: "Skylar")
+        let imageView = UIImageView(image: backgroundImage)
+        self.tableView.backgroundView = imageView
+    
+    }
+    
+    
     // MARK: TableView
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -45,6 +59,12 @@ class SongQueueViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "songQueueCell", for: indexPath) as? SongQueueTableViewCell else { return SongQueueTableViewCell() }
+        cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 0.8])
+        cell.layer.frame = CGRect(x: 20, y: 10, width: self.view.frame.size.width - 20 , height: 86)
+        cell.layer.masksToBounds = true
+        cell.layer.cornerRadius = 5.0
+        cell.layer.shadowOffset = CGSize(width: -1, height: 1)
+        cell.layer.shadowOpacity = 0.5
         let song = songs[indexPath.row]
         cell.updateCellWith(song: song)
         return cell
@@ -96,6 +116,7 @@ class SongQueueViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     
+   
     // MARK: Functions
     
     func updateTableView() {

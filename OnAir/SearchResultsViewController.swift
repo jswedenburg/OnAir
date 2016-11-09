@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuartzCore
 
 class SearchResultsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate,   SongAddedToQueueDelegate {
     
@@ -33,7 +34,22 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         self.tableView.delegate = self
         self.tableView.dataSource = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: Notification.Name(rawValue: "QueueHasChanged") , object: nil)
+        tableView.separatorStyle = .none
+    
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Add a background view to the table view
+        let backgroundImage = UIImage(named: "Skylar")
+        let imageView = UIImageView(image: backgroundImage)
+        self.tableView.backgroundView = imageView
+        // no lines where there aren't cells
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
+        // center and scale background image
+        imageView.contentMode = .scaleAspectFill
     }
     
     
@@ -142,9 +158,29 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "songCell", for: indexPath) as? SongQueueTableViewCell
         cell?.delegate = self
+        cell?.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 0.8])
+        cell?.layer.frame = CGRect(x: 20, y: 10, width: self.view.frame.size.width - 20 , height: 86)
+        cell?.layer.masksToBounds = true
+        cell?.layer.cornerRadius = 5.0
+        cell?.layer.shadowOffset = CGSize(width: -1, height: 1)
+        cell?.layer.shadowOpacity = 0.5
+        
+
+
+        
+        
+        
+//        cell?.layer.cornerRadius = 30
+//        cell?.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 0.8])
+//        cell?.frame = CGRect(x: 10, y: 8, width: self.view.frame.size.width - 20, height: 44)
+//        cell?.layer.masksToBounds = true
+//        cell?.layer.shadowOffset = CGSize(width: -1, height: 1)
+//        cell?.layer.shadowOpacity = 0.2
+        
         if indexPath.section == 0 {
             let song = songs[indexPath.row]
             cell?.album = nil
@@ -175,6 +211,18 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         
     }
     
+
+    
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//    
+//        cell.contentView.frame = CGRect(x: 10, y: 8, width: self.view.frame.size.width - 20, height: 66)
+//        cell.contentView.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 0.8])
+//        cell.layer.masksToBounds = false
+//        cell.layer.cornerRadius = 5.0
+//        cell.layer.shadowOffset = CGSize(width: -1, height: 1)
+//        cell.layer.shadowOpacity = 0.2
+//    
+//    }
     
     func alertControllerForFailedSearch() {
         let alertController = UIAlertController(title: "Error", message: "Unable to search. Please try back later.", preferredStyle: UIAlertControllerStyle.alert)

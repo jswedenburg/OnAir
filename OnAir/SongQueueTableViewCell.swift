@@ -25,6 +25,21 @@ class SongQueueTableViewCell: UITableViewCell {
     var songIsAdded: Bool?
     weak var delegate: SongAddedToQueueDelegate?
     
+    
+    //adding space between the cells of a tableview 
+    override var frame: CGRect {
+        get {
+            return super.frame
+        }
+        set (newFrame) {
+            var frame =  newFrame
+            frame.origin.y += 5
+            frame.size.height -= 2 * 5
+            super.frame = frame
+        }
+    }
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -68,6 +83,8 @@ class SongQueueTableViewCell: UITableViewCell {
             }
         }
     }
+    
+    
     
     @IBAction func addSongToQueueButtonTapped(sender: AnyObject) {
         delegate?.cellButtonTapped(cell: self)
