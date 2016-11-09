@@ -22,7 +22,10 @@ class DiscoveryViewController: UIViewController {
     //Outlets
     @IBOutlet weak var startStopAdvertisingButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var mainImage: UIImageView!
+    @IBOutlet weak var iconImage: UIImageView!
+    @IBOutlet weak var onAirImage: UIImageView!
+    @IBOutlet weak var soundImage: UIImageView!
+    
     
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -48,12 +51,8 @@ class DiscoveryViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isBrowsingNotification, object: nil)
         let isAdvertisingNotification = NSNotification.Name(rawValue: "isAdvertisingChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isAdvertisingNotification, object: nil)
-//        ImageController.imageForURL(imageEndpoint: mainImageURL) { (image) in
-//            DispatchQueue.main.async {
-//                guard let image = image else { return }
-//                self.mainImage.image = image
-//            }
-//        }
+        
+        self.soundImage.isHidden = true
     }
     
       
@@ -66,6 +65,8 @@ class DiscoveryViewController: UIViewController {
             MPCManager.sharedController.isAdvertising = false
             MPCManager.sharedController.disconnect()
             self.tableView.isUserInteractionEnabled = true
+            self.soundImage.isHidden = true
+            self.onAirImage.image = #imageLiteral(resourceName: "onAirBlack")
             
             
             
@@ -74,6 +75,8 @@ class DiscoveryViewController: UIViewController {
             MPCManager.sharedController.advertiser.startAdvertisingPeer()
             MPCManager.sharedController.isAdvertising = true
             self.tableView.isUserInteractionEnabled = false
+            self.soundImage.isHidden = false
+            self.onAirImage.image = #imageLiteral(resourceName: "OnAirRed")
             
         }
     }
@@ -97,13 +100,7 @@ class DiscoveryViewController: UIViewController {
             SongQueueController.sharedController.upNextQueue = []
         }
         
-        if MPCManager.sharedController.isAdvertising {
-            self.tabBarController?.tabBar.backgroundColor = UIColor.red
-        } else if MPCManager.isBrowsing {
-            self.tabBarController?.tabBar.backgroundColor = UIColor.green
-        } else {
-            self.tabBarController?.tabBar.backgroundColor = UIColor.white
-        }
+        
     }
     
     public func alert(title: String, message: String) {
@@ -208,7 +205,7 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "join a nearby broadcast"
+        return "Join a nearby broadcast"
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
