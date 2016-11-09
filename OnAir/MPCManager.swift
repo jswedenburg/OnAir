@@ -27,7 +27,7 @@
   }
   
   protocol ConnectedPeerArrayChangedDelegate {
-    func connectedPeersChanged()
+    func connectedPeersChanged(peerID: MCPeerID)
   }
   
   class MPCManager: NSObject , MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
@@ -137,7 +137,7 @@
             browser.stopBrowsingForPeers()
             MPCManager.isBrowsing = false
             print("Connected")
-            connectedDelegate?.connectedPeersChanged()
+            connectedDelegate?.connectedPeersChanged(peerID: peer)
         case MCSessionState.connecting:
             print("Connecting")
         default:
@@ -146,7 +146,7 @@
                 connectedPeers.remove(at: index!)
             }
             print("Disconnected")
-            connectedDelegate?.connectedPeersChanged()
+            connectedDelegate?.connectedPeersChanged(peerID: peer)
         }
     }
     

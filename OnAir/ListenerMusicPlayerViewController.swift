@@ -23,26 +23,13 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     
     @IBAction func addSongToLibrary(sender: UIButton) {
         let mediaLibrary = MPMediaLibrary.default()
-        if let song = self.song {
+        if let song = DataController.sharedController.song {
             mediaLibrary.addItem(withProductID: String(song.songID), completionHandler: nil)
             print("song added to library")
         }
     }
     
     //MARK: Properties
-    // Will be needing for the broadcaster to send trackID, songName, and artistName.
-    var previouslyPlayedSongs: [Song] = [] {
-        didSet{
-            tableView.reloadData()
-        }
-    }
-    
-    var song: Song?{
-        didSet{
-            guard let song = self.song else { return }
-                self.updateViewWith(song: song)
-        }
-    }
     
     let player = MusicPlayerController.sharedController.systemPlayer
     let historyQueueHasChanged = Notification.Name(rawValue: "historyQueueHasChanged")
@@ -55,45 +42,20 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         tableView.delegate = self
         tableView.dataSource = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: historyQueueHasChanged, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: Notification.Name(rawValue: "DisconnectedFromSession"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleListenerInteraction(notification:)), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: player)
-        DiscoveryViewController.clearSongDelegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: Notification.Name(rawValue: "SongHasChanged"), object: nil)
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if MPCManager.sharedController.isAdvertising {
-            NotificationCenter.default.removeObserver(self, name: .MPMusicPlayerControllerPlaybackStateDidChange , object: nil)
-        } else {
-            NotificationCenter.default.addObserver(self, selector: #selector(handleListenerInteraction(notification:)), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: player)
-            player.beginGeneratingPlaybackNotifications()
-        }
         self.tabBarController?.tabBar.tintColor = TeamMusicColor.ourColor
     }
     
     //MARK: Helper Functions
     
-    func getRidOfThatSong() {
-        self.song = nil
-        guard let image = mainImage else { return }
-        self.albumCoverImageView.image = image
-    }
     
-    func handleListenerInteraction(notification: Notification) {
-//        
-//        if MPCManager.sharedController.isAdvertising == false {
-//            switch player.playbackState {
-//            case .paused:
-//                MusicPlayerController.sharedController.listenerPause()
-//            case .playing:
-//                MusicPlayerController.sharedController.listenerPlay()
-//            default:
-//                print("listener did something else")
-//            }
-//        }
-        
-        
-    }
+    
+    
     
     func updateViewWith(song: Song) {
         DispatchQueue.main.async {
@@ -111,15 +73,15 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     }
     
     func clearSong() {
-        self.song = nil
-        self.albumNameLabel.text = ""
-        self.songNameLabel.text = ""
-        self.artistNameLabel.text = ""
-        self.albumCoverImageView.image = UIImage()
+        if DataController.sharedController.song == nil {
+            self.albumNameLabel.text = ""
+            self.songNameLabel.text = ""
+            self.artistNameLabel.text = ""
+            self.albumCoverImageView.image = UIImage()
+        }
     }
     
     func dataReceivedFromBroadcast(data: Data) {
-        player.endGeneratingPlaybackNotifications()
         guard let dictionaryFromData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: Any] else { return }
         
         guard let instruction = dictionaryFromData["instruction"] as? String?,
@@ -130,8 +92,6 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         if songDictionary != nil {
             guard let songDictionary  = dictionaryFromData["song"] as? [String: Any],
                 let song = Song(dictionary: songDictionary) else { return }
-            self.song = song
-            updateViewWith(song: song)
             MusicPlayerController.sharedController.setBroadcaterQueueWith(ids: ["\(song.songID)"])
             updateViewWith(song: song)
         }
@@ -143,7 +103,6 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                 print("play")
                 if timeStamp != nil && playbacktimeStamp != nil{
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                        MusicPlayerController.sharedController.systemPlayer.prepareToPlay()
                         MusicPlayerController.sharedController.setCurrentPlaybackTime(Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.2)
                     })
                     
@@ -154,13 +113,11 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                 MusicPlayerController.sharedController.broadcasterPause()
             case "next":
                 print("next")
-                MusicPlayerController.sharedController.systemPlayer.prepareToPlay()
                 MusicPlayerController.sharedController.setCurrentPlaybackTime(Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.1)
                 MusicPlayerController.sharedController.broadcaterPlay()
             default: ()
             }
         }
-        player.beginGeneratingPlaybackNotifications()
     }
     
 }
@@ -168,9 +125,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
 
 //MARK: Tableview Datasource and Delegate
 extension ListenerMusicPlayerViewController: UITableViewDelegate, UITableViewDataSource{
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return SongQueueController.sharedController.historyQueue.count
     }
