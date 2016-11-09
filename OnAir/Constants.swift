@@ -10,5 +10,5 @@ import UIKit
 
 struct TeamMusicColor {
     
-    static var ourColor = UIColor(red: 65/255, green: 244/255, blue: 208/255, alpha: 1)
+    static var ourColor = UIColor(red: 0/255, green: 0/255, blue: 102/255, alpha: 1)
 }
