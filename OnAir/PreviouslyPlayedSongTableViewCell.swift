@@ -13,7 +13,8 @@ class PreviouslyPlayedSongTableViewCell: UITableViewCell {
     @IBOutlet weak var songNameLabel: UILabel!
     @IBOutlet weak var artistNameLabel: UILabel!
     
-    func updateCellWith(songName: String, artistName: String){
+    func updateCellWith(songName: String?, artistName: String?){
+        guard let songName = songName, let artistName = artistName else { return }
         songNameLabel.text = songName
         artistNameLabel.text = artistName
     }

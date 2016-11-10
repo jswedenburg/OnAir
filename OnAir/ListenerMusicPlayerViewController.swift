@@ -94,6 +94,13 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                 let song = Song(dictionary: songDictionary) else { return }
             MusicPlayerController.sharedController.setBroadcaterQueueWith(ids: ["\(song.songID)"])
             updateViewWith(song: song)
+            
+            if !SongQueueController.sharedController.historyQueue.contains(song){
+                SongQueueController.sharedController.historyQueue.append(song)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
         }
         
         if instruction != nil{
@@ -105,7 +112,6 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                         MusicPlayerController.sharedController.setCurrentPlaybackTime(Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.7)
                     })
-                    
                 }
                 MusicPlayerController.sharedController.broadcaterPlay()
             case "pause":
@@ -130,16 +136,19 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
 extension ListenerMusicPlayerViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SongQueueController.sharedController.historyQueue.count
+        if SongQueueController.sharedController.historyQueue.count <= 1 {
+            return 0
+        } else {
+            return SongQueueController.sharedController.historyQueue.count - 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "previousSongCell", for: indexPath) as? PreviouslyPlayedSongTableViewCell else { return PreviouslyPlayedSongTableViewCell() }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recentSongCell", for: indexPath) as? PreviouslyPlayedSongTableViewCell
         let song = SongQueueController.sharedController.historyQueue[indexPath.row]
         
-        cell.artistNameLabel.text = song.artist
-        cell.songNameLabel.text = song.name
+        cell?.updateCellWith(songName: song.name, artistName: song.artist)
         
-        return cell
+        return cell ?? PreviouslyPlayedSongTableViewCell()
     }
 }
