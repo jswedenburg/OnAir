@@ -42,19 +42,27 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     @IBAction func playButtonPressed(){
         if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
             DataController.sharedController.sendPauseData()
-            MusicPlayerController.sharedController.broadcasterPause()
         } else {
             DataController.sharedController.sendPlayData()
-            MusicPlayerController.sharedController.broadcaterPlay()
         }
     }
     
     @IBAction func nextButtonPressed() {
-        DataController.sharedController.sendNextSongData()
-        MusicPlayerController.sharedController.skip()
-        if MusicPlayerController.sharedController.getApplicationPlayerState() != .playing{
-            MusicPlayerController.sharedController.broadcaterPlay()
+        if SongQueueController.sharedController.upNextQueue.count == 1 {
+            DataController.sharedController.sendStopData()
+            SongQueueController.sharedController.upNextQueue = []
+            alert(title: "Out of songs!", message: "Add more songs to the queue to keep listening")
+        } else {
+            SongQueueController.sharedController.upNextQueue.remove(at: 0)
+            DataController.sharedController.sendPlayData()
         }
+    }
+    
+    func alert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(ok)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func connectedPeersChanged(peerID: MCPeerID) {
@@ -87,10 +95,4 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
             self.songAlbumImageView.image = image
         }
     }
-    
-    var didChange: Bool = false
-    var index = 0
-    var timeStamp = Date()
-    
-    
 }

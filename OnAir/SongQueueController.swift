@@ -12,20 +12,16 @@ class SongQueueController {
     
     static let sharedController = SongQueueController()
     let historyQueueHasChanged = Notification.Name(rawValue: "historyQueueHasChanged")
+    var oldSong: Song?
     
     var upNextQueue: [Song] = [] {
         didSet {
-            var newSong: Song?
-            var oldSong: Song?
-            
-            newSong = upNextQueue[0]
+            let newSong = upNextQueue.first
             
             if upNextQueue.count > 0 && oldSong != newSong {
                 DataController.sharedController.song = newSong
                 let songIds = upNextQueue.map({"\($0.songID)"})
                 MusicPlayerController.sharedController.setBroadcaterQueueWith(ids: songIds )
-                let notification = Notification(name: Notification.Name(rawValue: "QueueHasChanged"))
-                NotificationCenter.default.post(notification)
                 if oldSong != nil {
                     historyQueue.append(oldSong!)
                 }
@@ -33,6 +29,8 @@ class SongQueueController {
             } else if upNextQueue.count == 0 {
                 DataController.sharedController.song = nil
             }
+            let notification = Notification(name: Notification.Name(rawValue: "QueueHasChanged"))
+            NotificationCenter.default.post(notification)
         }
     }
     

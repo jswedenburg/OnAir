@@ -22,6 +22,11 @@ protocol MusicPlayerControllerNowPlayingDelegate: class {
 
 class MusicPlayerController{
     
+    init() {
+        systemPlayer.repeatMode = .none
+        systemPlayer.shuffleMode = .off
+    }
+    
     let systemPlayer = MPMusicPlayerController.systemMusicPlayer()
 //    let systemPlayer = MPMusicPlayerController.systemMusicPlayer()
     

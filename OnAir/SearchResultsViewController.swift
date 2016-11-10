@@ -200,7 +200,7 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         if MPCManager.sharedController.isAdvertising {
             if indexPath.section == 0 {
                 let song = songs[indexPath.row]
-                SongQueueController.sharedController.appendSongToTopOfQueue(song)
+                SongQueueController.sharedController.addSongToUpNext(newSong: song)
             }
         } else {
             presentAlertController()

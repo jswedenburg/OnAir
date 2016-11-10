@@ -18,7 +18,11 @@ class DataController {
     
     var song: Song? {
         didSet {
-            sendPlayData()
+            
+            if song == nil {
+                MusicPlayerController.sharedController.stop()
+            }
+            
             let songHasChanged = Notification.Name(rawValue: "SongHasChanged")
             NotificationCenter.default.post(name: songHasChanged, object: nil)
         }
@@ -32,6 +36,7 @@ class DataController {
     
     func sendPlayData() {
         timeStamp = Date()
+        MusicPlayerController.sharedController.systemPlayer.play()
         makeDataDictionary(instruction: "play") { (messageData) in
             guard let messageData = messageData else { return }
             MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
@@ -40,25 +45,37 @@ class DataController {
     
     func sendPauseData() {
         timeStamp = Date()
+        MusicPlayerController.sharedController.systemPlayer.pause()
         makeDataDictionary(instruction: "pause") { (messageData) in
             guard let messageData = messageData else { return }
             MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
         }
-        
     }
     
     func sendNextSongData() {
+        MusicPlayerController.sharedController.systemPlayer.skipToNextItem()
         makeDataDictionary(instruction: "next") { (messageData) in
             guard let messageData = messageData else { return }
             MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
         }
     }
     
+    func sendStopData() {
+        MusicPlayerController.sharedController.systemPlayer.stop()
+        makeDataDictionary(instruction: "stop") { (messageData) in
+            guard let messageData = messageData else { return }
+            MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
+        }
+    }
+    
     func makeDataDictionary(instruction: String, completion: (_ messageDict: [String: Any]?)-> Void){
-        guard let song = self.song else { return }
-        let messageDict: [String: Any] = ["instruction": instruction, "playbackTime": MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime(), "timeStamp": Date(), "song": song.dictionaryRepresentation]
-        
-        completion(messageDict)
+        if self.song == nil {
+            let messageDict: [String: Any] = ["instruction": instruction, "playbackTime": MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime(), "timeStamp": Date(), "song": [:]]
+            completion(messageDict)
+        } else {
+            let messageDict: [String: Any] = ["instruction": instruction, "playbackTime": MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime(), "timeStamp": Date(), "song": song!.dictionaryRepresentation]
+            completion(messageDict)
+        }
     }
     
     func sendDataToNew(peer: MCPeerID?){

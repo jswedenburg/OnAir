@@ -174,7 +174,7 @@
         
         let dataToSend = NSKeyedArchiver.archivedData(withRootObject: dictionary)
         do {
-            try session.send(dataToSend, toPeers: peers, with: .reliable)
+            try session.send(dataToSend, toPeers: peers, with: .unreliable)
         } catch  {
             print("Sending Failed")
         }
