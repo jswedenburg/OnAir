@@ -12,22 +12,29 @@ class SongQueueController {
     
     static let sharedController = SongQueueController()
     let historyQueueHasChanged = Notification.Name(rawValue: "historyQueueHasChanged")
+    var oldSong: Song?
     
     var upNextQueue: [Song] = [] {
         didSet {
-            //TODO: Send songqueue when it changes
+            let newSong = upNextQueue.first
             
-            let arraySongIds = upNextQueue.map{"\($0.songID)"}
-            MusicPlayerController.sharedController.setBroadcaterQueueWith(ids: arraySongIds )
-            
+            if upNextQueue.count > 0 && oldSong != newSong {
+                DataController.sharedController.song = newSong
+                let songIds = upNextQueue.map({"\($0.songID)"})
+                MusicPlayerController.sharedController.setBroadcaterQueueWith(ids: songIds )
+                if oldSong != nil {
+                    historyQueue.append(oldSong!)
+                }
+                oldSong = newSong
+            } else if upNextQueue.count == 0 {
+                DataController.sharedController.song = nil
+            }
             let notification = Notification(name: Notification.Name(rawValue: "QueueHasChanged"))
             NotificationCenter.default.post(notification)
         }
     }
     
-    
     var historyQueue: [Song] = []
-    static var disableAddingSong = false
     
     func addSongToUpNext(newSong: Song) {
         upNextQueue.append(newSong)
@@ -50,16 +57,10 @@ class SongQueueController {
     }
     
     func appendSongToTopOfQueue(_ song: Song){
-        print(#function)
-        if MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime() <= 1 { return }
-        
-        if MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime() > 0 {
-            print(MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime())
-            addSongToHistoryFromUpNext()
-        }
-        
-        if SongQueueController.sharedController.upNextQueue.index(of: song) != nil {
-            let songIndex = SongQueueController.sharedController.upNextQueue.index(of: song)
+        let time = MusicPlayerController.sharedController.getApplicationPlayerPlaybackTime()
+        if time <= 1 { return }
+        if upNextQueue.index(of: song) != nil {
+            let songIndex = upNextQueue.index(of: song)
             upNextQueue.remove(at: songIndex!)
             upNextQueue.insert(song, at: 0)
         } else {
