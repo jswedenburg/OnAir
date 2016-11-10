@@ -33,16 +33,7 @@ class SegmentedControlViewController: UIViewController  {
         //let titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
         //self.segmentedControl.setTitleTextAttributes(titleTextAttributes, for: .normal)
         
-       
-        
-        
-        //default, add border color to search segment
-        self.segmentedControl.selectedSegmentIndex = 0
-        if segmentedControl.selectedSegmentIndex == 0 {
-                self.searchView.alpha = 1
-                self.songQueueView.alpha = 0
-                self.setupBorder()
-        }
+    
     }
     
     
@@ -64,6 +55,13 @@ class SegmentedControlViewController: UIViewController  {
         } else {
             self.segmentedControl.setEnabled(false, forSegmentAt: 1)
         }
+        
+        //default, add border color to search segment before selection is made 
+        self.segmentedControl.selectedSegmentIndex = 0
+        if segmentedControl.selectedSegmentIndex == 0 {
+            self.setupBorder()
+        }
+        
         
     }
     

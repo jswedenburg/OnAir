@@ -69,7 +69,7 @@
         <scene sceneID="F1r-j1-8WI">
             <objects>
                 <viewControllerPlaceholder storyboardName="BroadcastMusicPlayer" id="qh4-uZ-cl7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="lYe-Ll-zxl"/>
+                    <tabBarItem key="tabBarItem" title="Broadcast" image="Musical Notes" id="lYe-Ll-zxl"/>
                     <navigationItem key="navigationItem" id="fgz-fo-gOb"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jhm-eb-79d" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -80,7 +80,7 @@
         <scene sceneID="Pyp-Xi-7bT">
             <objects>
                 <tabBarController id="4K8-fu-mvi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="Music" id="hMT-eb-CAj"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="Musical Notes" id="hMT-eb-CAj"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="N3p-K0-LbG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -98,7 +98,7 @@
         <scene sceneID="aax-tc-tZc">
             <objects>
                 <viewControllerPlaceholder storyboardName="ListenerMusicPlayer" id="XUf-Hv-wkA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="wIX-Ya-Ij8"/>
+                    <tabBarItem key="tabBarItem" title="Listen" image="Musical Notes" id="wIX-Ya-Ij8"/>
                     <navigationItem key="navigationItem" id="vcn-w4-jno"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yai-L5-Txf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -144,7 +144,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Music" width="25" height="25"/>
         <image name="Musical Notes" width="25" height="25"/>
         <image name="Online" width="25" height="25"/>
         <image name="Search" width="25" height="25"/>
