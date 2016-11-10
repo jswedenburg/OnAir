@@ -29,6 +29,8 @@ class CustomTabBar: UIView {
     var customTabBarItems: [CustomTabBarItem]!
     var tabBarButtons: [UIButton]!
     
+    var initialTabBarItemIndex: Int!
+    var selectedTabBarItemIndex: Int!
     
     
     //MARK: Initializers
@@ -42,6 +44,12 @@ class CustomTabBar: UIView {
     
     //MARK: Target Actions
     func barItemTapped(sender: UIButton) {
+        //this code allows the selection and deselection of tab bar items and changing colors upon selection and deselection  
+        let index = tabBarButtons.index(of: sender)!
+        animateTabBarSelection(from: selectedTabBarItemIndex, to: index)
+        selectedTabBarItemIndex = index
+        delegate.didSelectViewController(tabBarView: self, atIndex: index)
+        
         if tabBarButtons.index(of: sender) == 2 {
             if MPCManager.sharedController.isAdvertising{
                 delegate.didSelectViewController(tabBarView: self, atIndex: 2)
@@ -71,12 +79,25 @@ class CustomTabBar: UIView {
         
         customTabBarItems = []
         tabBarButtons = []
+        initialTabBarItemIndex = 0
+        selectedTabBarItemIndex = initialTabBarItemIndex
         
         let containers = createTabBarItemContainers()
         createTabBarItems(containers: containers)
+        
+        
        
         
     }
+    
+    
+    
+    func animateTabBarSelection(from: Int, to: Int) {
+            self.customTabBarItems[from].iconView.tintColor = UIColor.gray
+            self.customTabBarItems[to].iconView.tintColor = TeamMusicColor.ourColor
+    }
+    
+    
     
     func createTabBarItemContainers() -> [CGRect] {
         var containerArray = [CGRect]()
@@ -107,9 +128,11 @@ class CustomTabBar: UIView {
             let container = containers[index]
             let customTabBarItem = CustomTabBarItem(frame: container)
             customTabBarItem.setup(item: item)
+         
             
             self.addSubview(customTabBarItem)
             customTabBarItems.append(customTabBarItem)
+
             
             let button = UIButton(frame: CGRect(x: container.origin.x, y: container.origin.y, width: container.width, height: container.height))
             
@@ -120,11 +143,11 @@ class CustomTabBar: UIView {
             
             index += 1
         }
+        self.customTabBarItems[initialTabBarItemIndex].iconView.tintColor = TeamMusicColor.ourColor
         
     }
     
-    
-    
+ 
     
     
 }
