@@ -28,17 +28,11 @@ class CustomTabBarController: UITabBarController, CustomTabBarDataSource, Custom
         setUpCustomTabBar()
         let name = NSNotification.Name("isAdvertisingChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(setUpCustomTabBar), name: name, object: nil)
-           let customTabBar = CustomTabBar(frame: self.tabBar.frame)
-        // set the color of the active tab
-        customTabBar.tintColor = TeamMusicColor.ourColor
-
-    
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        let customTabBar = CustomTabBar(frame: self.tabBar.frame)
-        customTabBar.tintColor = TeamMusicColor.ourColor
-    }
+    
+ 
+  
     
     
     //MARK: Helper Functions
