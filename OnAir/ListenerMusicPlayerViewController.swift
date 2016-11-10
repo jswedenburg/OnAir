@@ -145,7 +145,8 @@ extension ListenerMusicPlayerViewController: UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recentSongCell", for: indexPath) as? PreviouslyPlayedSongTableViewCell
-        let song = SongQueueController.sharedController.historyQueue[indexPath.row]
+        
+        let song = SongQueueController.sharedController.historyQueue.reversed()[indexPath.row + 1]
         
         cell?.updateCellWith(songName: song.name, artistName: song.artist)
         

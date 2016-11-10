@@ -46,9 +46,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "BroadcastMusicPlayerViewController"
-            landmarkType = "3">
+            endingLineNumber = "123">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -78,9 +76,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "sendNextSongData()"
-            landmarkType = "7">
+            endingLineNumber = "146">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -126,9 +122,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "sendDataToNew(peer:)"
-            landmarkType = "7">
+            endingLineNumber = "178">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -142,9 +136,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "188"
-            endingLineNumber = "188"
-            landmarkName = "nowPlayingItemChanged()"
-            landmarkType = "7">
+            endingLineNumber = "188">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -154,11 +146,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnAir/SongQueueController.swift"
-            timestampString = "500458380.498771"
+            timestampString = "500507725.771946"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "SongQueueController"
             landmarkType = "3">
          </BreakpointContent>

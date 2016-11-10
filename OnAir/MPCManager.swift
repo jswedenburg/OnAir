@@ -147,6 +147,8 @@
             }
             print("Disconnected")
             connectedDelegate?.connectedPeersChanged(peerID: peer)
+            let name = Notification.Name(rawValue: "diconnected")
+            NotificationCenter.default.post(name: name, object: nil)
         }
     }
     

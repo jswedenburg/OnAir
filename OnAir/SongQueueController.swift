@@ -14,6 +14,11 @@ class SongQueueController {
     let historyQueueHasChanged = Notification.Name(rawValue: "historyQueueHasChanged")
     var oldSong: Song?
     
+    init(){
+        let name = Notification.Name(rawValue: "diconnected")
+        NotificationCenter.default.addObserver(self, selector: #selector(resetHistory), name: name, object: nil)
+    }
+    
     var upNextQueue: [Song] = [] {
         didSet {
             let newSong = upNextQueue.first
@@ -70,5 +75,9 @@ class SongQueueController {
             upNextQueue.insert(song, at: 0)
         }
         
+    }
+    
+    @objc func resetHistory(){
+        historyQueue = []
     }
 }
