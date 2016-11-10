@@ -97,8 +97,8 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         //change the searchIcon
         self.searchBar.setImage(#imageLiteral(resourceName: "Microphone"), for: UISearchBarIcon.search, state: UIControlState.normal)
         
-//        let image = self.getImageWithColor(color: UIColor.clear, size: CGSize(width: 700, height: 30))
-//        searchBar.setSearchFieldBackgroundImage(image, for: .normal)
+        //removes lines around searchBar
+        searchBar.backgroundImage = UIImage()
     }
     
 
@@ -178,13 +178,17 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
     //MARK:- Table view data source function
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Songs"
+        //hides section header if there are no rows
+        if tableView.dataSource?.tableView(tableView, numberOfRowsInSection: section) == 0 {
+            return nil
         } else {
-            return "Albums"
+            if section == 0 {
+                return "Songs"
+            } else {
+                return "Albums"
+            }
         }
     }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
