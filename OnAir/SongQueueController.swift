@@ -34,7 +34,11 @@ class SongQueueController {
         }
     }
     
-    var historyQueue: [Song] = []
+    var historyQueue: [Song] = [] {
+        didSet{
+            NotificationCenter.default.post(name: historyQueueHasChanged, object: nil)
+        }
+    }
     
     func addSongToUpNext(newSong: Song) {
         upNextQueue.append(newSong)
@@ -49,7 +53,6 @@ class SongQueueController {
         guard let song = upNextQueue.first else { return }
         upNextQueue.remove(at: 0)
         historyQueue.insert(song, at: 0)
-        NotificationCenter.default.post(name: historyQueueHasChanged, object: nil)
     }
     
     func isInQueue(song: Song) -> Bool {
