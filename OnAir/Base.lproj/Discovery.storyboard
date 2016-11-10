@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A319" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,22 +20,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="soundIcon" translatesAutoresizingMaskIntoConstraints="NO" id="4rW-Ud-AdM" userLabel="soundImage">
-                                <rect key="frame" x="121" y="35" width="133" height="58"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="58" id="2mZ-N9-igO"/>
-                                    <constraint firstAttribute="width" secondItem="4rW-Ud-AdM" secondAttribute="height" multiplier="133:58" id="VYl-wR-CwN"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onAirBlack" translatesAutoresizingMaskIntoConstraints="NO" id="ykz-MX-kAr" userLabel="onAirImage">
-                                <rect key="frame" x="101.5" y="352" width="172" height="73"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="ykz-MX-kAr" secondAttribute="height" multiplier="172:73" id="Ave-iY-6mv"/>
-                                    <constraint firstAttribute="width" constant="172" id="SBZ-AI-qVl"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSH-mo-yEG" userLabel="Start Stop Broadcasting Button">
-                                <rect key="frame" x="96.5" y="433" width="182" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Start Broadcasting">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -48,7 +30,6 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aXI-Xp-jiT">
-                                <rect key="frame" x="10" y="480" width="355" height="187"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="187" id="DWu-br-Hab"/>
@@ -58,24 +39,21 @@
                                         <rect key="frame" x="0.0" y="28" width="355" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QUz-WZ-tiW" id="Nox-qi-6Q9">
-                                            <rect key="frame" x="0.0" y="0.0" width="355" height="43"/>
+                                            <frame key="frameInset" width="355" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6i-PR-zFO">
-                                                    <rect key="frame" x="8" y="8" width="0.0" height="27"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="EH5-ql-qWx">
-                                                    <rect key="frame" x="288" y="8" width="27" height="27"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="EH5-ql-qWx" secondAttribute="height" multiplier="1:1" id="6qa-uL-OR2"/>
                                                     </constraints>
                                                     <color key="color" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </activityIndicatorView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJm-Gd-xSC">
-                                                    <rect key="frame" x="190" y="8" width="117" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="117" id="UFs-Og-FPm"/>
                                                     </constraints>
@@ -107,10 +85,9 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Microphone" translatesAutoresizingMaskIntoConstraints="NO" id="f0X-pC-4kQ" userLabel="iconImage">
-                                <rect key="frame" x="-7" y="98" width="389" height="244"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MicOff" translatesAutoresizingMaskIntoConstraints="NO" id="v9c-VF-42P">
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="f0X-pC-4kQ" secondAttribute="height" multiplier="207:130" id="QFI-a2-4a6"/>
+                                    <constraint firstAttribute="height" constant="425" id="rfS-TJ-lJr"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -119,34 +96,26 @@
                             <constraint firstItem="aXI-Xp-jiT" firstAttribute="top" secondItem="zSH-mo-yEG" secondAttribute="bottom" constant="8" id="3cu-V9-c33"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="aXI-Xp-jiT" secondAttribute="bottom" id="7az-pz-RR6"/>
                             <constraint firstItem="aXI-Xp-jiT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="GD9-0i-BRV"/>
-                            <constraint firstItem="4rW-Ud-AdM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="15" id="Lb9-1z-5Iu"/>
+                            <constraint firstItem="zSH-mo-yEG" firstAttribute="top" secondItem="v9c-VF-42P" secondAttribute="bottom" constant="8" symbolic="YES" id="Ljt-6n-4ry"/>
                             <constraint firstItem="zSH-mo-yEG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="N4a-eG-aDy"/>
                             <constraint firstAttribute="trailing" secondItem="aXI-Xp-jiT" secondAttribute="trailing" constant="10" id="Yqw-iZ-LEh"/>
-                            <constraint firstItem="ykz-MX-kAr" firstAttribute="top" secondItem="f0X-pC-4kQ" secondAttribute="bottom" constant="10" id="ZDs-Po-gk2"/>
-                            <constraint firstItem="f0X-pC-4kQ" firstAttribute="top" secondItem="4rW-Ud-AdM" secondAttribute="bottom" constant="5" id="aVO-L8-OIl"/>
-                            <constraint firstItem="4rW-Ud-AdM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dN8-zd-kLh"/>
-                            <constraint firstItem="f0X-pC-4kQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gtd-Kt-SUX"/>
-                            <constraint firstItem="ykz-MX-kAr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tD6-U5-zt7"/>
-                            <constraint firstItem="zSH-mo-yEG" firstAttribute="top" secondItem="ykz-MX-kAr" secondAttribute="bottom" constant="8" id="thV-9r-iuw"/>
+                            <constraint firstItem="v9c-VF-42P" firstAttribute="centerX" secondItem="zSH-mo-yEG" secondAttribute="centerX" id="jMN-wZ-ZcR"/>
+                            <constraint firstItem="v9c-VF-42P" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ntU-KO-RPI"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" id="9G4-bN-5gI"/>
                     <connections>
-                        <outlet property="iconImage" destination="f0X-pC-4kQ" id="wr3-Im-DJl"/>
-                        <outlet property="onAirImage" destination="ykz-MX-kAr" id="rtA-2O-4N5"/>
-                        <outlet property="soundImage" destination="4rW-Ud-AdM" id="Ehz-Jq-Qvq"/>
+                        <outlet property="micImage" destination="v9c-VF-42P" id="cxf-Nk-QAH"/>
                         <outlet property="startStopAdvertisingButton" destination="zSH-mo-yEG" id="5JL-yo-YEp"/>
                         <outlet property="tableView" destination="aXI-Xp-jiT" id="gud-yW-PFU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2071.0144927536235" y="94.565217391304358"/>
+            <point key="canvasLocation" x="2069.5999999999999" y="94.002998500749626"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Microphone" width="2100" height="1752"/>
-        <image name="onAirBlack" width="1050" height="468"/>
-        <image name="soundIcon" width="666" height="237"/>
+        <image name="MicOff" width="283" height="365"/>
     </resources>
 </document>

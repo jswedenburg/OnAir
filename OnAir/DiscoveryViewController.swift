@@ -22,9 +22,7 @@ class DiscoveryViewController: UIViewController {
     //Outlets
     @IBOutlet weak var startStopAdvertisingButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var iconImage: UIImageView!
-    @IBOutlet weak var onAirImage: UIImageView!
-    @IBOutlet weak var soundImage: UIImageView!
+    @IBOutlet weak var micImage: UIImageView!
     
     
     
@@ -51,8 +49,6 @@ class DiscoveryViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isBrowsingNotification, object: nil)
         let isAdvertisingNotification = NSNotification.Name(rawValue: "isAdvertisingChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isAdvertisingNotification, object: nil)
-        
-        self.soundImage.isHidden = true
     }
     
       
@@ -65,8 +61,7 @@ class DiscoveryViewController: UIViewController {
             MPCManager.sharedController.isAdvertising = false
             MPCManager.sharedController.disconnect()
             self.tableView.isUserInteractionEnabled = true
-            self.soundImage.isHidden = true
-            self.onAirImage.image = #imageLiteral(resourceName: "onAirBlack")
+            turnOn(MPCManager.sharedController.isAdvertising)
             
             
             
@@ -75,8 +70,7 @@ class DiscoveryViewController: UIViewController {
             MPCManager.sharedController.advertiser.startAdvertisingPeer()
             MPCManager.sharedController.isAdvertising = true
             self.tableView.isUserInteractionEnabled = false
-            self.soundImage.isHidden = false
-            self.onAirImage.image = #imageLiteral(resourceName: "OnAirRed")
+            turnOn(MPCManager.sharedController.isAdvertising)
             
         }
     }
@@ -101,6 +95,16 @@ class DiscoveryViewController: UIViewController {
         }
         
         
+    }
+    
+    func turnOn(_ bool: Bool){
+        UIView.animate(withDuration: 0.8) {
+            if bool {
+                self.micImage.image = #imageLiteral(resourceName: "MicOn")
+            } else {
+                self.micImage.image = #imageLiteral(resourceName: "MicOff")
+            }
+        }
     }
     
     public func alert(title: String, message: String) {
