@@ -44,7 +44,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: historyQueueHasChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: Notification.Name(rawValue: "SongHasChanged"), object: nil)
         
-        
+        self.tableView.separatorStyle = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,7 +146,17 @@ extension ListenerMusicPlayerViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recentSongCell", for: indexPath) as? PreviouslyPlayedSongTableViewCell
         
+<<<<<<< HEAD
         let song = SongQueueController.sharedController.historyQueue.reversed()[indexPath.row + 1]
+=======
+        cell?.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 0.96])
+        cell?.layer.frame = CGRect(x: 20, y: 10, width: self.view.frame.size.width - 20 , height: 86)
+        cell?.layer.masksToBounds = true
+        cell?.layer.cornerRadius = 10.0
+        cell?.layer.shadowOffset = CGSize(width: -1, height: 1)
+        cell?.layer.shadowOpacity = 0.5
+        let song = SongQueueController.sharedController.historyQueue[indexPath.row]
+>>>>>>> feature/UIDiscoveryView
         
         cell?.updateCellWith(songName: song.name, artistName: song.artist)
         

@@ -27,8 +27,21 @@ class DiscoveryTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
-
     
+    
+    //adding space between the cells of a tableview
+    override var frame: CGRect {
+        get {
+            return super.frame
+        }
+        set (newFrame) {
+            var frame =  newFrame
+            frame.origin.y += 5
+            frame.size.height -= 2 * 5
+            super.frame = frame
+        }
+    }
+
     
     func updateSelectedBroadcastorWith(peer: MCPeerID!)
     {
