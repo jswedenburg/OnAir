@@ -59,6 +59,7 @@ class Song: Equatable {
             let songID = dictionary[kSongID] as? Int,
             let image = dictionary[kImage] as? String,
             let albumName = dictionary[kAlbumName] as? String
+            
             else { return nil }
         
         let largerImage = image.replacingOccurrences(of: "100", with: "400")

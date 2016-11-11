@@ -17,6 +17,10 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     @IBOutlet weak var songNameLabel: UILabel!
     @IBOutlet weak var songArtistLabel: UILabel!
     
+    @IBOutlet weak var playButton: UIButton!
+    
+    @IBOutlet weak var nextButton: UIButton!
+    
     
     //MARK: Properties
     let player = MusicPlayerController.sharedController.systemPlayer
@@ -29,7 +33,9 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         MPCManager.sharedController.connectedDelegate = self
         let songHasChanged = Notification.Name(rawValue: "SongHasChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(updateViewWithNewSong), name: songHasChanged, object: nil)
-        
+        self.tableView.separatorStyle = .none
+        playButton.titleLabel?.textColor = TeamMusicColor.ourColor
+        nextButton.titleLabel?.textColor = TeamMusicColor.ourColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,6 +84,14 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "peerCell", for: indexPath)
+        cell.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 0.96])
+        cell.layer.frame = CGRect(x: 20, y: 10, width: self.view.frame.size.width - 20 , height: 86)
+        cell.layer.masksToBounds = true
+        cell.layer.cornerRadius = 10.0
+        cell.layer.shadowOffset = CGSize(width: -1, height: 1)
+        cell.layer.shadowOpacity = 0.5
+        
+        
         let peer = MPCManager.sharedController.connectedPeers[indexPath.row]
         cell.textLabel?.text = peer.displayName
         return cell
@@ -91,6 +105,8 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         guard let song = DataController.sharedController.song else { return }
         self.songNameLabel.text = song.name
         self.songArtistLabel.text = song.artist
+        songNameLabel.sizeToFit()
+        songArtistLabel.sizeToFit()
         ImageController.imageForURL(imageEndpoint: song.image) { (image) in
             self.songAlbumImageView.image = image
         }
