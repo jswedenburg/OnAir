@@ -95,15 +95,12 @@ class DataController {
     }
     
     @objc func nowPlayingItemChanged(){
-        print(Date().timeIntervalSince(timeStamp))
-//        if Date().timeIntervalSince(timeStamp) > 1 {
-//            timeStamp = Date()
-//            index = index + 1
-//            print(index)
+        if Date().timeIntervalSince(timeStamp) > 1 {
+            timeStamp = Date()
             SongQueueController.sharedController.addSongToHistoryFromUpNext()
             (MusicPlayerController.sharedController.getApplicationPlayerState() == .playing) ? self.sendPlayData() : self.sendPauseData()
-        
-//        }
+            
+        }
     }
     
 }

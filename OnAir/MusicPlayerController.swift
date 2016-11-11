@@ -25,13 +25,17 @@ class MusicPlayerController{
     init() {
         systemPlayer.repeatMode = .none
         systemPlayer.shuffleMode = .off
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(listenerNotifications), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: systemPlayer)
+        
+        systemPlayer.beginGeneratingPlaybackNotifications()
     }
     
     let systemPlayer = MPMusicPlayerController.systemMusicPlayer()
-//    let systemPlayer = MPMusicPlayerController.systemMusicPlayer()
+    //    let systemPlayer = MPMusicPlayerController.systemMusicPlayer()
     
     /// Variable to log when the listener has pressed paused from an in app button or in the control center.
-    private var timeWhenPaused: Date?
+    var timeWhenPaused: Date?
     
     /// Initialized with a notification observer used to call the delegate function when playbackstate has changed.
     
@@ -48,9 +52,9 @@ class MusicPlayerController{
     static let sharedController = MusicPlayerController()
     
     /// Function to get the state of the system player
-//    func getSystemPlayerState() -> MPMusicPlaybackState{
-//        return systemPlayer.playbackState
-//    }
+    //    func getSystemPlayerState() -> MPMusicPlaybackState{
+    //        return systemPlayer.playbackState
+    //    }
     
     /// Function to get the state of the application player
     func getApplicationPlayerState() -> MPMusicPlaybackState{
@@ -93,15 +97,16 @@ class MusicPlayerController{
     
     /// Plays the application player. If the listener was in pause, it will begin playing from when paused was pressed plus the amount of time in the listener was in pause.
     func listenerPlay(){
-        if let timeWhenPaused = timeWhenPaused{
+        
+        guard let timeWhenPaused = timeWhenPaused else { systemPlayer.play(); return }
+        
+        if Date().timeIntervalSince(timeWhenPaused) > 1{
             let timeInterval = Date().timeIntervalSince(timeWhenPaused)
-            print(timeInterval)
+            print("listener Play")
             let currentPlayBacktime = systemPlayer.currentPlaybackTime
             systemPlayer.currentPlaybackTime = timeInterval + currentPlayBacktime
             systemPlayer.play()
             self.timeWhenPaused = nil
-        } else {
-            systemPlayer.play()
         }
     }
     
@@ -136,6 +141,20 @@ class MusicPlayerController{
     
     func stop(){
         systemPlayer.stop()
+    }
+    
+    @objc func listenerNotifications(){
+        if !MPCManager.sharedController.isAdvertising{
+            switch self.systemPlayer.playbackState{
+            case .playing:
+                listenerPlay()
+            case .paused:
+                listenerPause()
+            case .seekingBackward, .seekingForward:
+                listenerPause()
+            default: ()
+            }
+        }
     }
     
 }

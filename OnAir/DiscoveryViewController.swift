@@ -49,6 +49,8 @@ class DiscoveryViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isBrowsingNotification, object: nil)
         let isAdvertisingNotification = NSNotification.Name(rawValue: "isAdvertisingChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isAdvertisingNotification, object: nil)
+        let disconnectNoti = Notification.Name(rawValue: "diconnected")
+        NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: disconnectNoti, object: nil)
     }
     
       
@@ -75,7 +77,7 @@ class DiscoveryViewController: UIViewController {
         }
     }
     
-    @IBAction func disconnectButtonPressed(_ sender: AnyObject) {
+    func disconnect() {
         MPCManager.sharedController.disconnect()
         MusicPlayerController.sharedController.stop()
         NotificationCenter.default.post(name: disconnectNotification, object: nil)
