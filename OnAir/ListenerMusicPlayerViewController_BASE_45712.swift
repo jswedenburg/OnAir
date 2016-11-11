@@ -43,10 +43,8 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         tableView.dataSource = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: historyQueueHasChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: Notification.Name(rawValue: "SongHasChanged"), object: nil)
-        let disconnectNoti = Notification.Name(rawValue: "diconnected")
-        NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: disconnectNoti, object: nil)
         
-        self.tableView.separatorStyle = .none
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,16 +54,10 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     //MARK: Helper Functions
     
     
-    func updateViewToDefault() {
-        self.albumNameLabel.text = "Album Name"
-        self.artistNameLabel.text = "Artist Name"
-        self.songNameLabel.text = "Song Name"
-        self.albumCoverImageView.image = nil
-    }
+    
     
     
     func updateViewWith(song: Song) {
-        
         DispatchQueue.main.async {
             self.albumNameLabel.text = song.albumName
             self.songNameLabel.text = song.name
@@ -74,9 +66,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                 self.albumCoverImageView.image = image
             }
         }
-        
     }
-    
     
     func reloadTable() {
         self.tableView.reloadData()
@@ -84,15 +74,14 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     
     func clearSong() {
         if DataController.sharedController.song == nil {
-            self.albumNameLabel.text = "Album Name"
-            self.songNameLabel.text = "Song Name"
-            self.artistNameLabel.text = "Artist Name"
+            self.albumNameLabel.text = ""
+            self.songNameLabel.text = ""
+            self.artistNameLabel.text = ""
             self.albumCoverImageView.image = UIImage()
         }
     }
     
     func dataReceivedFromBroadcast(data: Data) {
-        MusicPlayerController.sharedController.systemPlayer.endGeneratingPlaybackNotifications()
         guard let dictionaryFromData = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: Any] else { return }
         
         guard let instruction = dictionaryFromData["instruction"] as? String?,
@@ -121,17 +110,15 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                 print("play")
                 if timeStamp != nil && playbacktimeStamp != nil{
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                        MusicPlayerController.sharedController.setCurrentPlaybackTime(Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.4)
+                        MusicPlayerController.sharedController.setCurrentPlaybackTime(Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.7)
                     })
                 }
-                MusicPlayerController.sharedController.timeWhenPaused = nil
                 MusicPlayerController.sharedController.broadcaterPlay()
             case "pause":
                 print("pause")
                 MusicPlayerController.sharedController.broadcasterPause()
             case "next":
                 print("next")
-                MusicPlayerController.sharedController.timeWhenPaused = nil
                 MusicPlayerController.sharedController.setCurrentPlaybackTime(Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.1)
                 MusicPlayerController.sharedController.broadcaterPlay()
             case "stop":
@@ -140,7 +127,6 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             default: ()
             }
         }
-        MusicPlayerController.sharedController.systemPlayer.beginGeneratingPlaybackNotifications()
     }
     
 }
@@ -159,16 +145,7 @@ extension ListenerMusicPlayerViewController: UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recentSongCell", for: indexPath) as? PreviouslyPlayedSongTableViewCell
-        
-
-        let song = SongQueueController.sharedController.historyQueue.reversed()[indexPath.row + 1]
-
-        cell?.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 0.96])
-        cell?.layer.frame = CGRect(x: 20, y: 10, width: self.view.frame.size.width - 20 , height: 86)
-        cell?.layer.masksToBounds = true
-        cell?.layer.cornerRadius = 10.0
-        cell?.layer.shadowOffset = CGSize(width: -1, height: 1)
-        cell?.layer.shadowOpacity = 0.5
+        let song = SongQueueController.sharedController.historyQueue[indexPath.row]
         
         cell?.updateCellWith(songName: song.name, artistName: song.artist)
         
