@@ -206,7 +206,7 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "songCell", for: indexPath) as? SongQueueTableViewCell
         cell?.delegate = self
-        cell?.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 0.8])
+        cell?.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 0.96])
         cell?.layer.frame = CGRect(x: 20, y: 10, width: self.view.frame.size.width - 20 , height: 86)
         cell?.layer.masksToBounds = true
         cell?.layer.cornerRadius = 5.0

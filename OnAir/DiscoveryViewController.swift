@@ -49,6 +49,7 @@ class DiscoveryViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isBrowsingNotification, object: nil)
         let isAdvertisingNotification = NSNotification.Name(rawValue: "isAdvertisingChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isAdvertisingNotification, object: nil)
+        self.tableView.separatorStyle = .none
     }
     
       
@@ -132,6 +133,12 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "broadcastCell", for: indexPath) as? DiscoveryTableViewCell
+        cell?.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 0.96])
+        cell?.layer.frame = CGRect(x: 20, y: 10, width: self.view.frame.size.width - 20 , height: 86)
+        cell?.layer.masksToBounds = true
+        cell?.layer.cornerRadius = 10.0
+        cell?.layer.shadowOffset = CGSize(width: -1, height: 1)
+        cell?.layer.shadowOpacity = 0.5
         let peer = MPCManager.sharedController.foundPeers[indexPath.row]
         DispatchQueue.main.async {
             cell?.activityIndicator.hidesWhenStopped = true
@@ -209,6 +216,8 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        var sectionHeader = UILabel(frame: CGRect.null)
+        sectionHeader.textAlignment = .center
         return "Join a nearby broadcast"
     }
     
@@ -236,6 +245,7 @@ extension DiscoveryViewController: MPCManagerDelegate{
                 cell.activityIndicator.stopAnimating()
                 cell.activityIndicator.hidesWhenStopped = true
                 cell.connectingLabel.text = "disconnect"
+                cell.connectingLabel.textAlignment = NSTextAlignment.center
                 self.parent?.tabBarController!.selectedIndex = 3
             }
         }
