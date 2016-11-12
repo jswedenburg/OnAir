@@ -16,6 +16,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     @IBOutlet weak var songAlbumImageView: UIImageView!
     @IBOutlet weak var songNameLabel: UILabel!
     @IBOutlet weak var songArtistLabel: UILabel!
+    var animate = true
     
     @IBOutlet weak var playButton: UIButton!
     
@@ -30,6 +31,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     //MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.separatorStyle = .none
         MPCManager.sharedController.connectedDelegate = self
         let songHasChanged = Notification.Name(rawValue: "SongHasChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(updateViewWithNewSong), name: songHasChanged, object: nil)
@@ -37,10 +39,11 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     override func viewWillAppear(_ animated: Bool) {
         self.updateViewWithNewSong()
-        tableView.separatorStyle = .none
+        
         playButton.titleLabel?.textColor = TeamMusicColor.ourColor
         nextButton.titleLabel?.textColor = TeamMusicColor.ourColor
         self.tableView.reloadData()
+        animateDiscTurn(imageView: songAlbumImageView, duration: 5.0, rotations: 1.0, repetition: 1.0)
     }
     
     
@@ -109,6 +112,21 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         songArtistLabel.sizeToFit()
         ImageController.imageForURL(imageEndpoint: song.image) { (image) in
             self.songAlbumImageView.image = image
+            self.animate = false
+        }
+    }
+    
+    func animateDiscTurn(imageView: UIImageView, duration: Float, rotations: Float, repetition: Float){
+        if animate{
+            let rotaionAnimation = CABasicAnimation.init(keyPath: "transform.rotation.z")
+            let value = Float.pi * 2.0 * rotations * duration
+            rotaionAnimation.toValue = NSNumber.init(value: value)
+            rotaionAnimation.duration = CFTimeInterval(duration)
+            rotaionAnimation.isCumulative = true
+            rotaionAnimation.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseInEaseOut)
+            rotaionAnimation.repeatCount = repetition
+            
+            imageView.layer.add(rotaionAnimation, forKey: "rotationAnimation")
         }
     }
 }
