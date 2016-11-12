@@ -46,10 +46,10 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         let disconnectNoti = Notification.Name(rawValue: "diconnected")
         NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: disconnectNoti, object: nil)
         
-        self.tableView.separatorStyle = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.tableView.separatorStyle = .none
         self.tabBarController?.tabBar.tintColor = TeamMusicColor.ourColor
     }
     

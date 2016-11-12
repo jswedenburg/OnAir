@@ -33,13 +33,13 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         MPCManager.sharedController.connectedDelegate = self
         let songHasChanged = Notification.Name(rawValue: "SongHasChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(updateViewWithNewSong), name: songHasChanged, object: nil)
-        self.tableView.separatorStyle = .none
-        playButton.titleLabel?.textColor = TeamMusicColor.ourColor
-        nextButton.titleLabel?.textColor = TeamMusicColor.ourColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.updateViewWithNewSong()
+        tableView.separatorStyle = .none
+        playButton.titleLabel?.textColor = TeamMusicColor.ourColor
+        nextButton.titleLabel?.textColor = TeamMusicColor.ourColor
         self.tableView.reloadData()
     }
     

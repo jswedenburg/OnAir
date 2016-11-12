@@ -3,7 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,7 +23,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Hua-FP-KyM" userLabel="SongTitle/Artist">
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJG-Nh-vGo">
-                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -83,23 +84,26 @@
                                     <outlet property="delegate" destination="irE-pj-7TK" id="ehX-Fs-Rmz"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RWP-Fz-5c2"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RWP-Fz-5c2">
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="RWP-Fz-5c2" secondAttribute="height" multiplier="1:1" id="cgN-v0-4Wx"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="7Lj-J6-5up" firstAttribute="centerX" secondItem="PMN-HJ-TS7" secondAttribute="centerX" id="36X-55-FHk"/>
-                            <constraint firstItem="NJG-Nh-vGo" firstAttribute="top" secondItem="RWP-Fz-5c2" secondAttribute="bottom" constant="16" id="E1V-6K-tiM"/>
-                            <constraint firstItem="RWP-Fz-5c2" firstAttribute="top" secondItem="PgT-rP-Ksx" secondAttribute="bottom" constant="50" id="JX3-0a-uJU"/>
+                            <constraint firstItem="RWP-Fz-5c2" firstAttribute="height" secondItem="5sV-eY-9Qy" secondAttribute="height" multiplier="0.454" id="JMq-o8-vJk"/>
                             <constraint firstItem="PMN-HJ-TS7" firstAttribute="top" secondItem="7Lj-J6-5up" secondAttribute="bottom" constant="15" id="Jd2-OG-dxZ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="RWP-Fz-5c2" secondAttribute="trailing" id="LoC-Cn-73Y"/>
+                            <constraint firstItem="RWP-Fz-5c2" firstAttribute="centerX" secondItem="5sV-eY-9Qy" secondAttribute="centerX" id="Jdh-2f-9Gr"/>
                             <constraint firstItem="Hua-FP-KyM" firstAttribute="centerX" secondItem="7Lj-J6-5up" secondAttribute="centerX" id="RGT-qo-UFF"/>
+                            <constraint firstItem="NJG-Nh-vGo" firstAttribute="top" secondItem="RWP-Fz-5c2" secondAttribute="bottom" constant="8.5" id="Tbx-TX-Ean"/>
                             <constraint firstItem="PMN-HJ-TS7" firstAttribute="bottom" secondItem="QNX-La-gIc" secondAttribute="top" id="U7e-UT-Y2d"/>
                             <constraint firstItem="PMN-HJ-TS7" firstAttribute="leading" secondItem="5sV-eY-9Qy" secondAttribute="leading" id="YTw-ln-Ztf"/>
                             <constraint firstItem="7Lj-J6-5up" firstAttribute="top" secondItem="Hua-FP-KyM" secondAttribute="bottom" constant="8" symbolic="YES" id="ZTi-31-vWv"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="RWP-Fz-5c2" secondAttribute="leading" id="aQM-1f-vg7"/>
                             <constraint firstItem="7Lj-J6-5up" firstAttribute="top" secondItem="5sV-eY-9Qy" secondAttribute="top" constant="340" id="sq3-zw-YH8"/>
                             <constraint firstAttribute="trailing" secondItem="PMN-HJ-TS7" secondAttribute="trailing" id="vsR-vu-DAT"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="RWP-Fz-5c2" secondAttribute="leading" id="xyv-Ms-xkW"/>
+                            <constraint firstItem="RWP-Fz-5c2" firstAttribute="top" secondItem="PgT-rP-Ksx" secondAttribute="bottom" constant="-1" id="yhA-PE-6hR"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" id="dti-vO-SKP"/>
