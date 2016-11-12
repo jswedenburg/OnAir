@@ -143,18 +143,32 @@ class MusicPlayerController{
         systemPlayer.stop()
     }
     
+    var timeStamp = Date()
+    
     @objc func listenerNotifications(){
-        if !MPCManager.sharedController.isAdvertising{
-            switch self.systemPlayer.playbackState{
-            case .playing:
-                listenerPlay()
-            case .paused:
-                listenerPause()
-            case .seekingBackward, .seekingForward:
-                listenerPause()
-            default: ()
+        if Date().timeIntervalSince(timeStamp) > 0.2 {
+            if !MPCManager.sharedController.isAdvertising{
+                switch self.systemPlayer.playbackState{
+                case .playing:
+                    listenerPlay()
+                case .paused:
+                    listenerPause()
+                case .seekingBackward, .seekingForward:
+                    listenerPause()
+                    
+                default: ()
+                }
+            } else {
+                switch self.systemPlayer.playbackState{
+                case .playing:
+                    DataController.sharedController.sendPlayData()
+                    print("systemplay")
+                case .paused:
+                    DataController.sharedController.sendPauseData()
+                    print("systempause")
+                default: ()
+                }
             }
         }
     }
-    
 }

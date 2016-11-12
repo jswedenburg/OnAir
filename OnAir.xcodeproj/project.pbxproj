@@ -325,7 +325,7 @@
 				TargetAttributes = {
 					811869711DBFBD0100FD2D7C = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = GU6XEEN2H9;
+						DevelopmentTeam = 8V7ERX2APN;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -588,7 +588,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = GU6XEEN2H9;
+				DEVELOPMENT_TEAM = 8V7ERX2APN;
 				INFOPLIST_FILE = OnAir/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = comjakeswedenburgonair;
@@ -601,7 +601,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = GU6XEEN2H9;
+				DEVELOPMENT_TEAM = 8V7ERX2APN;
 				INFOPLIST_FILE = OnAir/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = comjakeswedenburgonair;

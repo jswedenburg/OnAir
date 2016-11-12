@@ -36,7 +36,7 @@ class DataController {
     
     func sendPlayData() {
         timeStamp = Date()
-        MusicPlayerController.sharedController.systemPlayer.play()
+        
         makeDataDictionary(instruction: "play") { (messageData) in
             guard let messageData = messageData else { return }
             MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
@@ -45,7 +45,7 @@ class DataController {
     
     func sendPauseData() {
         timeStamp = Date()
-        MusicPlayerController.sharedController.systemPlayer.pause()
+        
         makeDataDictionary(instruction: "pause") { (messageData) in
             guard let messageData = messageData else { return }
             MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
@@ -53,7 +53,7 @@ class DataController {
     }
     
     func sendNextSongData() {
-        MusicPlayerController.sharedController.systemPlayer.skipToNextItem()
+        
         makeDataDictionary(instruction: "next") { (messageData) in
             guard let messageData = messageData else { return }
             MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
