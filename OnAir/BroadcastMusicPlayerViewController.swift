@@ -64,7 +64,8 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
             //SongQueueController.sharedController.upNextQueue = []
             alert(title: "Out of songs!", message: "Add more songs to the queue")
         } else {
-            SongQueueController.sharedController.upNextQueue.remove(at: 0)
+            SongQueueController.sharedController.addSongToHistoryFromUpNext()
+//            SongQueueController.sharedController.upNextQueue.remove(at: 0)
             //DataController.sharedController.sendPlayData()
             MusicPlayerController.sharedController.broadcaterPlay()
         }

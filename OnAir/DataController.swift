@@ -29,9 +29,9 @@ class DataController {
     }
     
     
-    init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(nowPlayingItemChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
-    }
+//    init() {
+//        NotificationCenter.default.addObserver(self, selector: #selector(nowPlayingItemChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
+//    }
     
     
     func sendPlayData() {
@@ -94,13 +94,13 @@ class DataController {
         }
     }
     
-    @objc func nowPlayingItemChanged(){
-        if Date().timeIntervalSince(timeStamp) > 1 {
-            timeStamp = Date()
-            SongQueueController.sharedController.addSongToHistoryFromUpNext()
-            (MusicPlayerController.sharedController.getApplicationPlayerState() == .playing) ? self.sendPlayData() : self.sendPauseData()
-            
-        }
-    }
+//    @objc func nowPlayingItemChanged(){
+//        if Date().timeIntervalSince(timeStamp) > 1 {
+//            timeStamp = Date()
+//            SongQueueController.sharedController.addSongToHistoryFromUpNext()
+//            //(MusicPlayerController.sharedController.getApplicationPlayerState() == .playing) ? self.sendPlayData() : self.sendPauseData()
+//            
+//        }
+//    }
     
 }
