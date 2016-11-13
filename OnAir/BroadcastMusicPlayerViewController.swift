@@ -47,20 +47,23 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     //MARK: Actions
     @IBAction func playButtonPressed(){
         if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
-            DataController.sharedController.sendPauseData()
+            MusicPlayerController.sharedController.broadcasterPause()
+            
         } else {
-            DataController.sharedController.sendPlayData()
+            MusicPlayerController.sharedController.broadcaterPlay()
+            
         }
     }
     
     @IBAction func nextButtonPressed() {
         if SongQueueController.sharedController.upNextQueue.count == 1 {
-            DataController.sharedController.sendStopData()
-            SongQueueController.sharedController.upNextQueue = []
-            alert(title: "Out of songs!", message: "Add more songs to the queue to keep listening")
+            //DataController.sharedController.sendStopData()
+            //SongQueueController.sharedController.upNextQueue = []
+            alert(title: "Out of songs!", message: "Add more songs to the queue")
         } else {
             SongQueueController.sharedController.upNextQueue.remove(at: 0)
-            DataController.sharedController.sendPlayData()
+            //DataController.sharedController.sendPlayData()
+            MusicPlayerController.sharedController.broadcaterPlay()
         }
     }
     
