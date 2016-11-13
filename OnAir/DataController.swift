@@ -78,9 +78,8 @@ class DataController {
         }
     }
     
-    func sendDataToNew(peer: MCPeerID?){
-        guard let peerID = peer else { return }
-        print("new peer \(peerID.displayName)")
+    func sendDataToNew(peer: MCPeerID){
+        print("new peer \(peer.displayName)")
         var instruction = ""
         
         if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
@@ -90,7 +89,7 @@ class DataController {
         }
         makeDataDictionary(instruction: instruction) { (messageData) in
             guard let messageData = messageData else { return }
-            MPCManager.sharedController.sendData(dictionary: messageData, to: [peerID])
+            MPCManager.sharedController.sendData(dictionary: messageData, to: [peer])
         }
     }
     

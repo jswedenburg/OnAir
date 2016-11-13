@@ -60,13 +60,9 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     @IBAction func nextButtonPressed() {
         if SongQueueController.sharedController.upNextQueue.count == 1 {
-            //DataController.sharedController.sendStopData()
-            //SongQueueController.sharedController.upNextQueue = []
             alert(title: "Out of songs!", message: "Add more songs to the queue")
         } else {
             SongQueueController.sharedController.addSongToHistoryFromUpNext()
-//            SongQueueController.sharedController.upNextQueue.remove(at: 0)
-            //DataController.sharedController.sendPlayData()
             MusicPlayerController.sharedController.broadcaterPlay()
         }
     }
@@ -98,9 +94,10 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         cell.layer.shadowOffset = CGSize(width: -1, height: 1)
         cell.layer.shadowOpacity = 0.5
         
-        
-        let peer = MPCManager.sharedController.connectedPeers[indexPath.row]
-        cell.textLabel?.text = peer.displayName
+        if MPCManager.sharedController.connectedPeers.count > 0 {
+            let peer = MPCManager.sharedController.connectedPeers[indexPath.row]
+            cell.textLabel?.text = peer.displayName
+        }
         return cell
     }
     
