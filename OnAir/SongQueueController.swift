@@ -46,7 +46,10 @@ class SongQueueController {
     }
     
     func addSongToUpNext(newSong: Song) {
-        upNextQueue.append(newSong)
+        if !upNextQueue.contains(newSong){
+            upNextQueue.append(newSong)
+        }
+        
     }
     
     func removeSongFromUpNext(song: Song) {
