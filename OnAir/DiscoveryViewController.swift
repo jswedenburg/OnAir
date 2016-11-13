@@ -9,9 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-protocol ClearSongAfterDisconnectDelegate {
-    func getRidOfThatSong()
-}
+
 
 
 // MARK: Todo - clean up cell's "connected" label. not using it anymore.
@@ -31,8 +29,6 @@ class DiscoveryViewController: UIViewController {
     var previousCellIndexPath: IndexPath?
     var isConnected = false
     var connectedSessionIndexPath: IndexPath?
-    let disconnectNotification = Notification.Name(rawValue: "DisconnectedFromSession")
-    static var clearSongDelegate: ClearSongAfterDisconnectDelegate?
     var selectedIndexPath: IndexPath?
     var mainImageImage: UIImage?
     
@@ -79,14 +75,13 @@ class DiscoveryViewController: UIViewController {
     }
     
     func disconnect() {
-        MPCManager.sharedController.disconnect()
-        MusicPlayerController.sharedController.stop()
-        NotificationCenter.default.post(name: disconnectNotification, object: nil)
-        isConnected = false
-        
-        MPCManager.sharedController.browser.startBrowsingForPeers()
-        DiscoveryViewController.clearSongDelegate?.getRidOfThatSong()
-        alert(title: "Disconnected", message: "You've been disconnected from your broadcast")
+        if !MPCManager.sharedController.isAdvertising {
+            MPCManager.sharedController.disconnect()
+            MusicPlayerController.sharedController.stop()
+            isConnected = false
+            MPCManager.sharedController.browser.startBrowsingForPeers()
+            alert(title: "Disconnected", message: "You've been disconnected from your broadcast")
+        }
     }
     
     
@@ -165,31 +160,19 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
         switch isConnected {
         case true:
             if indexPath == previousCellIndexPath {
-                MPCManager.sharedController.disconnect()
-                
-                isConnected = false
+                self.disconnect()
                 cell.activityIndicator.stopAnimating()
                 cell.connectingLabel.text = ""
-                MusicPlayerController.sharedController.stop()
-                NotificationCenter.default.post(name: disconnectNotification, object: nil)
-                MPCManager.sharedController.browser.startBrowsingForPeers()
-                DiscoveryViewController.clearSongDelegate?.getRidOfThatSong()
                 alert(title: "Disconnected", message: "You've been disconnected from \(peer.displayName)")
                 cell.isHighlighted = false
                 self.tableView.reloadData()
             } else {
                 cell.activityIndicator.startAnimating()
-                DispatchQueue.main.async {
-                    MPCManager.sharedController.disconnect()
-                }
-                
+                MPCManager.sharedController.disconnect()
                 MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
                 isConnected = true
-                
-                DiscoveryViewController.clearSongDelegate?.getRidOfThatSong()
                 connectedSessionIndexPath = indexPath
-//                cell.activityIndicator.stopAnimating()
-//                cell.connectingLabel.text = "Disconnect"
+
             }
         case false:
             cell.activityIndicator.startAnimating()
@@ -199,8 +182,7 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
             
             
             connectedSessionIndexPath = indexPath
-//            cell.activityIndicator.stopAnimating()
-//            cell.connectingLabel.text = "Disconnect"
+
         }
         
         self.previousCellIndexPath = indexPath
