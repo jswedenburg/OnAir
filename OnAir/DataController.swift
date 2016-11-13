@@ -29,9 +29,9 @@ class DataController {
     }
     
     
-//    init() {
-//        NotificationCenter.default.addObserver(self, selector: #selector(nowPlayingItemChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
-//    }
+    init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(nowPlayingItemChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
+    }
     
     
     func sendPlayData() {
@@ -94,13 +94,25 @@ class DataController {
         }
     }
     
-//    @objc func nowPlayingItemChanged(){
-//        if Date().timeIntervalSince(timeStamp) > 1 {
-//            timeStamp = Date()
-//            SongQueueController.sharedController.addSongToHistoryFromUpNext()
-//            //(MusicPlayerController.sharedController.getApplicationPlayerState() == .playing) ? self.sendPlayData() : self.sendPauseData()
-//            
-//        }
-//    }
+    @objc func nowPlayingItemChanged(){
+        if SongQueueController.sharedController.upNextQueue.count == 0 {
+            guard let nowPlayingItem = MusicPlayerController.sharedController.systemPlayer.nowPlayingItem, let songName = nowPlayingItem.title else { return }
+            SearchController.fetchSong(searchTerm: "\(songName)", completion: { (songs) in
+                guard let songs = songs, let song = songs.first else { return }
+                
+            
+                SongQueueController.sharedController.addSongToUpNext(newSong: song)
+                
+            })
+             if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing {
+                
+                self.sendPlayData()
+            } else {
+                self.sendPauseData()
+                
+            }
+        }
+    }
+
     
 }
