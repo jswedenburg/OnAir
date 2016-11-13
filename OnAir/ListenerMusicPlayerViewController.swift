@@ -8,6 +8,7 @@
 
 import UIKit
 import MediaPlayer
+import QuartzCore
 
 class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaster {
     
@@ -34,6 +35,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     let player = MusicPlayerController.sharedController.systemPlayer
     let historyQueueHasChanged = Notification.Name(rawValue: "historyQueueHasChanged")
     var mainImage: UIImage?
+    var animate: Bool = true
     
     //MARK: View Lifecycle Overriding Methods
     override func viewDidLoad() {
@@ -51,6 +53,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.separatorStyle = .none
         self.tabBarController?.tabBar.tintColor = TeamMusicColor.ourColor
+        animateDiscTurn(imageView: albumCoverImageView, duration: 5.0, rotations: 1.0, repetition: 1.0)
     }
     
     //MARK: Helper Functions
@@ -60,7 +63,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         self.albumNameLabel.text = "Album Name"
         self.artistNameLabel.text = "Artist Name"
         self.songNameLabel.text = "Song Name"
-        self.albumCoverImageView.image = nil
+        self.albumCoverImageView.image = #imageLiteral(resourceName: "disc")
     }
     
     
@@ -72,11 +75,10 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             self.artistNameLabel.text = song.artist
             ImageController.imageForURL(imageEndpoint: song.image) { (image) in
                 self.albumCoverImageView.image = image
+                self.animate = false
             }
         }
-        
     }
-    
     
     func reloadTable() {
         self.tableView.reloadData()
@@ -87,7 +89,8 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             self.albumNameLabel.text = "Album Name"
             self.songNameLabel.text = "Song Name"
             self.artistNameLabel.text = "Artist Name"
-            self.albumCoverImageView.image = UIImage()
+            self.albumCoverImageView.image = #imageLiteral(resourceName: "disc")
+            self.animate = true
         }
     }
     
@@ -161,9 +164,8 @@ extension ListenerMusicPlayerViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recentSongCell", for: indexPath) as? PreviouslyPlayedSongTableViewCell
         
-
         let song = SongQueueController.sharedController.historyQueue.reversed()[indexPath.row + 1]
-
+        
         cell?.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 0.96])
         cell?.layer.frame = CGRect(x: 20, y: 10, width: self.view.frame.size.width - 20 , height: 86)
         cell?.layer.masksToBounds = true
@@ -174,5 +176,19 @@ extension ListenerMusicPlayerViewController: UITableViewDelegate, UITableViewDat
         cell?.updateCellWith(songName: song.name, artistName: song.artist)
         
         return cell ?? PreviouslyPlayedSongTableViewCell()
+    }
+    
+    func animateDiscTurn(imageView: UIImageView, duration: Float, rotations: Float, repetition: Float){
+        if animate{
+            let rotaionAnimation = CABasicAnimation.init(keyPath: "transform.rotation.z")
+            let value = Float.pi * 2.0 * rotations * duration
+            rotaionAnimation.toValue = NSNumber.init(value: value)
+            rotaionAnimation.duration = CFTimeInterval(duration)
+            rotaionAnimation.isCumulative = true
+            rotaionAnimation.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseInEaseOut)
+            rotaionAnimation.repeatCount = repetition
+            
+            imageView.layer.add(rotaionAnimation, forKey: "rotationAnimation")
+        }
     }
 }
