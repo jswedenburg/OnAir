@@ -40,6 +40,10 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         NotificationCenter.default.addObserver(self, selector: #selector(setUpView), name: name, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(removeFromQueue), name: name, object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(sendNextData), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
+        let queueChanged = Notification.Name(rawValue: "QueueHasChanged")
+        NotificationCenter.default.addObserver(self, selector: #selector(sendNextData), name: queueChanged, object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,8 +72,22 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
             alert(title: "Out of songs!", message: "Add more songs to the queue")
         } else {
             SongQueueController.sharedController.addSongToHistoryFromUpNext()
-            MusicPlayerController.sharedController.broadcaterPlay()
+//            MusicPlayerController.sharedController.broadcaterPlay()
         }
+    }
+    
+    func sendNextData() {
+        MusicPlayerController.sharedController.broadcaterPlay()
+        if SongQueueController.sharedController.upNextQueue[0].name != MusicPlayerController.sharedController.systemPlayer.nowPlayingItem?.title {
+            SongQueueController.sharedController.addSongToHistoryFromUpNext()
+        }
+        
+        
+        
+    }
+    
+    func addToHistory() {
+        
     }
     
     func removeFromQueue() {
