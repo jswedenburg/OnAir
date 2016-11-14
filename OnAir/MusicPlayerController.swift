@@ -32,7 +32,7 @@ class MusicPlayerController{
     }
     
     let systemPlayer = MPMusicPlayerController.systemMusicPlayer()
-    //    let systemPlayer = MPMusicPlayerController.systemMusicPlayer()
+    
     
     /// Variable to log when the listener has pressed paused from an in app button or in the control center.
     var timeWhenPaused: Date?
@@ -143,18 +143,32 @@ class MusicPlayerController{
         systemPlayer.stop()
     }
     
+    var timeStamp = Date()
+    
     @objc func listenerNotifications(){
-        if !MPCManager.sharedController.isAdvertising{
-            switch self.systemPlayer.playbackState{
-            case .playing:
-                listenerPlay()
-            case .paused:
-                listenerPause()
-            case .seekingBackward, .seekingForward:
-                listenerPause()
-            default: ()
+        if Date().timeIntervalSince(timeStamp) > 0.2 {
+            if !MPCManager.sharedController.isAdvertising{
+                switch self.systemPlayer.playbackState{
+                case .playing:
+                    listenerPlay()
+                case .paused:
+                    listenerPause()
+                case .seekingBackward, .seekingForward:
+                    listenerPause()
+                    
+                default: ()
+                }
+            } else {
+                switch self.systemPlayer.playbackState{
+                case .playing:
+                    DataController.sharedController.sendPlayData()
+                    print("systemplay")
+                case .paused:
+                    DataController.sharedController.sendPauseData()
+                    print("systempause")
+                default: ()
+                }
             }
         }
     }
-    
 }

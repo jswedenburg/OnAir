@@ -9,9 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-protocol ClearSongAfterDisconnectDelegate {
-    func getRidOfThatSong()
-}
+
 
 
 // MARK: Todo - clean up cell's "connected" label. not using it anymore.
@@ -31,8 +29,6 @@ class DiscoveryViewController: UIViewController {
     var previousCellIndexPath: IndexPath?
     var isConnected = false
     var connectedSessionIndexPath: IndexPath?
-    let disconnectNotification = Notification.Name(rawValue: "DisconnectedFromSession")
-    static var clearSongDelegate: ClearSongAfterDisconnectDelegate?
     var selectedIndexPath: IndexPath?
     var mainImageImage: UIImage?
     
@@ -49,8 +45,10 @@ class DiscoveryViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isBrowsingNotification, object: nil)
         let isAdvertisingNotification = NSNotification.Name(rawValue: "isAdvertisingChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isAdvertisingNotification, object: nil)
-        let disconnectNoti = Notification.Name(rawValue: "diconnected")
+        let disconnectNoti = Notification.Name(rawValue: "disconnected")
         NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: disconnectNoti, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: disconnectNoti, object: nil)
+        
         self.tableView.separatorStyle = .none
     }
     
@@ -61,10 +59,12 @@ class DiscoveryViewController: UIViewController {
         if MPCManager.sharedController.isAdvertising {
             startStopAdvertisingButton.setTitle("Start Broadcasting", for: .normal)
             MPCManager.sharedController.advertiser.stopAdvertisingPeer()
-            MPCManager.sharedController.isAdvertising = false
             MPCManager.sharedController.disconnect()
+            MPCManager.sharedController.isAdvertising = false
             self.tableView.isUserInteractionEnabled = true
             turnOn(MPCManager.sharedController.isAdvertising)
+            let name = Notification.Name(rawValue: "stoppedBroadcasting")
+            NotificationCenter.default.post(name: name, object: nil)
             
             
             
@@ -79,14 +79,13 @@ class DiscoveryViewController: UIViewController {
     }
     
     func disconnect() {
-        MPCManager.sharedController.disconnect()
-        MusicPlayerController.sharedController.stop()
-        NotificationCenter.default.post(name: disconnectNotification, object: nil)
-        isConnected = false
-        
-        MPCManager.sharedController.browser.startBrowsingForPeers()
-        DiscoveryViewController.clearSongDelegate?.getRidOfThatSong()
-        alert(title: "Disconnected", message: "You've been disconnected from your broadcast")
+        if !MPCManager.sharedController.isAdvertising {
+            MPCManager.sharedController.disconnect()
+            MusicPlayerController.sharedController.stop()
+            isConnected = false
+            MPCManager.sharedController.browser.startBrowsingForPeers()
+            alert(title: "Disconnected", message: "You've been disconnected from your broadcast")
+        }
     }
     
     
@@ -98,6 +97,10 @@ class DiscoveryViewController: UIViewController {
         }
         
         
+    }
+    
+    func reloadTableView() {
+        self.tableView.reloadData()
     }
     
     func turnOn(_ bool: Bool){
@@ -135,6 +138,9 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "broadcastCell", for: indexPath) as? DiscoveryTableViewCell
+        if !isConnected {
+            cell?.connectingLabel.text = ""
+        }
         cell?.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 0.96])
         cell?.layer.frame = CGRect(x: 20, y: 10, width: self.view.frame.size.width - 20 , height: 86)
         cell?.layer.masksToBounds = true
@@ -165,31 +171,19 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
         switch isConnected {
         case true:
             if indexPath == previousCellIndexPath {
-                MPCManager.sharedController.disconnect()
-                
-                isConnected = false
+                self.disconnect()
                 cell.activityIndicator.stopAnimating()
                 cell.connectingLabel.text = ""
-                MusicPlayerController.sharedController.stop()
-                NotificationCenter.default.post(name: disconnectNotification, object: nil)
-                MPCManager.sharedController.browser.startBrowsingForPeers()
-                DiscoveryViewController.clearSongDelegate?.getRidOfThatSong()
                 alert(title: "Disconnected", message: "You've been disconnected from \(peer.displayName)")
                 cell.isHighlighted = false
                 self.tableView.reloadData()
             } else {
                 cell.activityIndicator.startAnimating()
-                DispatchQueue.main.async {
-                    MPCManager.sharedController.disconnect()
-                }
-                
+                MPCManager.sharedController.disconnect()
                 MPCManager.sharedController.browser.invitePeer(peer, to: session, withContext: nil, timeout: 20)
                 isConnected = true
-                
-                DiscoveryViewController.clearSongDelegate?.getRidOfThatSong()
                 connectedSessionIndexPath = indexPath
-//                cell.activityIndicator.stopAnimating()
-//                cell.connectingLabel.text = "Disconnect"
+
             }
         case false:
             cell.activityIndicator.startAnimating()
@@ -199,8 +193,7 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
             
             
             connectedSessionIndexPath = indexPath
-//            cell.activityIndicator.stopAnimating()
-//            cell.connectingLabel.text = "Disconnect"
+
         }
         
         self.previousCellIndexPath = indexPath

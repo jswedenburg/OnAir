@@ -15,7 +15,7 @@ class SongQueueController {
     var oldSong: Song?
     
     init(){
-        let name = Notification.Name(rawValue: "diconnected")
+        let name = Notification.Name(rawValue: "disconnected")
         NotificationCenter.default.addObserver(self, selector: #selector(resetHistory), name: name, object: nil)
     }
     
@@ -33,6 +33,7 @@ class SongQueueController {
                 oldSong = newSong
             } else if upNextQueue.count == 0 {
                 DataController.sharedController.song = nil
+                MusicPlayerController.sharedController.setBroadcaterQueueWith(ids: [])
             }
             let notification = Notification(name: Notification.Name(rawValue: "QueueHasChanged"))
             NotificationCenter.default.post(notification)
@@ -46,7 +47,10 @@ class SongQueueController {
     }
     
     func addSongToUpNext(newSong: Song) {
-        upNextQueue.append(newSong)
+        if !upNextQueue.contains(newSong){
+            upNextQueue.append(newSong)
+        }
+        
     }
     
     func removeSongFromUpNext(song: Song) {

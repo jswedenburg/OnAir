@@ -36,7 +36,7 @@ class DataController {
     
     func sendPlayData() {
         timeStamp = Date()
-        MusicPlayerController.sharedController.systemPlayer.play()
+        
         makeDataDictionary(instruction: "play") { (messageData) in
             guard let messageData = messageData else { return }
             MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
@@ -45,7 +45,7 @@ class DataController {
     
     func sendPauseData() {
         timeStamp = Date()
-        MusicPlayerController.sharedController.systemPlayer.pause()
+        
         makeDataDictionary(instruction: "pause") { (messageData) in
             guard let messageData = messageData else { return }
             MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
@@ -53,7 +53,7 @@ class DataController {
     }
     
     func sendNextSongData() {
-        MusicPlayerController.sharedController.systemPlayer.skipToNextItem()
+        
         makeDataDictionary(instruction: "next") { (messageData) in
             guard let messageData = messageData else { return }
             MPCManager.sharedController.sendData(dictionary: messageData, to: nil)
@@ -78,9 +78,8 @@ class DataController {
         }
     }
     
-    func sendDataToNew(peer: MCPeerID?){
-        guard let peerID = peer else { return }
-        print("new peer \(peerID.displayName)")
+    func sendDataToNew(peer: MCPeerID){
+        print("new peer \(peer.displayName)")
         var instruction = ""
         
         if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
@@ -90,17 +89,29 @@ class DataController {
         }
         makeDataDictionary(instruction: instruction) { (messageData) in
             guard let messageData = messageData else { return }
-            MPCManager.sharedController.sendData(dictionary: messageData, to: [peerID])
+            MPCManager.sharedController.sendData(dictionary: messageData, to: [peer])
         }
     }
     
     @objc func nowPlayingItemChanged(){
-        if Date().timeIntervalSince(timeStamp) > 1 {
-            timeStamp = Date()
-            SongQueueController.sharedController.addSongToHistoryFromUpNext()
-            (MusicPlayerController.sharedController.getApplicationPlayerState() == .playing) ? self.sendPlayData() : self.sendPauseData()
+        if SongQueueController.sharedController.upNextQueue.count == 0 {
+            guard let nowPlayingItem = MusicPlayerController.sharedController.systemPlayer.nowPlayingItem, let songName = nowPlayingItem.title else { return }
+            SearchController.fetchSong(searchTerm: "\(songName)", completion: { (songs) in
+                guard let songs = songs, let song = songs.first else { return }
+                
             
+                SongQueueController.sharedController.addSongToUpNext(newSong: song)
+                
+            })
+             if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing {
+                
+                self.sendPlayData()
+            } else {
+                self.sendPauseData()
+                
+            }
         }
     }
+
     
 }

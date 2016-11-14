@@ -35,6 +35,11 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         MPCManager.sharedController.connectedDelegate = self
         let songHasChanged = Notification.Name(rawValue: "SongHasChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(updateViewWithNewSong), name: songHasChanged, object: nil)
+        setUpView()
+        let name = Notification.Name(rawValue: "stoppedBroadcasting")
+        NotificationCenter.default.addObserver(self, selector: #selector(setUpView), name: name, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(removeFromQueue), name: name, object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,21 +55,31 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     //MARK: Actions
     @IBAction func playButtonPressed(){
         if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
-            DataController.sharedController.sendPauseData()
+            MusicPlayerController.sharedController.broadcasterPause()
+            
         } else {
-            DataController.sharedController.sendPlayData()
+            MusicPlayerController.sharedController.broadcaterPlay()
+            
         }
     }
     
     @IBAction func nextButtonPressed() {
         if SongQueueController.sharedController.upNextQueue.count == 1 {
-            DataController.sharedController.sendStopData()
-            SongQueueController.sharedController.upNextQueue = []
-            alert(title: "Out of songs!", message: "Add more songs to the queue to keep listening")
+            alert(title: "Out of songs!", message: "Add more songs to the queue")
         } else {
-            SongQueueController.sharedController.upNextQueue.remove(at: 0)
-            DataController.sharedController.sendPlayData()
+            SongQueueController.sharedController.addSongToHistoryFromUpNext()
+            MusicPlayerController.sharedController.broadcaterPlay()
         }
+    }
+    
+    func removeFromQueue() {
+        SongQueueController.sharedController.upNextQueue = []
+    }
+    
+    func setUpView() {
+        songNameLabel.text = "Song Name"
+        songArtistLabel.text = "Artist Name"
+        songAlbumImageView.image = #imageLiteral(resourceName: "disc")
     }
     
     func alert(title: String, message: String) {
@@ -94,9 +109,10 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         cell.layer.shadowOffset = CGSize(width: -1, height: 1)
         cell.layer.shadowOpacity = 0.5
         
-        
-        let peer = MPCManager.sharedController.connectedPeers[indexPath.row]
-        cell.textLabel?.text = peer.displayName
+        if MPCManager.sharedController.connectedPeers.count > 0 {
+            let peer = MPCManager.sharedController.connectedPeers[indexPath.row]
+            cell.textLabel?.text = peer.displayName
+        }
         return cell
     }
     
