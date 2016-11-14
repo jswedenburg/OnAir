@@ -45,8 +45,12 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         tableView.dataSource = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: historyQueueHasChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: Notification.Name(rawValue: "SongHasChanged"), object: nil)
-        let disconnectNoti = Notification.Name(rawValue: "diconnected")
+        let disconnectNoti = Notification.Name(rawValue: "disconnected")
         NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: disconnectNoti, object: nil)
+        let name = Notification.Name(rawValue: "stoppedBroadcasting")
+        NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: name, object: nil)
+        
+        
         
     }
     
@@ -85,13 +89,15 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     }
     
     func clearSong() {
-        if DataController.sharedController.song == nil {
-            self.albumNameLabel.text = "Album Name"
-            self.songNameLabel.text = "Song Name"
-            self.artistNameLabel.text = "Artist Name"
-            self.albumCoverImageView.image = #imageLiteral(resourceName: "disc")
-            self.animate = true
-        }
+        
+        SongQueueController.sharedController.historyQueue = []
+        self.reloadTable()
+        self.albumNameLabel.text = "Album Name"
+        self.songNameLabel.text = "Song Name"
+        self.artistNameLabel.text = "Artist Name"
+        self.albumCoverImageView.image = #imageLiteral(resourceName: "disc")
+        self.animate = true
+        
     }
     
     func dataReceivedFromBroadcast(data: Data) {

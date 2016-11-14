@@ -35,6 +35,11 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         MPCManager.sharedController.connectedDelegate = self
         let songHasChanged = Notification.Name(rawValue: "SongHasChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(updateViewWithNewSong), name: songHasChanged, object: nil)
+        setUpView()
+        let name = Notification.Name(rawValue: "stoppedBroadcasting")
+        NotificationCenter.default.addObserver(self, selector: #selector(setUpView), name: name, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(removeFromQueue), name: name, object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +70,16 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
             SongQueueController.sharedController.addSongToHistoryFromUpNext()
             MusicPlayerController.sharedController.broadcaterPlay()
         }
+    }
+    
+    func removeFromQueue() {
+        SongQueueController.sharedController.upNextQueue = []
+    }
+    
+    func setUpView() {
+        songNameLabel.text = "Song Name"
+        songArtistLabel.text = "Artist Name"
+        songAlbumImageView.image = #imageLiteral(resourceName: "disc")
     }
     
     func alert(title: String, message: String) {

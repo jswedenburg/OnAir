@@ -32,7 +32,7 @@ class MusicPlayerController{
     }
     
     let systemPlayer = MPMusicPlayerController.systemMusicPlayer()
-    //    let systemPlayer = MPMusicPlayerController.systemMusicPlayer()
+    
     
     /// Variable to log when the listener has pressed paused from an in app button or in the control center.
     var timeWhenPaused: Date?

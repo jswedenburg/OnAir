@@ -45,8 +45,10 @@ class DiscoveryViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isBrowsingNotification, object: nil)
         let isAdvertisingNotification = NSNotification.Name(rawValue: "isAdvertisingChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isAdvertisingNotification, object: nil)
-        let disconnectNoti = Notification.Name(rawValue: "diconnected")
+        let disconnectNoti = Notification.Name(rawValue: "disconnected")
         NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: disconnectNoti, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: disconnectNoti, object: nil)
+        
         self.tableView.separatorStyle = .none
     }
     
@@ -57,10 +59,12 @@ class DiscoveryViewController: UIViewController {
         if MPCManager.sharedController.isAdvertising {
             startStopAdvertisingButton.setTitle("Start Broadcasting", for: .normal)
             MPCManager.sharedController.advertiser.stopAdvertisingPeer()
-            MPCManager.sharedController.isAdvertising = false
             MPCManager.sharedController.disconnect()
+            MPCManager.sharedController.isAdvertising = false
             self.tableView.isUserInteractionEnabled = true
             turnOn(MPCManager.sharedController.isAdvertising)
+            let name = Notification.Name(rawValue: "stoppedBroadcasting")
+            NotificationCenter.default.post(name: name, object: nil)
             
             
             
@@ -93,6 +97,10 @@ class DiscoveryViewController: UIViewController {
         }
         
         
+    }
+    
+    func reloadTableView() {
+        self.tableView.reloadData()
     }
     
     func turnOn(_ bool: Bool){
@@ -130,6 +138,9 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "broadcastCell", for: indexPath) as? DiscoveryTableViewCell
+        if !isConnected {
+            cell?.connectingLabel.text = ""
+        }
         cell?.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 0.96])
         cell?.layer.frame = CGRect(x: 20, y: 10, width: self.view.frame.size.width - 20 , height: 86)
         cell?.layer.masksToBounds = true
