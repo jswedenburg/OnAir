@@ -95,8 +95,8 @@ class DataController {
     
     @objc func nowPlayingItemChanged(){
         if SongQueueController.sharedController.upNextQueue.count == 0 {
-            guard let nowPlayingItem = MusicPlayerController.sharedController.systemPlayer.nowPlayingItem, let songName = nowPlayingItem.title else { return }
-            SearchController.fetchSong(searchTerm: "\(songName)", completion: { (songs) in
+            guard let nowPlayingItem = MusicPlayerController.sharedController.systemPlayer.nowPlayingItem, let songName = nowPlayingItem.title, let artistName = nowPlayingItem.artist else { return }
+            SearchController.fetchSong(searchTerm: "\(songName) \(artistName)", completion: { (songs) in
                 guard let songs = songs, let song = songs.first else { return }
                 
             

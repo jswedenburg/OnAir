@@ -29,6 +29,8 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     @IBOutlet weak var tableView: UITableView!
     
+    
+    
     //MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,7 +125,10 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     func connectedPeersChanged(peerID: MCPeerID) {
         self.tableView.reloadData()
-        DataController.sharedController.sendDataToNew(peer: peerID)
+        if MPCManager.sharedController.isAdvertising {
+            print("connected peers changed \(peerID)")
+            DataController.sharedController.sendDataToNew(peer: peerID)
+        }
     }
     
     //MARK TableView Datasource

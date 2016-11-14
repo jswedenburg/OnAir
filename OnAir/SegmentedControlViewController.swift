@@ -50,11 +50,11 @@ class SegmentedControlViewController: UIViewController  {
     
     
     override func viewDidAppear(_ animated: Bool) {
-//        if MPCManager.sharedController.isAdvertising {
-//            self.segmentedControl.setEnabled(true, forSegmentAt: 1)
-//        } else {
-//            self.segmentedControl.setEnabled(false, forSegmentAt: 1)
-//        }
+        if MPCManager.sharedController.isAdvertising {
+            self.segmentedControl.setEnabled(true, forSegmentAt: 1)
+        } else {
+            self.segmentedControl.setEnabled(false, forSegmentAt: 1)
+        }
         
         //default, add border color to search segment before selection is made 
         self.segmentedControl.selectedSegmentIndex = 0

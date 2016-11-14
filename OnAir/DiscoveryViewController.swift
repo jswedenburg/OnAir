@@ -60,7 +60,10 @@ class DiscoveryViewController: UIViewController {
             startStopAdvertisingButton.setTitle("Start Broadcasting", for: .normal)
             MPCManager.sharedController.advertiser.stopAdvertisingPeer()
             MPCManager.sharedController.disconnect()
+            MusicPlayerController.sharedController.stop()
+            isConnected = false
             MPCManager.sharedController.isAdvertising = false
+            MPCManager.sharedController.browser.startBrowsingForPeers()
             self.tableView.isUserInteractionEnabled = true
             turnOn(MPCManager.sharedController.isAdvertising)
             let name = Notification.Name(rawValue: "stoppedBroadcasting")

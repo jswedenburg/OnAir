@@ -109,6 +109,8 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             let playbacktimeStamp = dictionaryFromData["playbackTime"] as? TimeInterval?,
             let timeStamp = dictionaryFromData["timeStamp"] as? Date? else { return }
         
+        
+        
         if songDictionary != nil {
             guard let songDictionary  = dictionaryFromData["song"] as? [String: Any],
                 let song = Song(dictionary: songDictionary) else { return }
@@ -132,6 +134,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
                         
                         MusicPlayerController.sharedController.setCurrentPlaybackTime(Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.5)
+                        
                         
                     })
                     
