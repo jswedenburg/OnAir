@@ -41,7 +41,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         setUpView()
         let name = Notification.Name(rawValue: "stoppedBroadcasting")
         NotificationCenter.default.addObserver(self, selector: #selector(setUpView), name: name, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(removeFromQueue), name: name, object: nil)
+        
         
         
         
@@ -106,9 +106,6 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     
     
-    func removeFromQueue() {
-        SongQueueController.sharedController.upNextQueue = []
-    }
     
     func setUpView() {
         songNameLabel.text = "Song Name"

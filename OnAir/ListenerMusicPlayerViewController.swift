@@ -44,7 +44,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         tableView.delegate = self
         tableView.dataSource = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: historyQueueHasChanged, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: Notification.Name(rawValue: "SongHasChanged"), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: Notification.Name(rawValue: "SongHasChanged"), object: nil)
         let disconnectNoti = Notification.Name(rawValue: "disconnected")
         NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: disconnectNoti, object: nil)
         let name = Notification.Name(rawValue: "stoppedBroadcasting")
@@ -90,13 +90,16 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     
     func clearSong() {
         
-        SongQueueController.sharedController.historyQueue = []
-        self.reloadTable()
-        self.albumNameLabel.text = "Album Name"
-        self.songNameLabel.text = "Song Name"
-        self.artistNameLabel.text = "Artist Name"
-        self.albumCoverImageView.image = #imageLiteral(resourceName: "disc")
-        self.animate = true
+        DispatchQueue.main.async {
+            SongQueueController.sharedController.historyQueue = []
+            self.reloadTable()
+            self.albumNameLabel.text = "Album Name"
+            self.songNameLabel.text = "Song Name"
+            self.artistNameLabel.text = "Artist Name"
+            self.albumCoverImageView.image = #imageLiteral(resourceName: "disc")
+            self.animate = true
+        }
+        
         
     }
     
@@ -133,7 +136,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                 if timeStamp != nil && playbacktimeStamp != nil{
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
                         
-                        MusicPlayerController.sharedController.setCurrentPlaybackTime(Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.5)
+                        MusicPlayerController.sharedController.setCurrentPlaybackTime(Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.7)
                         
                         
                     })

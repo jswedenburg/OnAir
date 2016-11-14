@@ -27,10 +27,6 @@
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Listen to music with friends</string>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>location</string>
-	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
