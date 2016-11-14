@@ -26,6 +26,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     //MARK: Properties
     let player = MusicPlayerController.sharedController.systemPlayer
     
+    
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: View Lifecycle Methods
@@ -40,17 +41,22 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         NotificationCenter.default.addObserver(self, selector: #selector(setUpView), name: name, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(removeFromQueue), name: name, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(sendNextData), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
-        let queueChanged = Notification.Name(rawValue: "QueueHasChanged")
-        NotificationCenter.default.addObserver(self, selector: #selector(sendNextData), name: queueChanged, object: nil)
+        
+        
+        playButton.titleLabel?.textColor = TeamMusicColor.ourColor
+        nextButton.titleLabel?.textColor = TeamMusicColor.ourColor
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.updateViewWithNewSong()
         
-        playButton.titleLabel?.textColor = TeamMusicColor.ourColor
-        nextButton.titleLabel?.textColor = TeamMusicColor.ourColor
+        if MPCManager.sharedController.isAdvertising {
+            NotificationCenter.default.addObserver(self, selector: #selector(nowPlayingItemChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
+            
+        }
+        
+        
         self.tableView.reloadData()
         animateDiscTurn(imageView: songAlbumImageView, duration: 5.0, rotations: 1.0, repetition: 1.0)
     }
@@ -58,6 +64,11 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     //MARK: Actions
     @IBAction func playButtonPressed(){
+        self.timeStamp = Date()
+        
+        NotificationCenter.default.removeObserver(self, name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
+        
+        
         if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
             MusicPlayerController.sharedController.broadcasterPause()
             
@@ -65,30 +76,33 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
             MusicPlayerController.sharedController.broadcaterPlay()
             
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+            NotificationCenter.default.addObserver(self, selector: #selector(self.nowPlayingItemChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
+            
+        })
+        
+        
     }
     
     @IBAction func nextButtonPressed() {
+        NotificationCenter.default.removeObserver(self, name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
         if SongQueueController.sharedController.upNextQueue.count == 1 {
             alert(title: "Out of songs!", message: "Add more songs to the queue")
         } else {
             SongQueueController.sharedController.addSongToHistoryFromUpNext()
-//            MusicPlayerController.sharedController.broadcaterPlay()
+            MusicPlayerController.sharedController.broadcaterPlay()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                NotificationCenter.default.addObserver(self, selector: #selector(self.nowPlayingItemChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
+                
+                })
+            
         }
     }
     
-    func sendNextData() {
-        MusicPlayerController.sharedController.broadcaterPlay()
-        if SongQueueController.sharedController.upNextQueue[0].name != MusicPlayerController.sharedController.systemPlayer.nowPlayingItem?.title {
-            SongQueueController.sharedController.addSongToHistoryFromUpNext()
-        }
-        
-        
-        
-    }
     
-    func addToHistory() {
-        
-    }
+    
+    
     
     func removeFromQueue() {
         SongQueueController.sharedController.upNextQueue = []
@@ -163,4 +177,19 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
             imageView.layer.add(rotaionAnimation, forKey: "rotationAnimation")
         }
     }
+    
+    var timeStamp = Date()
+    
+    
+    func nowPlayingItemChanged(){
+        if Date().timeIntervalSince(timeStamp) > 1 {
+            self.timeStamp = Date()
+            SongQueueController.sharedController.addSongToHistoryFromUpNext()
+            updateViewWithNewSong()
+            MusicPlayerController.sharedController.broadcaterPlay()
+            
+        }
+
+    }
+    
 }
