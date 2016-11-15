@@ -8,6 +8,7 @@
 
 import UIKit
 import MediaPlayer
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,8 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var delegate: SubscriptionDelegate?
     
+    let locationManager = CLLocationManager()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        
+        locationManager.requestAlwaysAuthorization()
     
         checkForSubscription()
         MusicPlayerController.sharedController.stop()

@@ -44,7 +44,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         tableView.delegate = self
         tableView.dataSource = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: historyQueueHasChanged, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: Notification.Name(rawValue: "SongHasChanged"), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: Notification.Name(rawValue: "SongHasChanged"), object: nil)
         let disconnectNoti = Notification.Name(rawValue: "disconnected")
         NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: disconnectNoti, object: nil)
         let name = Notification.Name(rawValue: "stoppedBroadcasting")
@@ -90,13 +90,16 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     
     func clearSong() {
         
-        SongQueueController.sharedController.historyQueue = []
-        self.reloadTable()
-        self.albumNameLabel.text = "Album Name"
-        self.songNameLabel.text = "Song Name"
-        self.artistNameLabel.text = "Artist Name"
-        self.albumCoverImageView.image = #imageLiteral(resourceName: "disc")
-        self.animate = true
+        DispatchQueue.main.async {
+            SongQueueController.sharedController.historyQueue = []
+            self.reloadTable()
+            self.albumNameLabel.text = "Album Name"
+            self.songNameLabel.text = "Song Name"
+            self.artistNameLabel.text = "Artist Name"
+            self.albumCoverImageView.image = #imageLiteral(resourceName: "disc")
+            self.animate = true
+        }
+        
         
     }
     
@@ -108,6 +111,8 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             let songDictionary = dictionaryFromData["song"] as? [String: Any]?,
             let playbacktimeStamp = dictionaryFromData["playbackTime"] as? TimeInterval?,
             let timeStamp = dictionaryFromData["timeStamp"] as? Date? else { return }
+        
+        
         
         if songDictionary != nil {
             guard let songDictionary  = dictionaryFromData["song"] as? [String: Any],
@@ -129,13 +134,16 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             case "play":
                 print("play")
                 if timeStamp != nil && playbacktimeStamp != nil{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                        MusicPlayerController.sharedController.setCurrentPlaybackTime(Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.4)
+                    MusicPlayerController.sharedController.broadcaterPlay()
+                    print("first play")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
+                    
+                        MusicPlayerController.sharedController.setCurrentPlaybackTime(Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.5)
+                        MusicPlayerController.sharedController.broadcaterPlay()
+                        print("second play")
                     })
                 }
                 MusicPlayerController.sharedController.timeWhenPaused = nil
-                MusicPlayerController.sharedController.broadcaterPlay()
-                print("listener play")
             case "pause":
                 print("pause")
                 MusicPlayerController.sharedController.broadcasterPause()

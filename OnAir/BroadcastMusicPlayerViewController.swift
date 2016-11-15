@@ -26,7 +26,10 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     //MARK: Properties
     let player = MusicPlayerController.sharedController.systemPlayer
     
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    
     
     //MARK: View Lifecycle Methods
     override func viewDidLoad() {
@@ -38,15 +41,24 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         setUpView()
         let name = Notification.Name(rawValue: "stoppedBroadcasting")
         NotificationCenter.default.addObserver(self, selector: #selector(setUpView), name: name, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(removeFromQueue), name: name, object: nil)
+        
+        
+        
+        
+        playButton.titleLabel?.textColor = TeamMusicColor.ourColor
+        nextButton.titleLabel?.textColor = TeamMusicColor.ourColor
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.updateViewWithNewSong()
         
-        playButton.titleLabel?.textColor = TeamMusicColor.ourColor
-        nextButton.titleLabel?.textColor = TeamMusicColor.ourColor
+        if MPCManager.sharedController.isAdvertising {
+            NotificationCenter.default.addObserver(self, selector: #selector(nowPlayingItemChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
+            
+        }
+        
+        
         self.tableView.reloadData()
         animateDiscTurn(imageView: songAlbumImageView, duration: 5.0, rotations: 1.0, repetition: 1.0)
     }
@@ -54,6 +66,11 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     //MARK: Actions
     @IBAction func playButtonPressed(){
+        self.timeStamp = Date()
+        
+        NotificationCenter.default.removeObserver(self, name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
+        
+        
         if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
             MusicPlayerController.sharedController.broadcasterPause()
             
@@ -61,20 +78,36 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
             MusicPlayerController.sharedController.broadcaterPlay()
             
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+            NotificationCenter.default.addObserver(self, selector: #selector(self.nowPlayingItemChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
+            
+        })
+        
+        
     }
     
     @IBAction func nextButtonPressed() {
+        NotificationCenter.default.removeObserver(self, name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
         if SongQueueController.sharedController.upNextQueue.count == 1 {
             alert(title: "Out of songs!", message: "Add more songs to the queue")
         } else {
+            self.timeStamp = Date()
             SongQueueController.sharedController.addSongToHistoryFromUpNext()
             MusicPlayerController.sharedController.broadcaterPlay()
+            DataController.sharedController.sendPlayData()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                NotificationCenter.default.addObserver(self, selector: #selector(self.nowPlayingItemChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
+                
+                })
+            
         }
     }
     
-    func removeFromQueue() {
-        SongQueueController.sharedController.upNextQueue = []
-    }
+    
+    
+    
+    
     
     func setUpView() {
         songNameLabel.text = "Song Name"
@@ -91,7 +124,10 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     func connectedPeersChanged(peerID: MCPeerID) {
         self.tableView.reloadData()
-        DataController.sharedController.sendDataToNew(peer: peerID)
+        if MPCManager.sharedController.isAdvertising {
+            print("connected peers changed \(peerID)")
+            DataController.sharedController.sendDataToNew(peer: peerID)
+        }
     }
     
     //MARK TableView Datasource
@@ -145,4 +181,19 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
             imageView.layer.add(rotaionAnimation, forKey: "rotationAnimation")
         }
     }
+    
+    var timeStamp = Date()
+    
+    
+    func nowPlayingItemChanged(){
+        if Date().timeIntervalSince(timeStamp) > 1 {
+            self.timeStamp = Date()
+            SongQueueController.sharedController.addSongToHistoryFromUpNext()
+            updateViewWithNewSong()
+            MusicPlayerController.sharedController.broadcaterPlay()
+            
+        }
+
+    }
+    
 }

@@ -137,7 +137,7 @@
             browser.stopBrowsingForPeers()
             MPCManager.isBrowsing = false
             print("Connected")
-            connectedDelegate?.connectedPeersChanged(peerID: peer)
+            connectedDelegate?.connectedPeersChanged(peerID: peerID)
         case MCSessionState.connecting:
             print("Connecting")
         default:
