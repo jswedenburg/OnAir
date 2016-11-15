@@ -229,7 +229,6 @@
 				0FC780D21DC15E72009515A9 /* ListenerMusicPlayerViewController.swift */,
 				815742D11DBFE72800FF1619 /* DiscoveryViewController.swift */,
 				815743011DC1277E00FF1619 /* BroadcastMusicPlayerViewController.swift */,
-				4B25C5461DD0E73F000533E0 /* Constants.swift */,
 				4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */,
 				4B0A945E1DBFCA6700DF39EE /* SegmentedControlViewController.swift */,
 				652EF04E1DC129E60020009B /* SearchResultsViewController.swift */,
@@ -250,6 +249,7 @@
 		815742E21DC0704200FF1619 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4B25C5461DD0E73F000533E0 /* Constants.swift */,
 				810106E41DDAC4BF00C1EC2A /* skylar.jpg */,
 				811869811DBFBD0200FD2D7C /* Info.plist */,
 				8118697C1DBFBD0200FD2D7C /* Assets.xcassets */,
