@@ -49,6 +49,9 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: disconnectNoti, object: nil)
         let name = Notification.Name(rawValue: "stoppedBroadcasting")
         NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: name, object: nil)
+        self.songNameLabel.adjustsFontSizeToFitWidth = true
+        self.artistNameLabel.adjustsFontSizeToFitWidth = true
+        self.albumNameLabel.adjustsFontSizeToFitWidth = true 
         
         
         

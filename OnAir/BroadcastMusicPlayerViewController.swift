@@ -45,8 +45,8 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         
         
         
-        playButton.titleLabel?.textColor = TeamMusicColor.ourColor
-        nextButton.titleLabel?.textColor = TeamMusicColor.ourColor
+        playButton.setTitleColor(UIColor.black, for: .normal)
+        nextButton.setTitleColor(UIColor.black, for: .normal)
         
     }
     

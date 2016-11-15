@@ -166,6 +166,7 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
         return cell ?? DiscoveryTableViewCell()
     }
     
+       
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
