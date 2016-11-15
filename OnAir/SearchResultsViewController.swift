@@ -35,6 +35,7 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         self.tableView.dataSource = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: Notification.Name(rawValue: "QueueHasChanged") , object: nil)
         tableView.separatorStyle = .none
+        setUpImage()
     
         
     }
@@ -45,18 +46,37 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         super.viewWillAppear(animated)
         
         // Add a background view to the table view
-        let backgroundImage = UIImage(named: "Skylar")
-        let imageView = UIImageView(image: backgroundImage)
-        self.tableView.backgroundView = imageView
+//        let backgroundImage = UIImage(named: "Skylar")
+//        let imageView = UIImageView(image: backgroundImage)
+//        self.tableView.backgroundView = imageView
         // no lines where there aren't cells
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         // center and scale background image
-        imageView.contentMode = .scaleAspectFill
+//        imageView.contentMode = .scaleAspectFill
         searchBarCustomizeAppearance()
     }
     
     
-
+    func setUpImage() {
+        let context = CIContext()
+        if let path = Bundle.main.path(forResource: "skylar", ofType: "jpg"),
+            let uiInputImage = UIImage(contentsOfFile: path),
+            let cgInputImage = uiInputImage.cgImage {
+        
+            let ciimg = CIImage(cgImage: cgInputImage)
+            let boxblur = CIFilter(name: "CIBoxBlur")
+            print(boxblur!.attributes)
+            boxblur?.setValue(30.0, forKey: "inputRadius")
+            boxblur?.setValue(ciimg, forKey: kCIInputImageKey)
+        
+            let cgimg = context.createCGImage((boxblur?.outputImage)!, from: ciimg.extent)
+            let uiimg = UIImage(cgImage: cgimg!)
+            
+            let imageView = UIImageView(image: uiimg)
+            self.tableView.backgroundView = imageView
+            imageView.contentMode = .scaleAspectFill
+        }
+    }
     
     
     //MARK: - Search Bar Delegate
@@ -206,12 +226,14 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "songCell", for: indexPath) as? SongQueueTableViewCell
         cell?.delegate = self
+        cell?.backgroundColor = UIColor.init(colorLiteralRed: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         cell?.layer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 1.0, 0.96])
         cell?.layer.frame = CGRect(x: 20, y: 10, width: self.view.frame.size.width - 20 , height: 86)
         cell?.layer.masksToBounds = true
-        cell?.layer.cornerRadius = 5.0
+        cell?.layer.cornerRadius = 10.0
         cell?.layer.shadowOffset = CGSize(width: -1, height: 1)
-        cell?.layer.shadowOpacity = 0.5
+        cell?.layer.shadowOpacity = 0.2
+        cell?.layer.opacity = 0.2
         
 
 
