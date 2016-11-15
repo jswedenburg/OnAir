@@ -98,8 +98,6 @@ class DataController {
             guard let nowPlayingItem = MusicPlayerController.sharedController.systemPlayer.nowPlayingItem, let songName = nowPlayingItem.title, let artistName = nowPlayingItem.artist else { return }
             SearchController.fetchSong(searchTerm: "\(songName) \(artistName)", completion: { (songs) in
                 guard let songs = songs, let song = songs.first else { return }
-                
-            
                 SongQueueController.sharedController.addSongToUpNext(newSong: song)
                 
             })

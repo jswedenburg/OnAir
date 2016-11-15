@@ -41,10 +41,6 @@ class DiscoveryViewController: UIViewController {
         MPCManager.sharedController.delegate = self
         MPCManager.sharedController.browser.startBrowsingForPeers()
         MPCManager.isBrowsing = true
-//        let isBrowsingNotification = Notification.Name(rawValue: "isBrowsingChanged")
-//        NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isBrowsingNotification, object: nil)
-//        let isAdvertisingNotification = NSNotification.Name(rawValue: "isAdvertisingChanged")
-//        NotificationCenter.default.addObserver(self, selector: #selector(advertisingBrowsingIdentify), name: isAdvertisingNotification, object: nil)
         let disconnectNoti = Notification.Name(rawValue: "disconnected")
         NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: disconnectNoti, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: disconnectNoti, object: nil)
@@ -110,17 +106,6 @@ class DiscoveryViewController: UIViewController {
             
         }
     }
-    
-    
-//    func advertisingBrowsingIdentify() {
-//        
-//        if MPCManager.sharedController.isAdvertising == false {
-//            MusicPlayerController.sharedController.listenerPause()
-//            SongQueueController.sharedController.upNextQueue = []
-//        }
-//        
-//        
-//    }
     
     func reloadTableView() {
         self.tableView.reloadData()

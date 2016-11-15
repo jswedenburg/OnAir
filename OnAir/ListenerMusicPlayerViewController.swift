@@ -142,13 +142,8 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                         MusicPlayerController.sharedController.broadcaterPlay()
                         print("second play")
                     })
-                    
-                   
                 }
-                
                 MusicPlayerController.sharedController.timeWhenPaused = nil
-                
-                
             case "pause":
                 print("pause")
                 MusicPlayerController.sharedController.broadcasterPause()
