@@ -51,7 +51,8 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         NotificationCenter.default.addObserver(self, selector: #selector(clearSong), name: name, object: nil)
         self.songNameLabel.adjustsFontSizeToFitWidth = true
         self.artistNameLabel.adjustsFontSizeToFitWidth = true
-        self.albumNameLabel.adjustsFontSizeToFitWidth = true 
+        self.albumNameLabel.adjustsFontSizeToFitWidth = true
+        updateViewToDefault()
         
         
         
@@ -67,9 +68,9 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     
     
     func updateViewToDefault() {
-        self.albumNameLabel.text = "Album Name"
-        self.artistNameLabel.text = "Artist Name"
-        self.songNameLabel.text = "Song Name"
+        self.albumNameLabel.text = ""
+        self.songNameLabel.text = "Tune into a broadcast to start listening!"
+        self.artistNameLabel.text = ""
         self.albumCoverImageView.image = #imageLiteral(resourceName: "disc")
     }
     
@@ -96,9 +97,9 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         DispatchQueue.main.async {
             SongQueueController.sharedController.historyQueue = []
             self.reloadTable()
-            self.albumNameLabel.text = "Album Name"
-            self.songNameLabel.text = "Song Name"
-            self.artistNameLabel.text = "Artist Name"
+            self.albumNameLabel.text = ""
+            self.songNameLabel.text = "Tune into a broadcast to start listening!"
+            self.artistNameLabel.text = ""
             self.albumCoverImageView.image = #imageLiteral(resourceName: "disc")
             self.animate = true
         }
@@ -137,8 +138,6 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             case "play":
                 print("play")
                 if timeStamp != nil && playbacktimeStamp != nil{
-                    MusicPlayerController.sharedController.broadcaterPlay()
-                    print("first play")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
                     
                         MusicPlayerController.sharedController.setCurrentPlaybackTime(Date().timeIntervalSince(timeStamp!) + playbacktimeStamp! + 0.5)
@@ -146,6 +145,8 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
                         print("second play")
                     })
                 }
+                MusicPlayerController.sharedController.broadcaterPlay()
+                print("first play")
                 MusicPlayerController.sharedController.timeWhenPaused = nil
             case "pause":
                 print("pause")

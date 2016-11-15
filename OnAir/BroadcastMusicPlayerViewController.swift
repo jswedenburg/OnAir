@@ -73,10 +73,11 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         
         if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
             MusicPlayerController.sharedController.broadcasterPause()
+            self.playButton.setTitle("Play", for: .normal)
             
         } else {
             MusicPlayerController.sharedController.broadcaterPlay()
-            
+            self.playButton.setTitle("Pause", for: .normal)
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
@@ -110,8 +111,8 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     
     func setUpView() {
-        songNameLabel.text = "Song Name"
-        songArtistLabel.text = "Artist Name"
+        songNameLabel.text = ""
+        songArtistLabel.text = "Add a song to your queue to start playing!"
         songAlbumImageView.image = #imageLiteral(resourceName: "disc")
     }
     
@@ -152,8 +153,24 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         return cell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Listening Peers"
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30.0
+    }
+    
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 30))
+        headerView.backgroundColor = UIColor(red: 0/255, green: 119/255, blue: 181/255, alpha: 0.6)
+        headerView.layer.borderColor = UIColor(colorLiteralRed: 134/255, green: 136/255, blue: 138/255, alpha: 1.0).cgColor
+        headerView.layer.borderWidth = 1.0
+        
+        let headerLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width - 5, height: 20 ))
+        headerLabel.text = "Listening Peers"
+        headerLabel.textAlignment = .center
+        headerLabel.font = UIFont(name: "Helvetica Neue", size: 14)
+        headerView.addSubview(headerLabel)
+        
+        return headerView
     }
     
     func updateViewWithNewSong() {

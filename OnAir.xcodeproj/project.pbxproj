@@ -25,6 +25,7 @@
 		655BAB6F1DBFFC740073F487 /* SongQueueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BAB6E1DBFFC740073F487 /* SongQueueController.swift */; };
 		65D56CA51DD382BB006E6994 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D56CA41DD382BB006E6994 /* DataController.swift */; };
 		810106E51DDAC4BF00C1EC2A /* skylar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 810106E41DDAC4BF00C1EC2A /* skylar.jpg */; };
+		811672EF1DDBB1B00037105E /* bluelights.png in Resources */ = {isa = PBXBuildFile; fileRef = 811672EE1DDBB1B00037105E /* bluelights.png */; };
 		811869761DBFBD0200FD2D7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869751DBFBD0200FD2D7C /* AppDelegate.swift */; };
 		8118697B1DBFBD0200FD2D7C /* SearchAndQueue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 811869791DBFBD0200FD2D7C /* SearchAndQueue.storyboard */; };
 		8118697D1DBFBD0200FD2D7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8118697C1DBFBD0200FD2D7C /* Assets.xcassets */; };
@@ -80,6 +81,7 @@
 		655BAB6E1DBFFC740073F487 /* SongQueueController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueController.swift; sourceTree = "<group>"; };
 		65D56CA41DD382BB006E6994 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		810106E41DDAC4BF00C1EC2A /* skylar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = skylar.jpg; path = Assets.xcassets/Skylar.imageset/skylar.jpg; sourceTree = "<group>"; };
+		811672EE1DDBB1B00037105E /* bluelights.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bluelights.png; sourceTree = "<group>"; };
 		811869721DBFBD0200FD2D7C /* OnAir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnAir.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		811869751DBFBD0200FD2D7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8118697A1DBFBD0200FD2D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SearchAndQueue.storyboard; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				4B25C5461DD0E73F000533E0 /* Constants.swift */,
+				811672EE1DDBB1B00037105E /* bluelights.png */,
 				810106E41DDAC4BF00C1EC2A /* skylar.jpg */,
 				811869811DBFBD0200FD2D7C /* Info.plist */,
 				8118697C1DBFBD0200FD2D7C /* Assets.xcassets */,
@@ -373,6 +376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				811869801DBFBD0200FD2D7C /* LaunchScreen.storyboard in Resources */,
+				811672EF1DDBB1B00037105E /* bluelights.png in Resources */,
 				8118697D1DBFBD0200FD2D7C /* Assets.xcassets in Resources */,
 				815742DC1DC00BA100FF1619 /* BroadcastMusicPlayer.storyboard in Resources */,
 				8118697B1DBFBD0200FD2D7C /* SearchAndQueue.storyboard in Resources */,

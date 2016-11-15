@@ -30,18 +30,17 @@ class SongQueueViewController: UIViewController, UITableViewDelegate, UITableVie
         NotificationCenter.default.addObserver(self, selector: #selector(updateTableView), name: Notification.Name(rawValue: "QueueHasChanged"), object: nil)
         
         self.tableView.separatorStyle = .none
+        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        self.tableView.reloadData()
-        self.parent?.parent?.navigationItem.rightBarButtonItem = editButtonItem
-        self.parent?.parent?.navigationItem.rightBarButtonItem?.isEnabled = false
-        self.parent?.parent?.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear
-    }
+    
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.parent?.parent?.navigationItem.rightBarButtonItem = editButtonItem
+        self.parent?.parent?.navigationItem.rightBarButtonItem?.isEnabled = false
+        self.parent?.parent?.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear
         
         // Add a background view to the table view
         let backgroundImage = UIImage(named: "Skylar")
@@ -49,6 +48,7 @@ class SongQueueViewController: UIViewController, UITableViewDelegate, UITableVie
         // center and scale background image
         imageView.contentMode = .scaleAspectFill
         self.tableView.backgroundView = imageView
+        self.tableView.reloadData()
     }
     
     
