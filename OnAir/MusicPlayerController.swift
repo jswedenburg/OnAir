@@ -126,8 +126,8 @@ class MusicPlayerController{
     /// Starts the broadcaster's application player to play
     func broadcaterPlay(){
         print("broadcaster play")
-        systemPlayer.play()
-    }
+        self.systemPlayer.play()
+        }
     
     /// Pauses the broadcaster's application player
     func broadcasterPause(){
@@ -168,6 +168,7 @@ class MusicPlayerController{
                     print("systempause")
                 default: ()
                 }
+                timeStamp = Date()
             }
         }
     }

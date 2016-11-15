@@ -92,8 +92,10 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         if SongQueueController.sharedController.upNextQueue.count == 1 {
             alert(title: "Out of songs!", message: "Add more songs to the queue")
         } else {
+            self.timeStamp = Date()
             SongQueueController.sharedController.addSongToHistoryFromUpNext()
             MusicPlayerController.sharedController.broadcaterPlay()
+            DataController.sharedController.sendPlayData()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                 NotificationCenter.default.addObserver(self, selector: #selector(self.nowPlayingItemChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
                 
