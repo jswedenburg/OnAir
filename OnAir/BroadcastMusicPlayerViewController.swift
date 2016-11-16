@@ -34,7 +34,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     //MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.separatorStyle = .none
+        //tableView.separatorStyle = .none
         MPCManager.sharedController.connectedDelegate = self
         let songHasChanged = Notification.Name(rawValue: "SongHasChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(updateViewWithNewSong), name: songHasChanged, object: nil)
@@ -160,11 +160,11 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 30))
-        headerView.backgroundColor = UIColor(red: 0/255, green: 119/255, blue: 181/255, alpha: 0.6)
-        headerView.layer.borderColor = UIColor(colorLiteralRed: 134/255, green: 136/255, blue: 138/255, alpha: 1.0).cgColor
+        headerView.backgroundColor = UIColor(red: 225/255, green: 232/255, blue: 237/255, alpha: 1.0)
+        headerView.layer.borderColor = UIColor(colorLiteralRed: 170/255, green: 184/255, blue: 194/255, alpha: 1.0).cgColor
         headerView.layer.borderWidth = 1.0
         
-        let headerLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width - 5, height: 20 ))
+        let headerLabel = UILabel(frame: CGRect(x: 0, y: 5, width: tableView.frame.size.width - 5, height: 20 ))
         headerLabel.text = "Listening Peers"
         headerLabel.textAlignment = .center
         headerLabel.font = UIFont(name: "Helvetica Neue", size: 14)

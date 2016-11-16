@@ -168,6 +168,7 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        self.tableView.separatorStyle = .none
         let cell = tableView.dequeueReusableCell(withIdentifier: "broadcastCell", for: indexPath) as? DiscoveryTableViewCell
         if !isConnected {
             cell?.connectingLabel.text = ""
@@ -257,7 +258,7 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
                 
         
         let headerLabel = UILabel(frame: CGRect(x: 5, y: 10, width: tableView.frame.size.width - 5, height: 30))
-        headerLabel.text = " Join a nearby broadcast"
+        headerLabel.text = "or join a nearby broadcast"
         headerLabel.textAlignment = .center
         headerLabel.font = UIFont(name: "Helvetica Neue", size: 18)
         headerView.addSubview(headerLabel)

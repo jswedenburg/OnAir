@@ -22,16 +22,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SYj-AS-FNE">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SYj-AS-FNE">
                                 <rect key="frame" x="0.0" y="485.5" width="375" height="181.5"/>
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.97254901959999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="181.5" id="KtS-cc-FeT"/>
+                                </constraints>
                                 <color key="sectionIndexBackgroundColor" red="0.96078431369999995" green="0.97254901959999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="recentSongCell" id="phj-eA-Aso" customClass="PreviouslyPlayedSongTableViewCell" customModule="OnAir" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="phj-eA-Aso" id="3kg-he-RRq">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70z-Tk-5vU">
@@ -115,6 +118,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" id="MnZ-cA-Q3w"/>
                     <connections>
+                        <outlet property="addSongToLibrary" destination="aJH-Df-Phg" id="Ybd-Pl-gVi"/>
                         <outlet property="albumCoverImageView" destination="Eho-ZU-hpR" id="KqK-Dd-9li"/>
                         <outlet property="albumNameLabel" destination="lA3-KI-zV2" id="vpd-Sa-lRD"/>
                         <outlet property="artistNameLabel" destination="Kkx-aN-EMN" id="VuA-Wv-2hS"/>

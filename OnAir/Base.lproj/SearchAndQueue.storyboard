@@ -131,8 +131,8 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3Y-7h-mSJ">
-                                                    <rect key="frame" x="320" y="26" width="55" height="55"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3Y-7h-mSJ">
+                                                    <rect key="frame" x="312" y="22" width="55" height="55.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="55" id="KTA-Mn-5bW"/>
                                                     </constraints>

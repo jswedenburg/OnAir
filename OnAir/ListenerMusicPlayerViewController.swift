@@ -18,6 +18,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     @IBOutlet weak var artistNameLabel: UILabel!
     @IBOutlet weak var albumNameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var addSongToLibrary: UIButton!
     
     
     //MARK: IBActions
@@ -59,7 +60,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tableView.separatorStyle = .none
+        //self.tableView.separatorStyle = .none
         self.tabBarController?.tabBar.tintColor = TeamMusicColor.ourColor
         animateDiscTurn(imageView: albumCoverImageView, duration: 5.0, rotations: 1.0, repetition: 1.0)
     }
@@ -71,6 +72,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         self.albumNameLabel.text = ""
         self.songNameLabel.text = "Tune into a broadcast to start listening!"
         self.artistNameLabel.text = ""
+        self.addSongToLibrary.setTitle("", for: .normal)
         self.albumCoverImageView.image = #imageLiteral(resourceName: "disc")
     }
     
@@ -80,6 +82,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
         DispatchQueue.main.async {
             self.albumNameLabel.text = song.albumName
             self.songNameLabel.text = song.name
+            self.addSongToLibrary.setTitle("Add song to personal library", for: .normal)
             self.artistNameLabel.text = song.artist
             ImageController.imageForURL(imageEndpoint: song.image) { (image) in
                 self.albumCoverImageView.image = image
@@ -100,6 +103,7 @@ class ListenerMusicPlayerViewController: UIViewController, GotDataFromBroadcaste
             self.albumNameLabel.text = ""
             self.songNameLabel.text = "Tune into a broadcast to start listening!"
             self.artistNameLabel.text = ""
+            self.addSongToLibrary.setTitle("", for: .normal)
             self.albumCoverImageView.image = #imageLiteral(resourceName: "disc")
             self.animate = true
         }
@@ -194,6 +198,25 @@ extension ListenerMusicPlayerViewController: UITableViewDelegate, UITableViewDat
         cell?.updateCellWith(songName: song.name, artistName: song.artist)
         
         return cell ?? PreviouslyPlayedSongTableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 30))
+        headerView.backgroundColor = UIColor(red: 225/255, green: 232/255, blue: 237/255, alpha: 1.0)
+        headerView.layer.borderColor = UIColor(colorLiteralRed: 170/255, green: 184/255, blue: 194/255, alpha: 1.0).cgColor
+        headerView.layer.borderWidth = 1.0
+        
+        let headerLabel = UILabel(frame: CGRect(x: 0, y: 5, width: tableView.frame.size.width - 5, height: 20 ))
+        headerLabel.text = "Previous Songs"
+        headerLabel.textAlignment = .center
+        headerLabel.font = UIFont(name: "Helvetica Neue", size: 14)
+        headerView.addSubview(headerLabel)
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
     }
     
     func animateDiscTurn(imageView: UIImageView, duration: Float, rotations: Float, repetition: Float){

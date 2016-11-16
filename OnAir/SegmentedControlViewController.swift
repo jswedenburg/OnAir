@@ -32,7 +32,7 @@ class SegmentedControlViewController: UIViewController  {
         
         //let titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
         //self.segmentedControl.setTitleTextAttributes(titleTextAttributes, for: .normal)
-        
+        navigationController?.navigationBar.barTintColor = UIColor(colorLiteralRed: 225/270, green: 232/270, blue: 237/270, alpha: 1.0)
     
     }
     

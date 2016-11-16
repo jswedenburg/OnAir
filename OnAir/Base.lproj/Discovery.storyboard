@@ -23,12 +23,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0cc-W9-QaU">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSH-mo-yEG" userLabel="Start Stop Broadcasting Button">
-                                <rect key="frame" x="96" y="385" width="183" height="80"/>
+                                <rect key="frame" x="96" y="427" width="183" height="38"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="21"/>
                                 <state key="normal" title="Start Broadcasting">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -37,7 +33,7 @@
                                     <action selector="broadcastButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XR4-Cz-jOB"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" alpha="0.90000000000000002" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aXI-Xp-jiT">
+                            <tableView clipsSubviews="YES" alpha="0.90000000000000002" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aXI-Xp-jiT">
                                 <rect key="frame" x="10" y="480" width="355" height="187"/>
                                 <color key="backgroundColor" red="0.94117647058823528" green="0.95294117647058818" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -48,7 +44,7 @@
                                         <rect key="frame" x="0.0" y="28" width="355" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QUz-WZ-tiW" id="Nox-qi-6Q9">
-                                            <rect key="frame" x="0.0" y="0.0" width="355" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="355" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6i-PR-zFO">
@@ -108,7 +104,7 @@
                             <constraint firstItem="aXI-Xp-jiT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="GD9-0i-BRV"/>
                             <constraint firstItem="v9c-VF-42P" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="KQ5-Fk-Vup"/>
                             <constraint firstItem="zSH-mo-yEG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="N4a-eG-aDy"/>
-                            <constraint firstItem="zSH-mo-yEG" firstAttribute="top" secondItem="v9c-VF-42P" secondAttribute="bottom" constant="20" id="PkH-7A-tvY"/>
+                            <constraint firstItem="zSH-mo-yEG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="v9c-VF-42P" secondAttribute="bottom" constant="20" id="PkH-7A-tvY"/>
                             <constraint firstAttribute="trailing" secondItem="aXI-Xp-jiT" secondAttribute="trailing" constant="10" id="Yqw-iZ-LEh"/>
                             <constraint firstAttribute="trailing" secondItem="v9c-VF-42P" secondAttribute="trailing" id="aK1-N6-vf8"/>
                             <constraint firstItem="v9c-VF-42P" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="bG5-MS-AZa"/>
@@ -116,7 +112,6 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" id="9G4-bN-5gI"/>
                     <connections>
-                        <outlet property="backgroundImage" destination="0cc-W9-QaU" id="Hbo-e0-zcQ"/>
                         <outlet property="micImage" destination="v9c-VF-42P" id="cxf-Nk-QAH"/>
                         <outlet property="startStopAdvertisingButton" destination="zSH-mo-yEG" id="5JL-yo-YEp"/>
                         <outlet property="tableView" destination="aXI-Xp-jiT" id="gud-yW-PFU"/>
