@@ -21,6 +21,7 @@ class DiscoveryViewController: UIViewController {
     @IBOutlet weak var startStopAdvertisingButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var micImage: UIImageView!
+    @IBOutlet weak var backgroundImage: UIImageView!
     
     
     
@@ -44,8 +45,8 @@ class DiscoveryViewController: UIViewController {
         let disconnectNoti = Notification.Name(rawValue: "disconnected")
         NotificationCenter.default.addObserver(self, selector: #selector(disconnect), name: disconnectNoti, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: disconnectNoti, object: nil)
+        //setUpImage()
         
-        self.tableView.separatorStyle = .none
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -54,6 +55,26 @@ class DiscoveryViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         MusicPlayerController.sharedController.systemPlayer.beginGeneratingPlaybackNotifications()
+    }
+    
+    func setUpImage() {
+        let context = CIContext()
+        if let path = Bundle.main.path(forResource: "bluelights", ofType: "png"),
+            let uiInputImage = UIImage(contentsOfFile: path),
+            let cgInputImage = uiInputImage.cgImage {
+            
+            let ciimg = CIImage(cgImage: cgInputImage)
+            let boxblur = CIFilter(name: "CIBoxBlur")
+            print(boxblur!.attributes)
+            boxblur?.setValue(30.0, forKey: "inputRadius")
+            boxblur?.setValue(ciimg, forKey: kCIInputImageKey)
+            
+            let cgimg = context.createCGImage((boxblur?.outputImage)!, from: ciimg.extent)
+            let uiimg = UIImage(cgImage: cgimg!)
+            
+            self.backgroundImage.image = uiimg
+            backgroundImage.contentMode = .scaleAspectFill
+        }
     }
     
       
@@ -147,6 +168,7 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        self.tableView.separatorStyle = .none
         let cell = tableView.dequeueReusableCell(withIdentifier: "broadcastCell", for: indexPath) as? DiscoveryTableViewCell
         if !isConnected {
             cell?.connectingLabel.text = ""
@@ -166,6 +188,7 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
         return cell ?? DiscoveryTableViewCell()
     }
     
+       
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -226,7 +249,21 @@ extension DiscoveryViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 75
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
+        headerView.backgroundColor = UIColor(red: 225/255, green: 232/255, blue: 237/255, alpha: 0.95)
+                
+        
+        let headerLabel = UILabel(frame: CGRect(x: 5, y: 10, width: tableView.frame.size.width - 5, height: 30))
+        headerLabel.text = "or join a nearby broadcast"
+        headerLabel.textAlignment = .center
+        headerLabel.font = UIFont(name: "Helvetica Neue", size: 18)
+        headerView.addSubview(headerLabel)
+        
+        return headerView
     }
 }
 

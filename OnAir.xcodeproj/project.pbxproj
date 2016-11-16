@@ -24,6 +24,7 @@
 		655BAB4B1DBFEF180073F487 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BAB4A1DBFEF180073F487 /* Album.swift */; };
 		655BAB6F1DBFFC740073F487 /* SongQueueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BAB6E1DBFFC740073F487 /* SongQueueController.swift */; };
 		65D56CA51DD382BB006E6994 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D56CA41DD382BB006E6994 /* DataController.swift */; };
+		810106E51DDAC4BF00C1EC2A /* skylar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 810106E41DDAC4BF00C1EC2A /* skylar.jpg */; };
 		811869761DBFBD0200FD2D7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811869751DBFBD0200FD2D7C /* AppDelegate.swift */; };
 		8118697B1DBFBD0200FD2D7C /* SearchAndQueue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 811869791DBFBD0200FD2D7C /* SearchAndQueue.storyboard */; };
 		8118697D1DBFBD0200FD2D7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8118697C1DBFBD0200FD2D7C /* Assets.xcassets */; };
@@ -78,6 +79,7 @@
 		655BAB4A1DBFEF180073F487 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		655BAB6E1DBFFC740073F487 /* SongQueueController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongQueueController.swift; sourceTree = "<group>"; };
 		65D56CA41DD382BB006E6994 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		810106E41DDAC4BF00C1EC2A /* skylar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = skylar.jpg; path = Assets.xcassets/Skylar.imageset/skylar.jpg; sourceTree = "<group>"; };
 		811869721DBFBD0200FD2D7C /* OnAir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnAir.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		811869751DBFBD0200FD2D7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8118697A1DBFBD0200FD2D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SearchAndQueue.storyboard; sourceTree = "<group>"; };
@@ -227,7 +229,6 @@
 				0FC780D21DC15E72009515A9 /* ListenerMusicPlayerViewController.swift */,
 				815742D11DBFE72800FF1619 /* DiscoveryViewController.swift */,
 				815743011DC1277E00FF1619 /* BroadcastMusicPlayerViewController.swift */,
-				4B25C5461DD0E73F000533E0 /* Constants.swift */,
 				4B0A94601DBFE46900DF39EE /* SongQueueViewController.swift */,
 				4B0A945E1DBFCA6700DF39EE /* SegmentedControlViewController.swift */,
 				652EF04E1DC129E60020009B /* SearchResultsViewController.swift */,
@@ -248,6 +249,8 @@
 		815742E21DC0704200FF1619 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4B25C5461DD0E73F000533E0 /* Constants.swift */,
+				810106E41DDAC4BF00C1EC2A /* skylar.jpg */,
 				811869811DBFBD0200FD2D7C /* Info.plist */,
 				8118697C1DBFBD0200FD2D7C /* Assets.xcassets */,
 			);
@@ -376,6 +379,7 @@
 				815742DA1DC00B8800FF1619 /* ListenerMusicPlayer.storyboard in Resources */,
 				811FD0FE1DC641DE0086AC3D /* TabBar.storyboard in Resources */,
 				815742D81DC00B7F00FF1619 /* Discovery.storyboard in Resources */,
+				810106E51DDAC4BF00C1EC2A /* skylar.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,6 +594,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = comjakeswedenburgonair;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -603,6 +608,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = comjakeswedenburgonair;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

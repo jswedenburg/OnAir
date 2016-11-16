@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A319" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="irE-pj-7TK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="irE-pj-7TK">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,53 +23,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Hua-FP-KyM" userLabel="SongTitle/Artist">
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJG-Nh-vGo">
-                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blue October" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQ4-Ju-f9X">
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="NJG-Nh-vGo" secondAttribute="bottom" constant="20" symbolic="YES" id="3MH-bn-WY6"/>
-                                </constraints>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="7Lj-J6-5up" userLabel="MusicControl">
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmY-hS-GJJ">
-                                        <state key="normal" title="Play"/>
-                                        <connections>
-                                            <action selector="playButtonPressed" destination="irE-pj-7TK" eventType="touchUpInside" id="urf-em-mPl"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBN-hS-dGH">
-                                        <state key="normal" title="next"/>
-                                        <connections>
-                                            <action selector="nextButtonPressed" destination="irE-pj-7TK" eventType="touchUpInside" id="JVx-DJ-ax0"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="63" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PMN-HJ-TS7">
+                                <rect key="frame" x="0.0" y="481" width="375" height="186"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="peerCell" textLabel="4O0-ap-6iv" rowHeight="63" style="IBUITableViewCellStyleDefault" id="z69-k8-eoJ">
                                         <rect key="frame" x="0.0" y="28" width="375" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z69-k8-eoJ" id="XFg-jn-4Kx">
-                                            <frame key="frameInset" width="375" height="63"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4O0-ap-6iv">
-                                                    <frame key="frameInset" minX="15" width="345" height="63"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="63"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -80,24 +51,73 @@
                                 </connections>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disc" translatesAutoresizingMaskIntoConstraints="NO" id="RWP-Fz-5c2">
+                                <rect key="frame" x="2" y="22" width="371" height="371"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="RWP-Fz-5c2" secondAttribute="height" multiplier="1:1" id="cgN-v0-4Wx"/>
                                 </constraints>
                             </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Dnb-VY-GCY">
+                                <rect key="frame" x="16" y="401" width="343" height="78"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Hua-FP-KyM" userLabel="SongTitle/Artist">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="40"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJG-Nh-vGo">
+                                                <rect key="frame" x="148.5" y="0.0" width="46" height="20"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blue October" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQ4-Ju-f9X">
+                                                <rect key="frame" x="121" y="20" width="101" height="20"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7Lj-J6-5up" userLabel="MusicControl">
+                                        <rect key="frame" x="0.0" y="45" width="343" height="33"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmY-hS-GJJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="171.5" height="33"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                                <state key="normal" title="Play">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="playButtonPressed" destination="irE-pj-7TK" eventType="touchUpInside" id="urf-em-mPl"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBN-hS-dGH">
+                                                <rect key="frame" x="171.5" y="0.0" width="171.5" height="33"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                                <state key="normal" title="Next">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="nextButtonPressed" destination="irE-pj-7TK" eventType="touchUpInside" id="JVx-DJ-ax0"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7Lj-J6-5up" firstAttribute="centerX" secondItem="PMN-HJ-TS7" secondAttribute="centerX" id="36X-55-FHk"/>
-                            <constraint firstItem="RWP-Fz-5c2" firstAttribute="height" secondItem="5sV-eY-9Qy" secondAttribute="height" multiplier="0.454" id="JMq-o8-vJk"/>
-                            <constraint firstItem="PMN-HJ-TS7" firstAttribute="top" secondItem="7Lj-J6-5up" secondAttribute="bottom" constant="15" id="Jd2-OG-dxZ"/>
+                            <constraint firstItem="PMN-HJ-TS7" firstAttribute="top" secondItem="Dnb-VY-GCY" secondAttribute="bottom" constant="2" id="4V5-kC-cfm"/>
                             <constraint firstItem="RWP-Fz-5c2" firstAttribute="centerX" secondItem="5sV-eY-9Qy" secondAttribute="centerX" id="Jdh-2f-9Gr"/>
-                            <constraint firstItem="Hua-FP-KyM" firstAttribute="centerX" secondItem="7Lj-J6-5up" secondAttribute="centerX" id="RGT-qo-UFF"/>
-                            <constraint firstItem="NJG-Nh-vGo" firstAttribute="top" secondItem="RWP-Fz-5c2" secondAttribute="bottom" constant="8.5" id="Tbx-TX-Ean"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Dnb-VY-GCY" secondAttribute="trailing" id="Tui-3Z-18K"/>
                             <constraint firstItem="PMN-HJ-TS7" firstAttribute="bottom" secondItem="QNX-La-gIc" secondAttribute="top" id="U7e-UT-Y2d"/>
+                            <constraint firstItem="RWP-Fz-5c2" firstAttribute="top" secondItem="PgT-rP-Ksx" secondAttribute="bottom" constant="2" id="XFG-SA-l41"/>
                             <constraint firstItem="PMN-HJ-TS7" firstAttribute="leading" secondItem="5sV-eY-9Qy" secondAttribute="leading" id="YTw-ln-Ztf"/>
-                            <constraint firstItem="7Lj-J6-5up" firstAttribute="top" secondItem="Hua-FP-KyM" secondAttribute="bottom" constant="8" symbolic="YES" id="ZTi-31-vWv"/>
+                            <constraint firstItem="RWP-Fz-5c2" firstAttribute="leading" secondItem="5sV-eY-9Qy" secondAttribute="leading" constant="2" id="ZBY-9c-IwM"/>
+                            <constraint firstAttribute="trailing" secondItem="RWP-Fz-5c2" secondAttribute="trailing" constant="2" id="gCn-aZ-ARD"/>
+                            <constraint firstItem="Dnb-VY-GCY" firstAttribute="centerX" secondItem="5sV-eY-9Qy" secondAttribute="centerX" id="gvF-sx-Sb0"/>
+                            <constraint firstItem="Dnb-VY-GCY" firstAttribute="top" secondItem="RWP-Fz-5c2" secondAttribute="bottom" constant="8" id="kTn-0x-dWB"/>
+                            <constraint firstItem="Dnb-VY-GCY" firstAttribute="leading" secondItem="5sV-eY-9Qy" secondAttribute="leadingMargin" id="mu1-Xf-ckT"/>
                             <constraint firstAttribute="trailing" secondItem="PMN-HJ-TS7" secondAttribute="trailing" id="vsR-vu-DAT"/>
-                            <constraint firstItem="RWP-Fz-5c2" firstAttribute="top" secondItem="PgT-rP-Ksx" secondAttribute="bottom" constant="-1" id="yhA-PE-6hR"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" id="dti-vO-SKP"/>

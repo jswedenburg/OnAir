@@ -34,7 +34,7 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     //MARK: View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.separatorStyle = .none
+        //tableView.separatorStyle = .none
         MPCManager.sharedController.connectedDelegate = self
         let songHasChanged = Notification.Name(rawValue: "SongHasChanged")
         NotificationCenter.default.addObserver(self, selector: #selector(updateViewWithNewSong), name: songHasChanged, object: nil)
@@ -45,8 +45,8 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         
         
         
-        playButton.titleLabel?.textColor = TeamMusicColor.ourColor
-        nextButton.titleLabel?.textColor = TeamMusicColor.ourColor
+        playButton.setTitleColor(UIColor.black, for: .normal)
+        nextButton.setTitleColor(UIColor.black, for: .normal)
         
     }
     
@@ -73,10 +73,11 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         
         if MusicPlayerController.sharedController.getApplicationPlayerState() == .playing{
             MusicPlayerController.sharedController.broadcasterPause()
+            self.playButton.setTitle("Play", for: .normal)
             
         } else {
             MusicPlayerController.sharedController.broadcaterPlay()
-            
+            self.playButton.setTitle("Pause", for: .normal)
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
@@ -110,8 +111,8 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
     
     
     func setUpView() {
-        songNameLabel.text = "Song Name"
-        songArtistLabel.text = "Artist Name"
+        songNameLabel.text = ""
+        songArtistLabel.text = "Add a song to your queue to start playing!"
         songAlbumImageView.image = #imageLiteral(resourceName: "disc")
     }
     
@@ -152,8 +153,24 @@ class BroadcastMusicPlayerViewController: UIViewController, UITableViewDataSourc
         return cell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Listening Peers"
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30.0
+    }
+    
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 30))
+        headerView.backgroundColor = UIColor(red: 225/255, green: 232/255, blue: 237/255, alpha: 1.0)
+        headerView.layer.borderColor = UIColor(colorLiteralRed: 170/255, green: 184/255, blue: 194/255, alpha: 1.0).cgColor
+        headerView.layer.borderWidth = 1.0
+        
+        let headerLabel = UILabel(frame: CGRect(x: 0, y: 5, width: tableView.frame.size.width - 5, height: 20 ))
+        headerLabel.text = "Listening Peers"
+        headerLabel.textAlignment = .center
+        headerLabel.font = UIFont(name: "Helvetica Neue", size: 14)
+        headerView.addSubview(headerLabel)
+        
+        return headerView
     }
     
     func updateViewWithNewSong() {
