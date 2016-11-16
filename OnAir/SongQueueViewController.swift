@@ -43,11 +43,11 @@ class SongQueueViewController: UIViewController, UITableViewDelegate, UITableVie
         self.parent?.parent?.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear
         
         // Add a background view to the table view
-        let backgroundImage = UIImage(named: "Skylar")
-        let imageView = UIImageView(image: backgroundImage)
-        // center and scale background image
-        imageView.contentMode = .scaleAspectFill
-        self.tableView.backgroundView = imageView
+//        let backgroundImage = UIImage(named: "Skylar")
+//        let imageView = UIImageView(image: backgroundImage)
+//        // center and scale background image
+//        imageView.contentMode = .scaleAspectFill
+//        self.tableView.backgroundView = imageView
         self.tableView.reloadData()
     }
     
